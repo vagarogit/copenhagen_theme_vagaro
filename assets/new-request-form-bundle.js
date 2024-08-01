@@ -1095,24 +1095,42 @@ function AnswerBotModal({ authToken, interactionAccessToken, articles, requestId
 function getCustomObjectKey(targetType) {
     return targetType.replace("zen:custom_object:", "");
 }
-function LookupField({ field, onChange }) {
+function LookupField({ field, userId, onChange }) {
     const { id: fieldId, label, error, value, name, required, description, relationship_target_type, } = field;
     const [options, setOptions] = reactExports.useState([]);
+    console.log("value", field, value);
+    const [selectedOption, setSelectedOption] = reactExports.useState(null);
+    const [inputValue, setInputValue] = reactExports.useState("");
     const customObjectKey = getCustomObjectKey(relationship_target_type);
+    const fetchSelectedOption = reactExports.useCallback(async (selectionValue) => {
+        const res = await fetch(`/api/v2/custom_objects/${customObjectKey}/records/${selectionValue}`);
+        const { custom_object_record } = await res.json();
+        const newSelectedOption = {
+            name: custom_object_record.name,
+            value: custom_object_record.id,
+        };
+        setSelectedOption(newSelectedOption);
+        setInputValue(custom_object_record.name); // Update input value to show the name
+        onChange(custom_object_record.id, newSelectedOption); // Set the hidden input value
+    }, [customObjectKey, onChange]);
     const handleChange = reactExports.useCallback(async ({ inputValue, selectionValue }) => {
         if (selectionValue !== undefined) {
-            onChange(selectionValue);
+            fetchSelectedOption(selectionValue);
             return;
         }
         if (inputValue !== undefined) {
+            setInputValue(inputValue);
             if (inputValue === "") {
                 setOptions([]);
+                setSelectedOption(null);
+                onChange("", null);
             }
             else {
                 const searchParams = new URLSearchParams();
                 searchParams.set("name", inputValue.toLocaleLowerCase());
                 searchParams.set("source", "zen:ticket");
                 searchParams.set("field_id", fieldId.toString());
+                searchParams.set("user_id", userId.toString());
                 const response = await fetch(`/api/v2/custom_objects/${customObjectKey}/records/autocomplete?${searchParams.toString()}`);
                 const data = await response.json();
                 setOptions(data.custom_object_records.map(({ name, id }) => ({
@@ -1121,23 +1139,17 @@ function LookupField({ field, onChange }) {
                 })));
             }
         }
-    }, [customObjectKey]);
+    }, [customObjectKey, fetchSelectedOption]);
     const debounceHandleChange = reactExports.useMemo(() => debounce(handleChange, 300), [handleChange]);
     reactExports.useEffect(() => {
         return () => debounceHandleChange.cancel();
     }, [debounceHandleChange]);
     reactExports.useEffect(() => {
         if (value && !options.find((option) => option.value === value)) {
-            fetch(`/api/v2/custom_objects/${customObjectKey}/records/${value}`)
-                .then((res) => res.json())
-                .then(({ custom_object_record }) => {
-                setOptions([
-                    { name: custom_object_record.name, value: value },
-                ]);
-            });
+            fetchSelectedOption(value);
         }
-    }, [value, customObjectKey, options]);
-    return (jsxRuntimeExports.jsxs(Field$1, { children: [jsxRuntimeExports.jsxs(Label$1, { children: [label, required && jsxRuntimeExports.jsx(Span, { "aria-hidden": "true", children: "*" })] }), description && (jsxRuntimeExports.jsx(Hint$1, { dangerouslySetInnerHTML: { __html: description } })), jsxRuntimeExports.jsxs(Combobox, { isAutocomplete: true, inputProps: { name, required }, validation: error ? "error" : undefined, inputValue: value, selectionValue: value, renderValue: ({ selection }) => selection?.label || jsxRuntimeExports.jsx(EmptyValueOption, {}), onChange: debounceHandleChange, children: [!required && (jsxRuntimeExports.jsx(Option, { value: "", label: "-", children: jsxRuntimeExports.jsx(EmptyValueOption, {}) })), options.map((option) => (jsxRuntimeExports.jsx(Option, { value: option.value, label: option.name }, option.value)))] }), error && jsxRuntimeExports.jsx(Message$1, { validation: "error", children: error }), JSON.stringify(options)] }));
+    }, [value, options, fetchSelectedOption]);
+    return (jsxRuntimeExports.jsxs(Field$1, { children: [jsxRuntimeExports.jsxs(Label$1, { children: [label, required && jsxRuntimeExports.jsx(Span, { "aria-hidden": "true", children: "*" })] }), description && (jsxRuntimeExports.jsx(Hint$1, { dangerouslySetInnerHTML: { __html: description } })), jsxRuntimeExports.jsxs(Combobox, { inputProps: { name, required }, validation: error ? "error" : undefined, inputValue: inputValue, selectionValue: selectedOption?.value, onChange: debounceHandleChange, children: [!required && (jsxRuntimeExports.jsx(Option, { value: "", label: "-", children: jsxRuntimeExports.jsx(EmptyValueOption, {}) })), options.length === 0 ? (jsxRuntimeExports.jsx(Option, { isDisabled: true, label: "", value: "No matches found" })) : (options.map((option) => (jsxRuntimeExports.jsx(Option, { value: option.value, label: option.name }, option.value))))] }), error && jsxRuntimeExports.jsx(Message$1, { validation: "error", children: error }), JSON.stringify(options)] }));
 }
 
 const StyledParagraph = styled(Paragraph) `
