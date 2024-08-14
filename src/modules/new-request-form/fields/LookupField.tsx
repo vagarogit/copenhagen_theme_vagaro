@@ -1,4 +1,7 @@
-import type { IComboboxProps, ISelectedOption } from "@zendeskgarden/react-dropdowns.next";
+import type {
+  IComboboxProps,
+  ISelectedOption,
+} from "@zendeskgarden/react-dropdowns.next";
 import {
   Field as GardenField,
   Label,
@@ -162,8 +165,8 @@ export function LookupField({ field, userId, onChange }: LookupFieldProps) {
   }, []);
 
   const onFocus = () => {
-    setInputValue('')
-  }
+    setInputValue("");
+  };
 
   return (
     <GardenField>
@@ -183,7 +186,9 @@ export function LookupField({ field, userId, onChange }: LookupFieldProps) {
         selectionValue={selectedOption?.value}
         onFocus={onFocus}
         onChange={debounceHandleChange}
-        renderValue={({selection}) => (selection as ISelectedOption | null)?.label || EMPTY_OPTION.name}
+        renderValue={({ selection }) =>
+          (selection as ISelectedOption | null)?.label || EMPTY_OPTION.name
+        }
       >
         {!required && !isLoadingOptions && (
           <Option value="" label="-">

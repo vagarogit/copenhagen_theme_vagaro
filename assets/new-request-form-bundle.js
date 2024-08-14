@@ -1222,11 +1222,11 @@ function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parent
     const visibleFields = useEndUserConditions(ticketFields, end_user_conditions);
     const { formRefCallback, handleSubmit } = useFormSubmit(ticketFields);
     const { t } = useTranslation();
-    const handleChange = reactExports.useCallback((field, value) => {
+    function handleChange(field, value) {
         setTicketFields(ticketFields.map((ticketField) => ticketField.name === field.name
             ? { ...ticketField, value }
             : ticketField));
-    }, []);
+    }
     function handleOrganizationChange(value) {
         if (organizationField === null) {
             return;
