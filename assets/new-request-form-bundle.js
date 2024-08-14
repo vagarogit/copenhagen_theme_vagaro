@@ -1109,11 +1109,11 @@ function LookupField({ field, userId, onChange }) {
     const { t } = useTranslation();
     const customObjectKey = getCustomObjectKey(relationship_target_type);
     const loadingOption = {
-        name: t("new-request-form.lookupfield.loading-options", "Loading items..."),
+        name: t("new-request-form.lookup-field.loading-options", "Loading items..."),
         id: "loading",
     };
     const noResultsOption = {
-        name: t("new-request-form.lookupfield.no-matches.found", "No matches found"),
+        name: t("new-request-form.lookup-field.no-matches.found", "No matches found"),
         id: "no-results",
     };
     const fetchSelectedOption = reactExports.useCallback(async (selectionValue) => {
@@ -1186,11 +1186,8 @@ function LookupField({ field, userId, onChange }) {
             fetchSelectedOption(value);
             return;
         }
-    }, [value]);
-    const handleRenderValue = reactExports.useCallback(() => {
-        return selectedOption?.name ?? EMPTY_OPTION.name;
-    }, [selectedOption]);
-    return (jsxRuntimeExports.jsxs(Field$1, { children: [jsxRuntimeExports.jsxs(Label$1, { children: [label, required && jsxRuntimeExports.jsx(Span, { "aria-hidden": "true", children: "*" })] }), description && (jsxRuntimeExports.jsx(Hint$1, { dangerouslySetInnerHTML: { __html: description } })), jsxRuntimeExports.jsx("input", { type: "hidden", name: name, value: selectedOption?.value }), jsxRuntimeExports.jsxs(Combobox, { inputProps: { required }, startIcon: jsxRuntimeExports.jsx(SvgSearchStroke, {}), validation: error ? "error" : undefined, inputValue: inputValue, selectionValue: selectedOption?.value, onChange: debounceHandleChange, renderValue: handleRenderValue, children: [!required && !isLoadingOptions && (jsxRuntimeExports.jsx(Option, { value: "", label: "-", children: jsxRuntimeExports.jsx(EmptyValueOption, {}) })), isLoadingOptions && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: loadingOption.name }, loadingOption.id)), !isLoadingOptions && !isFirstLoad && options.length === 0 && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: noResultsOption.name }, noResultsOption.id)), !isLoadingOptions &&
+    }, []);
+    return (jsxRuntimeExports.jsxs(Field$1, { children: [jsxRuntimeExports.jsxs(Label$1, { children: [label, required && jsxRuntimeExports.jsx(Span, { "aria-hidden": "true", children: "*" })] }), description && (jsxRuntimeExports.jsx(Hint$1, { dangerouslySetInnerHTML: { __html: description } })), jsxRuntimeExports.jsx("input", { type: "hidden", name: name, value: selectedOption?.value }), jsxRuntimeExports.jsxs(Combobox, { inputProps: { required }, startIcon: jsxRuntimeExports.jsx(SvgSearchStroke, {}), validation: error ? "error" : undefined, inputValue: inputValue, selectionValue: selectedOption?.value, onChange: debounceHandleChange, renderValue: ({ selection }) => selection?.label || EMPTY_OPTION.name, children: [!required && !isLoadingOptions && (jsxRuntimeExports.jsx(Option, { value: "", label: "-", children: jsxRuntimeExports.jsx(EmptyValueOption, {}) })), isLoadingOptions && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: loadingOption.name }, loadingOption.id)), !isLoadingOptions && !isFirstLoad && options.length === 0 && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: noResultsOption.name }, noResultsOption.id)), !isLoadingOptions &&
                         options.length !== 0 &&
                         options.map((option) => (jsxRuntimeExports.jsx(Option, { value: option.value, label: option.name }, option.value)))] }), error && jsxRuntimeExports.jsx(Message$1, { validation: "error", children: error })] }));
 }
@@ -1222,11 +1219,11 @@ function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parent
     const visibleFields = useEndUserConditions(ticketFields, end_user_conditions);
     const { formRefCallback, handleSubmit } = useFormSubmit(ticketFields);
     const { t } = useTranslation();
-    function handleChange(field, value) {
+    const handleChange = reactExports.useCallback((field, value) => {
         setTicketFields(ticketFields.map((ticketField) => ticketField.name === field.name
             ? { ...ticketField, value }
             : ticketField));
-    }
+    }, []);
     function handleOrganizationChange(value) {
         if (organizationField === null) {
             return;

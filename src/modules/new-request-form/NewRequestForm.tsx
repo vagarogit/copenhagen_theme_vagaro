@@ -1,5 +1,5 @@
 import type { AnswerBot, Field, RequestForm } from "./data-types";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Input } from "./fields/Input";
 import { TextArea } from "./fields/textarea/TextArea";
 import { DropDown } from "./fields/DropDown";
@@ -105,7 +105,6 @@ export function NewRequestForm({
     organizationField: organization_field,
     dueDateField: due_date_field,
   });
-
   const [ticketFields, setTicketFields] = useState(prefilledTicketFields);
   const [organizationField, setOrganizationField] = useState(
     prefilledOrganizationField
@@ -115,7 +114,7 @@ export function NewRequestForm({
   const { formRefCallback, handleSubmit } = useFormSubmit(ticketFields);
   const { t } = useTranslation();
 
-  function handleChange(field: Field, value: Field["value"]) {
+  const handleChange = useCallback((field: Field, value: Field["value"]) => {
     setTicketFields(
       ticketFields.map((ticketField) =>
         ticketField.name === field.name
@@ -123,7 +122,7 @@ export function NewRequestForm({
           : ticketField
       )
     );
-  }
+  }, []);
 
   function handleOrganizationChange(value: string) {
     if (organizationField === null) {

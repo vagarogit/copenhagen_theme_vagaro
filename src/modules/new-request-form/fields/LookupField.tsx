@@ -1,4 +1,4 @@
-import type { IComboboxProps } from "@zendeskgarden/react-dropdowns.next";
+import type { IComboboxProps, ISelectedOption } from "@zendeskgarden/react-dropdowns.next";
 import {
   Field as GardenField,
   Label,
@@ -55,13 +55,16 @@ export function LookupField({ field, userId, onChange }: LookupFieldProps) {
   );
 
   const loadingOption = {
-    name: t("new-request-form.lookupfield.loading-options", "Loading items..."),
+    name: t(
+      "new-request-form.lookup-field.loading-options",
+      "Loading items..."
+    ),
     id: "loading",
   };
 
   const noResultsOption = {
     name: t(
-      "new-request-form.lookupfield.no-matches.found",
+      "new-request-form.lookup-field.no-matches.found",
       "No matches found"
     ),
     id: "no-results",
@@ -156,11 +159,7 @@ export function LookupField({ field, userId, onChange }: LookupFieldProps) {
       fetchSelectedOption(value as string);
       return;
     }
-  }, [value]);
-
-  const handleRenderValue = useCallback(() => {
-    return selectedOption?.name ?? EMPTY_OPTION.name;
-  }, [selectedOption]);
+  }, []);
 
   return (
     <GardenField>
@@ -179,7 +178,7 @@ export function LookupField({ field, userId, onChange }: LookupFieldProps) {
         inputValue={inputValue}
         selectionValue={selectedOption?.value}
         onChange={debounceHandleChange}
-        renderValue={handleRenderValue}
+        renderValue={({selection}) => (selection as ISelectedOption | null)?.label || EMPTY_OPTION.name}
       >
         {!required && !isLoadingOptions && (
           <Option value="" label="-">
