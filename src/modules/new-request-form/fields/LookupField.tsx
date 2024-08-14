@@ -161,6 +161,10 @@ export function LookupField({ field, userId, onChange }: LookupFieldProps) {
     }
   }, []);
 
+  const onFocus = () => {
+    setInputValue('')
+  }
+
   return (
     <GardenField>
       <Label>
@@ -177,6 +181,7 @@ export function LookupField({ field, userId, onChange }: LookupFieldProps) {
         validation={error ? "error" : undefined}
         inputValue={inputValue}
         selectionValue={selectedOption?.value}
+        onFocus={onFocus}
         onChange={debounceHandleChange}
         renderValue={({selection}) => (selection as ISelectedOption | null)?.label || EMPTY_OPTION.name}
       >
