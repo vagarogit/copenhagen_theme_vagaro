@@ -36,7 +36,7 @@ export interface NewRequestFormProps {
   userRole: string;
   userId: number;
   brandId: number;
-  organizationId: any;
+  organizationId: number;
   answerBotModal: {
     answerBot: AnswerBot;
     hasRequestManagement: boolean;
@@ -116,15 +116,18 @@ export function NewRequestForm({
   const { formRefCallback, handleSubmit } = useFormSubmit(ticketFields);
   const { t } = useTranslation();
 
-  const handleChange = useCallback((field: Field, value: Field["value"]) => {
-    setTicketFields(
-      ticketFields.map((ticketField) =>
-        ticketField.name === field.name
-          ? { ...ticketField, value }
-          : ticketField
-      )
-    );
-  }, []);
+  const handleChange = useCallback(
+    (field: Field, value: Field["value"]) => {
+      setTicketFields(
+        ticketFields.map((ticketField) =>
+          ticketField.name === field.name
+            ? { ...ticketField, value }
+            : ticketField
+        )
+      );
+    },
+    [ticketFields]
+  );
 
   function handleOrganizationChange(value: string) {
     if (organizationField === null) {

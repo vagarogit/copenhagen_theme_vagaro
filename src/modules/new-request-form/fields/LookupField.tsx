@@ -40,10 +40,17 @@ const getOrganizationId = async (user_id: number) => {
   );
 
   const data = await response.json();
-  return data && data.count === 1 && data.organization_memberships[0].organization_id;
+  return (
+    data && data.count === 1 && data.organization_memberships[0].organization_id
+  );
 };
 
-export function LookupField({ field, userId, organizationId, onChange }: LookupFieldProps) {
+export function LookupField({
+  field,
+  userId,
+  organizationId,
+  onChange,
+}: LookupFieldProps) {
   const {
     id: fieldId,
     label,
@@ -122,7 +129,9 @@ export function LookupField({ field, userId, organizationId, onChange }: LookupF
           onChange("");
         } else {
           const searchParams = new URLSearchParams();
-          const organization_id = organizationId ? organizationId : await getOrganizationId(userId);
+          const organization_id = organizationId
+            ? organizationId
+            : await getOrganizationId(userId);
           searchParams.set("name", inputValue.toLocaleLowerCase());
           searchParams.set("source", "zen:ticket");
           searchParams.set("field_id", fieldId.toString());
@@ -156,13 +165,17 @@ export function LookupField({ field, userId, organizationId, onChange }: LookupF
       }
       return;
     },
-    [customObjectKey, fetchSelectedOption]
+    [
+      customObjectKey,
+      fetchSelectedOption,
+      userId,
+      organizationId,
+      fieldId,
+      onChange,
+    ]
   );
 
-  const debounceHandleChange = useMemo(
-    () => debounce(handleChange, 300),
-    [handleChange]
-  );
+  const debounceHandleChange = useMemo(() => debounce(handleChange, 300), []);
 
   useEffect(() => {
     return () => debounceHandleChange.cancel();

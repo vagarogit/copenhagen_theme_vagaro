@@ -1102,9 +1102,9 @@ const EMPTY_OPTION = {
 const getOrganizationId = async (user_id) => {
     const response = await fetch(`/api/v2/users/${user_id}/organization_memberships.json`);
     const data = await response.json();
-    return data && data.count === 1 && data.organization_memberships[0].organization_id;
+    return (data && data.count === 1 && data.organization_memberships[0].organization_id);
 };
-function LookupField({ field, userId, organizationId, onChange }) {
+function LookupField({ field, userId, organizationId, onChange, }) {
     const { id: fieldId, label, error, value, name, required, description, relationship_target_type, } = field;
     const [options, setOptions] = reactExports.useState([]);
     const [selectedOption, setSelectedOption] = reactExports.useState(null);
@@ -1154,7 +1154,9 @@ function LookupField({ field, userId, organizationId, onChange }) {
             }
             else {
                 const searchParams = new URLSearchParams();
-                const organization_id = organizationId ? organizationId : await getOrganizationId(userId);
+                const organization_id = organizationId
+                    ? organizationId
+                    : await getOrganizationId(userId);
                 searchParams.set("name", inputValue.toLocaleLowerCase());
                 searchParams.set("source", "zen:ticket");
                 searchParams.set("field_id", fieldId.toString());
@@ -1183,8 +1185,15 @@ function LookupField({ field, userId, organizationId, onChange }) {
             }
         }
         return;
-    }, [customObjectKey, fetchSelectedOption]);
-    const debounceHandleChange = reactExports.useMemo(() => debounce(handleChange, 300), [handleChange]);
+    }, [
+        customObjectKey,
+        fetchSelectedOption,
+        userId,
+        organizationId,
+        fieldId,
+        onChange,
+    ]);
+    const debounceHandleChange = reactExports.useMemo(() => debounce(handleChange, 300), []);
     reactExports.useEffect(() => {
         return () => debounceHandleChange.cancel();
     }, [debounceHandleChange]);
@@ -1233,7 +1242,7 @@ function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parent
         setTicketFields(ticketFields.map((ticketField) => ticketField.name === field.name
             ? { ...ticketField, value }
             : ticketField));
-    }, []);
+    }, [ticketFields]);
     function handleOrganizationChange(value) {
         if (organizationField === null) {
             return;
