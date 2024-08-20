@@ -1099,7 +1099,12 @@ const EMPTY_OPTION = {
     value: "",
     name: "-",
 };
-function LookupField({ field, userId, onChange }) {
+const getOrganizationId = async (user_id) => {
+    const response = await fetch(`/api/v2/users/${user_id}/organization_memberships.json`);
+    const data = await response.json();
+    return data && data.count === 1 && data.organization_memberships[0].organization_id;
+};
+function LookupField({ field, userId, organizationId, onChange }) {
     const { id: fieldId, label, error, value, name, required, description, relationship_target_type, } = field;
     const [options, setOptions] = reactExports.useState([]);
     const [selectedOption, setSelectedOption] = reactExports.useState(null);
@@ -1149,10 +1154,12 @@ function LookupField({ field, userId, onChange }) {
             }
             else {
                 const searchParams = new URLSearchParams();
+                const organization_id = organizationId ? organizationId : await getOrganizationId(userId);
                 searchParams.set("name", inputValue.toLocaleLowerCase());
                 searchParams.set("source", "zen:ticket");
                 searchParams.set("field_id", fieldId.toString());
                 searchParams.set("user_id", userId.toString());
+                searchParams.set("organization_id", organization_id);
                 setIsLoadingOptions(true);
                 try {
                     const response = await fetch(`/api/v2/custom_objects/${customObjectKey}/records/autocomplete?${searchParams.toString()}`);
@@ -1188,7 +1195,7 @@ function LookupField({ field, userId, onChange }) {
         }
     }, []);
     const onFocus = () => {
-        setInputValue('');
+        setInputValue("");
     };
     return (jsxRuntimeExports.jsxs(Field$1, { children: [jsxRuntimeExports.jsxs(Label$1, { children: [label, required && jsxRuntimeExports.jsx(Span, { "aria-hidden": "true", children: "*" })] }), description && (jsxRuntimeExports.jsx(Hint$1, { dangerouslySetInnerHTML: { __html: description } })), jsxRuntimeExports.jsx("input", { type: "hidden", name: name, value: selectedOption?.value }), jsxRuntimeExports.jsxs(Combobox, { inputProps: { required }, startIcon: jsxRuntimeExports.jsx(SvgSearchStroke, {}), validation: error ? "error" : undefined, inputValue: inputValue, selectionValue: selectedOption?.value, onFocus: onFocus, onChange: debounceHandleChange, renderValue: ({ selection }) => selection?.label || EMPTY_OPTION.name, children: [!required && !isLoadingOptions && (jsxRuntimeExports.jsx(Option, { value: "", label: "-", children: jsxRuntimeExports.jsx(EmptyValueOption, {}) })), isLoadingOptions && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: loadingOption.name }, loadingOption.id)), !isLoadingOptions && !isFirstLoad && options.length === 0 && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: noResultsOption.name }, noResultsOption.id)), !isLoadingOptions &&
                         options.length !== 0 &&
@@ -1206,7 +1213,7 @@ const Form = styled.form `
 const Footer = styled.div `
   margin-top: ${(props) => props.theme.space.md};
 `;
-function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parentIdPath, locale, baseLocale, hasAtMentions, userRole, brandId, answerBotModal, }) {
+function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parentIdPath, locale, baseLocale, hasAtMentions, userRole, userId, brandId, organizationId, answerBotModal, }) {
     const { ticket_fields, action, http_method, accept_charset, errors, parent_id_field, ticket_form_field, email_field, cc_field, organization_field, due_date_field, end_user_conditions, attachments_field, inline_attachments_fields, description_mimetype_field, } = requestForm;
     const { answerBot } = answerBotModal;
     const { ticketFields: prefilledTicketFields, emailField, ccField, organizationField: prefilledOrganizationField, dueDateField: prefilledDueDateField, } = usePrefilledTicketFields({
@@ -1222,11 +1229,11 @@ function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parent
     const visibleFields = useEndUserConditions(ticketFields, end_user_conditions);
     const { formRefCallback, handleSubmit } = useFormSubmit(ticketFields);
     const { t } = useTranslation();
-    function handleChange(field, value) {
+    const handleChange = reactExports.useCallback((field, value) => {
         setTicketFields(ticketFields.map((ticketField) => ticketField.name === field.name
             ? { ...ticketField, value }
             : ticketField));
-    }
+    }, []);
     function handleOrganizationChange(value) {
         if (organizationField === null) {
             return;
@@ -1273,7 +1280,7 @@ function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parent
                             case "tagger":
                                 return (jsxRuntimeExports.jsx(Tagger, { field: field, onChange: (value) => handleChange(field, value) }, field.name));
                             case "lookup":
-                                return (jsxRuntimeExports.jsx(LookupField, { field: field, onChange: (value) => handleChange(field, value) }, field.name));
+                                return (jsxRuntimeExports.jsx(LookupField, { field: field, userId: userId, organizationId: organizationField && organizationField?.value, onChange: (value) => handleChange(field, value) }, field.name));
                             default:
                                 return jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
                         }

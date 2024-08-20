@@ -30,10 +30,20 @@ const EMPTY_OPTION = {
 interface LookupFieldProps {
   field: Field;
   userId: number;
+  organizationId: string | boolean | string[] | null | undefined;
   onChange: (value: string) => void;
 }
 
-export function LookupField({ field, userId, onChange }: LookupFieldProps) {
+const getOrganizationId = async (user_id: number) => {
+  const response = await fetch(
+    `/api/v2/users/${user_id}/organization_memberships.json`
+  );
+
+  const data = await response.json();
+  return data && data.count === 1 && data.organization_memberships[0].organization_id;
+};
+
+export function LookupField({ field, userId, organizationId, onChange }: LookupFieldProps) {
   const {
     id: fieldId,
     label,
@@ -112,11 +122,12 @@ export function LookupField({ field, userId, onChange }: LookupFieldProps) {
           onChange("");
         } else {
           const searchParams = new URLSearchParams();
+          const organization_id = organizationId ? organizationId : await getOrganizationId(userId);
           searchParams.set("name", inputValue.toLocaleLowerCase());
           searchParams.set("source", "zen:ticket");
           searchParams.set("field_id", fieldId.toString());
           searchParams.set("user_id", userId.toString());
-
+          searchParams.set("organization_id", organization_id);
           setIsLoadingOptions(true);
           try {
             const response = await fetch(

@@ -36,6 +36,7 @@ export interface NewRequestFormProps {
   userRole: string;
   userId: number;
   brandId: number;
+  organizationId: any;
   answerBotModal: {
     answerBot: AnswerBot;
     hasRequestManagement: boolean;
@@ -72,6 +73,7 @@ export function NewRequestForm({
   userRole,
   userId,
   brandId,
+  organizationId,
   answerBotModal,
 }: NewRequestFormProps) {
   const {
@@ -309,6 +311,7 @@ export function NewRequestForm({
                   key={field.name}
                   field={field}
                   userId={userId}
+                  organizationId={organizationField && organizationField?.value}
                   onChange={(value) => handleChange(field, value)}
                 />
               );
