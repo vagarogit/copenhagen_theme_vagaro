@@ -37,12 +37,14 @@ const getOrganizationId = async (user_id: number) => {
     `/api/v2/users/${user_id}/organization_memberships.json`
   );
   const data = await response.json();
-  const defaultOrganization =
-    data &&
-    data.organization_memberships.filter(
+  if (data && data.organization_memberships.length > 0) {
+    const defaultOrganization = data.organization_memberships.filter(
       (organization: Organization) => organization.default === true
     );
-  return defaultOrganization[0].organization_id;
+    return defaultOrganization[0].organization_id;
+  } else {
+    return null;
+  }
 };
 
 export function LookupField({
@@ -141,7 +143,8 @@ export function LookupField({
           searchParams.set("source", "zen:ticket");
           searchParams.set("field_id", fieldId.toString());
           searchParams.set("user_id", userId.toString());
-          searchParams.set("organization_id", organization_id);
+          organization_id !== null &&
+            searchParams.set("organization_id", organization_id);
           setIsLoadingOptions(true);
           try {
             const response = await fetch(
