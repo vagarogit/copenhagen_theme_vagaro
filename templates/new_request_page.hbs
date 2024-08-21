@@ -24,9 +24,7 @@
   import { renderNewRequestForm } from "new-request-form";
 
   const container = document.getElementById("new-request-form");
-  
   const settings = {{json settings}};
-  
   const props = {
     requestForm: {{json new_request_form}},
     newRequestPath: {{json (page_path 'new_request')}},
@@ -49,5 +47,6 @@
       requestPath: {{json (page_path 'request' id=answer_bot.request_id)}}
     },
   };
+  
   renderNewRequestForm(settings, props, container);
 </script>
