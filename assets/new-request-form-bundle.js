@@ -1102,7 +1102,9 @@ const EMPTY_OPTION = {
 const getOrganizationId = async (user_id) => {
     const response = await fetch(`/api/v2/users/${user_id}/organization_memberships.json`);
     const data = await response.json();
-    return (data && data.count === 1 && data.organization_memberships[0].organization_id);
+    const defaultOrganization = data &&
+        data.organization_memberships.filter((organization) => organization.default === true);
+    return defaultOrganization[0].organization_id;
 };
 function LookupField({ field, userId, organizationId, onChange, }) {
     const { id: fieldId, label, error, value, name, required, description, relationship_target_type, } = field;
@@ -1110,7 +1112,6 @@ function LookupField({ field, userId, organizationId, onChange, }) {
     const [selectedOption, setSelectedOption] = reactExports.useState(null);
     const [inputValue, setInputValue] = reactExports.useState(value);
     const [isLoadingOptions, setIsLoadingOptions] = reactExports.useState(false);
-    const [isFirstLoad, setIsFirstLoad] = reactExports.useState(true);
     const { t } = useTranslation();
     const customObjectKey = getCustomObjectKey(relationship_target_type);
     const loadingOption = {
@@ -1133,7 +1134,6 @@ function LookupField({ field, userId, organizationId, onChange, }) {
         onChange(custom_object_record.id);
     }, [customObjectKey, onChange]);
     const handleChange = reactExports.useCallback(async ({ inputValue, selectionValue }) => {
-        setIsFirstLoad(false);
         if (selectionValue !== undefined) {
             if (selectionValue == "") {
                 setSelectedOption(EMPTY_OPTION);
@@ -1141,7 +1141,12 @@ function LookupField({ field, userId, organizationId, onChange, }) {
                 onChange(EMPTY_OPTION.value);
             }
             else {
-                await fetchSelectedOption(selectionValue);
+                const selectedOption = options.find((option) => option.value === selectionValue);
+                if (selectedOption) {
+                    setSelectedOption(selectedOption);
+                    setInputValue(selectedOption.name);
+                    onChange(selectedOption.value);
+                }
             }
             return;
         }
@@ -1185,28 +1190,19 @@ function LookupField({ field, userId, organizationId, onChange, }) {
             }
         }
         return;
-    }, [
-        customObjectKey,
-        fetchSelectedOption,
-        userId,
-        organizationId,
-        fieldId,
-        onChange,
-    ]);
-    const debounceHandleChange = reactExports.useMemo(() => debounce(handleChange, 300), []);
+    }, [customObjectKey, userId, organizationId, fieldId, onChange, options]);
+    const debounceHandleChange = reactExports.useMemo(() => debounce(handleChange, 300), [handleChange]);
     reactExports.useEffect(() => {
         return () => debounceHandleChange.cancel();
     }, [debounceHandleChange]);
     reactExports.useEffect(() => {
-        if (value && !options.find((option) => option.value === value)) {
+        if (value) {
             fetchSelectedOption(value);
-            return;
         }
     }, []);
-    const onFocus = () => {
-        setInputValue("");
-    };
-    return (jsxRuntimeExports.jsxs(Field$1, { children: [jsxRuntimeExports.jsxs(Label$1, { children: [label, required && jsxRuntimeExports.jsx(Span, { "aria-hidden": "true", children: "*" })] }), description && (jsxRuntimeExports.jsx(Hint$1, { dangerouslySetInnerHTML: { __html: description } })), jsxRuntimeExports.jsx("input", { type: "hidden", name: name, value: selectedOption?.value }), jsxRuntimeExports.jsxs(Combobox, { inputProps: { required }, startIcon: jsxRuntimeExports.jsx(SvgSearchStroke, {}), validation: error ? "error" : undefined, inputValue: inputValue, selectionValue: selectedOption?.value, onFocus: onFocus, onChange: debounceHandleChange, renderValue: ({ selection }) => selection?.label || EMPTY_OPTION.name, children: [!required && !isLoadingOptions && (jsxRuntimeExports.jsx(Option, { value: "", label: "-", children: jsxRuntimeExports.jsx(EmptyValueOption, {}) })), isLoadingOptions && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: loadingOption.name }, loadingOption.id)), !isLoadingOptions && !isFirstLoad && options.length === 0 && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: noResultsOption.name }, noResultsOption.id)), !isLoadingOptions &&
+    return (jsxRuntimeExports.jsxs(Field$1, { children: [jsxRuntimeExports.jsxs(Label$1, { children: [label, required && jsxRuntimeExports.jsx(Span, { "aria-hidden": "true", children: "*" })] }), description && (jsxRuntimeExports.jsx(Hint$1, { dangerouslySetInnerHTML: { __html: description } })), jsxRuntimeExports.jsx("input", { type: "hidden", name: name, value: selectedOption?.value }), jsxRuntimeExports.jsxs(Combobox, { inputProps: { required }, startIcon: jsxRuntimeExports.jsx(SvgSearchStroke, {}), validation: error ? "error" : undefined, inputValue: inputValue, selectionValue: selectedOption?.value, onFocus: () => setInputValue(""), onChange: debounceHandleChange, renderValue: () => selectedOption?.name || EMPTY_OPTION.name, children: [!required && !isLoadingOptions && (jsxRuntimeExports.jsx(Option, { value: "", label: "-", children: jsxRuntimeExports.jsx(EmptyValueOption, {}) })), isLoadingOptions && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: loadingOption.name }, loadingOption.id)), !isLoadingOptions &&
+                        inputValue?.length > 0 &&
+                        options.length === 0 && (jsxRuntimeExports.jsx(Option, { isDisabled: true, value: noResultsOption.name }, noResultsOption.id)), !isLoadingOptions &&
                         options.length !== 0 &&
                         options.map((option) => (jsxRuntimeExports.jsx(Option, { value: option.value, label: option.name }, option.value)))] }), error && jsxRuntimeExports.jsx(Message$1, { validation: "error", children: error })] }));
 }
@@ -1222,7 +1218,7 @@ const Form = styled.form `
 const Footer = styled.div `
   margin-top: ${(props) => props.theme.space.md};
 `;
-function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parentIdPath, locale, baseLocale, hasAtMentions, userRole, userId, brandId, organizationId, answerBotModal, }) {
+function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parentIdPath, locale, baseLocale, hasAtMentions, userRole, userId, brandId, organizations, answerBotModal, }) {
     const { ticket_fields, action, http_method, accept_charset, errors, parent_id_field, ticket_form_field, email_field, cc_field, organization_field, due_date_field, end_user_conditions, attachments_field, inline_attachments_fields, description_mimetype_field, } = requestForm;
     const { answerBot } = answerBotModal;
     const { ticketFields: prefilledTicketFields, emailField, ccField, organizationField: prefilledOrganizationField, dueDateField: prefilledDueDateField, } = usePrefilledTicketFields({
@@ -1289,7 +1285,7 @@ function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parent
                             case "tagger":
                                 return (jsxRuntimeExports.jsx(Tagger, { field: field, onChange: (value) => handleChange(field, value) }, field.name));
                             case "lookup":
-                                return (jsxRuntimeExports.jsx(LookupField, { field: field, userId: userId, organizationId: organizationField && organizationField?.value, onChange: (value) => handleChange(field, value) }, field.name));
+                                return (jsxRuntimeExports.jsx(LookupField, { field: field, userId: userId, organizationId: organizationField?.value, onChange: (value) => handleChange(field, value) }, field.name));
                             default:
                                 return jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
                         }

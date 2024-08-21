@@ -22,8 +22,11 @@
 
 <script type="module">
   import { renderNewRequestForm } from "new-request-form";
+
   const container = document.getElementById("new-request-form");
+  
   const settings = {{json settings}};
+  
   const props = {
     requestForm: {{json new_request_form}},
     newRequestPath: {{json (page_path 'new_request')}},
@@ -35,7 +38,7 @@
     userRole: {{json user.role}},
     userId: {{json user.id}},
     brandId: {{json brand.id}},
-    organizationId: {{json ''}},
+    organizations: {{json ''}}, //we will read organizations when the backend will be marged
     wysiwyg: true,
     answerBotModal: {
       answerBot: {{json answer_bot}},

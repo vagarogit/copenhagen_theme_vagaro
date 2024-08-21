@@ -23,6 +23,7 @@ import { AnswerBotModal } from "./answer-bot-modal/AnswerBotModal";
 import { useTranslation } from "react-i18next";
 import { Paragraph } from "@zendeskgarden/react-typography";
 import { LookupField } from "./fields/LookupField";
+import type { Organization } from "./data-types/Organization";
 
 export interface NewRequestFormProps {
   requestForm: RequestForm;
@@ -36,7 +37,7 @@ export interface NewRequestFormProps {
   userRole: string;
   userId: number;
   brandId: number;
-  organizationId: number;
+  organizations: Array<Organization>;
   answerBotModal: {
     answerBot: AnswerBot;
     hasRequestManagement: boolean;
@@ -73,7 +74,7 @@ export function NewRequestForm({
   userRole,
   userId,
   brandId,
-  organizationId,
+  organizations,
   answerBotModal,
 }: NewRequestFormProps) {
   const {
@@ -314,7 +315,7 @@ export function NewRequestForm({
                   key={field.name}
                   field={field}
                   userId={userId}
-                  organizationId={organizationField && organizationField?.value}
+                  organizationId={organizationField?.value} //will need to read from organizations[0].id
                   onChange={(value) => handleChange(field, value)}
                 />
               );

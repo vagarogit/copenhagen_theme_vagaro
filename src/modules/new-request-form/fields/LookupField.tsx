@@ -1,7 +1,4 @@
-import type {
-  IComboboxProps,
-  ISelectedOption,
-} from "@zendeskgarden/react-dropdowns.next";
+import type { IComboboxProps } from "@zendeskgarden/react-dropdowns.next";
 import {
   Field as GardenField,
   Label,
@@ -17,6 +14,7 @@ import SearchIcon from "@zendeskgarden/svg-icons/src/16/search-stroke.svg";
 import debounce from "lodash.debounce";
 import { useTranslation } from "react-i18next";
 import { EmptyValueOption } from "./EmptyValueOption";
+import type { Organization } from "../data-types/Organization";
 
 function getCustomObjectKey(targetType: string) {
   return targetType.replace("zen:custom_object:", "");
@@ -30,7 +28,7 @@ const EMPTY_OPTION = {
 interface LookupFieldProps {
   field: Field;
   userId: number;
-  organizationId: string | boolean | string[] | null | undefined;
+  organizationId: string | null;
   onChange: (value: string) => void;
 }
 
@@ -38,11 +36,13 @@ const getOrganizationId = async (user_id: number) => {
   const response = await fetch(
     `/api/v2/users/${user_id}/organization_memberships.json`
   );
-
   const data = await response.json();
-  return (
-    data && data.count === 1 && data.organization_memberships[0].organization_id
-  );
+  const defaultOrganization =
+    data &&
+    data.organization_memberships.filter(
+      (organization: Organization) => organization.default === true
+    );
+  return defaultOrganization[0].organization_id;
 };
 
 export function LookupField({
@@ -67,7 +67,6 @@ export function LookupField({
   );
   const [inputValue, setInputValue] = useState<string>(value as string);
   const [isLoadingOptions, setIsLoadingOptions] = useState<boolean>(false);
-  const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
   const { t } = useTranslation();
 
   const customObjectKey = getCustomObjectKey(
@@ -109,14 +108,20 @@ export function LookupField({
 
   const handleChange = useCallback<NonNullable<IComboboxProps["onChange"]>>(
     async ({ inputValue, selectionValue }) => {
-      setIsFirstLoad(false);
       if (selectionValue !== undefined) {
         if (selectionValue == "") {
           setSelectedOption(EMPTY_OPTION);
           setInputValue(EMPTY_OPTION.name);
           onChange(EMPTY_OPTION.value);
         } else {
-          await fetchSelectedOption(selectionValue as string);
+          const selectedOption = options.find(
+            (option) => option.value === selectionValue
+          );
+          if (selectedOption) {
+            setSelectedOption(selectedOption);
+            setInputValue(selectedOption.name);
+            onChange(selectedOption.value);
+          }
         }
         return;
       }
@@ -165,32 +170,23 @@ export function LookupField({
       }
       return;
     },
-    [
-      customObjectKey,
-      fetchSelectedOption,
-      userId,
-      organizationId,
-      fieldId,
-      onChange,
-    ]
+    [customObjectKey, userId, organizationId, fieldId, onChange, options]
   );
 
-  const debounceHandleChange = useMemo(() => debounce(handleChange, 300), []);
+  const debounceHandleChange = useMemo(
+    () => debounce(handleChange, 300),
+    [handleChange]
+  );
 
   useEffect(() => {
     return () => debounceHandleChange.cancel();
   }, [debounceHandleChange]);
 
   useEffect(() => {
-    if (value && !options.find((option) => option.value === value)) {
+    if (value) {
       fetchSelectedOption(value as string);
-      return;
     }
   }, []);
-
-  const onFocus = () => {
-    setInputValue("");
-  };
 
   return (
     <GardenField>
@@ -208,11 +204,9 @@ export function LookupField({
         validation={error ? "error" : undefined}
         inputValue={inputValue}
         selectionValue={selectedOption?.value}
-        onFocus={onFocus}
+        onFocus={() => setInputValue("")}
         onChange={debounceHandleChange}
-        renderValue={({ selection }) =>
-          (selection as ISelectedOption | null)?.label || EMPTY_OPTION.name
-        }
+        renderValue={() => selectedOption?.name || EMPTY_OPTION.name}
       >
         {!required && !isLoadingOptions && (
           <Option value="" label="-">
@@ -226,13 +220,15 @@ export function LookupField({
             value={loadingOption.name}
           />
         )}
-        {!isLoadingOptions && !isFirstLoad && options.length === 0 && (
-          <Option
-            isDisabled
-            key={noResultsOption.id}
-            value={noResultsOption.name}
-          />
-        )}
+        {!isLoadingOptions &&
+          inputValue?.length > 0 &&
+          options.length === 0 && (
+            <Option
+              isDisabled
+              key={noResultsOption.id}
+              value={noResultsOption.name}
+            />
+          )}
         {!isLoadingOptions &&
           options.length !== 0 &&
           options.map((option) => (
