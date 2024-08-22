@@ -116,7 +116,10 @@ export function NewRequestForm({
   const visibleFields = useEndUserConditions(ticketFields, end_user_conditions);
   const { formRefCallback, handleSubmit } = useFormSubmit(ticketFields);
   const { t } = useTranslation();
-
+  const defaultOrganizationId =
+    organizations.length > 0 && organizations[0]?.id
+      ? organizations[0]?.id?.toString()
+      : null;
   const handleChange = useCallback(
     (field: Field, value: Field["value"]) => {
       setTicketFields(
@@ -315,7 +318,11 @@ export function NewRequestForm({
                   key={field.name}
                   field={field}
                   userId={userId}
-                  organizationId={organizationField?.value} //will need to read from organizations[0].id
+                  organizationId={
+                    organizationField !== null
+                      ? (organizationField.value as string)
+                      : defaultOrganizationId
+                  }
                   onChange={(value) => handleChange(field, value)}
                 />
               );

@@ -14,7 +14,6 @@ import SearchIcon from "@zendeskgarden/svg-icons/src/16/search-stroke.svg";
 import debounce from "lodash.debounce";
 import { useTranslation } from "react-i18next";
 import { EmptyValueOption } from "./EmptyValueOption";
-import type { Organization } from "../data-types/Organization";
 
 function getCustomObjectKey(targetType: string) {
   return targetType.replace("zen:custom_object:", "");
@@ -31,21 +30,6 @@ interface LookupFieldProps {
   organizationId: string | null;
   onChange: (value: string) => void;
 }
-
-const getOrganizationId = async (user_id: number) => {
-  const response = await fetch(
-    `/api/v2/users/${user_id}/organization_memberships.json`
-  );
-  const data = await response.json();
-  if (data && data.organization_memberships.length > 0) {
-    const defaultOrganization = data.organization_memberships.filter(
-      (organization: Organization) => organization.default === true
-    );
-    return defaultOrganization[0].organization_id;
-  } else {
-    return null;
-  }
-};
 
 export function LookupField({
   field,
@@ -136,15 +120,12 @@ export function LookupField({
           onChange("");
         } else {
           const searchParams = new URLSearchParams();
-          const organization_id = organizationId
-            ? organizationId
-            : await getOrganizationId(userId);
           searchParams.set("name", inputValue.toLocaleLowerCase());
           searchParams.set("source", "zen:ticket");
           searchParams.set("field_id", fieldId.toString());
           searchParams.set("user_id", userId.toString());
-          organization_id !== null &&
-            searchParams.set("organization_id", organization_id);
+          if (organizationId !== null)
+            searchParams.set("organization_id", organizationId);
           setIsLoadingOptions(true);
           try {
             const response = await fetch(

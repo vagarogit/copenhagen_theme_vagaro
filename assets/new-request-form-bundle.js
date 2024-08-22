@@ -1099,17 +1099,6 @@ const EMPTY_OPTION = {
     value: "",
     name: "-",
 };
-const getOrganizationId = async (user_id) => {
-    const response = await fetch(`/api/v2/users/${user_id}/organization_memberships.json`);
-    const data = await response.json();
-    if (data && data.organization_memberships.length > 0) {
-        const defaultOrganization = data.organization_memberships.filter((organization) => organization.default === true);
-        return defaultOrganization[0].organization_id;
-    }
-    else {
-        return null;
-    }
-};
 function LookupField({ field, userId, organizationId, onChange, }) {
     const { id: fieldId, label, error, value, name, required, description, relationship_target_type, } = field;
     const [options, setOptions] = reactExports.useState([]);
@@ -1163,15 +1152,12 @@ function LookupField({ field, userId, organizationId, onChange, }) {
             }
             else {
                 const searchParams = new URLSearchParams();
-                const organization_id = organizationId
-                    ? organizationId
-                    : await getOrganizationId(userId);
                 searchParams.set("name", inputValue.toLocaleLowerCase());
                 searchParams.set("source", "zen:ticket");
                 searchParams.set("field_id", fieldId.toString());
                 searchParams.set("user_id", userId.toString());
-                organization_id !== null &&
-                    searchParams.set("organization_id", organization_id);
+                if (organizationId !== null)
+                    searchParams.set("organization_id", organizationId);
                 setIsLoadingOptions(true);
                 try {
                     const response = await fetch(`/api/v2/custom_objects/${customObjectKey}/records/autocomplete?${searchParams.toString()}`);
@@ -1239,6 +1225,9 @@ function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parent
     const visibleFields = useEndUserConditions(ticketFields, end_user_conditions);
     const { formRefCallback, handleSubmit } = useFormSubmit(ticketFields);
     const { t } = useTranslation();
+    const defaultOrganizationId = organizations.length > 0 && organizations[0]?.id
+        ? organizations[0]?.id?.toString()
+        : null;
     const handleChange = reactExports.useCallback((field, value) => {
         setTicketFields(ticketFields.map((ticketField) => ticketField.name === field.name
             ? { ...ticketField, value }
@@ -1290,7 +1279,9 @@ function NewRequestForm({ requestForm, wysiwyg, newRequestPath, parentId, parent
                             case "tagger":
                                 return (jsxRuntimeExports.jsx(Tagger, { field: field, onChange: (value) => handleChange(field, value) }, field.name));
                             case "lookup":
-                                return (jsxRuntimeExports.jsx(LookupField, { field: field, userId: userId, organizationId: organizationField?.value, onChange: (value) => handleChange(field, value) }, field.name));
+                                return (jsxRuntimeExports.jsx(LookupField, { field: field, userId: userId, organizationId: organizationField !== null
+                                        ? organizationField.value
+                                        : defaultOrganizationId, onChange: (value) => handleChange(field, value) }, field.name));
                             default:
                                 return jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {});
                         }
