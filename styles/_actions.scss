@@ -3,7 +3,6 @@
 .actions {
   text-align: center;
   flex-shrink: 0; /*Avoid collapsing elements in Safari*/
-
   & button {
     -webkit-appearance: none;
     -moz-appearance: none;
