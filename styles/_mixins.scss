@@ -18,14 +18,16 @@
 }
 
 @mixin max-width-container {
+
+  margin: 0 auto;
+  padding: 0 5%;
   @media (min-width: #{$max-width-container}) {
     padding: 0;
     width: 90%;
   }
 
   max-width: $max-width-container;
-  margin: 0 auto;
-  padding: 0 5%;
+ 
 }
 
 @mixin vertical-align {

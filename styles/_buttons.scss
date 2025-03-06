@@ -1,7 +1,5 @@
 /***** Buttons *****/
 .button {
-  @include tablet { width: auto; }
-
   background-color: transparent;
   border: 1px solid $button-color;
   border-radius: 4px;
@@ -18,6 +16,10 @@
   white-space: nowrap;
   width: 100%;
   -webkit-touch-callout: none;
+
+  @include tablet { 
+    width: auto; 
+  }
 
   &:visited {
     color: $button-color;
@@ -47,10 +49,6 @@
 }
 
 .button-large, .hbs-form input[type="submit"] {
-  @include tablet {
-    width: auto;
-  }
-
   cursor: pointer;
   background-color: $button-color;
   border: 0;
@@ -62,6 +60,10 @@
   padding: 0 1.9286em;
   width: 100%;
 
+  @include tablet {
+    width: auto;
+  }
+
   &:visited {
     color: $brand_text_color;
   }
@@ -71,7 +73,6 @@
   &:focus {
     background-color: $hover-button-color;
   }
-
 
   &[disabled] {
     background-color: #ddd;

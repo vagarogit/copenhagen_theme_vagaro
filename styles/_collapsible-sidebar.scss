@@ -1,21 +1,20 @@
 /* Sidebar navigation that collapses on mobile */
 .collapsible-sidebar {
-  @include desktop {
-    max-height: none;
-    padding: 0;
-  }
   flex: 1;
   max-height: 45px;
   overflow: hidden;
   padding: 10px 0;
   position: relative;
+  @include desktop {
+    max-height: none;
+    padding: 0;
+  }
 
   &-title {
     margin-top: 0;
   }
 
   &-toggle {
-    @include desktop { display: none; }
     position: absolute;
     top: calc(45px / 2);
     transform: translateY(-50%);
@@ -26,6 +25,7 @@
     width: 25px;
     height: 25px;
     border-radius: 50%;
+    @include desktop { display: none; }
 
     [dir="rtl"] & {
       left: 0;
@@ -55,8 +55,8 @@
   }
 
   &-body {
-    @include desktop { display: block; }
     display: none;
+    @include desktop { display: block; }
   }
 
   &[aria-expanded="true"] {
