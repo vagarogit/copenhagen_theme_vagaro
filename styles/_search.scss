@@ -1,6 +1,6 @@
 /***** Search field *****/
 
-$icon-color: #777;
+$icon-color: #333333;
 $padding-left: 40px;
 $padding-right: 20px;
 
@@ -24,7 +24,6 @@ $padding-right: 20px;
   input[type="search"], 
   .clear-button {
     background-color: #fff;
-    border-radius: 30px;
     border: none;
   }
 
@@ -39,11 +38,14 @@ $padding-right: 20px;
     box-sizing: border-box;
     color: $field-text-color;
     flex: 1 1 auto;
-    height: 40px;
+    height: 36px;
     width: 100%;
+    background-color: #f7f7f7;
+    border-radius: 30px;
 
     &:focus {
       color: $field-text-focus-color;
+      background-color: #f9f9f9;
     }
 
     &::-webkit-search-decoration,
@@ -151,10 +153,15 @@ $padding-right: 20px;
   position: absolute;
   left: 15px;
   z-index: 1;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   color: $icon-color;
   pointer-events: none;
+  transition: color $input-transition;
+
+  .search:focus-within & {
+    color: $brand_color;
+  }
 
   [dir="rtl"] & {
     left: auto;

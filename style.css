@@ -1,4 +1,6 @@
 @charset "UTF-8";
+/* Import Inter font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 /***** Normalize.css *****/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 html {
@@ -245,7 +247,7 @@ template {
 body {
   background-color: $background_color;
   color: $text_color;
-  font-family: $text_font;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -262,7 +264,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $heading_font;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   margin-top: 0;
 }
 
@@ -586,6 +588,55 @@ ul {
     padding: 10px 20px;
     height: 60px;
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  margin: 0 0 20px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 32px;
+}
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+}
+
+.text-large {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.text-medium {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.text-small {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 /***** Forms *****/
@@ -1097,7 +1148,6 @@ ul {
 .search input[type=search],
 .search .clear-button {
   background-color: #fff;
-  border-radius: 30px;
   border: none;
 }
 .search-full input[type=search], .search-full .clear-button {
@@ -1109,11 +1159,14 @@ ul {
   box-sizing: border-box;
   color: #666;
   flex: 1 1 auto;
-  height: 40px;
+  height: 36px;
   width: 100%;
+  background-color: #f7f7f7;
+  border-radius: 30px;
 }
 .search input[type=search]:focus {
   color: #555;
+  background-color: #f9f9f9;
 }
 .search input[type=search]::-webkit-search-decoration, .search input[type=search]::-webkit-search-cancel-button, .search input[type=search]::-webkit-search-results-button, .search input[type=search]::-webkit-search-results-decoration {
   -webkit-appearance: none;
@@ -1124,7 +1177,7 @@ ul {
 .search .clear-button {
   align-items: center;
   box-sizing: border-box;
-  color: #777;
+  color: #333333;
   cursor: pointer;
   display: none;
   flex: none;
@@ -1192,10 +1245,14 @@ ul {
   position: absolute;
   left: 15px;
   z-index: 1;
-  width: 18px;
-  height: 18px;
-  color: #777;
+  width: 20px;
+  height: 20px;
+  color: #333333;
   pointer-events: none;
+  transition: color border 0.12s ease-in-out;
+}
+.search:focus-within .search-icon {
+  color: $brand_color;
 }
 [dir=rtl] .search-icon {
   left: auto;
@@ -1204,20 +1261,40 @@ ul {
 
 /***** Hero component *****/
 .hero {
-  background-image: url($homepage_background_image);
-  background-position: center;
-  background-size: cover;
-  height: 300px;
-  padding: 0 20px;
+  background-color: #ffffff;
+  padding: 48px 20px;
   text-align: center;
   width: 100%;
 }
 .hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.hero .search {
+  background: darken($background_color, 5%);
+  border-radius: 8px;
+  padding: 16px;
+  width: 100%;
   position: relative;
+}
+.hero .search input[type=search] {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  height: 40px;
+  padding-left: 40px;
+  width: 100%;
+}
+.hero .search input[type=search]:focus {
+  outline: none;
+}
+.hero .search-icon {
+  position: absolute;
+  left: 32px;
   top: 50%;
   transform: translateY(-50%);
-  max-width: 610px;
-  margin: 0 auto;
+  width: 16px;
+  height: 16px;
 }
 
 .page-header {
@@ -1308,30 +1385,35 @@ ul {
 }
 @media (min-width: 768px) {
   .blocks-list {
-    margin: 0 -15px;
+    margin: 0 -10px;
   }
 }
 .blocks-item {
-  border: 1px solid $brand_color;
-  border-radius: 4px;
+  border: 0.5px solid $brand_color;
+  border-radius: 8px;
   box-sizing: border-box;
   color: $brand_color;
   display: flex;
-  flex: 1 0 340px;
-  margin: 0 0 30px;
-  max-width: 100%;
+  flex: 1 0 240px;
+  margin: 0 0 20px;
+  max-width: calc(25% - 20px);
   text-align: center;
+  min-height: 150px;
+  transition: all 0.2s ease-in-out;
 }
 @media (min-width: 768px) {
   .blocks-item {
-    margin: 0 15px 30px;
+    margin: 0 10px 20px;
   }
 }
 .blocks-item:hover, .blocks-item:focus, .blocks-item:active {
-  background-color: $brand_color;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.2s ease-in-out;
 }
 .blocks-item:hover *, .blocks-item:focus *, .blocks-item:active * {
-  color: $brand_text_color;
+  color: #000000;
   text-decoration: none;
 }
 .blocks-item-internal {
@@ -1349,7 +1431,7 @@ ul {
 }
 .blocks-item-link {
   color: $brand_color;
-  padding: 20px 30px;
+  padding: 20px 25px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -1368,6 +1450,7 @@ ul {
 .blocks-item-title {
   margin-bottom: 0;
   font-size: 16px;
+  font-weight: 600;
 }
 .blocks-item-description {
   margin: 0;

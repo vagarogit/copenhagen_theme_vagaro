@@ -1,16 +1,42 @@
 /***** Hero component *****/
 .hero {
-  background-image: url($homepage_background_image);
-  background-position: center;
-  background-size: cover;
-  height: 300px;
-  padding: 0 20px;
+  background-color: #ffffff;
+  padding: 48px 20px;
   text-align: center;
   width: 100%;
 
   &-inner {
-    @include vertical-align;
-    max-width: 610px;
+    max-width: 720px;
     margin: 0 auto;
+  }
+
+  .search {
+    background: $secondary-shade;
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    position: relative;
+
+    input[type="search"] {
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      height: 40px;
+      padding-left: 40px;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
   }
 }

@@ -1,0 +1,53 @@
+// Typography styles
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-base;
+  margin: 0 0 20px;
+}
+
+// Hero typography
+.hero {
+  h1 {
+    font-size: 48px;
+    line-height: 1.2;
+    font-weight: $font-weight-semibold;
+    color: $heading-color;
+    margin-bottom: 32px;
+
+    @media (max-width: $tablet-width) {
+      font-size: 36px;
+    }
+  }
+}
+
+// General text sizes
+.text-large {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.text-medium {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.text-small {
+  font-size: $font-size-small;
+  line-height: 1.6;
+}
+
+// Font weights
+.font-normal {
+  font-weight: 400;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.font-bold {
+  font-weight: 700;
+}
