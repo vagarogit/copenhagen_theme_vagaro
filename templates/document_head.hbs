@@ -20,7 +20,7 @@
     "new-request-form-translations-bundle.js"
   }}", "shared": "{{asset "shared-bundle.js"}}", "wysiwyg": "{{asset
     "wysiwyg-bundle.js"
-  }}" } }
+  }}", "statusio": "{{asset "statusio.js"}}" } }
 </script>
 <script type="module">
   import { renderFlashNotifications } from "flash-notifications"; const settings
@@ -29,4 +29,8 @@
   {{json (t "close")}}
 
   renderFlashNotifications(settings, closeLabel);
+</script>
+
+<script type="module">
+  import "statusio";
 </script>

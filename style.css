@@ -2782,6 +2782,109 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/***** Status.io Bar *****/
+.statusio-container {
+  width: 100%;
+  margin: 15px 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.statusio-bar {
+  display: flex;
+  justify-content: flex-start;
+  width: 1180px;
+  padding: 10px 0;
+  height: 77px;
+  text-align: center;
+  background-color: #f4f4f4;
+  margin-top: 64px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+.statusio-bar.operational {
+  background-color: #D7EBDD;
+}
+.statusio-bar.degraded {
+  background-color: #f39c12;
+}
+.statusio-bar.partial-outage {
+  background-color: #e67e22;
+}
+.statusio-bar.major-outage {
+  background-color: #e74c3c;
+}
+.statusio-bar.maintenance {
+  background-color: #3498db;
+}
+
+.statusio-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #379B55;
+  font-weight: 600;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 5%;
+  text-align: left;
+}
+.operational .statusio-status {
+  color: #379B55;
+}
+.degraded .statusio-status, .partial-outage .statusio-status, .major-outage .statusio-status, .maintenance .statusio-status {
+  color: #fff;
+}
+
+.statusio-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.operational .statusio-icon {
+  background-color: #379B55;
+  position: relative;
+}
+.operational .statusio-icon:before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 4px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+  margin-top: -1px;
+}
+.degraded .statusio-icon, .partial-outage .statusio-icon, .major-outage .statusio-icon, .maintenance .statusio-icon {
+  background-color: #fff;
+}
+
+#statusio-message {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .statusio-bar {
+    padding: 12px 0;
+  }
+  #statusio-message {
+    font-size: 24px;
+  }
+  .statusio-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
 /***** Post *****/
 /*
 * The post grid is defined this way:
