@@ -496,6 +496,43 @@ ul {
   -webkit-touch-callout: none;
 }
 
+.see-more-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 200px;
+  border: none;
+}
+
+.see-more-container .button, .see-more-container .pagination-next-link, .see-more-container .pagination-prev-link, .see-more-container .pagination-first-link, .see-more-container .pagination-last-link, .see-more-container .subscriptions-subscribe button, .subscriptions-subscribe .see-more-container button, .see-more-container .requests-table-toolbar .organization-subscribe button, .requests-table-toolbar .organization-subscribe .see-more-container button, .see-more-container .community-follow button, .community-follow .see-more-container button, .see-more-container .article-subscribe button, .article-subscribe .see-more-container button, .see-more-container .section-subscribe button, .section-subscribe .see-more-container button, .see-more-container .split-button button, .split-button .see-more-container button {
+  border: none;
+  font-size: 16px;
+  line-height: 2.34;
+  padding: 0 20px;
+  text-align: center;
+  transition: background-color 0.12s ease-in-out, border-color 0.12s ease-in-out, color 0.15s ease-in-out;
+  user-select: none;
+  white-space: nowrap;
+  background-color: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.see-more-container .button svg, .see-more-container .pagination-next-link svg, .see-more-container .pagination-prev-link svg, .see-more-container .pagination-first-link svg, .see-more-container .pagination-last-link svg, .see-more-container .subscriptions-subscribe button svg, .subscriptions-subscribe .see-more-container button svg, .see-more-container .requests-table-toolbar .organization-subscribe button svg, .requests-table-toolbar .organization-subscribe .see-more-container button svg, .see-more-container .community-follow button svg, .community-follow .see-more-container button svg, .see-more-container .article-subscribe button svg, .article-subscribe .see-more-container button svg, .see-more-container .section-subscribe button svg, .section-subscribe .see-more-container button svg, .see-more-container .split-button button svg, .split-button .see-more-container button svg {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}
+
+.see-more-container .button:hover, .see-more-container .pagination-next-link:hover, .see-more-container .pagination-prev-link:hover, .see-more-container .pagination-first-link:hover, .see-more-container .pagination-last-link:hover, .see-more-container .subscriptions-subscribe button:hover, .subscriptions-subscribe .see-more-container button:hover, .see-more-container .requests-table-toolbar .organization-subscribe button:hover, .requests-table-toolbar .organization-subscribe .see-more-container button:hover, .see-more-container .community-follow button:hover, .community-follow .see-more-container button:hover, .see-more-container .article-subscribe button:hover, .article-subscribe .see-more-container button:hover, .see-more-container .section-subscribe button:hover, .section-subscribe .see-more-container button:hover, .see-more-container .split-button button:hover, .split-button .see-more-container button:hover {
+  background-color: black;
+}
+
 /***** Split button *****/
 .split-button {
   display: flex;
@@ -3377,9 +3414,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 .collapsible-sidebar-toggle[aria-expanded=false] .chevron-icon {
   display: inline-block;
+  transform: none;
 }
-.collapsible-sidebar-toggle[aria-expanded=true] .x-icon {
+.collapsible-sidebar-toggle[aria-expanded=true] .chevron-icon {
   display: inline-block;
+  transform: rotate(180deg);
 }
 .collapsible-sidebar-toggle:focus {
   outline: none;

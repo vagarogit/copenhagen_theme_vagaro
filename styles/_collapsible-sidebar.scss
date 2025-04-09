@@ -39,12 +39,14 @@
     &[aria-expanded="false"] {
       .chevron-icon {
         display: inline-block;
+        transform: none;
       }
     }
     
     &[aria-expanded="true"] {
-      .x-icon {
+      .chevron-icon {
         display: inline-block;
+        transform: rotate(180deg);
       }
     }
 

@@ -117,3 +117,39 @@
   width: 100%;
   -webkit-touch-callout: none;
 }
+
+.see-more-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 200px;
+  border: none;
+}
+.see-more-container .button {
+  border: none;
+  font-size: 16px;
+  line-height: 2.34;
+  padding: 0 20px;
+  text-align: center;
+  transition: background-color 0.12s ease-in-out, border-color 0.12s ease-in-out, color 0.15s ease-in-out;
+  user-select: none;
+  white-space: nowrap;
+  background-color: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.see-more-container .button svg {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+}
+
+.see-more-container .button:hover {
+  background-color: black;
+}
