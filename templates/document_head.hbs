@@ -1,6 +1,8 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <link rel="stylesheet" href="{{asset 'inter-font.css'}}" />
-
+<script
+  src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"
+></script>
 <!-- Make the translated search clear button label available for use in JS -->
 <!-- See buildClearSearchButton() in script.js -->
 <script type="text/javascript">window.searchClearButtonLabelLocalized = "{{t
@@ -25,7 +27,7 @@
     "new-request-form-translations-bundle.js"
   }}", "shared": "{{asset "shared-bundle.js"}}", "wysiwyg": "{{asset
     "wysiwyg-bundle.js"
-  }}", "statusio": "{{asset "statusio.js"}}" } }
+  }}" } }
 </script>
 <script type="module">
   import { renderFlashNotifications } from "flash-notifications"; const settings

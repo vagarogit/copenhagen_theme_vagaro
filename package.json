@@ -16,6 +16,7 @@
     "zcli": "zcli"
   },
   "dependencies": {
+    "@glidejs/glide": "^3.7.1",
     "@types/dompurify": "3.0.2",
     "@zendesk/help-center-wysiwyg": "0.0.5",
     "@zendeskgarden/container-grid": "^3.0.14",
