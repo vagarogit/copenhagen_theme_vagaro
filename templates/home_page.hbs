@@ -93,13 +93,18 @@
 
     {{#if promoted_articles}}
       <section class="articles">
-        <h2>{{t 'promoted_articles'}}</h2>
+        <h2 class="text-2xl font-semibold text-gray-900 mb-0">Trending Articles</h2>
         <ul class="article-list promoted-articles">
           {{#each promoted_articles}}
             <li class="promoted-articles-item">
-                <a href="{{url}}">
-                  {{title}}
-
+                <a href="{{url}}" class="flex items-center gap-2 py-4 border-b border-gray-200">
+                  <span class="text-gray-900">{{title}}</span>
+                  <div class="border w-4 h-4 flex items-center justify-center">
+                    <img src="{{asset 'arrow-up-right.svg'}}" class="w-full h-full" />
+                  </div>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="text-blue-600 flex-shrink-0" aria-hidden="true">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" d="M4.5 11.5l7-7m0 0H4.5m7 0v7"/>
+                  </svg>
                   {{#if internal}}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-lock" title="{{t 'internal'}}">
                       <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
