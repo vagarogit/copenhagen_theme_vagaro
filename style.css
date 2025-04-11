@@ -32,10 +32,6 @@ pre {
   font-size: 1em;
 }
 
-a {
-  background-color: transparent;
-}
-
 abbr[title] {
   border-bottom: none;
   text-decoration: underline;
@@ -266,34 +262,6 @@ h5,
 h6 {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   margin-top: 0;
-}
-
-h1 {
-  font-size: 32px;
-}
-
-h2 {
-  font-size: 22px;
-}
-
-h3 {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-h4 {
-  font-size: 16px;
-}
-
-a {
-  color: $link_color;
-  text-decoration: none;
-}
-a:visited {
-  color: $visited_link_color;
-}
-a:hover, a:active, a:focus {
-  text-decoration: underline;
 }
 
 .hbs-form input,

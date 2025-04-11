@@ -34,8 +34,8 @@
         {{#each categories}}
           {{#if ../has_multiple_categories}}
           {{!-- category-item --}}
-            <li class="category-item bg-white rounded-lg border border-gray-200 duration-300 w-full min-h-48 flex items-center justify-center text-center" data-index="{{@index}}">
-              <a href='{{url}}' class="p-6 flex flex-col gap-4 items-center justify-center">
+            <li class="category-item bg-white rounded-2xl border border-gray-200 duration-300 w-full flex items-center justify-center text-center" data-index="{{@index}}">
+              <a href='{{url}}' class="p-6 flex flex-col gap-4 items-center justify-center mt-4 h-40 ">
                 {{#is id 115000066034}}<img class="" src="{{asset 'key.svg'}}" />{{/is}}
                 {{#is id 22542821917083}}<img class="" src="{{asset 'bag-shopping.svg'}}" />{{/is}}
                 {{#is id 115000065974}}<img class="" src="{{asset 'credit-card.svg'}}" />{{/is}}
@@ -141,24 +141,25 @@
   {{!-- Slider section ends here --}}
 
   {{!-- cta section starts here --}}
+
 <div class="bg-white">
-  <div class="mx-auto max-w-7xl py-32 sm:px-6 lg:px-8">
-    <div class="relative isolate overflow-hidden bg-white px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0 min-h-[600px]">
-     
-      <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-        <h2 class="text-balance text-3xl font-semibold tracking-tight text-gray-900">Try Vagaro For Free Now</h2>
-      
-        <div class="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-          <a href="#" class="rounded-full bg-red-900 px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline  focus-visible:outline-offset-2 focus-visible:outline-white">Get started</a>
-          <a href="#" class="text-sm/6 font-semibold text-white">Learn more <span aria-hidden="true">→</span></a>
+  <div class="mx-auto max-w-8xl py-8 sm:px-6 lg:px-8">
+    <div class="relative isolate overflow-hidden bg-wave-gray px-6 pt-16 sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0 min-h-[440px] h-[440px]">
+      {{!-- This block is now centered on y axis --}}
+        <div class="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:flex lg:flex-col lg:justify-center lg:py-0 lg:text-left h-full">
+          <h2 class="text-4xl font-semibold text-gray-900">Try Vagaro For Free Now</h2>
+        
+          <div class="mt-8 flex items-center justify-center gap-x-6 lg:justify-start">
+            <a href="https://www.vagaro.com/pro/pricing" class="flex items-center justify-center rounded-full bg-primary px-3.5 py-3 text-base font-semibold text-white hover:bg-gray-100 h-12 w-44">Start Free Trial</a>
+            <a href="#" class="text-base/6 font-regular text-blue-default">Book a Demo<span aria-hidden="true">  →</span></a>
+          </div>
         </div>
-      </div>
       <div class="relative w-full lg:w-1/2">
-        <img class="absolute object-left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cm9d5v4iohmnr07mvspvx12i4" alt="App screenshot" width="1824" height="1080">
-      </div>
+        <img class="absolute object-left-0 top-0 w-[49rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10" src="https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cm9d5v4iohmnr07mvspvx12i4" alt="App screenshot" width="1824" height="1080">
       </div>
     </div>
   </div>
+</div>
   {{!-- cta section ends here --}}
 
 
