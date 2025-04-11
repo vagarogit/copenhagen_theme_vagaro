@@ -1,6 +1,7 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <link rel="stylesheet" href="{{asset 'inter-font.css'}}">
+  <link rel="stylesheet" href="{{asset 'output.css'}}" />
   <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
   <!-- Make the translated search clear button label available for use in JS -->
   <!-- See buildClearSearchButton() in script.js -->
@@ -17,17 +18,16 @@
   </script>
   
   <script type="importmap">
-  {
-    "imports": {
-      "new-request-form": "{{asset 'new-request-form-bundle.js'}}",
-      "flash-notifications": "{{asset 'flash-notifications-bundle.js'}}",
-      "new-request-form-translations": "{{asset 'new-request-form-translations-bundle.js'}}",
-      "shared": "{{asset 'shared-bundle.js'}}",
-      "wysiwyg": "{{asset 'wysiwyg-bundle.js'}}",
-      "statusio": "{{asset 'statusio.js'}}"
-    }
+{
+  "imports": {
+    "new-request-form": "{{asset 'new-request-form-bundle.js'}}",
+    "flash-notifications": "{{asset 'flash-notifications-bundle.js'}}",
+    "new-request-form-translations": "{{asset 'new-request-form-translations-bundle.js'}}",
+    "shared": "{{asset 'shared-bundle.js'}}",
+    "wysiwyg": "{{asset 'wysiwyg-bundle.js'}}"
   }
-  </script>
+}
+</script>
 </head>
 <body>
   <script type="module">
