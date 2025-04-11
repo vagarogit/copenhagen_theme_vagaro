@@ -3,7 +3,7 @@
  * This is a fallback implementation that doesn't require React
  */
 
-function initVanillaAccordions() {
+export function initVanillaAccordions() {
   // Wrap in try/catch to avoid any errors breaking the page
   try {
     // Make sure we're on the category page
@@ -143,8 +143,3 @@ function initVanillaAccordions() {
     }
   }
 }
-
-// Initialize accordions when the DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    initVanillaAccordions();
-});
