@@ -35,6 +35,7 @@ export default defineConfig([
     input: {
       "new-request-form": "src/modules/new-request-form/index.tsx",
       "flash-notifications": "src/modules/flash-notifications/index.ts",
+      "category-accordions": "src/modules/category-accordions/category-accordions-bundle.ts",
     },
     output: {
       dir: "assets",

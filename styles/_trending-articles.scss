@@ -1,0 +1,44 @@
+/***** Trending Articles Section *****/
+
+.trending-articles-container {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+// Skeleton loading animation
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+// Keep a fixed height for the skeleton and content to prevent layout shift
+#trending-articles-skeleton,
+#trending-articles-content {
+  min-height: 100px;
+}
+
+// Item styling
+.trending-articles-api-item {
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  a {
+    text-decoration: none;
+    height: 100%;
+  }
+}
