@@ -7,6 +7,12 @@
   <!-- See buildClearSearchButton() in script.js -->
   <script type="text/javascript">
     window.searchClearButtonLabelLocalized = "{{t 'search_clear'}}";
+    // Make the asset helper available to JavaScript
+    window.themeAsset = function(path) {
+      return "{{asset '" + path + "'}}";
+    };
+    // Expose the assets path directly
+    window.themePath = "{{asset 'arrow-up-right.svg'}}".replace("arrow-up-right.svg", "");
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <link rel="stylesheet" href="https://use.typekit.net/zrd5zcu.css">
@@ -24,7 +30,8 @@
     "flash-notifications": "{{asset 'flash-notifications-bundle.js'}}",
     "new-request-form-translations": "{{asset 'new-request-form-translations-bundle.js'}}",
     "shared": "{{asset 'shared-bundle.js'}}",
-    "wysiwyg": "{{asset 'wysiwyg-bundle.js'}}"
+    "wysiwyg": "{{asset 'wysiwyg-bundle.js'}}",
+    "statusio": "{{asset 'statusio.js'}}"
   }
 }
 </script>
