@@ -1,20 +1,23 @@
 /***** Category Accordions *****/
 
 .section-tree-accordion {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   
   .accordion-item {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem; // Reduced margin between items
     border: 1px solid #e5e7eb;
     border-radius: 0.375rem;
     overflow: hidden;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease; // Slightly slower transition
     
     &:hover {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     }
     
     &.expanded {
+      background-color: #f9fafb; // Light gray background for active item
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); // Slightly more pronounced shadow
+      
       .accordion-icon {
         transform: rotate(180deg);
       }
@@ -33,11 +36,23 @@
     
     &:hover {
       background-color: #f9fafb;
+      
+      .section-tree-title a {
+        color: #2563eb; // Blue color on hover for better feedback
+      }
     }
     
     &[aria-expanded="true"] {
       background-color: #f9fafb;
       border-bottom: 1px solid #e5e7eb;
+      
+      .section-tree-title a {
+        color: #2563eb; // Blue color for active accordion
+      }
+      
+      .accordion-icon {
+        color: #2563eb; // Blue icon for active accordion
+      }
     }
     
     .section-tree-title {
@@ -55,17 +70,19 @@
     
     .accordion-icon {
       color: #6b7280;
-      transition: transform 0.2s ease;
+      transition: transform 0.35s ease-in-out; // Match with panel transition
     }
   }
   
   .accordion-panel {
-    padding: 1rem;
+    padding: 0 1rem;
+    overflow: hidden;
+    transition: height 0.35s ease-in-out; // Smooth height transition
     
     .article-list {
       list-style: none;
       margin: 0;
-      padding: 0;
+      padding: 1rem 0 0 0; // Add padding to the top only
     }
     
     .article-list-item {
@@ -91,7 +108,8 @@
     
     .see-all-articles {
       display: inline-block;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem; // Add bottom padding
       color: #2563eb;
       text-decoration: none;
       
