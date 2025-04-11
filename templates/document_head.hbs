@@ -1,43 +1,43 @@
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<link rel="stylesheet" href="{{asset 'inter-font.css'}}" />
-<script
-  src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"
-></script>
-<!-- Make the translated search clear button label available for use in JS -->
-<!-- See buildClearSearchButton() in script.js -->
-<script type="text/javascript">window.searchClearButtonLabelLocalized = "{{t
-    "search_clear"
-  }}";</script>
-<script
-  defer
-  src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-></script>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="stylesheet" href="{{asset 'inter-font.css'}}">
+  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
+  <!-- Make the translated search clear button label available for use in JS -->
+  <!-- See buildClearSearchButton() in script.js -->
+  <script type="text/javascript">
+    window.searchClearButtonLabelLocalized = "{{t 'search_clear'}}";
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-<script type="text/javascript">
-  // Load ES module polyfill only for browsers that don't support ES modules if
-  (!(HTMLScriptElement.supports && HTMLScriptElement.supports('importmap'))) {
-  document.write('<script async src="{{asset
-    "es-module-shims.js"
-  }}"><\/script>'); }
-</script>
-<script type="importmap">
-  { "imports": { "new-request-form": "{{asset "new-request-form-bundle.js"}}",
-  "flash-notifications": "{{asset "flash-notifications-bundle.js"}}",
-  "new-request-form-translations": "{{asset
-    "new-request-form-translations-bundle.js"
-  }}", "shared": "{{asset "shared-bundle.js"}}", "wysiwyg": "{{asset
-    "wysiwyg-bundle.js"
-  }}" } }
-</script>
-<script type="module">
-  import { renderFlashNotifications } from "flash-notifications"; const settings
-  =
-  {{json settings}}; const closeLabel =
-  {{json (t "close")}}
+  <script type="text/javascript">
+    // Load ES module polyfill only for browsers that don't support ES modules
+    if (!(HTMLScriptElement.supports && HTMLScriptElement.supports('importmap'))) {
+      document.write('<script async src="{{asset "es-module-shims.js"}}"><\/script>');
+    }
+  </script>
+  
+  <script type="importmap">
+  {
+    "imports": {
+      "new-request-form": "{{asset 'new-request-form-bundle.js'}}",
+      "flash-notifications": "{{asset 'flash-notifications-bundle.js'}}",
+      "new-request-form-translations": "{{asset 'new-request-form-translations-bundle.js'}}",
+      "shared": "{{asset 'shared-bundle.js'}}",
+      "wysiwyg": "{{asset 'wysiwyg-bundle.js'}}",
+      "statusio": "{{asset 'statusio.js'}}"
+    }
+  }
+  </script>
+</head>
+<body>
+  <script type="module">
+    import { renderFlashNotifications } from "flash-notifications";
+    // 'settings' and the translated 'close' label are injected via server-side templating.
+    const settings = {{json settings}};
+    const closeLabel = {{json (t 'close')}};
 
-  renderFlashNotifications(settings, closeLabel);
-</script>
-
-<script type="module">
-  import "statusio";
-</script>
+    renderFlashNotifications(settings, closeLabel);
+  </script>
+  <script type="module">
+    import "statusio";
+  </script>

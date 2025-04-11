@@ -87,17 +87,26 @@
       </section>
     {{/if}}
   </section>
-  <section>
-    <h1>Slider here.</h1>
-        <p>Our support articles library is regularly updated to ensure you have access to the latest information and support resources.</p>
-        <div class="glide">
+  <section class="section video-section">
+    <div class="video-section-header">
+      <h2 class="video-section-title">Check Out Our Videos On Vagaro University</h2>
+      <div class="video-section-controls">
+        <button class="glide__arrow glide__arrow--left" id="glide-prev">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="glide__arrow glide__arrow--right" id="glide-next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="glide">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
-          <li class="glide__slide">0</li>
-          <li class="glide__slide">1</li>
-          <li class="glide__slide">2</li>
-          <li class="glide__slide">3</li>
-          <li class="glide__slide">4</li>
+          <!-- Video cards will be populated by JavaScript -->
         </ul>
       </div>
     </div>
@@ -123,35 +132,103 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Handle the "Show More" button functionality
     var seeMoreBtn = document.getElementById('see-more-btn');
+    var showMoreIcon = document.querySelector('.show-more-icon');
+    var showLessIcon = document.querySelector('.show-less-icon');
+    var categoryItems = document.querySelectorAll('.category-item');
+    var showAll = false;
+    
     if (seeMoreBtn) {
-      seeMoreBtn.addEventListener('click', function() {
-        var hiddenCategories = document.querySelector('.hidden-categories');
-        if (hiddenCategories) {
-          hiddenCategories.style.display = 'flex';
-          seeMoreBtn.style.display = 'none';
+      // Initially hide items with index >= 8
+      categoryItems.forEach(function(item) {
+        var index = parseInt(item.getAttribute('data-index'));
+        if (index >= 8) {
+          item.style.display = 'none';
         }
+      });
+      
+      seeMoreBtn.addEventListener('click', function() {
+        showAll = !showAll;
+        
+        // Toggle text
+        seeMoreBtn.textContent = showAll ? 'Show Less' : 'Show More';
+        
+        // Toggle icons
+        if (showMoreIcon) showMoreIcon.style.display = showAll ? 'none' : 'inline-block';
+        if (showLessIcon) showLessIcon.style.display = showAll ? 'inline-block' : 'none';
+        
+        // Toggle visibility of items
+        categoryItems.forEach(function(item) {
+          var index = parseInt(item.getAttribute('data-index'));
+          if (index >= 8) {
+            item.style.display = showAll ? 'block' : 'none';
+          }
+        });
       });
     }
     
-    // Initialize Glide slider after ensuring the script is loaded
-    if (typeof Glide !== 'undefined') {
-      new Glide('.glide', {
-        perView: 4,
-        gap: 20
-      }).mount();
-    } else {
-      // If Glide isn't loaded yet, wait a bit and try again
-      setTimeout(function() {
-        if (typeof Glide !== 'undefined') {
-          new Glide('.glide', {
-            perView: 4,
-            gap: 20
-          }).mount();
-        } else {
-          console.error('Glide.js could not be loaded');
-        }
-      }, 500);
-    }
+    // Load video data from JSON file
+    fetch('{{asset "videos.json"}}')
+      .then(response => response.json())
+      .then(videos => {
+        const slidesContainer = document.querySelector('.glide__slides');
+        
+        // Clear existing slides
+        slidesContainer.innerHTML = '';
+        
+        // Create video card for each item
+        videos.forEach((video, index) => {
+          // Determine which card style to use based on index
+          let cardClass = 'video-card';
+          if (index % 4 === 1) cardClass = 'video-card--purple';
+          if (index % 4 === 2) cardClass = 'video-card--green';
+          if (index % 4 === 3) cardClass = 'video-card--orange';
+          
+          const slide = document.createElement('li');
+          slide.className = 'glide__slide';
+          
+          slide.innerHTML = `
+            <a href="${video.url}" class="${cardClass}">
+              <div class="${cardClass}-image-container">
+                <img src="${video.thumbnail}" alt="${video.title}" class="${cardClass}-image">
+              </div>
+              <div class="video-card-content">
+                <div class="video-card-category">${video.category}</div>
+                <h3 class="video-card-title">${video.title}</h3>
+              </div>
+            </a>
+          `;
+          
+          slidesContainer.appendChild(slide);
+        });
+        
+        // Initialize Glide slider
+        const glide = new Glide('.glide', {
+          perView: 3.5,
+          gap: 4,
+          type: 'carousel',
+          autoplay: 4000, // Auto-scroll every 4 seconds
+          hoverpause: true, // Pause on hover
+          animationDuration: 1000,
+          breakpoints: {
+            1200: { perView: 3 },
+            992: { perView: 2 },
+            576: { perView: 1 }
+          }
+        }).mount();
+
+        // Add event listeners to the external controls
+        document.getElementById('glide-prev').addEventListener('click', () => {
+          glide.go('<');
+        });
+        
+        document.getElementById('glide-next').addEventListener('click', () => {
+          glide.go('>');
+        });
+      })
+      .catch(error => {
+        console.error('Error loading video data:', error);
+      });
   });
 </script>

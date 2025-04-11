@@ -1,0 +1,178 @@
+// Card base mixin with shared styles for all video cards
+@mixin video-card-base {
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+}
+// Image container mixin with specific background colors
+@mixin video-card-image-container($bg-color) {
+  overflow: hidden;
+  height: 250px;
+  position: relative;
+  background-color: $bg-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Image mixin for all card variations
+@mixin video-card-image {
+  width: 80%;
+  height: auto;
+  object-contain: fit;
+  display: block;
+  margin: 0 auto;
+}
+
+// Define the cards with color variations
+.video-card {
+  @include video-card-base;
+  
+  &-image-container {
+    @include video-card-image-container(#EBB5B3); // Pink background
+  }
+  
+  &-image {
+    @include video-card-image;
+  }
+}
+
+.video-card--purple {
+  @include video-card-base;
+  
+  &-image-container {
+    @include video-card-image-container(#C3BFDF); // Purple background
+  }
+  
+  &-image {
+    @include video-card-image;
+  }
+}
+
+.video-card--green {
+  @include video-card-base;
+  
+  &-image-container {
+    @include video-card-image-container(#BEE3BC); // Green background
+  }
+  
+  &-image {
+    @include video-card-image;
+  }
+}
+
+.video-card--orange {
+  @include video-card-base;
+  
+  &-image-container {
+    @include video-card-image-container(#FFE1B2); // Orange background
+  }
+  
+  &-image {
+    @include video-card-image;
+  }
+}
+
+// Text elements container
+.video-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: white;
+}
+
+.video-card-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0;
+  margin-top: 8px;
+  color: #333;
+  line-height: 1.3;
+}
+
+.video-card-category {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #CC4744;
+}
+
+// Video section container
+.video-section {
+  margin: 50px 0 70px;
+  
+  .video-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin-bottom: 40px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .video-section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+    margin-bottom: 0;
+  }
+  
+  .video-section-controls {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .glide__arrow {
+    position: static;
+    transform: none;
+    border: none;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    svg {
+      width: 24px;
+      height: 24px;
+      color: #333;
+    }
+  }
+  
+  .glide__slides {
+    padding: 10px 0;
+  }
+  
+  .glide__slide {
+    padding: 10px;
+  }
+}

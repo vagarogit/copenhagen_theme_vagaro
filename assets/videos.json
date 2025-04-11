@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Opening A Business Account",
+    "category": "GETTING STARTED",
+    "thumbnail": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cm9c0dk1lmbo50dn1l90fl5kj",
+    "url": "/videos/getting-started"
+  },
+  {
+    "id": 2,
+    "title": "Selling Products Online",
+    "category": "INVENTORY MANAGEMENT",
+    "thumbnail": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cm9c0dk21mboa0dn15ubka9r4",
+    "url": "/videos/inventory"
+  },
+  {
+    "id": 3,
+    "title": "Run The Payroll Report",
+    "category": "PAYROLL",
+    "thumbnail": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cm9c0djvvmenj07mvx1q1eg3c",
+    "url": "/videos/payroll"
+  },
+  {
+    "id": 4,
+    "title": "Get Featured",
+    "category": "MARKETING",
+    "thumbnail": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cm9c0dk1lmbo50dn1l90fl5kj",
+    "url": "/videos/marketing"
+  }
+]
