@@ -5220,14 +5220,14 @@ zd-summary-block {
 .section-tree-accordion .accordion-header:hover {
   background-color: #f9fafb;
 }
-.section-tree-accordion .accordion-header:hover .section-tree-title a {
+.section-tree-accordion .accordion-header:hover .section-tree-title .accordion-title-text {
   color: #2563eb;
 }
 .section-tree-accordion .accordion-header[aria-expanded=true] {
   background-color: #f9fafb;
   border-bottom: 1px solid #e5e7eb;
 }
-.section-tree-accordion .accordion-header[aria-expanded=true] .section-tree-title a {
+.section-tree-accordion .accordion-header[aria-expanded=true] .section-tree-title .accordion-title-text {
   color: #2563eb;
 }
 .section-tree-accordion .accordion-header[aria-expanded=true] .accordion-icon {
@@ -5236,12 +5236,10 @@ zd-summary-block {
 .section-tree-accordion .accordion-header .section-tree-title {
   margin: 0;
 }
-.section-tree-accordion .accordion-header .section-tree-title a {
+.section-tree-accordion .accordion-header .section-tree-title .accordion-title-text {
   color: #111827;
-  text-decoration: none;
-}
-.section-tree-accordion .accordion-header .section-tree-title a:hover {
-  color: #2563eb;
+  font-weight: 600;
+  cursor: pointer;
 }
 .section-tree-accordion .accordion-header .accordion-icon {
   color: #6b7280;

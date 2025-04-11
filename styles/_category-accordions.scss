@@ -37,7 +37,7 @@
     &:hover {
       background-color: #f9fafb;
       
-      .section-tree-title a {
+      .section-tree-title .accordion-title-text {
         color: #2563eb; // Blue color on hover for better feedback
       }
     }
@@ -46,7 +46,7 @@
       background-color: #f9fafb;
       border-bottom: 1px solid #e5e7eb;
       
-      .section-tree-title a {
+      .section-tree-title .accordion-title-text {
         color: #2563eb; // Blue color for active accordion
       }
       
@@ -58,13 +58,10 @@
     .section-tree-title {
       margin: 0;
       
-      a {
+      .accordion-title-text {
         color: #111827;
-        text-decoration: none;
-        
-        &:hover {
-          color: #2563eb;
-        }
+        font-weight: 600;
+        cursor: pointer;
       }
     }
     
