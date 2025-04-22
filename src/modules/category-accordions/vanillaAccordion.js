@@ -39,22 +39,22 @@ export function initVanillaAccordions() {
 
     // Track currently open accordion
     let currentlyOpenAccordion = null;
-    
+
     // Function to close an accordion
     const closeAccordion = (header, panel, item) => {
       if (!header || !panel) return;
-      
+
       header.setAttribute("aria-expanded", "false");
-      
+
       // Closing animation
-      panel.style.height = panel.scrollHeight + 'px';
+      panel.style.height = panel.scrollHeight + "px";
       // Force a reflow to ensure the height is applied before changing it
       panel.offsetHeight;
-      
+
       // Start animation
-      panel.style.height = '0';
+      panel.style.height = "0";
       item.classList.remove("expanded");
-      
+
       // After animation completes, hide completely
       setTimeout(() => {
         if (header.getAttribute("aria-expanded") === "false") {
@@ -62,7 +62,7 @@ export function initVanillaAccordions() {
         }
       }, 350);
     };
-    
+
     // Process each section
     sections.forEach((section, index) => {
       const sectionTitle = section.querySelector(".section-tree-title a");
@@ -93,9 +93,12 @@ export function initVanillaAccordions() {
       titleText.className = "accordion-title-text";
       titleText.textContent = sectionTitle.textContent.trim();
       titleElement.appendChild(titleText);
-      
+
       // Store the original URL as a data attribute for reference
-      titleElement.setAttribute("data-section-url", sectionTitle.getAttribute("href"));
+      titleElement.setAttribute(
+        "data-section-url",
+        sectionTitle.getAttribute("href")
+      );
 
       // Add icon
       const icon = document.createElement("span");
@@ -132,7 +135,7 @@ export function initVanillaAccordions() {
       accordionHeader.addEventListener("click", () => {
         const expanded =
           accordionHeader.getAttribute("aria-expanded") === "true";
-        
+
         // If this accordion is already open, just close it
         if (expanded) {
           closeAccordion(accordionHeader, accordionPanel, accordionItem);
@@ -143,34 +146,34 @@ export function initVanillaAccordions() {
             const { header, panel, item } = currentlyOpenAccordion;
             closeAccordion(header, panel, item);
           }
-          
+
           // Now open this accordion
           accordionHeader.setAttribute("aria-expanded", "true");
-          
+
           // Opening animation
           // First make it visible but with height 0
           accordionPanel.style.display = "block";
-          accordionPanel.style.height = '0';
-          
+          accordionPanel.style.height = "0";
+
           // Force a reflow to ensure the display change is applied
           accordionPanel.offsetHeight;
-          
+
           // Set the target height and start animation
-          accordionPanel.style.height = accordionPanel.scrollHeight + 'px';
+          accordionPanel.style.height = accordionPanel.scrollHeight + "px";
           accordionItem.classList.add("expanded");
-          
+
           // Clear height after animation is complete to allow for dynamic content
           setTimeout(() => {
             if (accordionHeader.getAttribute("aria-expanded") === "true") {
-              accordionPanel.style.height = 'auto';
+              accordionPanel.style.height = "auto";
             }
           }, 350); // Match this with CSS transition duration
-          
+
           // Update currently open accordion
           currentlyOpenAccordion = {
             header: accordionHeader,
             panel: accordionPanel,
-            item: accordionItem
+            item: accordionItem,
           };
         }
       });
