@@ -787,7 +787,7 @@
           for (var i = 0; i < response.length; i++) {
             var articleItem = document.createElement("li");
             articleItem.className =
-              "trending-articles-api-item border-b border-gray-200";
+              "trending-articles-api-item border-b border-gray-200 group";
 
             var articleLink = document.createElement("a");
             articleLink.className = "flex items-center p-2";
@@ -795,7 +795,7 @@
             articleLink.target = "_blank";
 
             var titleSpan = document.createElement("span");
-            titleSpan.className = "text-gray-900 flex-grow";
+            titleSpan.className = "text-gray-900 flex-grow group-hover:text-primary";
             titleSpan.textContent = response[i].articleTitle;
 
             var arrowImg = document.createElement("img");
@@ -811,18 +811,16 @@
             // Add individual hover event listeners
             articleItem.addEventListener("mouseenter", function () {
               this.classList.add("border-primary");
-              this.querySelector("span").classList.add("text-primary");
-              // Add primary color to the arrow
+              // Add primary color to the arrow (#CC4744)
               var arrow = this.querySelector("img");
               if (arrow) {
                 arrow.style.filter =
-                  "invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%)";
+                  "invert(37%) sepia(74%) saturate(2790%) hue-rotate(335deg) brightness(96%) contrast(84%)";
               }
             });
 
             articleItem.addEventListener("mouseleave", function () {
               this.classList.remove("border-primary");
-              this.querySelector("span").classList.remove("text-primary");
               // Reset arrow color
               var arrow = this.querySelector("img");
               if (arrow) {
