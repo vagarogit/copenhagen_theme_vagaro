@@ -4,105 +4,171 @@
 
 <header class="bg-white shadow">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 justify-between items-center">
+    <!-- Top row with logo and auth buttons -->
+    <div
+      class="relative flex h-16 justify-between items-center border-b border-gray-100"
+    >
       <!-- Logo -->
       <div class="flex shrink-0 items-center">
         {{#link "help_center" class="flex items-center"}}
           <img
-            src="{{settings.logo}}"
+            src="{{asset 'logo.svg'}}"
             alt="{{t 'home_page' name=help_center.name}}"
             class="h-8 w-auto"
           />
-          {{#if settings.show_brand_name}}
-            <span aria-hidden="true" class="ml-3 font-medium">{{help_center.name}}</span>
-          {{/if}}
         {{/link}}
       </div>
 
-      <!-- Desktop menu -->
-      <div class="hidden sm:flex sm:space-x-8">
-        <div class="flex space-x-4">
-          {{link "community" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"}}
-          {{link "new_request" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 submit-a-request"}}
-          {{#unless signed_in}}
-            {{#link "sign_in" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 sign-in"}}
-              {{t "sign_in"}}
-            {{/link}}
-          {{/unless}}
-        </div>
-      </div>
-
-      <!-- User dropdown (desktop) -->
-      {{#if signed_in}}
-        <div class="hidden sm:ml-6 sm:flex sm:items-center">
-          <div class="relative ml-3">
-            <button
-              type="button"
-              class="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dropdown-toggle"
-              aria-haspopup="true"
-            >
-              {{user_avatar class="size-8 rounded-full"}}
-              <span class="ml-1 flex items-center">
-                {{user_name}}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="12"
-                  focusable="false"
-                  viewBox="0 0 12 12"
-                  class="ml-1"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"
-                  />
-                </svg>
-              </span>
-            </button>
-            <div
-              class="dropdown-menu absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none transition ease-out duration-200"
-              role="menu"
-            >
-              {{#my_profile role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"}}{{t "profile"}}{{/my_profile}}
-              {{link "requests" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"}}
-              {{#link "contributions" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"}}{{t "activities"}}{{/link}}
-              {{contact_details role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"}}
-              {{change_password role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"}}
-              <div class="border-t border-gray-200 my-1" role="separator"></div>
-              {{link "sign_out" role="menuitem" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"}}
-            </div>
-          </div>
-        </div>
-      {{/if}}
-
-      <!-- Mobile menu button -->
-      <div class="flex items-center sm:hidden">
+      <!-- Auth & Region -->
+      <div class="flex items-center space-x-4">
         <button
           type="button"
-          class="menu-button-mobile relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-          aria-controls="user-nav-mobile"
-          aria-expanded="false"
-          aria-label="{{t 'toggle_navigation'}}"
+          class="text-gray-600 hover:text-gray-900 lg:hidden"
         >
-          {{#if signed_in}}
-            {{user_avatar class="size-8 rounded-full mr-2"}}
-          {{/if}}
           <svg
-            class="size-6"
+            class="w-5 h-5"
             fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
             stroke="currentColor"
-            aria-hidden="true"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            ></path>
+          </svg>
+        </button>
+
+        <div class="hidden lg:flex items-center space-x-4">
+          <div class="flex items-center mr-4">
+            <img
+              src="https://flagicons.lipis.dev/flags/4x3/us.svg"
+              alt="US"
+              class="w-5 h-auto mr-1"
             />
+            <span class="text-sm font-medium">US</span>
+          </div>
+
+          <a
+            href="#"
+            class="text-sm font-medium text-charcoal hover:text-gray-900 mr-4"
+          >Log In</a>
+
+          <a
+            href="https://www.vagaro.com/pro/pricing"
+            class="flex items-center justify-center bg-primary hover:bg-charcoal hover:border-solid text-md text-white font-medium py-2 px-4 rounded-full w-[145px] h-[50px]"
+          >
+            Sign up
+          </a>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="flex items-center lg:hidden">
+          <button
+            type="button"
+            class="menu-button-mobile relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+            aria-controls="user-nav-mobile"
+            aria-expanded="false"
+            aria-label="{{t 'toggle_navigation'}}"
+          >
+            {{#if signed_in}}
+              {{user_avatar class="size-8 rounded-full mr-2"}}
+            {{/if}}
+            <svg
+              class="size-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom row with navigation menu -->
+    <div class="hidden lg:flex items-center h-12">
+      <div
+        class="flex space-x-6 items-center border w-full mx-auto text-center justify-center h-12 text-[15px] font-semibold"
+      >
+        <a
+          href="#"
+          class="flex items-center text-sm font-medium text-primary text-nowrap"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            class="h-4 w-4 mr-1"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+            />
+          </svg>
+          Book a Service
+        </a>
+        <a
+          href="#"
+          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
+        >Business Types</a>
+        <a
+          href="#"
+          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
+        >Features</a>
+        <a
+          href="#"
+          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
+        >Products</a>
+        <a
+          href="#"
+          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
+        >Enterprise</a>
+        <a
+          href="https://www.vagaro.com/pro/pricing"
+          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
+        >Pricing</a>
+        <a
+          href="#"
+          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
+        >Contact Sales</a>
+        <a
+          href="#"
+          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
+        >Support</a>
+        <a
+          href="#"
+          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
+        >Resources</a>
+      </div>
+
+      <div class="ml-auto">
+        <button type="button" class="text-charcoal hover:text-gray-900">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            ></path>
           </svg>
         </button>
       </div>
@@ -110,7 +176,7 @@
   </div>
 
   <!-- Mobile menu, show/hide based on menu state -->
-  <div class="sm:hidden hidden" id="user-nav-mobile" aria-expanded="false">
+  <div class="lg:hidden hidden" id="user-nav-mobile" aria-expanded="false">
     <div class="space-y-1 pb-4 pt-2 border-t border-gray-200 shadow-lg">
       {{#if signed_in}}
         <div class="flex items-center px-4 py-2">
@@ -123,34 +189,112 @@
           {{/my_profile}}
         </div>
         <div class="border-t border-gray-200 my-1"></div>
-        {{#link "requests" class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem"}}
-          {{t 'my_requests'}}
+        {{#link
+          "requests"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal"
+          role="menuitem"
+        }}
+          {{t "my_requests"}}
         {{/link}}
-        {{#link "contributions" class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem"}}
-          {{t 'activities'}}
+        {{#link
+          "contributions"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal"
+          role="menuitem"
+        }}
+          {{t "activities"}}
         {{/link}}
-        {{#my_profile class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem"}}
-          {{t 'profile'}}
+        {{#my_profile
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal"
+          role="menuitem"
+        }}
+          {{t "profile"}}
         {{/my_profile}}
-        {{change_password class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 change-password" role="menuitem"}}
+        {{change_password
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal change-password"
+          role="menuitem"
+        }}
         <div class="border-t border-gray-200 my-1"></div>
       {{/if}}
-      {{#link "community" class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem"}}
-        {{t 'community'}}
-      {{/link}}
-      {{#link "new_request" class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 submit-a-request" role="menuitem"}}
-        {{t 'submit_a_request'}}
-      {{/link}}
-      {{#if signed_in}}
+      <div class="div">
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Book a Service
+        </a>
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Business Types
+        </a>
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Features
+        </a>
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Products
+        </a>
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Enterprise
+        </a>
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Pricing
+        </a>
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Contact Sales
+        </a>
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Support
+        </a>
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Resources
+        </a>
         <div class="border-t border-gray-200 my-1"></div>
-        {{#link "sign_out" class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem"}}
-          {{t 'sign_out'}}
-        {{/link}}
-      {{else}}
-        {{#link "sign_in" class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700" role="menuitem"}}
-          {{t 'sign_in'}}
-        {{/link}}
-      {{/if}}
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
+          role="menuitem"
+        >
+          Log In
+        </a>
+        <a
+          href="#"
+          class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap bg-amber-500"
+          role="menuitem"
+        >
+          Sign up
+        </a>
+      </div>
     </div>
   </div>
 </header>
