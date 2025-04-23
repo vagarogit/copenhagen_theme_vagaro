@@ -5,11 +5,11 @@
 </div> --}}
 
 <section id="main-content" class="section hero">
-  <div class="hero-inner">
-    <h1 class="text-6xl font-semibold text-gray-900">Let's Get You Some Answers.</h1>
-    <p class="text-gray-600">Our support articles library is regularly updated to ensure you have access to the latest information and support resources.</p>
-    <div class="search-container">
-      {{search submit=false instant=settings.instant_search class='search search-full' placeholder='Search for articles...'}}
+  <div class="w-full flex flex-col gap-6">
+    <span class="text-6xl font-semibold text-gray-900">Let's Get You Some Answers.</span>
+    <p class="text-gray-600 text-xl max-w-2xl mx-auto">Our support articles library is regularly updated to ensure you have access to the latest information and support resources.</p>
+    <div class="search-container min-w-2xl max-w-2xl mx-auto">
+      {{search submit=false instant=settings.instant_search class='search search-full' placeholder='Search support articles...'}}
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
         <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
         <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
@@ -17,10 +17,10 @@
     </div>
     
   </div>
-  <div id="statusio-bar" class="statusio-bar w-full">
-    <div class="statusio-status">
-      <span class="statusio-icon"></span>
-      <span id="statusio-message">Checking system status...</span>
+  <div id="statusio-bar" class="statusio-bar w-full" role="button" tabindex="0" aria-label="Click to view Vagaro system status page" title="Click to view Vagaro system status page">
+    <div class="statusio-status flex items-center justify-start w-full px-4">
+      <span class="statusio-icon flex-shrink-0"></span>
+      <span id="statusio-message" class="ml-2">Checking system status...</span>
     </div>
   </div>
 </section>

@@ -9,10 +9,11 @@
 .statusio-bar {
   display: flex;
   justify-content: flex-start;
-  width: 1180px;
+  max-width: 1360px;
+  min-width: 1360px;
   padding: 10px 0;
   height: 77px;
-  text-align: center;
+  text-align: left;
   background-color: #f4f4f4; // Default background
   margin-top: 64px;
   transition: background-color 0.3s ease;
@@ -22,6 +23,12 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   margin-left: auto;
   margin-right: auto;
+  cursor: pointer;
+  border-radius: 8px;
+  
+  &:hover {
+    opacity: 0.9;
+  }
   
   &.operational {
     background-color: #D7EBDD; // Green for operational
@@ -54,6 +61,7 @@
   margin: 0 auto;
   padding: 0 5%;
   text-align: left;
+  width: 100%;  // Add width 100% to ensure full container width
   
   .operational & {
     color: #379B55;
@@ -75,6 +83,7 @@
   height: 16px;
   border-radius: 50%;
   margin-right: 8px;
+  flex-shrink: 0; // Prevent icon from shrinking
   
   .operational & {
     background-color: #379B55;
@@ -103,6 +112,8 @@
 #statusio-message {
   font-size: 24px;
   font-weight: 400;
+  text-align: left;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -117,5 +128,12 @@
   .statusio-icon {
     width: 14px;
     height: 14px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .statusio-bar {
+    min-width: auto;
+    max-width: 100%;
   }
 } 

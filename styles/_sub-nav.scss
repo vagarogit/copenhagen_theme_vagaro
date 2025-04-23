@@ -30,5 +30,10 @@
     &::after { 
       font-size: $font-size-base; 
     }
+    
+    &::placeholder {
+      color: #666666;
+      font-size: 16px;
+    }
   }
 }

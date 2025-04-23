@@ -4,8 +4,23 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (!statusBar || !statusMessage) return;
   
-  // Status API endpoint
+  // Status API endpoint and status page URL
   const statusioApiUrl = 'https://status.vagaro.com/api/v2/status.json';
+  const statusPageUrl = 'https://status.vagaro.com/';
+  
+  // Make status bar clickable
+  statusBar.addEventListener('click', function() {
+    window.open(statusPageUrl, '_blank');
+  });
+  
+  // Add keyboard accessibility
+  statusBar.addEventListener('keydown', function(event) {
+    // Handle Enter or Space key
+    if (event.key === 'Enter' || event.key === ' ' || event.keyCode === 13 || event.keyCode === 32) {
+      event.preventDefault();
+      window.open(statusPageUrl, '_blank');
+    }
+  });
   
   fetchStatusIoData();
   

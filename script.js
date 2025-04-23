@@ -770,7 +770,7 @@
           // Create articles container
           var articlesContainer = document.createElement("ul");
           articlesContainer.className =
-            "trending-articles-api-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full";
+            "trending-articles-api-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full hover:cursor-pointer";
 
           // Determine arrow image path - using the exposed theme path
           var arrowPath;
@@ -787,7 +787,7 @@
           for (var i = 0; i < response.length; i++) {
             var articleItem = document.createElement("li");
             articleItem.className =
-              "trending-articles-api-item border-b border-gray-200 ";
+              "trending-articles-api-item border-b border-gray-200";
 
             var articleLink = document.createElement("a");
             articleLink.className = "flex items-center p-2";
@@ -807,6 +807,28 @@
             articleLink.appendChild(arrowImg);
             articleItem.appendChild(articleLink);
             articlesContainer.appendChild(articleItem);
+
+            // Add individual hover event listeners
+            articleItem.addEventListener("mouseenter", function () {
+              this.classList.add("border-primary");
+              this.querySelector("span").classList.add("text-primary");
+              // Add primary color to the arrow
+              var arrow = this.querySelector("img");
+              if (arrow) {
+                arrow.style.filter =
+                  "invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%)";
+              }
+            });
+
+            articleItem.addEventListener("mouseleave", function () {
+              this.classList.remove("border-primary");
+              this.querySelector("span").classList.remove("text-primary");
+              // Reset arrow color
+              var arrow = this.querySelector("img");
+              if (arrow) {
+                arrow.style.filter = "";
+              }
+            });
           }
 
           // Clear any existing content

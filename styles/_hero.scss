@@ -11,12 +11,12 @@
   }
 
   .search {
-    background: $secondary-shade;
+    background: #fff;
     border-radius: 8px;
-    padding: 16px;
+    padding: 7px;
     width: 100%;
     position: relative;
-
+   
     input[type="search"] {
       background: transparent;
       border: none;
@@ -24,16 +24,24 @@
       height: 40px;
       padding-left: 40px;
       width: 100%;
+      text-align: left;
+      display: flex;
+      align-items: center;
 
       &:focus {
         outline: none;
+      }
+      
+      &::placeholder {
+        color: #666666;
+        font-size: 16px;
       }
     }
   }
 
   .search-icon {
     position: absolute;
-    left: 32px;
+    left: 20px;
     top: 50%;
     transform: translateY(-50%);
     width: 16px;
