@@ -252,16 +252,16 @@ function initSubTopicAccordions() {
         if (expanded) {
           // Close accordion
           panelHeading.setAttribute("aria-expanded", "false");
-          
+
           // First set explicit height before animating
           panelBody.style.height = panelBody.scrollHeight + "px";
-          
+
           // Force reflow to ensure the browser applies the height
           panelBody.offsetHeight;
-          
+
           // Trigger animation to close
           panelBody.style.height = "0px";
-          
+
           // After animation completes, hide the panel completely
           setTimeout(() => {
             if (panelHeading.getAttribute("aria-expanded") === "false") {
@@ -271,17 +271,17 @@ function initSubTopicAccordions() {
         } else {
           // Open accordion
           panelHeading.setAttribute("aria-expanded", "true");
-          
+
           // Make sure panel is visible but with zero height to start animation
           panelBody.style.display = "block";
           panelBody.style.height = "0px";
-          
+
           // Force reflow to ensure display change is applied
           panelBody.offsetHeight;
-          
+
           // Set target height to trigger animation
           panelBody.style.height = panelBody.scrollHeight + "px";
-          
+
           // Clear height after animation completes
           setTimeout(() => {
             if (panelHeading.getAttribute("aria-expanded") === "true") {

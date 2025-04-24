@@ -232,6 +232,34 @@ template {
   margin-bottom: 10px;
 }
 
+.tip {
+  background-color: #D7EBDD !important;
+  border: 1px solid #ffeaca;
+  border-radius: 8px;
+  color: #333333;
+  padding: 20px;
+  margin: 8px 0;
+  position: relative;
+  padding-left: 48px;
+}
+.tip::before {
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23379B55' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'%3E%3C/polygon%3E%3C/svg%3E");
+  color: #333333;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 16px;
+  top: 26px;
+  width: 24px;
+  height: 24px;
+}
+.tip .title {
+  color: #333333;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
 /***** Base *****/
 * {
   box-sizing: border-box;
@@ -5390,24 +5418,128 @@ zd-summary-block {
 }
 .section.accordion.sub-topic .panel-body {
   padding: 1rem;
-  overflow: hidden;
   background-color: #ffffff;
+  /* Fix for content visibility */
+  /* Basic content elements */
+  /* Ordered lists */
+  /* Unordered lists */
+  /* Nested content */
+  /* Tips and callouts */
+  /* Links */
+  /* Bold text */
+}
+.section.accordion.sub-topic .panel-body.panel-body-expanded {
+  overflow: visible !important;
+  height: auto !important;
+  display: block !important;
 }
 .section.accordion.sub-topic .panel-body.collapse {
+  overflow: hidden;
   padding-top: 0;
   padding-bottom: 0;
 }
-.section.accordion.sub-topic .panel-body p, .section.accordion.sub-topic .panel-body .procedure {
+.section.accordion.sub-topic .panel-body p, .section.accordion.sub-topic .panel-body .procedure, .section.accordion.sub-topic .panel-body .itemizedlist, .section.accordion.sub-topic .panel-body .tip {
   margin-bottom: 1rem;
+  display: block !important; /* Ensure blocks are visible */
 }
 .section.accordion.sub-topic .panel-body ol.procedure {
   padding-left: 1.5rem;
+  display: block !important; /* Ensure lists are visible */
+  list-style-type: decimal !important;
 }
 .section.accordion.sub-topic .panel-body ol.procedure li.step {
   margin-bottom: 0.5rem;
+  display: list-item !important; /* Ensure list items are visible */
+  padding-left: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body ul.itemizedlist {
+  padding-left: 1.5rem;
+  display: block !important;
+  list-style-type: disc !important;
+  margin-bottom: 1rem;
+}
+.section.accordion.sub-topic .panel-body ul.itemizedlist li.listitem {
+  display: list-item !important;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body li > p {
+  margin-bottom: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body .tip {
+  background-color: #f3f4f6;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  border-left: 4px solid #3b82f6;
+  margin: 1rem 0;
+}
+.section.accordion.sub-topic .panel-body .tip .title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1e3a8a;
+}
+.section.accordion.sub-topic .panel-body a.link {
+  color: #2563eb;
+  text-decoration: none;
+}
+.section.accordion.sub-topic .panel-body a.link:hover {
+  text-decoration: underline;
 }
 .section.accordion.sub-topic .panel-body .bold {
   font-weight: 700;
+}
+
+/***** Tip Element Styling Overrides *****/
+.section.accordion.sub-topic .panel-body .tip {
+  background-color: #f9fafb;
+  border-radius: 0.375rem;
+  border-left: 4px solid #3b82f6;
+  padding: 1rem;
+  margin: 1rem 0;
+  display: block !important;
+}
+.section.accordion.sub-topic .panel-body .tip .title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #1e3a8a;
+}
+.section.accordion.sub-topic .panel-body .tip p {
+  display: block !important;
+  margin-bottom: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body ul.itemizedlist {
+  list-style-type: disc !important;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  display: block !important;
+}
+.section.accordion.sub-topic .panel-body ul.itemizedlist li.listitem {
+  display: list-item !important;
+  margin-bottom: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body ul.itemizedlist li.listitem p {
+  display: block !important;
+  margin-bottom: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body ol.procedure {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  display: block !important;
+}
+.section.accordion.sub-topic .panel-body ol.procedure li.step {
+  display: list-item !important;
+  margin-bottom: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body ol.procedure li.step > p {
+  display: block !important;
+  margin-bottom: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body ol.procedure li.step .itemizedlist {
+  margin-top: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body li[style*="display:"] {
+  display: list-item !important;
 }
 
 .glide {
