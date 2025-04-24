@@ -208,3 +208,112 @@ export function initVanillaAccordions() {
     }
   }
 }
+
+/**
+ * Initialize sub-topic accordions for article pages
+ * This handles the section accordion sub-topic pattern
+ */
+export function initSubTopicAccordions() {
+  try {
+    // Find all sub-topic accordions
+    const subTopicAccordions = document.querySelectorAll(
+      ".section.accordion.sub-topic"
+    );
+
+    if (!subTopicAccordions.length) {
+      return;
+    }
+
+    subTopicAccordions.forEach((accordion, index) => {
+      const panelHeading = accordion.querySelector(".panel-heading");
+      const panelBody = accordion.querySelector(".panel-body");
+      const titleElement = accordion.querySelector(".title");
+
+      if (!panelHeading || !panelBody || !titleElement) return;
+
+      // Extract the panel ID from the existing structure or create a new one
+      const panelId = panelBody.id || `sub-topic-panel-${index}`;
+      panelBody.id = panelId;
+
+      // Setup ARIA attributes - match initial collapsed state
+      panelHeading.setAttribute("role", "button");
+      panelHeading.setAttribute("aria-expanded", "false");
+      panelHeading.setAttribute("aria-controls", panelId);
+      panelHeading.tabIndex = 0;
+
+      // Add transition for smooth animation - must do this programmatically
+      // because we don't want transitions before JS loads
+      panelBody.style.transition = "height 0.35s ease-in-out";
+
+      // Add click functionality
+      panelHeading.addEventListener("click", () => {
+        const expanded = panelHeading.getAttribute("aria-expanded") === "true";
+
+        if (expanded) {
+          // Close accordion
+          panelHeading.setAttribute("aria-expanded", "false");
+          
+          // First set explicit height before animating
+          panelBody.style.height = panelBody.scrollHeight + "px";
+          
+          // Force reflow to ensure the browser applies the height
+          panelBody.offsetHeight;
+          
+          // Trigger animation to close
+          panelBody.style.height = "0px";
+          
+          // After animation completes, hide the panel completely
+          setTimeout(() => {
+            if (panelHeading.getAttribute("aria-expanded") === "false") {
+              panelBody.style.display = "none";
+            }
+          }, 350);
+        } else {
+          // Open accordion
+          panelHeading.setAttribute("aria-expanded", "true");
+          
+          // Make sure panel is visible but with zero height to start animation
+          panelBody.style.display = "block";
+          panelBody.style.height = "0px";
+          
+          // Force reflow to ensure display change is applied
+          panelBody.offsetHeight;
+          
+          // Set target height to trigger animation
+          panelBody.style.height = panelBody.scrollHeight + "px";
+          
+          // Clear height after animation completes
+          setTimeout(() => {
+            if (panelHeading.getAttribute("aria-expanded") === "true") {
+              panelBody.style.height = "auto";
+            }
+          }, 350);
+        }
+      });
+
+      // Add keyboard accessibility
+      panelHeading.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          panelHeading.click();
+        }
+      });
+
+      // Add icon to header if not already present
+      if (!panelHeading.querySelector(".accordion-icon")) {
+        const icon = document.createElement("span");
+        icon.className = "accordion-icon";
+        icon.innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+        panelHeading.appendChild(icon);
+      }
+
+      // Ensure panel is properly collapsed initially
+      // Keep the existing collapse class which is part of the HTML structure
+      panelBody.style.display = "none";
+      panelBody.style.height = "0px";
+    });
+  } catch (error) {
+    console.error("Error initializing sub-topic accordions:", error);
+  }
+}

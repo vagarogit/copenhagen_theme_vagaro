@@ -5333,6 +5333,83 @@ zd-summary-block {
   text-decoration: underline;
 }
 
+/***** Sub-topic Accordions *****/
+.section.accordion.sub-topic {
+  margin-bottom: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+.section.accordion.sub-topic .panel.panel-default {
+  overflow: hidden;
+}
+.section.accordion.sub-topic .panel-heading {
+  padding: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  transition: background-color 0.2s ease;
+}
+.section.accordion.sub-topic .panel-heading:hover {
+  background-color: #f9fafb;
+}
+.section.accordion.sub-topic .panel-heading:hover .title {
+  color: #2563eb;
+}
+.section.accordion.sub-topic .panel-heading[aria-expanded=true] {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+.section.accordion.sub-topic .panel-heading[aria-expanded=true] .title {
+  color: #2563eb;
+}
+.section.accordion.sub-topic .panel-heading[aria-expanded=true] + .panel-body {
+  border-top: none;
+}
+.section.accordion.sub-topic .panel-heading[aria-expanded=true] .accordion-icon {
+  color: #2563eb;
+  transform: rotate(180deg);
+}
+.section.accordion.sub-topic .panel-heading .titlepage {
+  margin: 0;
+  flex: 1;
+}
+.section.accordion.sub-topic .panel-heading .title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+.section.accordion.sub-topic .panel-heading .accordion-icon {
+  color: #6b7280;
+  transition: transform 0.35s ease-in-out;
+  margin-left: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body {
+  padding: 1rem;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+.section.accordion.sub-topic .panel-body.collapse {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.section.accordion.sub-topic .panel-body p, .section.accordion.sub-topic .panel-body .procedure {
+  margin-bottom: 1rem;
+}
+.section.accordion.sub-topic .panel-body ol.procedure {
+  padding-left: 1.5rem;
+}
+.section.accordion.sub-topic .panel-body ol.procedure li.step {
+  margin-bottom: 0.5rem;
+}
+.section.accordion.sub-topic .panel-body .bold {
+  font-weight: 700;
+}
+
 .glide {
   position: relative;
   width: 100%;
