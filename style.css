@@ -620,6 +620,65 @@ ul {
   }
 }
 
+/***** Article Body Tables *****/
+.article-body table {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+@media (max-width: 768px) {
+  .article-body table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+.article-body table td, .article-body table th {
+  padding: 0.75rem;
+  border: 1px solid #ddd !important;
+  text-align: left;
+  vertical-align: top;
+}
+[dir=rtl] .article-body table td, [dir=rtl] .article-body table th {
+  text-align: right;
+}
+.article-body table td p, .article-body table th p {
+  margin: 0;
+}
+.article-body table td .bold, .article-body table td strong, .article-body table th .bold, .article-body table th strong {
+  font-weight: 600;
+}
+.article-body table th, .article-body table tr:first-child td {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+.article-body table tr:nth-child(even) {
+  background-color: darken($background_color, 3%);
+}
+.article-body table tr:hover {
+  background-color: #f0f0f0;
+}
+.article-body table a, .article-body table a.link {
+  color: $link_color;
+  text-decoration: none;
+}
+.article-body table a:hover, .article-body table a:active, .article-body table a:focus, .article-body table a.link:hover, .article-body table a.link:active, .article-body table a.link:focus {
+  text-decoration: underline;
+}
+
+/***** Informaltable (legacy support) *****/
+.article-body .informaltable {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.article-body .informaltable table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "proxima-nova", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   margin: 0 0 20px;
@@ -1944,6 +2003,41 @@ h1, h2, h3, h4, h5, h6 {
 .article-body > p:last-child {
   margin-bottom: 0;
 }
+.article-body h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #111827;
+  line-height: 1.2;
+}
+.article-body h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: #1f2937;
+  line-height: 1.3;
+}
+.article-body h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+  line-height: 1.4;
+}
+.article-body p {
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+.article-body ul, .article-body ol {
+  margin-bottom: 1rem;
+}
+.article-body li {
+  margin-bottom: 0.25rem;
+}
 .article-content {
   line-height: 1.6;
   margin: 40px 0;
@@ -2080,6 +2174,11 @@ h1, h2, h3, h4, h5, h6 {
 .recent-articles li,
 .related-articles li {
   margin-bottom: 15px;
+}
+
+.mediaobject img {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 /***** Attachments *****/

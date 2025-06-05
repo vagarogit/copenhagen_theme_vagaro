@@ -1,11 +1,11 @@
 /***** Tables *****/
 .table {
-  @include tablet { table-layout: auto; }
-
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
+
+  @include tablet { table-layout: auto; }
 
   th,
   th a {
@@ -17,19 +17,19 @@
   }
 
   tr {
-    @include tablet { display: table-row; }
-
     border-bottom: 1px solid $low-contrast-border-color;
     display: block;
     padding: 20px 0;
+
+    @include tablet { display: table-row; }
   }
 
   td {
+    display: block;
+
     @include tablet {
       display: table-cell;
     }
-
-    display: block;
   }
 
   td, th {
@@ -40,5 +40,81 @@
       padding: 10px 20px;
       height: 60px;
     }
+  }
+}
+
+/***** Article Body Tables *****/
+.article-body table {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-collapse: collapse;
+  border: 1px solid $low-contrast-border-color;
+  
+  @include mobile {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  td, th {
+    padding: 0.75rem;
+    border: 1px solid $low-contrast-border-color !important;
+    text-align: left;
+    vertical-align: top;
+    
+    [dir="rtl"] & {
+      text-align: right;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .bold, strong {
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  th, tr:first-child td {
+    background-color: #f0f0f0;
+    font-weight: $font-weight-semibold;
+    
+
+  }
+
+  tr {
+    &:nth-child(even) {
+      background-color: $primary-shade;
+      
+    }
+    
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  // Handle links within tables
+  a, a.link {
+    color: $link_color;
+    text-decoration: none;
+    
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+/***** Informaltable (legacy support) *****/
+.article-body .informaltable {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
   }
 }
