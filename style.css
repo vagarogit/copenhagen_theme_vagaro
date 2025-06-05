@@ -5542,6 +5542,41 @@ zd-summary-block {
   display: list-item !important;
 }
 
+/***** Tabbed Article Layout *****/
+.article-body.tabbed-layout .tab-panel .titlepage {
+  display: none;
+}
+.article-body.tabbed-layout .tab-panel p, .article-body.tabbed-layout .tab-panel ol, .article-body.tabbed-layout .tab-panel ul, .article-body.tabbed-layout .tab-panel .tip, .article-body.tabbed-layout .tab-panel .procedure, .article-body.tabbed-layout .tab-panel .itemizedlist {
+  @apply mb-4;
+}
+.article-body.tabbed-layout .tab-panel ol {
+  @apply list-decimal pl-6;
+}
+.article-body.tabbed-layout .tab-panel ol li {
+  @apply mb-2;
+}
+.article-body.tabbed-layout .tab-panel ul {
+  @apply list-disc pl-6;
+}
+.article-body.tabbed-layout .tab-panel ul li {
+  @apply mb-2;
+}
+.article-body.tabbed-layout .tab-panel .tip {
+  @apply bg-gray-50 border-l-4 border-primary p-4 rounded-r mb-4;
+}
+.article-body.tabbed-layout .tab-panel .tip .title {
+  @apply font-semibold text-gray-800 mb-2;
+}
+@media (max-width: 767px) {
+  .article-body.tabbed-layout button[role=tab] {
+    @apply px-4 py-2 text-xs;
+  }
+}
+
+.tab-panel {
+  transition: opacity 0.2s ease-in-out;
+}
+
 .glide {
   position: relative;
   width: 100%;

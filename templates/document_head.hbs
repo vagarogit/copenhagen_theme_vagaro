@@ -31,8 +31,7 @@
     "category-accordions": "{{asset 'category-accordions-bundle.js'}}",
     "new-request-form-translations": "{{asset 'new-request-form-translations-bundle.js'}}",
     "shared": "{{asset 'shared-bundle.js'}}",
-    "wysiwyg": "{{asset 'wysiwyg-bundle.js'}}",
-    "statusio": "{{asset 'statusio.js'}}"
+    "wysiwyg": "{{asset 'wysiwyg-bundle.js'}}"
   }
 }
 </script>
@@ -47,6 +46,7 @@
     renderFlashNotifications(settings, closeLabel);
   </script>
   <script type="module">
-    import "statusio";
+    import { default as statusio } from "statusio";
   </script>
   <script src="{{asset 'sub-topic-accordions-fix.js'}}"></script>
+  <script src="{{asset 'tabbed-article.js'}}"></script>

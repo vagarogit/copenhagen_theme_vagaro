@@ -1,0 +1,55 @@
+/***** Tabbed Article Layout *****/
+
+// Additional styles for tabbed article layout - most styling now comes from Tailwind classes
+.article-body.tabbed-layout {
+  // Content spacing within panels
+  .tab-panel {
+    // Hide the panel headings since they're already in the tabs
+    .titlepage {
+      display: none;
+    }
+    
+    // Improve content spacing
+    p, ol, ul, .tip, .procedure, .itemizedlist {
+      @apply mb-4;
+    }
+    
+    // Lists styling
+    ol {
+      @apply list-decimal pl-6;
+      
+      li {
+        @apply mb-2;
+      }
+    }
+    
+    ul {
+      @apply list-disc pl-6;
+      
+      li {
+        @apply mb-2;
+      }
+    }
+    
+    // Tip boxes styling
+    .tip {
+      @apply bg-gray-50 border-l-4 border-primary p-4 rounded-r mb-4;
+      
+      .title {
+        @apply font-semibold text-gray-800 mb-2;
+      }
+    }
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 767px) {
+    button[role="tab"] {
+      @apply px-4 py-2 text-xs;
+    }
+  }
+}
+
+// Add animation for tab transitions
+.tab-panel {
+  transition: opacity 0.2s ease-in-out;
+}
