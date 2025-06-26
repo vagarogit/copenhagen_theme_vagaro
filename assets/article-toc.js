@@ -14,8 +14,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const tocMobileContainer = document.querySelector('#article-toc-mobile');
   if (!tocContainer && !tocMobileContainer) return;
 
+  // Define excluded IDs
+  const excludedIds = ['important', 'note', 'notice', 'tip', 'warning'];
+  
   // Find only top-level headings in the article body
-  const headings = articleBody.querySelectorAll('h2');
+  const allHeadings = articleBody.querySelectorAll('h2');
+  
+  // Filter out headings with excluded IDs
+  const headings = Array.from(allHeadings).filter(heading => {
+    return !excludedIds.includes(heading.id);
+  });
+  
   if (headings.length === 0) {
     // Hide TOC if no headings found
     if (tocContainer) tocContainer.style.display = 'none';
@@ -25,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Generate unique IDs for headings that don't have them
   const headingData = [];
-  headings.forEach((heading, index) => {
+  headings.forEach((heading) => {
     let id = heading.id;
     if (!id) {
       // Create a slug from the heading text
@@ -47,6 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
       
       heading.id = uniqueId;
       id = uniqueId;
+    }
+
+    // Skip headings with excluded IDs
+    if (excludedIds.includes(id)) {
+      return;
     }
 
     headingData.push({
@@ -96,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Create TOC content function
   function createTOCContent(container, isMobile = false) {
     const tocTitle = document.createElement('h3');
-    tocTitle.textContent = 'In this article';
+    tocTitle.textContent = 'What’s in this article?';
     tocTitle.className = isMobile 
       ? 'text-2xl font-semibold text-gray-700 mb-4'
       : 'text-2xl font-semibold text-black tracking-normal mb-6 sticky top-0 bg-white py-2';
@@ -119,14 +133,14 @@ document.addEventListener('DOMContentLoaded', function() {
     allContainers.forEach(container => {
       const links = container.querySelectorAll('a');
       links.forEach(link => {
-        link.classList.remove('text-blue-600', 'border-blue-500', 'font-normal');
+        link.classList.remove('text-primary', 'border-primary', 'font-normal');
         link.classList.add('text-gray-600', 'border-transparent');
       });
     });
     
     if (activeLink) {
       activeLink.classList.remove('text-gray-600', 'border-transparent');
-      activeLink.classList.add('text-blue-600', 'border-blue-500', 'font-normal');
+      activeLink.classList.add('text-primary', 'border-primary', 'font-normal');
       return;
     }
 
@@ -150,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const activeLink = container.querySelector(`a[href="#${currentHeading.id}"]`);
         if (activeLink) {
           activeLink.classList.remove('text-gray-600', 'border-transparent');
-          activeLink.classList.add('text-blue-600', 'border-blue-500', 'font-medium');
+          activeLink.classList.add('text-primary', 'border-primary', 'font-medium');
         }
       });
     }
