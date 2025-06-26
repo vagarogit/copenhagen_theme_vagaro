@@ -4,11 +4,11 @@
   <span class="text-white text-7xl">Hello</span>
 </div> --}}
 
-<section id="main-content" class="section hero">
+<section id="main-content" class="section hero z-10">
   <div class="w-full flex flex-col gap-6">
     <span class="text-6xl font-semibold text-gray-900">Let's Get You Some Answers.</span>
     <p class="text-gray-600 text-xl max-w-2xl mx-auto">Our support articles library is regularly updated to ensure you have access to the latest information and support resources.</p>
-    <div class="search-container min-w-2xl max-w-2xl mx-auto">
+    <div class="search-container min-w-2xl max-w-2xl mx-auto z-0">
       {{search submit=false instant=settings.instant_search class='search search-full' placeholder='Search support articles...'}}
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
         <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
@@ -17,7 +17,7 @@
     </div>
     
   </div>
-  <div id="statusio-bar" class="statusio-bar w-full" role="button" tabindex="0" aria-label="Click to view Vagaro system status page" title="Click to view Vagaro system status page">
+  <div id="statusio-bar" class="statusio-bar w-full z-0" role="button" tabindex="0" aria-label="Click to view Vagaro system status page" title="Click to view Vagaro system status page">
     <div class="statusio-status flex items-center justify-start w-full px-4">
       <span class="statusio-icon flex-shrink-0"></span>
       <span id="statusio-message" class="ml-2">Checking system status...</span>
