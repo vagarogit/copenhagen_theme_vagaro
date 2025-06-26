@@ -1,0 +1,267 @@
+// Mega Menu Transitions - Adapted from Radix Navigation Menu
+// Import this in your main styles/index.scss file
+
+// Viewport container for mega menus
+.mega-menu-viewport {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  perspective: 2000px;
+  z-index: 50;
+}
+
+// Mega menu content wrapper
+.mega-menu-content {
+  position: relative;
+  transform-origin: top center;
+  margin-top: 10px;
+  width: 100%;
+  background-color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  transition: width, height, 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Animation states
+  &[data-state="open"] {
+    animation: scaleIn 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  &[data-state="closed"] {
+    animation: scaleOut 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  // Motion states for different directions
+  &[data-motion="from-start"] {
+    animation-name: enterFromLeft;
+  }
+  
+  &[data-motion="from-end"] {
+    animation-name: enterFromRight;
+  }
+  
+  &[data-motion="to-start"] {
+    animation-name: exitToLeft;
+  }
+  
+  &[data-motion="to-end"] {
+    animation-name: exitToRight;
+  }
+  
+  // Responsive adjustments
+  @media only screen and (min-width: 600px) {
+    width: auto;
+  }
+}
+
+// Arrow indicator
+.mega-menu-arrow {
+  position: relative;
+  top: 70%;
+  background-color: white;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  border-top-left-radius: 2px;
+  margin: 0 auto;
+}
+
+// Caret down icon for triggers
+.caret-down {
+  position: relative;
+  color: #D43C2E;
+  top: 1px;
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &[data-state="open"] {
+    transform: rotate(-180deg);
+  }
+}
+
+// Animation keyframes - Optimized for smoother performance
+@keyframes enterFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes enterFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes exitToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+
+@keyframes exitToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-20deg) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: rotateX(-10deg) scale(0.98);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+// Enhanced hover states for menu items
+.mega-menu-item {
+  display: block;
+  outline: none;
+  text-decoration: none;
+  user-select: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), 
+              color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:focus {
+    box-shadow: 0 0 0 2px #D43C2E;
+  }
+  
+  &:hover {
+    background-color: #f3f4f6;
+    color: #D43C2E;
+  }
+}
+
+// Category headings
+.mega-menu-category-heading {
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 5px;
+  color: #D43C2E;
+}
+
+// Category text
+.mega-menu-category-text {
+  color: #6b7280;
+  line-height: 1.4;
+  font-weight: initial;
+}
+
+// Full width mega menu container
+.mega-menu-full-width {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  z-index: 50;
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  // Animation states
+  &[data-state="open"] {
+    animation: slideDown 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  &[data-state="closed"] {
+    animation: slideUp 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+}
+
+// Trigger button states
+.mega-menu-trigger {
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), 
+              color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &[data-state="open"] {
+    background-color: #f3f4f6;
+    color: #D43C2E;
+  }
+  
+  &:hover {
+    background-color: #f3f4f6;
+    color: #D43C2E;
+  }
+} 

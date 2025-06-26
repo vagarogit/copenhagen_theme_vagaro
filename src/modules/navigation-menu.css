@@ -1,0 +1,129 @@
+/* Radix Navigation Menu Animations */
+@keyframes enterFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes enterFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes exitToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+}
+
+@keyframes exitToLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-30deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: rotateX(-10deg) scale(0.95);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Animation classes for Radix */
+.animate-scaleIn {
+  animation: scaleIn 200ms ease;
+}
+
+.animate-scaleOut {
+  animation: scaleOut 200ms ease;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 200ms ease;
+}
+
+.animate-fadeOut {
+  animation: fadeOut 200ms ease;
+}
+
+/* Position the viewport correctly */
+[data-radix-navigation-menu-viewport] {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100vw;
+}
+
+/* Full width content */
+[data-radix-navigation-menu-content] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+}
+
+/* Override Radix's default positioning */
+[data-radix-navigation-menu-root] {
+  position: relative;
+}
+
+/* Ensure triggers have proper z-index */
+[data-radix-navigation-menu-trigger] {
+  position: relative;
+  z-index: 10;
+}

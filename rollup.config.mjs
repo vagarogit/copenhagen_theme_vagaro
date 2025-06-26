@@ -5,6 +5,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import dynamicImportVars from "@rollup/plugin-dynamic-import-vars";
 import typescript from "@rollup/plugin-typescript";
+import babel from "@rollup/plugin-babel";
 import replace from "@rollup/plugin-replace";
 import terser from "@rollup/plugin-terser";
 import svgr from "@svgr/rollup";
@@ -24,7 +25,34 @@ export default defineConfig([
       file: "script.js",
       format: "iife",
     },
-    plugins: [zass()],
+    onwarn: (warning, warn) => {
+      // Suppress "use client" directive warnings from Radix UI
+      if (warning.code === 'MODULE_LEVEL_DIRECTIVE' && warning.message.includes('"use client"')) {
+        return;
+      }
+      // Use default warning handler for other warnings
+      warn(warning);
+    },
+    plugins: [
+      zass(),
+      nodeResolve({
+        extensions: [".js", ".jsx"],
+      }),
+      replace({
+        preventAssignment: true,
+        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development"),
+      }),
+      babel({
+        babelHelpers: "bundled",
+        extensions: [".js", ".jsx"],
+        exclude: "node_modules/**",
+        presets: [
+          ["@babel/preset-react", { runtime: "classic" }]
+        ],
+      }),
+      commonjs(),
+      isProduction && terser(),
+    ].filter(Boolean),
     watch: {
       clearScreen: false,
     },

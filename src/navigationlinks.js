@@ -13,6 +13,10 @@ class NavigationLinksManager {
       retries: 3,
       ...options,
     };
+
+    // Global state management for smooth navigation
+    this.activeMenu = null;
+    this.menuStates = new Map();
   }
 
   /**
@@ -143,7 +147,7 @@ class NavigationLinksManager {
         return columnItems
           .map(
             (item) => `
-            <div class="flex items-center py-1 hover:bg-gray-50 rounded px-2">
+            <div class="mega-menu-item flex items-center py-1 hover:bg-gray-50 rounded px-2">
               ${
                 item.iconImage?.url
                   ? `<img src="${item.iconImage.url}" alt="${item.name}" class="w-6 h-6 mr-3" />`
@@ -162,7 +166,7 @@ class NavigationLinksManager {
 
       return `
         <div class="px-0">
-          <h3 class="text-sm font-semibold mb-6" style="color:#D43C2E">${title}</h3>
+          <h3 class="mega-menu-category-heading text-sm font-semibold mb-6" style="color:#D43C2E">${title}</h3>
           <div class="grid grid-cols-2 gap-4">
             <div class="space-y-3">
               ${renderColumn(col1)}
@@ -181,21 +185,19 @@ class NavigationLinksManager {
     const navBarBottom = navBarRect ? navBarRect.bottom + window.scrollY : 64;
 
     return `
-      <div class="absolute bg-white shadow-lg border-b border-gray-200" style="
+      <div class="mega-menu-full-width" style="
         top: ${navBarBottom}px; 
-        left: 0; 
-        right: 0; 
-        width: 100vw;
         min-height: 300px;
-        z-index: 50;
-        position: fixed;
-      ">
-        <div class="max-w-6xl mx-auto px-8 py-12">
-          <div class="grid grid-cols-3 gap-16">
-            ${renderCategory(beautyItems, "BEAUTY")}
-            ${renderCategory(wellnessItems, "WELLNESS")}
-            ${renderCategory(fitnessItems, "FITNESS")}
+      " data-state="closed">
+        <div class="mega-menu-content" data-state="closed">
+          <div class="max-w-6xl mx-auto px-8 py-12">
+            <div class="grid grid-cols-3 gap-16">
+              ${renderCategory(beautyItems, "BEAUTY")}
+              ${renderCategory(wellnessItems, "WELLNESS")}
+              ${renderCategory(fitnessItems, "FITNESS")}
+            </div>
           </div>
+          <div class="mega-menu-arrow"></div>
         </div>
       </div>
     `;
@@ -267,7 +269,7 @@ class NavigationLinksManager {
       const itemsHtml = items
         .map(
           (item) => `
-          <div class="flex items-start p-2 hover:bg-gray-50 rounded">
+          <div class="mega-menu-item flex items-start p-2 hover:bg-gray-50 rounded">
             ${
               item.iconImage?.url
                 ? `<img src="${item.iconImage.url}" alt="${item.name}" class="w-5 h-5 mr-3 mt-0.5" />`
@@ -285,7 +287,7 @@ class NavigationLinksManager {
 
       return `
         <div>
-          <h4 class="text-xs font-semibold mb-4" style="color:#D43C2E">${title}</h4>
+          <h4 class="mega-menu-category-heading text-xs font-semibold mb-4" style="color:#D43C2E">${title}</h4>
           <div class="space-y-2">
             ${itemsHtml}
           </div>
@@ -299,21 +301,19 @@ class NavigationLinksManager {
     const navBarBottom = navBarRect ? navBarRect.bottom + window.scrollY : 64;
 
     return `
-      <div class="absolute bg-white shadow-lg border-b border-gray-200" style="
+      <div class="mega-menu-full-width" style="
         top: ${navBarBottom}px; 
-        left: 0; 
-        right: 0; 
-        width: 100vw;
         min-height: 300px;
-        z-index: 50;
-        position: fixed;
-      ">
-        <div class="max-w-6xl mx-auto px-8 py-12">
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-            ${Object.entries(categories)
-              .map(([title, items]) => renderCategory(title, items))
-              .join("")}
+      " data-state="closed">
+        <div class="mega-menu-content" data-state="closed">
+          <div class="max-w-6xl mx-auto px-8 py-12">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+              ${Object.entries(categories)
+                .map(([title, items]) => renderCategory(title, items))
+                .join("")}
+            </div>
           </div>
+          <div class="mega-menu-arrow"></div>
         </div>
       </div>
     `;
@@ -612,27 +612,53 @@ class NavigationLinksManager {
 
     if (!businessTypesButton || !megaMenu) return;
 
+    // Add mega-menu-trigger class to button
+    businessTypesButton.classList.add("mega-menu-trigger");
+
     let showTimeout;
     let hideTimeout;
+    let isVisible = false;
 
     const showMegaMenu = () => {
       clearTimeout(hideTimeout);
+
+      if (isVisible) return; // Already visible, don't re-trigger animation
+
       showTimeout = setTimeout(() => {
+        // Show the menu first
         megaMenu.style.display = "block";
-        businessTypesButton.style.backgroundColor = "#f3f4f6";
-        businessTypesButton.style.color = "#D43C2E";
+
+        // Use the transition utility for smooth animation
+        this.handleMegaMenuTransition(megaMenu, "from-start");
+
+        // Update button state
+        businessTypesButton.setAttribute("data-state", "open");
+
+        isVisible = true;
         console.log("[NavigationLinks] Business Types mega menu shown");
-      }, 100);
+      }, 50); // Reduced from 100ms for faster response
     };
 
     const hideMegaMenu = () => {
       clearTimeout(showTimeout);
+
+      if (!isVisible) return; // Already hidden, don't re-trigger animation
+
       hideTimeout = setTimeout(() => {
-        megaMenu.style.display = "none";
-        businessTypesButton.style.backgroundColor = "";
-        businessTypesButton.style.color = "";
+        // Use the exit transition utility for smooth animation
+        this.handleMegaMenuExit(megaMenu, "to-start");
+
+        // Update button state
+        businessTypesButton.setAttribute("data-state", "closed");
+
+        // Hide the menu after animation completes
+        setTimeout(() => {
+          megaMenu.style.display = "none";
+          isVisible = false;
+        }, 150); // Reduced from 200ms for faster response
+
         console.log("[NavigationLinks] Business Types mega menu hidden");
-      }, 300);
+      }, 100); // Reduced from 300ms for faster response
     };
 
     // Show on hover over Business Types button
@@ -647,6 +673,13 @@ class NavigationLinksManager {
 
     // Initially hide the mega menu
     megaMenu.style.display = "none";
+    megaMenu.setAttribute("data-state", "closed");
+    const content = megaMenu.querySelector(".mega-menu-content");
+    if (content) {
+      content.setAttribute("data-state", "closed");
+    }
+    businessTypesButton.setAttribute("data-state", "closed");
+    isVisible = false;
   }
 
   /**
@@ -663,27 +696,53 @@ class NavigationLinksManager {
 
     if (!featuresButton || !megaMenu) return;
 
+    // Add mega-menu-trigger class to button
+    featuresButton.classList.add("mega-menu-trigger");
+
     let showTimeout;
     let hideTimeout;
+    let isVisible = false;
 
     const showMegaMenu = () => {
       clearTimeout(hideTimeout);
+
+      if (isVisible) return; // Already visible, don't re-trigger animation
+
       showTimeout = setTimeout(() => {
+        // Show the menu first
         megaMenu.style.display = "block";
-        featuresButton.style.backgroundColor = "#f3f4f6";
-        featuresButton.style.color = "#D43C2E";
+
+        // Use the transition utility for smooth animation
+        this.handleMegaMenuTransition(megaMenu, "from-end");
+
+        // Update button state
+        featuresButton.setAttribute("data-state", "open");
+
+        isVisible = true;
         console.log("[NavigationLinks] Features mega menu shown");
-      }, 100);
+      }, 50); // Reduced from 100ms for faster response
     };
 
     const hideMegaMenu = () => {
       clearTimeout(showTimeout);
+
+      if (!isVisible) return; // Already hidden, don't re-trigger animation
+
       hideTimeout = setTimeout(() => {
-        megaMenu.style.display = "none";
-        featuresButton.style.backgroundColor = "";
-        featuresButton.style.color = "";
+        // Use the exit transition utility for smooth animation
+        this.handleMegaMenuExit(megaMenu, "to-end");
+
+        // Update button state
+        featuresButton.setAttribute("data-state", "closed");
+
+        // Hide the menu after animation completes
+        setTimeout(() => {
+          megaMenu.style.display = "none";
+          isVisible = false;
+        }, 150); // Reduced from 200ms for faster response
+
         console.log("[NavigationLinks] Features mega menu hidden");
-      }, 300);
+      }, 100); // Reduced from 300ms for faster response
     };
 
     // Show on hover over Features button
@@ -698,6 +757,13 @@ class NavigationLinksManager {
 
     // Initially hide the mega menu
     megaMenu.style.display = "none";
+    megaMenu.setAttribute("data-state", "closed");
+    const content = megaMenu.querySelector(".mega-menu-content");
+    if (content) {
+      content.setAttribute("data-state", "closed");
+    }
+    featuresButton.setAttribute("data-state", "closed");
+    isVisible = false;
   }
 
   /**
@@ -792,6 +858,91 @@ class NavigationLinksManager {
   }
 
   /**
+   * Utility method to handle smooth transitions with direction detection
+   */
+  handleMegaMenuTransition(megaMenu, direction = "from-start") {
+    if (!megaMenu) return;
+
+    const content = megaMenu.querySelector(".mega-menu-content");
+    if (!content) return;
+
+    // If there's an active menu that's different, hide it quickly
+    if (this.activeMenu && this.activeMenu !== megaMenu) {
+      this.activeMenu.style.display = "none";
+      this.activeMenu.setAttribute("data-state", "closed");
+      const activeContent = this.activeMenu.querySelector(".mega-menu-content");
+      if (activeContent) {
+        activeContent.setAttribute("data-state", "closed");
+      }
+    }
+
+    // Set this as the active menu
+    this.activeMenu = megaMenu;
+
+    // Cancel any ongoing animations
+    content.style.animation = "none";
+    content.offsetHeight; // Force reflow
+
+    // Set motion direction for animation
+    content.setAttribute("data-motion", direction);
+
+    // Set state to trigger animation
+    megaMenu.setAttribute("data-state", "open");
+    content.setAttribute("data-state", "open");
+
+    // Restore animation
+    content.style.animation = "";
+  }
+
+  /**
+   * Utility method to handle smooth exit transitions
+   */
+  handleMegaMenuExit(megaMenu, direction = "to-start") {
+    if (!megaMenu) return;
+
+    const content = megaMenu.querySelector(".mega-menu-content");
+    if (!content) return;
+
+    // Clear active menu if this is the active one
+    if (this.activeMenu === megaMenu) {
+      this.activeMenu = null;
+    }
+
+    // Cancel any ongoing animations
+    content.style.animation = "none";
+    content.offsetHeight; // Force reflow
+
+    // Set motion direction for exit animation
+    content.setAttribute("data-motion", direction);
+
+    // Set state to trigger exit animation
+    megaMenu.setAttribute("data-state", "closed");
+    content.setAttribute("data-state", "closed");
+
+    // Restore animation
+    content.style.animation = "";
+  }
+
+  /**
+   * Utility method to handle rapid navigation between menu items
+   */
+  handleRapidNavigation(fromMenu, toMenu, direction = "from-start") {
+    if (!fromMenu || !toMenu) return;
+
+    // Quickly hide the previous menu without animation
+    fromMenu.style.display = "none";
+    fromMenu.setAttribute("data-state", "closed");
+    const fromContent = fromMenu.querySelector(".mega-menu-content");
+    if (fromContent) {
+      fromContent.setAttribute("data-state", "closed");
+    }
+
+    // Show the new menu with smooth animation
+    toMenu.style.display = "block";
+    this.handleMegaMenuTransition(toMenu, direction);
+  }
+
+  /**
    * Debug method to test navigation menu fetching
    */
   async debugFetch() {
@@ -848,6 +999,11 @@ document.addEventListener("DOMContentLoaded", function () {
       "business-types-mega-menu-wrapper"
     );
     if (megaMenu) {
+      megaMenu.setAttribute("data-state", "open");
+      const content = megaMenu.querySelector(".mega-menu-content");
+      if (content) {
+        content.setAttribute("data-state", "open");
+      }
       megaMenu.style.display = "block";
       console.log("[DEBUG] Business Types mega menu forced to show");
     } else {
@@ -860,7 +1016,14 @@ document.addEventListener("DOMContentLoaded", function () {
       "business-types-mega-menu-wrapper"
     );
     if (megaMenu) {
-      megaMenu.style.display = "none";
+      megaMenu.setAttribute("data-state", "closed");
+      const content = megaMenu.querySelector(".mega-menu-content");
+      if (content) {
+        content.setAttribute("data-state", "closed");
+      }
+      setTimeout(() => {
+        megaMenu.style.display = "none";
+      }, 200);
       console.log("[DEBUG] Business Types mega menu hidden");
     } else {
       console.log("[DEBUG] Business Types mega menu not found");
@@ -870,6 +1033,11 @@ document.addEventListener("DOMContentLoaded", function () {
   window.showFeaturesMenu = function () {
     const megaMenu = document.getElementById("features-mega-menu-wrapper");
     if (megaMenu) {
+      megaMenu.setAttribute("data-state", "open");
+      const content = megaMenu.querySelector(".mega-menu-content");
+      if (content) {
+        content.setAttribute("data-state", "open");
+      }
       megaMenu.style.display = "block";
       console.log("[DEBUG] Features mega menu forced to show");
     } else {
@@ -880,7 +1048,14 @@ document.addEventListener("DOMContentLoaded", function () {
   window.hideFeaturesMenu = function () {
     const megaMenu = document.getElementById("features-mega-menu-wrapper");
     if (megaMenu) {
-      megaMenu.style.display = "none";
+      megaMenu.setAttribute("data-state", "closed");
+      const content = megaMenu.querySelector(".mega-menu-content");
+      if (content) {
+        content.setAttribute("data-state", "closed");
+      }
+      setTimeout(() => {
+        megaMenu.style.display = "none";
+      }, 200);
       console.log("[DEBUG] Features mega menu hidden");
     } else {
       console.log("[DEBUG] Features mega menu not found");

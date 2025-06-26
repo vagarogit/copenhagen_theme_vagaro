@@ -9,3 +9,6 @@ import "./trendingarticles";
 import "./responsiveVideos";
 import "./footerlinks";
 import "./navigationlinks";
+
+// Import Radix Navigation Integration
+import "./modules/radix-navigation-integration.jsx";

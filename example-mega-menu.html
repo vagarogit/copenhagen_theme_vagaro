@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Menu with Radix-Style Transitions</title>
+    <link href="assets/output.css" rel="stylesheet">
+    <style>
+        /* Additional demo styles */
+        .demo-nav {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem 0;
+        }
+        
+        .demo-nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .demo-nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .demo-nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            transition: all 150ms ease;
+            cursor: pointer;
+        }
+        
+        .demo-nav-link:hover {
+            background-color: #f3f4f6;
+            color: #D43C2E;
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .demo-section {
+            margin-bottom: 3rem;
+        }
+        
+        .demo-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+        
+        .demo-description {
+            color: #6b7280;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .demo-button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            background: white;
+            color: #374151;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 150ms ease;
+        }
+        
+        .demo-button:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+        
+        .demo-button.primary {
+            background: #D43C2E;
+            color: white;
+            border-color: #D43C2E;
+        }
+        
+        .demo-button.primary:hover {
+            background: #b91c1c;
+        }
+    </style>
+</head>
+<body>
+    <nav class="demo-nav">
+        <div class="demo-nav-content">
+            <div class="logo">
+                <h1 style="margin: 0; color: #D43C2E; font-size: 1.5rem;">Vagaro</h1>
+            </div>
+            <ul class="demo-nav-links">
+                <li>
+                    <button class="demo-nav-link mega-menu-trigger" data-state="closed">
+                        Business Types
+                        <span class="caret-down" data-state="closed">▼</span>
+                    </button>
+                    <div id="business-types-dropdown"></div>
+                </li>
+                <li>
+                    <button class="demo-nav-link mega-menu-trigger" data-state="closed">
+                        Features
+                        <span class="caret-down" data-state="closed">▼</span>
+                    </button>
+                    <div id="features-dropdown"></div>
+                </li>
+                <li><a href="#" class="demo-nav-link">Pricing</a></li>
+                <li><a href="#" class="demo-nav-link">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="demo-container">
+        <div class="demo-section">
+            <h2 class="demo-title">Mega Menu with Radix-Style Transitions</h2>
+            <p class="demo-description">
+                This example demonstrates how to use the new Radix-style transitions for your mega menus. 
+                The transitions include smooth scale-in/out animations, directional slide animations, and 
+                proper state management with data attributes.
+            </p>
+            
+            <div class="demo-buttons">
+                <button class="demo-button primary" onclick="showBusinessTypesMenu()">
+                    Show Business Types Menu
+                </button>
+                <button class="demo-button" onclick="hideBusinessTypesMenu()">
+                    Hide Business Types Menu
+                </button>
+                <button class="demo-button primary" onclick="showFeaturesMenu()">
+                    Show Features Menu
+                </button>
+                <button class="demo-button" onclick="hideFeaturesMenu()">
+                    Hide Features Menu
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3 class="demo-title">How It Works</h3>
+            <div class="demo-description">
+                <h4>CSS Classes Used:</h4>
+                <ul>
+                    <li><code>.mega-menu-full-width</code> - Full-width container with slide animations</li>
+                    <li><code>.mega-menu-content</code> - Content wrapper with scale animations</li>
+                    <li><code>.mega-menu-item</code> - Individual menu items with hover effects</li>
+                    <li><code>.mega-menu-category-heading</code> - Category titles</li>
+                    <li><code>.mega-menu-arrow</code> - Dropdown arrow indicator</li>
+                    <li><code>.mega-menu-trigger</code> - Trigger buttons with state management</li>
+                </ul>
+                
+                <h4>Data Attributes:</h4>
+                <ul>
+                    <li><code>data-state="open|closed"</code> - Controls animation states</li>
+                    <li><code>data-motion="from-start|from-end|to-start|to-end"</code> - Controls animation direction</li>
+                </ul>
+                
+                <h4>Key Features:</h4>
+                <ul>
+                    <li>Smooth scale-in/out animations with 3D perspective</li>
+                    <li>Directional slide animations (left/right)</li>
+                    <li>Proper state management with data attributes</li>
+                    <li>Hover effects with smooth transitions</li>
+                    <li>Responsive design with proper breakpoints</li>
+                    <li>Accessibility-friendly focus states</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h3 class="demo-title">Usage Example</h3>
+            <pre style="background: #f3f4f6; padding: 1rem; border-radius: 0.375rem; overflow-x: auto;">
+// JavaScript usage
+const megaMenu = document.getElementById('mega-menu-wrapper');
+
+// Show with animation
+megaMenu.style.display = 'block';
+megaMenu.setAttribute('data-state', 'open');
+const content = megaMenu.querySelector('.mega-menu-content');
+content.setAttribute('data-state', 'open');
+content.setAttribute('data-motion', 'from-start'); // or 'from-end'
+
+// Hide with animation
+megaMenu.setAttribute('data-state', 'closed');
+content.setAttribute('data-state', 'closed');
+content.setAttribute('data-motion', 'to-start'); // or 'to-end'
+setTimeout(() => {
+    megaMenu.style.display = 'none';
+}, 200);</pre>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize the navigation manager for this demo
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Demo page loaded');
+            
+            // You can test the navigation manager here
+            if (window.navigationManager) {
+                console.log('Navigation manager available');
+            }
+        });
+    </script>
+</body>
+</html> 
