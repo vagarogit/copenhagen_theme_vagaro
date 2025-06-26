@@ -3,7 +3,7 @@
   }}</a>
 
 <header class="bg-white ">
-  <div class="mx-auto sm:px-6 lg:px-8">
+  <div class="mx-auto">
     <!-- Top row with logo and auth buttons -->
     <div
       class="relative flex h-16 justify-between items-center border-b border-gray-100"
@@ -96,13 +96,13 @@
     </div>
 
     <!-- Bottom row with navigation menu -->
-    <div class="hidden lg:flex items-center h-12">
+    <div class="hidden lg:flex items-center h-12 bg-white relative" id="navigation-menu">
       <div
         class="flex space-x-6 items-center w-full mx-auto text-center justify-center h-12 text-[15px] font-semibold"
       >
         <a
           href="#"
-          class="flex items-center text-sm font-medium text-primary text-nowrap"
+          class="flex items-center text-sm font-medium text-primary text-nowrap hover:bg-gray-300 h-12"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -125,12 +125,12 @@
         <div class="relative group">
           <button
             type="button"
-            class="dropdown-toggle text-[15px] font-semibold text-charcoal hover:text-gray-900 flex items-center"
+            class="text-[15px] font-semibold text-charcoal hover:text-gray-900 flex items-center hover:bg-gray-200 h-12 px-3"
             aria-expanded="false"
             aria-haspopup="true"
           >
             Business Types
-            <svg
+            {{!-- <svg
               class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180"
               fill="none"
               viewBox="0 0 24 24"
@@ -142,22 +142,22 @@
                 stroke-width="2"
                 d="M19 9l-7 7-7-7"
               />
-            </svg>
+            </svg> --}}
           </button>
           <!-- Dropdown container for Business Types mega menu -->
-          <div id="business-types-dropdown" class="hidden group-hover:block"></div>
+          <div id="business-types-dropdown" class="hidden"></div>
         </div>
         
         <!-- Features Dropdown -->
         <div class="relative group">
           <button
             type="button"
-            class="dropdown-toggle text-[15px] font-semibold text-charcoal hover:text-gray-900 flex items-center"
+            class="text-[15px] font-semibold text-charcoal hover:text-gray-900 flex items-center hover:bg-gray-200 hover:rounded h-12 px-3"
             aria-expanded="false"
             aria-haspopup="true"
           >
             Features
-            <svg
+            {{!-- <svg
               class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180"
               fill="none"
               viewBox="0 0 24 24"
@@ -168,7 +168,7 @@
                 stroke-linejoin="round"
                 stroke-width="2"
                 d="M19 9l-7 7-7-7"
-              />
+              /> --}}
             </svg>
           </button>
           <!-- Dropdown container for Features -->

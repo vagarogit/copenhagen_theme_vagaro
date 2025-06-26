@@ -1249,37 +1249,59 @@
         const col1 = items.slice(0, mid);
         const col2 = items.slice(mid);
 
-        const renderCol = (col) =>
-          col
+        const renderColumn = (columnItems) => {
+          return columnItems
             .map(
               (item) => `
-            <li class="flex items-center mb-4">
+            <div class="flex items-center py-1 hover:bg-gray-50 rounded px-2">
               ${
                 item.iconImage?.url
-                  ? `<img src="${item.iconImage.url}" alt="${item.name}" class="w-10 h-10 mr-3 rounded-full bg-gray-100" />`
-                  : ""
+                  ? `<img src="${item.iconImage.url}" alt="${item.name}" class="w-6 h-6 mr-3" />`
+                  : `<div class="w-6 h-6 mr-3"></div>`
               }
-              <span>${item.name}</span>
-            </li>
+              <a href="${
+                item.link
+              }" class="text-sm text-gray-600 hover:text-gray-900">
+                ${item.name}
+              </a>
+            </div>
           `
             )
             .join("");
+        };
 
         return `
-        <div class="px-4 py-3">
-          <h3 class="text-md font-semibold mb-4" style="color:#D43C2E">${title}</h3>
-          <div class="flex gap-8">
-            <ul class="flex-1">${renderCol(col1)}</ul>
-            <ul class="flex-1">${renderCol(col2)}</ul>
+        <div class="px-0">
+          <h3 class="text-sm font-semibold mb-6" style="color:#D43C2E">${title}</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-3">
+              ${renderColumn(col1)}
+            </div>
+            <div class="space-y-3">
+              ${renderColumn(col2)}
+            </div>
           </div>
         </div>
       `;
       };
 
+      // Calculate position of the navigation bar
+      const navBar = document.getElementById("navigation-menu");
+      const navBarRect = navBar?.getBoundingClientRect();
+      const navBarBottom = navBarRect ? navBarRect.bottom + window.scrollY : 64;
+
       return `
-      <div class="absolute left-0 z-10 mt-2 w-screen transform px-2 sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
-        <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-          <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-3 max-w-6xl mx-auto">
+      <div class="absolute bg-white shadow-lg border-b border-gray-200" style="
+        top: ${navBarBottom}px; 
+        left: 0; 
+        right: 0; 
+        width: 100vw;
+        min-height: 300px;
+        z-index: 50;
+        position: fixed;
+      ">
+        <div class="max-w-6xl mx-auto px-8 py-12">
+          <div class="grid grid-cols-3 gap-16">
             ${renderCategory(beautyItems, "BEAUTY")}
             ${renderCategory(wellnessItems, "WELLNESS")}
             ${renderCategory(fitnessItems, "FITNESS")}
@@ -1381,19 +1403,22 @@
       `;
       };
 
-      // Calculate position of Features button for proper positioning
-      document.querySelector('[aria-haspopup="true"]');
-      const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-      
+      // Calculate position of the navigation bar
+      const navBar = document.getElementById("navigation-menu");
+      const navBarRect = navBar?.getBoundingClientRect();
+      const navBarBottom = navBarRect ? navBarRect.bottom + window.scrollY : 64;
+
       return `
-      <div class="fixed z-50 bg-gray-50 shadow-lg border-t border-gray-200" style="
-        top: ${headerHeight}px; 
+      <div class="absolute bg-white shadow-lg border-b border-gray-200" style="
+        top: ${navBarBottom}px; 
         left: 0; 
         right: 0; 
         width: 100vw;
-        min-height: 200px;
+        min-height: 300px;
+        z-index: 50;
+        position: fixed;
       ">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-6xl mx-auto px-8 py-12">
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             ${Object.entries(categories)
               .map(([title, items]) => renderCategory(title, items))
@@ -1513,7 +1538,31 @@
             "[NavigationLinks] Business types HTML length:",
             businessTypesHTML.length
           );
-          businessTypesContainer.innerHTML = businessTypesHTML;
+
+          // Clear existing content
+          businessTypesContainer.innerHTML = "";
+
+          // Create the mega menu and append to body for true full width
+          const businessMegaMenuWrapper = document.createElement("div");
+          businessMegaMenuWrapper.id = "business-types-mega-menu-wrapper";
+          businessMegaMenuWrapper.innerHTML = businessTypesHTML;
+
+          // Remove any existing mega menu
+          const existingBusinessMegaMenu = document.getElementById(
+            "business-types-mega-menu-wrapper"
+          );
+          if (existingBusinessMegaMenu) {
+            existingBusinessMegaMenu.remove();
+          }
+
+          // Append to body for true full viewport width
+          document.body.appendChild(businessMegaMenuWrapper);
+
+          // Add hover behavior for Business Types button and mega menu
+          this.setupBusinessTypesMegaMenuBehavior();
+
+          // Add a placeholder div to the original container to maintain hover behavior
+          businessTypesContainer.innerHTML = `<div id="business-types-placeholder" style="position: absolute; top: 100%; left: 0; width: 1px; height: 1px;"></div>`;
         }
 
         // Update Features dropdown
@@ -1530,27 +1579,29 @@
             "[NavigationLinks] Features HTML length:",
             featuresHTML.length
           );
-          
+
           // Clear existing content
           featuresContainer.innerHTML = "";
-          
+
           // Create the mega menu and append to body for true full width
-          const megaMenuWrapper = document.createElement('div');
-          megaMenuWrapper.id = 'features-mega-menu-wrapper';
+          const megaMenuWrapper = document.createElement("div");
+          megaMenuWrapper.id = "features-mega-menu-wrapper";
           megaMenuWrapper.innerHTML = featuresHTML;
-          
+
           // Remove any existing mega menu
-          const existingMegaMenu = document.getElementById('features-mega-menu-wrapper');
+          const existingMegaMenu = document.getElementById(
+            "features-mega-menu-wrapper"
+          );
           if (existingMegaMenu) {
             existingMegaMenu.remove();
           }
-          
+
           // Append to body for true full viewport width
           document.body.appendChild(megaMenuWrapper);
-          
+
           // Add hover behavior for Features button and mega menu
           this.setupFeaturesMegaMenuBehavior();
-          
+
           // Add a placeholder div to the original container to maintain hover behavior
           featuresContainer.innerHTML = `<div id="features-placeholder" style="position: absolute; top: 100%; left: 0; width: 1px; height: 1px;"></div>`;
         }
@@ -1656,48 +1707,107 @@
     }
 
     /**
+     * Setup hover behavior for Business Types mega menu
+     */
+    setupBusinessTypesMegaMenuBehavior() {
+      // Find the Business Types button specifically
+      const businessTypesButton =
+        document.querySelector("button:has(+ #business-types-dropdown)") ||
+        Array.from(document.querySelectorAll(".dropdown-toggle")).find((btn) =>
+          btn.textContent.trim().includes("Business Types")
+        );
+      const megaMenu = document.getElementById(
+        "business-types-mega-menu-wrapper"
+      );
+
+      if (!businessTypesButton || !megaMenu) return;
+
+      let showTimeout;
+      let hideTimeout;
+
+      const showMegaMenu = () => {
+        clearTimeout(hideTimeout);
+        showTimeout = setTimeout(() => {
+          megaMenu.style.display = "block";
+          businessTypesButton.style.backgroundColor = "#f3f4f6";
+          businessTypesButton.style.color = "#D43C2E";
+          console.log("[NavigationLinks] Business Types mega menu shown");
+        }, 100);
+      };
+
+      const hideMegaMenu = () => {
+        clearTimeout(showTimeout);
+        hideTimeout = setTimeout(() => {
+          megaMenu.style.display = "none";
+          businessTypesButton.style.backgroundColor = "";
+          businessTypesButton.style.color = "";
+          console.log("[NavigationLinks] Business Types mega menu hidden");
+        }, 300);
+      };
+
+      // Show on hover over Business Types button
+      businessTypesButton.addEventListener("mouseenter", showMegaMenu);
+      businessTypesButton.addEventListener("mouseleave", hideMegaMenu);
+
+      // Keep visible when hovering over mega menu
+      megaMenu.addEventListener("mouseenter", () => {
+        clearTimeout(hideTimeout);
+      });
+      megaMenu.addEventListener("mouseleave", hideMegaMenu);
+
+      // Initially hide the mega menu
+      megaMenu.style.display = "none";
+    }
+
+    /**
      * Setup hover behavior for Features mega menu
      */
     setupFeaturesMegaMenuBehavior() {
       // Find the Features button specifically (not Business Types)
-      const featuresButton = document.querySelector('button:has(+ #features-dropdown)') || 
-                            Array.from(document.querySelectorAll('.dropdown-toggle')).find(btn => 
-                              btn.textContent.trim().includes('Features'));
-      const megaMenu = document.getElementById('features-mega-menu-wrapper');
-      
+      const featuresButton =
+        document.querySelector("button:has(+ #features-dropdown)") ||
+        Array.from(document.querySelectorAll(".dropdown-toggle")).find((btn) =>
+          btn.textContent.trim().includes("Features")
+        );
+      const megaMenu = document.getElementById("features-mega-menu-wrapper");
+
       if (!featuresButton || !megaMenu) return;
-      
+
       let showTimeout;
       let hideTimeout;
-      
+
       const showMegaMenu = () => {
         clearTimeout(hideTimeout);
         showTimeout = setTimeout(() => {
-          megaMenu.style.display = 'block';
-          console.log('[NavigationLinks] Features mega menu shown');
+          megaMenu.style.display = "block";
+          featuresButton.style.backgroundColor = "#f3f4f6";
+          featuresButton.style.color = "#D43C2E";
+          console.log("[NavigationLinks] Features mega menu shown");
         }, 100);
       };
-      
+
       const hideMegaMenu = () => {
         clearTimeout(showTimeout);
         hideTimeout = setTimeout(() => {
-          megaMenu.style.display = 'none';
-          console.log('[NavigationLinks] Features mega menu hidden');
+          megaMenu.style.display = "none";
+          featuresButton.style.backgroundColor = "";
+          featuresButton.style.color = "";
+          console.log("[NavigationLinks] Features mega menu hidden");
         }, 300);
       };
-      
+
       // Show on hover over Features button
-      featuresButton.addEventListener('mouseenter', showMegaMenu);
-      featuresButton.addEventListener('mouseleave', hideMegaMenu);
-      
+      featuresButton.addEventListener("mouseenter", showMegaMenu);
+      featuresButton.addEventListener("mouseleave", hideMegaMenu);
+
       // Keep visible when hovering over mega menu
-      megaMenu.addEventListener('mouseenter', () => {
+      megaMenu.addEventListener("mouseenter", () => {
         clearTimeout(hideTimeout);
       });
-      megaMenu.addEventListener('mouseleave', hideMegaMenu);
-      
+      megaMenu.addEventListener("mouseleave", hideMegaMenu);
+
       // Initially hide the mega menu
-      megaMenu.style.display = 'none';
+      megaMenu.style.display = "none";
     }
 
     /**
@@ -1842,7 +1952,31 @@
     // Make navigation manager globally available for debugging
     window.navigationManager = navigationManager;
 
-    // Debug function to force show features menu
+    // Debug functions for mega menus
+    window.showBusinessTypesMenu = function () {
+      const megaMenu = document.getElementById(
+        "business-types-mega-menu-wrapper"
+      );
+      if (megaMenu) {
+        megaMenu.style.display = "block";
+        console.log("[DEBUG] Business Types mega menu forced to show");
+      } else {
+        console.log("[DEBUG] Business Types mega menu not found");
+      }
+    };
+
+    window.hideBusinessTypesMenu = function () {
+      const megaMenu = document.getElementById(
+        "business-types-mega-menu-wrapper"
+      );
+      if (megaMenu) {
+        megaMenu.style.display = "none";
+        console.log("[DEBUG] Business Types mega menu hidden");
+      } else {
+        console.log("[DEBUG] Business Types mega menu not found");
+      }
+    };
+
     window.showFeaturesMenu = function () {
       const megaMenu = document.getElementById("features-mega-menu-wrapper");
       if (megaMenu) {
@@ -1869,11 +2003,12 @@
     console.log(
       "[NavigationLinks] For debugging, use: window.navigationManager.debugFetch()"
     );
+    console.log("[NavigationLinks] Debug commands available:");
     console.log(
-      "[NavigationLinks] To force show features menu: window.showFeaturesMenu()"
+      "  - Business Types: window.showBusinessTypesMenu() / window.hideBusinessTypesMenu()"
     );
     console.log(
-      "[NavigationLinks] To hide features menu: window.hideFeaturesMenu()"
+      "  - Features: window.showFeaturesMenu() / window.hideFeaturesMenu()"
     );
 
     // Initialize navigation menu
