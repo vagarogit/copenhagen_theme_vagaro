@@ -120,14 +120,61 @@
           </svg>
           Book a Service
         </a>
-        <a
-          href="#"
-          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
-        >Business Types</a>
-        <a
-          href="#"
-          class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
-        >Features</a>
+        
+        <!-- Business Types Dropdown -->
+        <div class="relative group">
+          <button
+            type="button"
+            class="dropdown-toggle text-[15px] font-semibold text-charcoal hover:text-gray-900 flex items-center"
+            aria-expanded="false"
+            aria-haspopup="true"
+          >
+            Business Types
+            <svg
+              class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <!-- Dropdown container for Business Types mega menu -->
+          <div id="business-types-dropdown" class="hidden group-hover:block"></div>
+        </div>
+        
+        <!-- Features Dropdown -->
+        <div class="relative group">
+          <button
+            type="button"
+            class="dropdown-toggle text-[15px] font-semibold text-charcoal hover:text-gray-900 flex items-center"
+            aria-expanded="false"
+            aria-haspopup="true"
+          >
+            Features
+            <svg
+              class="ml-1 h-4 w-4 transition-transform group-hover:rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <!-- Dropdown container for Features -->
+          <div id="features-dropdown" class="hidden group-hover:block"></div>
+        </div>
+        
         <a
           href="#"
           class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
@@ -215,7 +262,9 @@
         }}
         <div class="border-t border-gray-200 my-1"></div>
       {{/if}}
-      <div class="div">
+      
+      <!-- Mobile navigation items container -->
+      <div id="mobile-navigation-items">
         <a
           href="#"
           class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-charcoal text-nowrap"
