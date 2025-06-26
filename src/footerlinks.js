@@ -88,8 +88,8 @@ class FooterLinksManager {
       .map(
         (item) => `
       <li>
-        <a href="${item.link}" 
-           class="text-sm/6 text-gray-400 hover:text-gray-300"
+        <a href="https://www.vagaro.com/${item.link}" 
+           class="text-base font-normal text-white/80 hover:text-gray-300"
            ${item.externalLink ? 'target="_blank" rel="noopener"' : ""}>
           ${item.name}
         </a>
@@ -100,7 +100,7 @@ class FooterLinksManager {
 
     return `
       <div class="${title !== "Get Started" ? "mt-10 md:mt-0" : ""}">
-        <h3 class="text-sm/6 font-semibold text-white">${title}</h3>
+        <h3 class="text-base font-semibold text-white">${title}</h3>
         <ul role="list" class="mt-6 space-y-4">
           ${linksHtml}
         </ul>
