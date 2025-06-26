@@ -7,3 +7,4 @@ import "./search";
 import "./forms";
 import "./trendingarticles";
 import "./responsiveVideos";
+import "./footerlinks";

@@ -43,10 +43,10 @@
         target="_blank"
         id="b2b-apple-store"
       >
-        <div class="h-16 w-16 rounded-full border-2 border-white bg-black pl-2 pr-2 hover:bg-charcoal">
+        <div class="h-16 rounded-full border-2 border-white bg-black pl-2 pr-2 hover:bg-charcoal">
           <img
             class="b2c-apple-store mx-auto h-16 w-auto rounded-xl lg:h-16"
-            src="/assets/apple-download-app-store-white-text.svg"
+            src="{{asset 'apple-download-app-store-white-text.svg'}}"
             alt=""
             
           />
@@ -60,7 +60,7 @@
         <div class="h-16 rounded-full border-2 border-white bg-black pl-1 pr-2 hover:bg-charcoal">
           <img
             class="b2c-google-store mx-auto h-16 w-auto rounded-full"
-            src="/assets/play-store-button-text.svg"
+            src="{{asset 'play-store-button-text.svg'}}"
             alt=""
            
           />
@@ -71,7 +71,7 @@
     <div class="xl:grid xl:grid-cols-3 xl:gap-8">
       <div class="space-y-8">
         <img class="h-9" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Company name" />
-        <p class="text-balance text-sm/6 text-gray-400">Making the world a better place through constructing elegant hierarchies.</p>
+        <p class="text-balance text-sm/6 text-gray-400">View all Vagaro Apps.</p>
         <div class="flex gap-x-6">
           <a href="#" class="text-gray-400 hover:text-gray-300">
             <span class="sr-only">Facebook</span>
@@ -106,79 +106,45 @@
         </div>
       </div>
       <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-        <div class="md:grid md:grid-cols-2 md:gap-8">
+        <div id="footer-links-container" class="md:grid md:grid-cols-3 md:gap-8">
+          <!-- Dynamic footer links will be loaded here -->
+          <!-- Fallback static content -->
           <div>
-            <h3 class="text-sm/6 font-semibold text-white">Solutions</h3>
+            <h3 class="text-sm/6 font-semibold text-white">Get Started</h3>
             <ul role="list" class="mt-6 space-y-4">
               <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Marketing</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Analytics</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Automation</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Commerce</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Insights</a>
+                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Loading...</a>
               </li>
             </ul>
           </div>
           <div class="mt-10 md:mt-0">
-            <h3 class="text-sm/6 font-semibold text-white">Support</h3>
-            <ul role="list" class="mt-6 space-y-4">
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Submit ticket</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Documentation</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Guides</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="md:grid md:grid-cols-2 md:gap-8">
-          <div>
             <h3 class="text-sm/6 font-semibold text-white">Company</h3>
             <ul role="list" class="mt-6 space-y-4">
               <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">About</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Blog</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Jobs</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Press</a>
+                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Loading...</a>
               </li>
             </ul>
           </div>
           <div class="mt-10 md:mt-0">
-            <h3 class="text-sm/6 font-semibold text-white">Legal</h3>
+            <h3 class="text-sm/6 font-semibold text-white">Resources</h3>
             <ul role="list" class="mt-6 space-y-4">
               <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Terms of service</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Privacy policy</a>
-              </li>
-              <li>
-                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">License</a>
+                <a href="#" class="text-sm/6 text-gray-400 hover:text-gray-300">Loading...</a>
               </li>
             </ul>
           </div>
         </div>
+       
       </div>
     </div>
-    <div class="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
-      <p class="text-sm/6 text-gray-400">&copy; 2024 Your Company, Inc. All rights reserved.</p>
-    </div>
+    <div class="mx-auto mt-16 flex w-full flex-col justify-center border-t border-white/10 pt-8 text-center sm:mt-20 lg:mt-24">
+          <p class="mt-24 text-lg text-gray-50">
+            &copy; 2025 Vagaro, Inc.
+          </p>
+          <p class="text-lg text-gray-50">
+            Vagaro Merchant Services is a registered ISO of PNC Bank, N.A.,
+            Pittsburgh, PA
+          </p>
+        </div>
   </div>
 </footer>
