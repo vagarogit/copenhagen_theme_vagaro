@@ -1381,15 +1381,23 @@
       `;
       };
 
+      // Calculate position of Features button for proper positioning
+      document.querySelector('[aria-haspopup="true"]');
+      const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+      
       return `
-      <div class="absolute left-0 right-0 z-10 w-screen" style="width: 100vw; left: 50%; margin-left: -50vw; top: 100%;">
-        <div class="bg-gray-50 shadow-lg border-t border-gray-200">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-              ${Object.entries(categories)
-                .map(([title, items]) => renderCategory(title, items))
-                .join("")}
-            </div>
+      <div class="fixed z-50 bg-gray-50 shadow-lg border-t border-gray-200" style="
+        top: ${headerHeight}px; 
+        left: 0; 
+        right: 0; 
+        width: 100vw;
+        min-height: 200px;
+      ">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            ${Object.entries(categories)
+              .map(([title, items]) => renderCategory(title, items))
+              .join("")}
           </div>
         </div>
       </div>
@@ -1522,7 +1530,29 @@
             "[NavigationLinks] Features HTML length:",
             featuresHTML.length
           );
-          featuresContainer.innerHTML = featuresHTML;
+          
+          // Clear existing content
+          featuresContainer.innerHTML = "";
+          
+          // Create the mega menu and append to body for true full width
+          const megaMenuWrapper = document.createElement('div');
+          megaMenuWrapper.id = 'features-mega-menu-wrapper';
+          megaMenuWrapper.innerHTML = featuresHTML;
+          
+          // Remove any existing mega menu
+          const existingMegaMenu = document.getElementById('features-mega-menu-wrapper');
+          if (existingMegaMenu) {
+            existingMegaMenu.remove();
+          }
+          
+          // Append to body for true full viewport width
+          document.body.appendChild(megaMenuWrapper);
+          
+          // Add hover behavior for Features button and mega menu
+          this.setupFeaturesMegaMenuBehavior();
+          
+          // Add a placeholder div to the original container to maintain hover behavior
+          featuresContainer.innerHTML = `<div id="features-placeholder" style="position: absolute; top: 100%; left: 0; width: 1px; height: 1px;"></div>`;
         }
 
         // Update mobile menu items
@@ -1623,6 +1653,51 @@
           "[NavigationLinks] Could not find Resources link to insert dynamic items after"
         );
       }
+    }
+
+    /**
+     * Setup hover behavior for Features mega menu
+     */
+    setupFeaturesMegaMenuBehavior() {
+      // Find the Features button specifically (not Business Types)
+      const featuresButton = document.querySelector('button:has(+ #features-dropdown)') || 
+                            Array.from(document.querySelectorAll('.dropdown-toggle')).find(btn => 
+                              btn.textContent.trim().includes('Features'));
+      const megaMenu = document.getElementById('features-mega-menu-wrapper');
+      
+      if (!featuresButton || !megaMenu) return;
+      
+      let showTimeout;
+      let hideTimeout;
+      
+      const showMegaMenu = () => {
+        clearTimeout(hideTimeout);
+        showTimeout = setTimeout(() => {
+          megaMenu.style.display = 'block';
+          console.log('[NavigationLinks] Features mega menu shown');
+        }, 100);
+      };
+      
+      const hideMegaMenu = () => {
+        clearTimeout(showTimeout);
+        hideTimeout = setTimeout(() => {
+          megaMenu.style.display = 'none';
+          console.log('[NavigationLinks] Features mega menu hidden');
+        }, 300);
+      };
+      
+      // Show on hover over Features button
+      featuresButton.addEventListener('mouseenter', showMegaMenu);
+      featuresButton.addEventListener('mouseleave', hideMegaMenu);
+      
+      // Keep visible when hovering over mega menu
+      megaMenu.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimeout);
+      });
+      megaMenu.addEventListener('mouseleave', hideMegaMenu);
+      
+      // Initially hide the mega menu
+      megaMenu.style.display = 'none';
     }
 
     /**
@@ -1769,22 +1844,22 @@
 
     // Debug function to force show features menu
     window.showFeaturesMenu = function () {
-      const container = document.getElementById("features-dropdown");
-      if (container) {
-        container.style.display = "block";
-        container.classList.remove("hidden");
-        container.classList.add("block");
-        console.log("[DEBUG] Features menu forced to show");
+      const megaMenu = document.getElementById("features-mega-menu-wrapper");
+      if (megaMenu) {
+        megaMenu.style.display = "block";
+        console.log("[DEBUG] Features mega menu forced to show");
+      } else {
+        console.log("[DEBUG] Features mega menu not found");
       }
     };
 
     window.hideFeaturesMenu = function () {
-      const container = document.getElementById("features-dropdown");
-      if (container) {
-        container.style.display = "";
-        container.classList.add("hidden");
-        container.classList.remove("block");
-        console.log("[DEBUG] Features menu hidden");
+      const megaMenu = document.getElementById("features-mega-menu-wrapper");
+      if (megaMenu) {
+        megaMenu.style.display = "none";
+        console.log("[DEBUG] Features mega menu hidden");
+      } else {
+        console.log("[DEBUG] Features mega menu not found");
       }
     };
 
