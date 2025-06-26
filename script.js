@@ -1163,7 +1163,7 @@
                 url
               }
             }
-            featuresItems {
+            featureItems {
               id
               name
               description
@@ -1184,6 +1184,10 @@
      * Fetch navigation menu items from Hygraph
      */
     async fetchNavigationMenu() {
+      console.log("[NavigationLinks] Starting to fetch navigation menu...");
+      console.log("[NavigationLinks] Endpoint:", this.endpoint);
+      console.log("[NavigationLinks] Query:", this.getNavigationMenuQuery());
+
       try {
         const response = await fetch(this.endpoint, {
           method: "POST",
@@ -1194,19 +1198,31 @@
           signal: AbortSignal.timeout(this.options.timeout),
         });
 
+        console.log("[NavigationLinks] Response status:", response.status);
+        console.log("[NavigationLinks] Response ok:", response.ok);
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
+        console.log("[NavigationLinks] Received data:", data);
 
         if (data.errors) {
+          console.error("[NavigationLinks] GraphQL errors:", data.errors);
           throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
         }
 
+        console.log(
+          "[NavigationLinks] Navigation menu data:",
+          data.data.navigationMenu
+        );
         return data.data.navigationMenu;
       } catch (error) {
-        console.error("Failed to fetch navigation menu:", error);
+        console.error(
+          "[NavigationLinks] Failed to fetch navigation menu:",
+          error
+        );
         throw error;
       }
     }
@@ -1215,7 +1231,17 @@
      * Render business types mega menu (beauty, wellness, fitness)
      */
     renderBusinessTypesMegaMenu(beautyItems, wellnessItems, fitnessItems) {
+      console.log("[NavigationLinks] Rendering business types mega menu");
+      console.log("[NavigationLinks] Beauty items:", beautyItems);
+      console.log("[NavigationLinks] Wellness items:", wellnessItems);
+      console.log("[NavigationLinks] Fitness items:", fitnessItems);
+
       const renderCategory = (items, title) => {
+        console.log(
+          `[NavigationLinks] Rendering category ${title} with ${
+          items?.length || 0
+        } items`
+        );
         if (!items || items.length === 0) return "";
 
         // Split items into two columns
@@ -1264,9 +1290,123 @@
     }
 
     /**
-     * Render features dropdown menu
+     * Render features mega menu
+     */
+    renderFeatureItemsMegaMenu(featureItems) {
+      console.log("[NavigationLinks] Rendering features mega menu");
+      console.log("[NavigationLinks] Feature items:", featureItems);
+      console.log(
+        "[NavigationLinks] Number of features:",
+        featureItems?.length || 0
+      );
+
+      if (!featureItems || featureItems.length === 0) return "";
+
+      // Group items into categories based on their position
+      const categories = {
+        "RUN YOUR BUSINESS": [],
+        "ELEVATE CLIENT EXPERIENCE": [],
+        "GROW YOUR BUSINESS": [],
+        "SIMPLIFY PAYMENTS": [],
+        "BUILD YOUR BRAND": [],
+      };
+
+      // You can customize this mapping based on your actual feature names
+      featureItems.forEach((item) => {
+        if (
+          item.name.includes("Calendar") ||
+          item.name.includes("Payroll") ||
+          item.name.includes("Reports") ||
+          item.name.includes("Rent") ||
+          item.name.includes("Forms")
+        ) {
+          categories["RUN YOUR BUSINESS"].push(item);
+        } else if (
+          item.name.includes("Booking") ||
+          item.name.includes("Connect") ||
+          item.name.includes("Notifications") ||
+          item.name.includes("Stream") ||
+          item.name.includes("Apps")
+        ) {
+          categories["ELEVATE CLIENT EXPERIENCE"].push(item);
+        } else if (
+          item.name.includes("Marketplace") ||
+          item.name.includes("Store") ||
+          item.name.includes("Memberships") ||
+          item.name.includes("Inventory") ||
+          item.name.includes("Capital")
+        ) {
+          categories["GROW YOUR BUSINESS"].push(item);
+        } else if (
+          item.name.includes("PayPro") ||
+          item.name.includes("Pay Later") ||
+          item.name.includes("Invoices") ||
+          item.name.includes("Payments")
+        ) {
+          categories["SIMPLIFY PAYMENTS"].push(item);
+        } else {
+          categories["BUILD YOUR BRAND"].push(item);
+        }
+      });
+
+      const renderCategory = (title, items) => {
+        if (items.length === 0) return "";
+
+        const itemsHtml = items
+          .map(
+            (item) => `
+          <div class="flex items-start p-2 hover:bg-gray-50 rounded">
+            ${
+              item.iconImage?.url
+                ? `<img src="${item.iconImage.url}" alt="${item.name}" class="w-5 h-5 mr-3 mt-0.5" />`
+                : `<div class="w-5 h-5 mr-3 mt-0.5"></div>`
+            }
+            <a href="${
+              item.link
+            }" class="text-sm text-gray-700 hover:text-gray-900">
+              ${item.name}
+            </a>
+          </div>
+        `
+          )
+          .join("");
+
+        return `
+        <div>
+          <h4 class="text-xs font-semibold mb-4" style="color:#D43C2E">${title}</h4>
+          <div class="space-y-2">
+            ${itemsHtml}
+          </div>
+        </div>
+      `;
+      };
+
+      return `
+      <div class="absolute left-0 right-0 z-10 w-screen" style="width: 100vw; left: 50%; margin-left: -50vw; top: 100%;">
+        <div class="bg-gray-50 shadow-lg border-t border-gray-200">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+              ${Object.entries(categories)
+                .map(([title, items]) => renderCategory(title, items))
+                .join("")}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    }
+
+    /**
+     * Render features dropdown menu (simple dropdown version)
      */
     renderFeaturesDropdown(featuresItems) {
+      console.log("[NavigationLinks] Rendering features dropdown");
+      console.log("[NavigationLinks] Features items:", featuresItems);
+      console.log(
+        "[NavigationLinks] Number of features:",
+        featuresItems?.length || 0
+      );
+
       if (!featuresItems || featuresItems.length === 0) return "";
 
       const itemsHtml = featuresItems
@@ -1312,33 +1452,86 @@
      * Update navigation menu in the header
      */
     async updateNavigationMenu() {
+      console.log("[NavigationLinks] Starting updateNavigationMenu...");
       try {
         const navigationMenu = await this.fetchNavigationMenu();
+        console.log("[NavigationLinks] Fetched navigation menu:", navigationMenu);
+
+        // Validate navigation menu data
+        if (!navigationMenu) {
+          console.error("[NavigationLinks] No navigation menu data received!");
+          this.showFallbackContent();
+          return;
+        }
+
+        // Log what data we actually have
+        console.log("[NavigationLinks] Data structure check:");
+        console.log(
+          "  - beautyItems:",
+          navigationMenu.beautyItems?.length || 0,
+          "items"
+        );
+        console.log(
+          "  - wellnessItems:",
+          navigationMenu.wellnessItems?.length || 0,
+          "items"
+        );
+        console.log(
+          "  - fitnessItems:",
+          navigationMenu.fitnessItems?.length || 0,
+          "items"
+        );
+        console.log(
+          "  - featureItems:",
+          navigationMenu.featureItems?.length || 0,
+          "items"
+        );
 
         // Update Business Types dropdown
         const businessTypesContainer = document.getElementById(
           "business-types-dropdown"
         );
+        console.log(
+          "[NavigationLinks] Business types container found:",
+          !!businessTypesContainer
+        );
         if (businessTypesContainer) {
-          businessTypesContainer.innerHTML = this.renderBusinessTypesMegaMenu(
+          const businessTypesHTML = this.renderBusinessTypesMegaMenu(
             navigationMenu.beautyItems || [],
             navigationMenu.wellnessItems || [],
             navigationMenu.fitnessItems || []
           );
+          console.log(
+            "[NavigationLinks] Business types HTML length:",
+            businessTypesHTML.length
+          );
+          businessTypesContainer.innerHTML = businessTypesHTML;
         }
 
         // Update Features dropdown
         const featuresContainer = document.getElementById("features-dropdown");
+        console.log(
+          "[NavigationLinks] Features container found:",
+          !!featuresContainer
+        );
         if (featuresContainer) {
-          featuresContainer.innerHTML = this.renderFeaturesDropdown(
-            navigationMenu.featuresItems || []
+          const featuresHTML = this.renderFeatureItemsMegaMenu(
+            navigationMenu.featureItems || []
           );
+          console.log(
+            "[NavigationLinks] Features HTML length:",
+            featuresHTML.length
+          );
+          featuresContainer.innerHTML = featuresHTML;
         }
 
         // Update mobile menu items
         this.updateMobileMenu(navigationMenu);
       } catch (error) {
-        console.error("Failed to update navigation menu:", error);
+        console.error(
+          "[NavigationLinks] Failed to update navigation menu:",
+          error
+        );
         // Fallback to static content
         this.showFallbackContent();
       }
@@ -1348,17 +1541,30 @@
      * Update mobile menu with navigation items
      */
     updateMobileMenu(navigationMenu) {
+      console.log("[NavigationLinks] Updating mobile menu");
+      console.log(
+        "[NavigationLinks] Mobile navigation menu data:",
+        navigationMenu
+      );
+
       const mobileMenuContainer = document.getElementById(
         "mobile-navigation-items"
       );
+      console.log(
+        "[NavigationLinks] Mobile menu container found:",
+        !!mobileMenuContainer
+      );
       if (!mobileMenuContainer) return;
 
-      // Get the existing static navigation items
-      const existingItems = mobileMenuContainer.innerHTML;
-
       const renderMobileItems = (items, title) => {
-        if (!items || items.length === 0) return "";
+        if (!items || items.length === 0) {
+          console.log(`[NavigationLinks] No items for ${title}`);
+          return "";
+        }
 
+        console.log(
+          `[NavigationLinks] Rendering ${items.length} items for ${title}`
+        );
         const itemsHtml = items
           .map(
             (item) => `
@@ -1378,27 +1584,44 @@
       `;
       };
 
-      // Create the dynamic navigation items
-      const dynamicItems = `
-      ${renderMobileItems(navigationMenu.beautyItems, "Beauty")}
-      ${renderMobileItems(navigationMenu.wellnessItems, "Wellness")}
-      ${renderMobileItems(navigationMenu.fitnessItems, "Fitness")}
-      ${renderMobileItems(navigationMenu.featuresItems, "Features")}
-    `;
+      // Find the last static menu item (Resources) to insert dynamic content after it
+      const allLinks = mobileMenuContainer.querySelectorAll("a");
+      let resourcesLink = null;
 
-      // Insert dynamic items after the existing static items but before the auth items
-      const authItemsStart = existingItems.indexOf(
-        '<div class="border-t border-gray-200 my-1"></div>'
-      );
+      allLinks.forEach((link) => {
+        if (link.textContent.trim() === "Resources") {
+          resourcesLink = link;
+        }
+      });
 
-      if (authItemsStart !== -1) {
-        // Insert dynamic items before the auth section
-        const beforeAuth = existingItems.substring(0, authItemsStart);
-        const authSection = existingItems.substring(authItemsStart);
-        mobileMenuContainer.innerHTML = beforeAuth + dynamicItems + authSection;
+      if (resourcesLink) {
+        // Create a container for dynamic items
+        const dynamicContainer = document.createElement("div");
+        dynamicContainer.id = "dynamic-mobile-menu-items";
+        dynamicContainer.innerHTML = `
+        ${renderMobileItems(navigationMenu.beautyItems, "Beauty")}
+        ${renderMobileItems(navigationMenu.wellnessItems, "Wellness")}
+        ${renderMobileItems(navigationMenu.fitnessItems, "Fitness")}
+        ${renderMobileItems(navigationMenu.featureItems, "Features")}
+      `;
+
+        // Remove any existing dynamic container
+        const existingDynamic = document.getElementById(
+          "dynamic-mobile-menu-items"
+        );
+        if (existingDynamic) {
+          existingDynamic.remove();
+        }
+
+        // Insert after Resources link
+        resourcesLink.insertAdjacentElement("afterend", dynamicContainer);
+        console.log(
+          "[NavigationLinks] Dynamic mobile menu items inserted successfully"
+        );
       } else {
-        // If no auth section found, append to the end
-        mobileMenuContainer.innerHTML = existingItems + dynamicItems;
+        console.warn(
+          "[NavigationLinks] Could not find Resources link to insert dynamic items after"
+        );
       }
     }
 
@@ -1411,7 +1634,7 @@
       );
       if (businessTypesContainer) {
         businessTypesContainer.innerHTML = `
-        <div class="absolute left-0 z-10 mt-2 w-screen transform px-2 sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
+        <div class="absolute left-0 z-10 mt-2 w-screen transform px-2 sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2 bg-white">
           <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
             <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-3 max-w-6xl mx-auto">
               <div class="px-4 py-3">
@@ -1492,6 +1715,35 @@
         }
       }
     }
+
+    /**
+     * Debug method to test navigation menu fetching
+     */
+    async debugFetch() {
+      console.log("[NavigationLinks DEBUG] Testing navigation menu fetch...");
+      try {
+        const menu = await this.fetchNavigationMenu();
+        console.log("[NavigationLinks DEBUG] Successfully fetched menu:", menu);
+
+        if (menu) {
+          console.log("[NavigationLinks DEBUG] Menu structure:");
+          Object.keys(menu).forEach((key) => {
+            const items = menu[key];
+            console.log(
+              `  - ${key}:`,
+              Array.isArray(items) ? `${items.length} items` : "not an array"
+            );
+            if (Array.isArray(items) && items.length > 0) {
+              console.log(`    Sample item:`, items[0]);
+            }
+          });
+        }
+        return menu;
+      } catch (error) {
+        console.error("[NavigationLinks DEBUG] Failed to fetch:", error);
+        throw error;
+      }
+    }
   }
 
   // Make NavigationLinksManager globally available
@@ -1499,6 +1751,10 @@
 
   // Initialize when DOM is ready
   document.addEventListener("DOMContentLoaded", function () {
+    console.log(
+      "[NavigationLinks] DOM Content Loaded - Initializing navigation links..."
+    );
+
     // Replace with your actual Hygraph endpoint
     const HYGRAPH_ENDPOINT =
       "https://us-west-2.cdn.hygraph.com/content/cld3gw4bb0hr001ue9afzcunb/master";
@@ -1507,6 +1763,43 @@
       timeout: 8000,
       retries: 2,
     });
+
+    // Make navigation manager globally available for debugging
+    window.navigationManager = navigationManager;
+
+    // Debug function to force show features menu
+    window.showFeaturesMenu = function () {
+      const container = document.getElementById("features-dropdown");
+      if (container) {
+        container.style.display = "block";
+        container.classList.remove("hidden");
+        container.classList.add("block");
+        console.log("[DEBUG] Features menu forced to show");
+      }
+    };
+
+    window.hideFeaturesMenu = function () {
+      const container = document.getElementById("features-dropdown");
+      if (container) {
+        container.style.display = "";
+        container.classList.add("hidden");
+        container.classList.remove("block");
+        console.log("[DEBUG] Features menu hidden");
+      }
+    };
+
+    console.log(
+      "[NavigationLinks] Navigation manager created, starting initialization..."
+    );
+    console.log(
+      "[NavigationLinks] For debugging, use: window.navigationManager.debugFetch()"
+    );
+    console.log(
+      "[NavigationLinks] To force show features menu: window.showFeaturesMenu()"
+    );
+    console.log(
+      "[NavigationLinks] To hide features menu: window.hideFeaturesMenu()"
+    );
 
     // Initialize navigation menu
     navigationManager.init();
