@@ -498,6 +498,9 @@ class NavigationLinksManager {
 
       // Update mobile menu items
       this.updateMobileMenu(navigationMenu);
+
+      // Send data to Radix Navigation component
+      this.updateRadixNavigation(navigationMenu);
     } catch (error) {
       console.error(
         "[NavigationLinks] Failed to update navigation menu:",
@@ -940,6 +943,36 @@ class NavigationLinksManager {
     // Show the new menu with smooth animation
     toMenu.style.display = "block";
     this.handleMegaMenuTransition(toMenu, direction);
+  }
+
+  /**
+   * Update Radix Navigation component with data
+   */
+  updateRadixNavigation(navigationMenu) {
+    console.log("[NavigationLinks] Updating Radix Navigation with data");
+
+    // Format data for Radix component
+    const businessTypes = {
+      beauty: navigationMenu.beautyItems || [],
+      wellness: navigationMenu.wellnessItems || [],
+      fitness: navigationMenu.fitnessItems || [],
+    };
+
+    const features = navigationMenu.featureItems || [];
+
+    // Send data to global bridge
+    if (typeof window.updateNavigationData === "function") {
+      window.updateNavigationData({
+        businessTypes,
+        features,
+      });
+      console.log("[NavigationLinks] Data sent to Radix Navigation:", {
+        businessTypes,
+        features,
+      });
+    } else {
+      console.warn("[NavigationLinks] Radix Navigation bridge not available");
+    }
   }
 
   /**

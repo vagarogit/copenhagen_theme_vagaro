@@ -2,132 +2,221 @@ import * as React from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
 import { CaretDownIcon } from "@radix-ui/react-icons";
+import { PropTypes } from "prop-types";
 
-const NavigationMenuDemo = () => {
-	return (
-		<NavigationMenu.Root className="NavigationMenuRoot">
-			<NavigationMenu.List className="NavigationMenuList">
-				<NavigationMenu.Item>
-					<NavigationMenu.Trigger className="NavigationMenuTrigger">
-						Learn <CaretDownIcon className="CaretDown" aria-hidden />
-					</NavigationMenu.Trigger>
-					<NavigationMenu.Content className="NavigationMenuContent">
-						<ul className="List one">
-							<li style={{ gridRow: "span 3" }}>
-								<NavigationMenu.Link asChild>
-									<a className="Callout" href="/">
-										<svg
-											aria-hidden
-											width="38"
-											height="38"
-											viewBox="0 0 25 25"
-											fill="white"
-										>
-											<path d="M12 25C7.58173 25 4 21.4183 4 17C4 12.5817 7.58173 9 12 9V25Z"></path>
-											<path d="M12 0H4V8H12V0Z"></path>
-											<path d="M17 8C19.2091 8 21 6.20914 21 4C21 1.79086 19.2091 0 17 0C14.7909 0 13 1.79086 13 4C13 6.20914 14.7909 8 17 8Z"></path>
-										</svg>
-										<div className="CalloutHeading">Radix Primitives</div>
-										<p className="CalloutText">
-											Unstyled, accessible components for React.
-										</p>
-									</a>
-								</NavigationMenu.Link>
-							</li>
+const NavigationMenuDemo = ({ navigationData = {} }) => {
+  const { businessTypes, features, isLoaded } = navigationData;
 
-							<ListItem href="https://stitches.dev/" title="Stitches">
-								CSS-in-JS with best-in-class developer experience.
-							</ListItem>
-							<ListItem href="/colors" title="Colors">
-								Beautiful, thought-out palettes with auto dark mode.
-							</ListItem>
-							<ListItem href="https://icons.radix-ui.com/" title="Icons">
-								A crisp set of 15x15 icons, balanced and consistent.
-							</ListItem>
-						</ul>
-					</NavigationMenu.Content>
-				</NavigationMenu.Item>
+  // Render business types content
+  const renderBusinessTypes = () => {
+    if (!businessTypes || !isLoaded) {
+      return <div className="List one">Loading business types...</div>;
+    }
 
-				<NavigationMenu.Item>
-					<NavigationMenu.Trigger className="NavigationMenuTrigger">
-						Overview <CaretDownIcon className="CaretDown" aria-hidden />
-					</NavigationMenu.Trigger>
-					<NavigationMenu.Content className="NavigationMenuContent">
-						<ul className="List two">
-							<ListItem
-								title="Introduction"
-								href="/primitives/docs/overview/introduction"
-							>
-								Build high-quality, accessible design systems and web apps.
-							</ListItem>
-							<ListItem
-								title="Getting started"
-								href="/primitives/docs/overview/getting-started"
-							>
-								A quick tutorial to get you up and running with Radix
-								Primitives.
-							</ListItem>
-							<ListItem title="Styling" href="/primitives/docs/guides/styling">
-								Unstyled and compatible with any styling solution.
-							</ListItem>
-							<ListItem
-								title="Animation"
-								href="/primitives/docs/guides/animation"
-							>
-								Use CSS keyframes or any animation library of your choice.
-							</ListItem>
-							<ListItem
-								title="Accessibility"
-								href="/primitives/docs/overview/accessibility"
-							>
-								Tested in a range of browsers and assistive technologies.
-							</ListItem>
-							<ListItem
-								title="Releases"
-								href="/primitives/docs/overview/releases"
-							>
-								Radix Primitives releases and their changelogs.
-							</ListItem>
-						</ul>
-					</NavigationMenu.Content>
-				</NavigationMenu.Item>
+    return (
+      <div
+        className="List one"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "2rem",
+          padding: "2rem",
+        }}
+      >
+        {/* Beauty Column */}
+        <div>
+          <h3
+            style={{
+              fontWeight: "bold",
+              marginBottom: "1rem",
+              color: "var(--violet-11)",
+            }}
+          >
+            Beauty
+          </h3>
+          {businessTypes.beauty?.map((item) => (
+            <ListItem key={item.id} href={item.link} title={item.name}>
+              {item.iconImage?.url && (
+                <img
+                  src={item.iconImage.url}
+                  alt={item.name}
+                  style={{ width: "16px", height: "16px", marginRight: "8px" }}
+                />
+              )}
+            </ListItem>
+          ))}
+        </div>
 
-				<NavigationMenu.Item>
-					<NavigationMenu.Link
-						className="NavigationMenuLink"
-						href="https://github.com/radix-ui"
-					>
-						Github
-					</NavigationMenu.Link>
-				</NavigationMenu.Item>
+        {/* Wellness Column */}
+        <div>
+          <h3
+            style={{
+              fontWeight: "bold",
+              marginBottom: "1rem",
+              color: "var(--violet-11)",
+            }}
+          >
+            Wellness
+          </h3>
+          {businessTypes.wellness?.map((item) => (
+            <ListItem key={item.id} href={item.link} title={item.name}>
+              {item.iconImage?.url && (
+                <img
+                  src={item.iconImage.url}
+                  alt={item.name}
+                  style={{ width: "16px", height: "16px", marginRight: "8px" }}
+                />
+              )}
+            </ListItem>
+          ))}
+        </div>
 
-				<NavigationMenu.Indicator className="NavigationMenuIndicator">
-					<div className="Arrow" />
-				</NavigationMenu.Indicator>
-			</NavigationMenu.List>
+        {/* Fitness Column */}
+        <div>
+          <h3
+            style={{
+              fontWeight: "bold",
+              marginBottom: "1rem",
+              color: "var(--violet-11)",
+            }}
+          >
+            Fitness
+          </h3>
+          {businessTypes.fitness?.map((item) => (
+            <ListItem key={item.id} href={item.link} title={item.name}>
+              {item.iconImage?.url && (
+                <img
+                  src={item.iconImage.url}
+                  alt={item.name}
+                  style={{ width: "16px", height: "16px", marginRight: "8px" }}
+                />
+              )}
+            </ListItem>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
-			<div className="ViewportPosition">
-				<NavigationMenu.Viewport className="NavigationMenuViewport" />
-			</div>
-		</NavigationMenu.Root>
-	);
+  // Render features content
+  const renderFeatures = () => {
+    if (!features || !isLoaded) {
+      return <div className="List two">Loading features...</div>;
+    }
+
+    // Group features into columns (5 columns as per original design)
+    const columns = Array.from({ length: 5 }, () => []);
+    features.forEach((item, index) => {
+      columns[index % 5].push(item);
+    });
+
+    return (
+      <div
+        className="List two"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(5, 1fr)",
+          gap: "1rem",
+          padding: "2rem",
+        }}
+      >
+        {columns.map((column, columnIndex) => (
+          <div key={columnIndex}>
+            {column.map((item) => (
+              <ListItem key={item.id} href={item.link} title={item.name}>
+                {item.iconImage?.url && (
+                  <img
+                    src={item.iconImage.url}
+                    alt={item.name}
+                    style={{
+                      width: "16px",
+                      height: "16px",
+                      marginRight: "8px",
+                    }}
+                  />
+                )}
+              </ListItem>
+            ))}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <NavigationMenu.Root className="NavigationMenuRoot">
+      <NavigationMenu.List className="NavigationMenuList">
+        {/* Business Types Menu */}
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger className="NavigationMenuTrigger">
+            Business Types <CaretDownIcon className="CaretDown" aria-hidden />
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content className="NavigationMenuContent">
+            {renderBusinessTypes()}
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+
+        {/* Features Menu */}
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger className="NavigationMenuTrigger">
+            Features <CaretDownIcon className="CaretDown" aria-hidden />
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content className="NavigationMenuContent">
+            {renderFeatures()}
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
+
+        <NavigationMenu.Item>
+          <NavigationMenu.Link
+            className="NavigationMenuLink"
+            href="https://github.com/radix-ui"
+          >
+            Github
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+
+        <NavigationMenu.Indicator className="NavigationMenuIndicator">
+          <div className="Arrow" />
+        </NavigationMenu.Indicator>
+      </NavigationMenu.List>
+
+      <div className="ViewportPosition">
+        <NavigationMenu.Viewport className="NavigationMenuViewport" />
+      </div>
+    </NavigationMenu.Root>
+  );
+};
+
+NavigationMenuDemo.propTypes = {
+  navigationData: PropTypes.shape({
+    businessTypes: PropTypes.object,
+    features: PropTypes.array,
+    isLoaded: PropTypes.bool,
+  }),
 };
 
 const ListItem = React.forwardRef(
-	({ className, children, title, ...props }, forwardedRef) => (
-		<li>
-			<NavigationMenu.Link asChild>
-				<a
-					className={classNames("ListItemLink", className)}
-					{...props}
-					ref={forwardedRef}
-				>
-					<div className="ListItemHeading">{title}</div>
-					<p className="ListItemText">{children}</p>
-				</a>
-			</NavigationMenu.Link>
-		</li>
-	),
+  ({ className, children, title, ...props }, forwardedRef) => (
+    <li>
+      <NavigationMenu.Link asChild>
+        <a
+          className={classNames("ListItemLink", className)}
+          {...props}
+          ref={forwardedRef}
+        >
+          <div className="ListItemHeading">{title}</div>
+          <p className="ListItemText">{children}</p>
+        </a>
+      </NavigationMenu.Link>
+    </li>
+  )
 );
+
+ListItem.displayName = "ListItem";
+ListItem.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+  title: PropTypes.string,
+};
 
 export default NavigationMenuDemo;
