@@ -91,25 +91,13 @@ export default defineConfig([
       chunkFileNames: fileNames,
     },
     external: [
-      "@zendesk/help-center-wysiwyg",
-      "@zendeskgarden/react-buttons",
-      "@zendeskgarden/react-forms", 
-      "@zendeskgarden/react-dropdowns.next",
-      "@zendeskgarden/react-notifications",
-      "@zendeskgarden/react-tooltips",
-      "@zendeskgarden/react-accordions",
-      "@zendeskgarden/react-datepickers",
-      "@zendeskgarden/react-tags",
-      "@zendeskgarden/react-theming",
-      "@zendeskgarden/react-loaders",
-      "@zendeskgarden/react-typography",
-      "@zendeskgarden/react-modals",
-      "@zendeskgarden/svg-icons"
+      "@zendesk/help-center-wysiwyg"
     ],
     plugins: [
       nodeResolve({
         extensions: [".js"],
         preferBuiltins: false,
+        browser: true,
       }),
       commonjs(),
       typescript(),
@@ -136,7 +124,16 @@ export default defineConfig([
       }),
       json(),
       dynamicImportVars(),
-      isProduction && terser(),
+      isProduction && terser({
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
+        },
+        mangle: {
+          safari10: true
+        }
+      }),
       generateImportMap(),
     ],
     watch: {

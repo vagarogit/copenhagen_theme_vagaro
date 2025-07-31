@@ -44,15 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
         articlesContainer.className =
           "trending-articles-api-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full hover:cursor-pointer";
 
-        // Determine arrow image path - using the exposed theme path
-        var arrowPath;
-        if (window.themePath) {
-          // Use the pre-configured theme path
-          arrowPath = window.themePath + "arrow-up-right.svg";
-        } else {
-          // Fallback to the best guess path
-          arrowPath = "/assets/arrow-up-right.svg";
-        }
+        // Use the pre-configured arrow SVG path
+        var arrowPath = window.arrowUpRightSvg || "/assets/arrow-up-right.svg";
         console.log("Using arrow path:", arrowPath);
 
         // Add articles
