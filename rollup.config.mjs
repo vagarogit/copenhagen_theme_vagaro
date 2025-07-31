@@ -69,11 +69,12 @@ export default defineConfig([
       dir: "assets",
       format: "es",
       manualChunks: (id) => {
+        // Exclude WYSIWYG from bundling - make it external
         if (
           id.includes("node_modules/@zendesk/help-center-wysiwyg") ||
           id.includes("node_modules/@ckeditor5")
         ) {
-          return "wysiwyg";
+          return undefined; // Don't bundle, make external
         }
 
         if (id.includes("node_modules") || id.includes("src/modules/shared")) {
@@ -89,9 +90,26 @@ export default defineConfig([
       entryFileNames: fileNames,
       chunkFileNames: fileNames,
     },
+    external: [
+      "@zendesk/help-center-wysiwyg",
+      "@zendeskgarden/react-buttons",
+      "@zendeskgarden/react-forms", 
+      "@zendeskgarden/react-dropdowns.next",
+      "@zendeskgarden/react-notifications",
+      "@zendeskgarden/react-tooltips",
+      "@zendeskgarden/react-accordions",
+      "@zendeskgarden/react-datepickers",
+      "@zendeskgarden/react-tags",
+      "@zendeskgarden/react-theming",
+      "@zendeskgarden/react-loaders",
+      "@zendeskgarden/react-typography",
+      "@zendeskgarden/react-modals",
+      "@zendeskgarden/svg-icons"
+    ],
     plugins: [
       nodeResolve({
         extensions: [".js"],
+        preferBuiltins: false,
       }),
       commonjs(),
       typescript(),
