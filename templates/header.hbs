@@ -1,6 +1,19 @@
-<a class="skip-navigation" tabindex="1" href="#main-content">{{t
-    "skip_navigation"
-  }}</a>
+<a class="skip-navigation" tabindex="1" href="#main-content" onclick="
+  // Fallback for skip navigation if main-content doesn't exist
+  const target = document.getElementById('main-content');
+  if (!target) {
+    const fallbacks = ['.container', '.section', 'main', 'article'];
+    for (const selector of fallbacks) {
+      const fallback = document.querySelector(selector);
+      if (fallback) {
+        fallback.focus();
+        fallback.scrollIntoView();
+        return false;
+      }
+    }
+  }
+  return true;
+">{{t "skip_navigation"}}</a>
 
 <header class="bg-white">
   <div class="mx-auto">
@@ -95,12 +108,12 @@
       </div>
     </div>
 
-    <!-- Bottom row with navigation menu -->
+    <!-- Bottom row with the navigation menu -->
     <div class="hidden lg:flex items-center h-12 bg-white relative" id="navigation-menu">
     <div class="container mx-auto">
         <!-- Mount point for Radix Navigation Menu -->
         <div id="radix-navigation-root"></div>
-        
+
         <!-- Fallback navigation (hidden when React component loads) -->
         <div id="fallback-navigation" class="flex space-x-6 items-center w-full mx-auto text-center justify-center h-12 text-[15px] font-semibold">
         <a
@@ -123,7 +136,7 @@
           </svg>
           Book a Service
         </a>
-        
+
         <!-- Business Types Dropdown -->
         <div class="relative group">
           <button
@@ -150,7 +163,7 @@
           <!-- Dropdown container for Business Types mega menu -->
           <div id="business-types-dropdown" class="hidden"></div>
         </div>
-        
+
         <!-- Features Dropdown -->
         <div class="relative group">
           <button
@@ -177,7 +190,7 @@
           <!-- Dropdown container for Features -->
           <div id="features-dropdown" class="hidden"></div>
         </div>
-        
+
         <a
           href="#"
           class="text-[15px] font-semibold text-charcoal hover:text-gray-900"
@@ -224,7 +237,7 @@
       </div>
     </div>
     </div>
-  
+
 
   <!-- Mobile menu, show/hide based on menu state -->
   <div class="lg:hidden hidden" id="user-nav-mobile" aria-expanded="false">
@@ -266,7 +279,7 @@
         }}
         <div class="border-t border-gray-200 my-1"></div>
       {{/if}}
-      
+
       <!-- Mobile navigation items container -->
       <div id="mobile-navigation-items">
         <a
@@ -350,4 +363,5 @@
       </div>
     </div>
   </div>
+    </div>
 </header>

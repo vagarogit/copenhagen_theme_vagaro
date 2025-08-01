@@ -25,29 +25,54 @@
   margin-right: auto;
   cursor: pointer;
   border-radius: 8px;
-  
+
   &:hover {
     opacity: 0.9;
   }
-  
+
   &.operational {
     background-color: #D7EBDD; // Green for operational
   }
-  
+
   &.degraded {
     background-color: #f39c12; // Orange for degraded performance
   }
-  
+
   &.partial-outage {
     background-color: #e67e22; // Darker orange for partial outage
   }
-  
+
   &.major-outage {
     background-color: #e74c3c; // Red for major outage
   }
-  
+
   &.maintenance {
     background-color: #3498db; // Blue for maintenance
+  }
+
+  &.loading {
+    background-color: #f8f9fa; // Light gray for loading
+
+    .statusio-icon {
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+  }
+
+  &.error {
+    background-color: #f8f9fa; // Light gray for error
+  }
+}
+
+// Pulse animation for loading state
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -62,11 +87,11 @@
   padding: 0 5%;
   text-align: left;
   width: 100%;  // Add width 100% to ensure full container width
-  
+
   .operational & {
     color: #379B55;
   }
-  
+
   .degraded &,
   .partial-outage &,
   .major-outage &,
@@ -84,11 +109,11 @@
   border-radius: 50%;
   margin-right: 8px;
   flex-shrink: 0; // Prevent icon from shrinking
-  
+
   .operational & {
     background-color: #379B55;
     position: relative;
-    
+
     &:before {
       content: '';
       display: block;
@@ -100,7 +125,7 @@
       margin-top: -1px;
     }
   }
-  
+
   .degraded &,
   .partial-outage &,
   .major-outage &,
@@ -120,11 +145,11 @@
   .statusio-bar {
     padding: 12px 0;
   }
-  
+
   #statusio-message {
     font-size: 24px;
   }
-  
+
   .statusio-icon {
     width: 14px;
     height: 14px;
@@ -136,4 +161,4 @@
     min-width: auto;
     max-width: 100%;
   }
-} 
+}

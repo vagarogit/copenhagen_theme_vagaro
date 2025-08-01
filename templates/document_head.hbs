@@ -18,7 +18,7 @@
       document.write('<script async src="{{asset "es-module-shims.js"}}"><\/script>');
     }
   </script>
-  
+
   <script type="importmap">
 {
   "imports": {
@@ -40,13 +40,44 @@
 
     renderFlashNotifications(settings, closeLabel);
   </script>
-  <script type="module">
-    import { default as statusio } from "statusio";
-  </script>
+  <script src="{{asset 'statusio.js'}}"></script>
   <script src="{{asset 'sub-topic-accordions-fix.js'}}"></script>
   <script src="{{asset 'tabbed-article.js'}}"></script>
   <script src="{{asset 'article-toc.js'}}"></script>
 
+  <!-- Ensure main-content anchor always exists for skip navigation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!document.getElementById('main-content')) {
+        // Create a fallback main-content element if it doesn't exist
+        const mainContent = document.createElement('div');
+        mainContent.id = 'main-content';
+        mainContent.setAttribute('tabindex', '-1');
+
+        // Find the first meaningful content element to use as main content
+        const contentSelectors = [
+          '.container',
+          '.section',
+          'main',
+          'article',
+          '.content',
+          'body > div:first-child'
+        ];
+
+        let targetElement = null;
+        for (const selector of contentSelectors) {
+          targetElement = document.querySelector(selector);
+          if (targetElement) break;
+        }
+
+        if (targetElement && targetElement.parentNode) {
+          targetElement.parentNode.insertBefore(mainContent, targetElement);
+        } else {
+          document.body.appendChild(mainContent);
+        }
+      }
+    });
+  </script>
 
 
- 
+

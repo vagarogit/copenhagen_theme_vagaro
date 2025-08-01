@@ -144,8 +144,16 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
   };
 
   return (
-    <NavigationMenu.Root className="NavigationMenuRoot">
+    <NavigationMenu.Root className="NavigationMenuRoot mx-auto bg-black">
       <NavigationMenu.List className="NavigationMenuList">
+        <NavigationMenu.Item>
+          <NavigationMenu.Link
+            className="NavigationMenuLink"
+            href="https://github.com/radix-ui"
+          >
+            Book a Service
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
         {/* Business Types Menu */}
         <NavigationMenu.Item>
           <NavigationMenu.Trigger className="NavigationMenuTrigger">
@@ -165,13 +173,52 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
             {renderFeatures()}
           </NavigationMenu.Content>
         </NavigationMenu.Item>
-
         <NavigationMenu.Item>
           <NavigationMenu.Link
             className="NavigationMenuLink"
             href="https://github.com/radix-ui"
           >
-            Github
+            Products
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+          <NavigationMenu.Link
+            className="NavigationMenuLink"
+            href="https://github.com/radix-ui"
+          >
+            Multi-location
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+          <NavigationMenu.Link
+            className="NavigationMenuLink"
+            href="https://www.vagaro.com/pro/pricing"
+          >
+            Pricing
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+          <NavigationMenu.Link
+            className="NavigationMenuLink"
+            href="https://github.com/radix-ui"
+          >
+            Contact Sales
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+          <NavigationMenu.Link
+            className="NavigationMenuLink"
+            href="https://github.com/radix-ui"
+          >
+            Support
+          </NavigationMenu.Link>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+          <NavigationMenu.Link
+            className="NavigationMenuLink"
+            href="https://github.com/radix-ui"
+          >
+            Resources
           </NavigationMenu.Link>
         </NavigationMenu.Item>
 
