@@ -35476,52 +35476,59 @@
       }))))));
     };
     return /*#__PURE__*/reactExports.createElement(Root2, {
-      className: "NavigationMenuRoot mx-auto bg-black"
+      className: "NavigationMenuRoot relative flex justify-center w-full max-w-6xl mx-auto z-10"
     }, /*#__PURE__*/reactExports.createElement(List, {
-      className: "NavigationMenuList"
+      className: "NavigationMenuList flex justify-center p-1 list-none m-0"
     }, /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink",
+      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
       href: "https://github.com/radix-ui"
     }, "Book a Service")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Trigger, {
-      className: "NavigationMenuTrigger"
-    }, "Business Types ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
-      className: "CaretDown",
+      className: "NavigationMenuTrigger px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E] data-[state=open]:bg-gray-100 data-[state=open]:text-[#D43C2E]"
+    }, "Business Types", " ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
+      className: "CaretDown relative text-gray-600 top-px transition-transform duration-250 ease-out data-[state=open]:rotate-180",
       "aria-hidden": true
     })), /*#__PURE__*/reactExports.createElement(Content, {
-      className: "NavigationMenuContent"
+      className: "NavigationMenuContent absolute top-0 w-screen animate-duration-250 ease-out data-[motion=from-start]:animate-[enterFromLeft_250ms_ease] data-[motion=from-end]:animate-[enterFromRight_250ms_ease] data-[motion=to-start]:animate-[exitToLeft_250ms_ease] data-[motion=to-end]:animate-[exitToRight_250ms_ease]",
+      style: {
+        left: "50%",
+        transform: "translateX(-50%)"
+      }
     }, renderBusinessTypes())), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Trigger, {
-      className: "NavigationMenuTrigger"
-    }, "Features ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
-      className: "CaretDown",
+      className: "NavigationMenuTrigger px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E] data-[state=open]:bg-gray-100 data-[state=open]:text-[#D43C2E]"
+    }, "Features", " ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
+      className: "CaretDown relative text-gray-600 top-px transition-transform duration-250 ease-out data-[state=open]:rotate-180",
       "aria-hidden": true
     })), /*#__PURE__*/reactExports.createElement(Content, {
       className: "NavigationMenuContent"
     }, renderFeatures())), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink",
+      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
       href: "https://github.com/radix-ui"
     }, "Products")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink",
+      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
       href: "https://github.com/radix-ui"
     }, "Multi-location")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink",
+      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
       href: "https://www.vagaro.com/pro/pricing"
     }, "Pricing")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink",
+      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
       href: "https://github.com/radix-ui"
     }, "Contact Sales")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink",
+      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
       href: "https://github.com/radix-ui"
     }, "Support")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink",
+      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
       href: "https://github.com/radix-ui"
     }, "Resources")), /*#__PURE__*/reactExports.createElement(Indicator, {
-      className: "NavigationMenuIndicator"
+      className: "NavigationMenuIndicator flex items-end justify-center h-2.5 top-full overflow-hidden z-10 transition-all duration-250 ease-out data-[state=visible]:animate-[fadeIn_200ms_ease] data-[state=hidden]:animate-[fadeOut_200ms_ease]"
     }, /*#__PURE__*/reactExports.createElement("div", {
-      className: "Arrow"
+      className: "Arrow relative top-[70%] bg-white w-2.5 h-2.5 rotate-45 rounded-tl-sm"
     }))), /*#__PURE__*/reactExports.createElement("div", {
-      className: "ViewportPosition"
+      className: "ViewportPosition",
+      style: {
+        perspective: "2000px"
+      }
     }, /*#__PURE__*/reactExports.createElement(Viewport, {
-      className: "NavigationMenuViewport"
+      className: "NavigationMenuViewport relative transform-gpu origin-top-center mt-2.5 w-full bg-white rounded-md overflow-hidden shadow-lg transition-all duration-300 ease-out"
     })));
   };
   NavigationMenuDemo.propTypes = {
@@ -35539,13 +35546,13 @@
   }, forwardedRef) => /*#__PURE__*/reactExports.createElement("li", null, /*#__PURE__*/reactExports.createElement(Link, {
     asChild: true
   }, /*#__PURE__*/reactExports.createElement("a", _extends({
-    className: classNames("ListItemLink", className)
+    className: classNames("ListItemLink block outline-none no-underline select-none p-3 rounded-md text-sm leading-none hover:bg-gray-50 focus:shadow-[0_0_0_2px_#D43C2E]", className)
   }, props, {
     ref: forwardedRef
   }), /*#__PURE__*/reactExports.createElement("div", {
-    className: "ListItemHeading"
+    className: "ListItemHeading font-medium leading-tight mb-1.5 text-gray-900"
   }, title), /*#__PURE__*/reactExports.createElement("p", {
-    className: "ListItemText"
+    className: "ListItemText text-gray-500 leading-relaxed font-normal"
   }, children)))));
   ListItem.displayName = "ListItem";
   ListItem.propTypes = {

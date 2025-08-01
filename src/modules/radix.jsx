@@ -144,11 +144,11 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
   };
 
   return (
-    <NavigationMenu.Root className="NavigationMenuRoot mx-auto bg-black">
-      <NavigationMenu.List className="NavigationMenuList">
+    <NavigationMenu.Root className="NavigationMenuRoot relative flex justify-center w-full max-w-6xl mx-auto z-10">
+      <NavigationMenu.List className="NavigationMenuList flex justify-center p-1 list-none m-0">
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]"
             href="https://github.com/radix-ui"
           >
             Book a Service
@@ -156,18 +156,29 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         {/* Business Types Menu */}
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="NavigationMenuTrigger">
-            Business Types <CaretDownIcon className="CaretDown" aria-hidden />
+          <NavigationMenu.Trigger className="NavigationMenuTrigger px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E] data-[state=open]:bg-gray-100 data-[state=open]:text-[#D43C2E]">
+            Business Types{" "}
+            <CaretDownIcon
+              className="CaretDown relative text-gray-600 top-px transition-transform duration-250 ease-out data-[state=open]:rotate-180"
+              aria-hidden
+            />
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="NavigationMenuContent">
+          <NavigationMenu.Content
+            className="NavigationMenuContent absolute top-0 w-screen animate-duration-250 ease-out data-[motion=from-start]:animate-[enterFromLeft_250ms_ease] data-[motion=from-end]:animate-[enterFromRight_250ms_ease] data-[motion=to-start]:animate-[exitToLeft_250ms_ease] data-[motion=to-end]:animate-[exitToRight_250ms_ease]"
+            style={{ left: "50%", transform: "translateX(-50%)" }}
+          >
             {renderBusinessTypes()}
           </NavigationMenu.Content>
         </NavigationMenu.Item>
 
         {/* Features Menu */}
         <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="NavigationMenuTrigger">
-            Features <CaretDownIcon className="CaretDown" aria-hidden />
+          <NavigationMenu.Trigger className="NavigationMenuTrigger px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E] data-[state=open]:bg-gray-100 data-[state=open]:text-[#D43C2E]">
+            Features{" "}
+            <CaretDownIcon
+              className="CaretDown relative text-gray-600 top-px transition-transform duration-250 ease-out data-[state=open]:rotate-180"
+              aria-hidden
+            />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent">
             {renderFeatures()}
@@ -175,7 +186,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]"
             href="https://github.com/radix-ui"
           >
             Products
@@ -183,7 +194,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]"
             href="https://github.com/radix-ui"
           >
             Multi-location
@@ -191,7 +202,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]"
             href="https://www.vagaro.com/pro/pricing"
           >
             Pricing
@@ -199,7 +210,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]"
             href="https://github.com/radix-ui"
           >
             Contact Sales
@@ -207,7 +218,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]"
             href="https://github.com/radix-ui"
           >
             Support
@@ -215,20 +226,20 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]"
             href="https://github.com/radix-ui"
           >
             Resources
           </NavigationMenu.Link>
         </NavigationMenu.Item>
 
-        <NavigationMenu.Indicator className="NavigationMenuIndicator">
-          <div className="Arrow" />
+        <NavigationMenu.Indicator className="NavigationMenuIndicator flex items-end justify-center h-2.5 top-full overflow-hidden z-10 transition-all duration-250 ease-out data-[state=visible]:animate-[fadeIn_200ms_ease] data-[state=hidden]:animate-[fadeOut_200ms_ease]">
+          <div className="Arrow relative top-[70%] bg-white w-2.5 h-2.5 rotate-45 rounded-tl-sm" />
         </NavigationMenu.Indicator>
       </NavigationMenu.List>
 
-      <div className="ViewportPosition">
-        <NavigationMenu.Viewport className="NavigationMenuViewport" />
+      <div className="ViewportPosition" style={{ perspective: "2000px" }}>
+        <NavigationMenu.Viewport className="NavigationMenuViewport relative transform-gpu origin-top-center mt-2.5 w-full bg-white rounded-md overflow-hidden shadow-lg transition-all duration-300 ease-out" />
       </div>
     </NavigationMenu.Root>
   );
@@ -247,12 +258,19 @@ const ListItem = React.forwardRef(
     <li>
       <NavigationMenu.Link asChild>
         <a
-          className={classNames("ListItemLink", className)}
+          className={classNames(
+            "ListItemLink block outline-none no-underline select-none p-3 rounded-md text-sm leading-none hover:bg-gray-50 focus:shadow-[0_0_0_2px_#D43C2E]",
+            className
+          )}
           {...props}
           ref={forwardedRef}
         >
-          <div className="ListItemHeading">{title}</div>
-          <p className="ListItemText">{children}</p>
+          <div className="ListItemHeading font-medium leading-tight mb-1.5 text-gray-900">
+            {title}
+          </div>
+          <p className="ListItemText text-gray-500 leading-relaxed font-normal">
+            {children}
+          </p>
         </a>
       </NavigationMenu.Link>
     </li>

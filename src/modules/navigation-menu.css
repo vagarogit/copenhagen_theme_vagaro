@@ -100,12 +100,12 @@
   animation: fadeOut 200ms ease;
 }
 
-/* Position the viewport correctly */
+/* Position the viewport correctly for full width */
 [data-radix-navigation-menu-viewport] {
   position: absolute;
   top: 100%;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100vw;
 }
 
@@ -113,7 +113,8 @@
 [data-radix-navigation-menu-content] {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100vw;
 }
 
