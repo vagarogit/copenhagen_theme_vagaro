@@ -1,4 +1,6 @@
-import { u as useToast, r as reactExports, j as jsxRuntimeExports, N as Notification, T as Title, C as Close, a6 as FLASH_NOTIFICATIONS_KEY, a3 as reactDomExports, a4 as ThemeProviders, a5 as createTheme } from 'shared';
+import { r as reactExports, j as jsxRuntimeExports, F as FLASH_NOTIFICATIONS_KEY, g as reactDomExports, T as ThemeProviders, h as createTheme } from 'shared';
+import { useToast, Notification, Title, Close } from '@zendeskgarden/react-notifications';
+import '@zendeskgarden/react-theming';
 
 function FlashNotifications({ notifications, closeLabel, }) {
     const { addToast } = useToast();

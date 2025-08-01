@@ -1,0 +1,64 @@
+# Dependencies
+node_modules/
+yarn.lock
+package-lock.json
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Development files
+src/
+bin/
+.git/
+.github/
+coverage/
+.nyc_output/
+
+# Build tools and configs
+rollup.config.mjs
+tsconfig.json
+jest.config.mjs
+.eslintrc*
+.prettierrc*
+.babelrc*
+.commitlintrc*
+.husky/
+
+# Development scripts
+*.spec.js
+*.test.js
+__tests__/
+test/
+tests/
+
+# Logs and temp files
+*.log
+*.tmp
+.DS_Store
+.sass-cache/
+.cache/
+
+# Documentation and examples
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+example-*.html
+test-*.html
+
+# Development assets
+generate-import-map.mjs
+install-radix-deps.sh
+install-radix.md
+zass.mjs
+zendesk-categories.json
+
+# Environment files
+.env*
+.a11yrc.json
+
+# Source maps
+*.map

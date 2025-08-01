@@ -77,21 +77,57 @@ export default defineConfig([
           return undefined; // Don't bundle, make external
         }
 
+        // Exclude large Garden components from bundling to reduce bundle size
+        if (
+          id.includes("node_modules/@zendeskgarden/react-forms") ||
+          id.includes("node_modules/@zendeskgarden/react-dropdowns") ||
+          id.includes("node_modules/@zendeskgarden/react-buttons") ||
+          id.includes("node_modules/@zendeskgarden/react-notifications") ||
+          id.includes("node_modules/@zendeskgarden/react-typography") ||
+          id.includes("node_modules/@zendeskgarden/react-theming") ||
+          id.includes("node_modules/@zendeskgarden/react-modals") ||
+          id.includes("node_modules/@zendeskgarden/react-accordions") ||
+          id.includes("node_modules/@zendeskgarden/react-datepickers") ||
+          id.includes("node_modules/@zendeskgarden/react-loaders") ||
+          id.includes("node_modules/@zendeskgarden/react-tags") ||
+          id.includes("node_modules/@zendeskgarden/react-tooltips")
+        ) {
+          return undefined; // Don't bundle, make external
+        }
+
         if (id.includes("node_modules") || id.includes("src/modules/shared")) {
           return "shared";
         }
 
-        // Bundle all files from `src/modules/MODULE_NAME/translations/locales/*.json to `${MODULE_NAME}-translations.js`
+        // Bundle only English translation files from `src/modules/MODULE_NAME/translations/locales/*.json to `${MODULE_NAME}-translations.js`
         const translationFileMatch = id.match(TRANSLATION_FILE_REGEX);
         if (translationFileMatch) {
-          return `${translationFileMatch[1]}-translations`;
+          // Only include English locales to reduce bundle size
+          if (id.includes('/en-us.json') || id.includes('/en-gb.json') || id.includes('/en-ca.json')) {
+            return `${translationFileMatch[1]}-translations`;
+          }
+          // Exclude non-English translations from bundling
+          return undefined;
         }
       },
       entryFileNames: fileNames,
       chunkFileNames: fileNames,
     },
     external: [
-      "@zendesk/help-center-wysiwyg"
+      "@zendesk/help-center-wysiwyg",
+      "@zendeskgarden/react-forms",
+      "@zendeskgarden/react-dropdowns.next",
+      "@zendeskgarden/react-buttons",
+      "@zendeskgarden/react-notifications",
+      "@zendeskgarden/react-typography",
+      "@zendeskgarden/react-theming",
+      "@zendeskgarden/react-modals",
+      "@zendeskgarden/react-accordions",
+      "@zendeskgarden/react-datepickers",
+      "@zendeskgarden/react-loaders",
+      "@zendeskgarden/react-tags",
+      "@zendeskgarden/react-tooltips",
+      "@zendeskgarden/svg-icons"
     ],
     plugins: [
       nodeResolve({
