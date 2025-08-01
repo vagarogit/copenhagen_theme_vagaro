@@ -5,18 +5,35 @@ function toggleNavigation(toggle, menu) {
   menu.setAttribute("aria-expanded", !isExpanded);
   toggle.setAttribute("aria-expanded", !isExpanded);
 
-  // Toggle the hidden class
+  // Use smooth animations for mobile menu
   if (isExpanded) {
-    menu.classList.add("hidden");
+    // Closing animation
+    menu.classList.add("opacity-0", "scale-95");
+    menu.classList.remove("opacity-100", "scale-100");
+    setTimeout(() => {
+      menu.classList.add("hidden");
+    }, 200); // Match the transition duration
   } else {
+    // Opening animation
     menu.classList.remove("hidden");
+    // Force a reflow to ensure the hidden class is removed before adding animation classes
+    menu.offsetHeight;
+    menu.classList.add("opacity-100", "scale-100");
+    menu.classList.remove("opacity-0", "scale-95");
   }
 }
 
 function closeNavigation(toggle, menu) {
   menu.setAttribute("aria-expanded", false);
   toggle.setAttribute("aria-expanded", false);
-  menu.classList.add("hidden");
+
+  // Use smooth closing animation
+  menu.classList.add("opacity-0", "scale-95");
+  menu.classList.remove("opacity-100", "scale-100");
+  setTimeout(() => {
+    menu.classList.add("hidden");
+  }, 200); // Match the transition duration
+
   toggle.focus();
 }
 

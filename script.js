@@ -25,17 +25,34 @@
     menu.setAttribute("aria-expanded", !isExpanded);
     toggle.setAttribute("aria-expanded", !isExpanded);
 
-    // Toggle the hidden class
+    // Use smooth animations for mobile menu
     if (isExpanded) {
-      menu.classList.add("hidden");
+      // Closing animation
+      menu.classList.add("opacity-0", "scale-95");
+      menu.classList.remove("opacity-100", "scale-100");
+      setTimeout(() => {
+        menu.classList.add("hidden");
+      }, 200); // Match the transition duration
     } else {
+      // Opening animation
       menu.classList.remove("hidden");
+      // Force a reflow to ensure the hidden class is removed before adding animation classes
+      menu.offsetHeight;
+      menu.classList.add("opacity-100", "scale-100");
+      menu.classList.remove("opacity-0", "scale-95");
     }
   }
   function closeNavigation(toggle, menu) {
     menu.setAttribute("aria-expanded", false);
     toggle.setAttribute("aria-expanded", false);
-    menu.classList.add("hidden");
+
+    // Use smooth closing animation
+    menu.classList.add("opacity-0", "scale-95");
+    menu.classList.remove("opacity-100", "scale-100");
+    setTimeout(() => {
+      menu.classList.add("hidden");
+    }, 200); // Match the transition duration
+
     toggle.focus();
   }
 
@@ -35476,59 +35493,52 @@
       }))))));
     };
     return /*#__PURE__*/reactExports.createElement(Root2, {
-      className: "NavigationMenuRoot relative flex justify-center w-full max-w-6xl mx-auto z-10"
+      className: "NavigationMenuRoot"
     }, /*#__PURE__*/reactExports.createElement(List, {
-      className: "NavigationMenuList flex justify-center p-1 list-none m-0"
+      className: "NavigationMenuList"
     }, /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
+      className: "NavigationMenuLink",
       href: "https://github.com/radix-ui"
     }, "Book a Service")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Trigger, {
-      className: "NavigationMenuTrigger px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E] data-[state=open]:bg-gray-100 data-[state=open]:text-[#D43C2E]"
+      className: "NavigationMenuTrigger"
     }, "Business Types", " ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
-      className: "CaretDown relative text-gray-600 top-px transition-transform duration-250 ease-out data-[state=open]:rotate-180",
+      className: "CaretDown",
       "aria-hidden": true
     })), /*#__PURE__*/reactExports.createElement(Content, {
-      className: "NavigationMenuContent absolute top-0 w-screen animate-duration-250 ease-out data-[motion=from-start]:animate-[enterFromLeft_250ms_ease] data-[motion=from-end]:animate-[enterFromRight_250ms_ease] data-[motion=to-start]:animate-[exitToLeft_250ms_ease] data-[motion=to-end]:animate-[exitToRight_250ms_ease]",
-      style: {
-        left: "50%",
-        transform: "translateX(-50%)"
-      }
+      className: "NavigationMenuContent"
     }, renderBusinessTypes())), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Trigger, {
-      className: "NavigationMenuTrigger px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E] data-[state=open]:bg-gray-100 data-[state=open]:text-[#D43C2E]"
+      className: "NavigationMenuTrigger"
     }, "Features", " ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
-      className: "CaretDown relative text-gray-600 top-px transition-transform duration-250 ease-out data-[state=open]:rotate-180",
+      className: "CaretDown",
       "aria-hidden": true
     })), /*#__PURE__*/reactExports.createElement(Content, {
       className: "NavigationMenuContent"
     }, renderFeatures())), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
+      className: "NavigationMenuLink",
       href: "https://github.com/radix-ui"
     }, "Products")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
+      className: "NavigationMenuLink",
       href: "https://github.com/radix-ui"
     }, "Multi-location")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
+      className: "NavigationMenuLink",
       href: "https://www.vagaro.com/pro/pricing"
     }, "Pricing")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
+      className: "NavigationMenuLink",
       href: "https://github.com/radix-ui"
     }, "Contact Sales")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
+      className: "NavigationMenuLink",
       href: "https://github.com/radix-ui"
     }, "Support")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
-      className: "NavigationMenuLink px-3 py-2 outline-none select-none font-medium leading-none rounded text-gray-600 bg-transparent border-none cursor-pointer flex items-center gap-0.5 hover:bg-gray-100 focus:shadow-[0_0_0_2px_#D43C2E]",
+      className: "NavigationMenuLink",
       href: "https://github.com/radix-ui"
     }, "Resources")), /*#__PURE__*/reactExports.createElement(Indicator, {
-      className: "NavigationMenuIndicator flex items-end justify-center h-2.5 top-full overflow-hidden z-10 transition-all duration-250 ease-out data-[state=visible]:animate-[fadeIn_200ms_ease] data-[state=hidden]:animate-[fadeOut_200ms_ease]"
+      className: "NavigationMenuIndicator"
     }, /*#__PURE__*/reactExports.createElement("div", {
-      className: "Arrow relative top-[70%] bg-white w-2.5 h-2.5 rotate-45 rounded-tl-sm"
+      className: "Arrow"
     }))), /*#__PURE__*/reactExports.createElement("div", {
-      className: "ViewportPosition",
-      style: {
-        perspective: "2000px"
-      }
+      className: "ViewportPosition"
     }, /*#__PURE__*/reactExports.createElement(Viewport, {
-      className: "NavigationMenuViewport relative transform-gpu origin-top-center mt-2.5 w-full bg-white rounded-md overflow-hidden shadow-lg transition-all duration-300 ease-out"
+      className: "NavigationMenuViewport"
     })));
   };
   NavigationMenuDemo.propTypes = {
@@ -35546,13 +35556,13 @@
   }, forwardedRef) => /*#__PURE__*/reactExports.createElement("li", null, /*#__PURE__*/reactExports.createElement(Link, {
     asChild: true
   }, /*#__PURE__*/reactExports.createElement("a", _extends({
-    className: classNames("ListItemLink block outline-none no-underline select-none p-3 rounded-md text-sm leading-none hover:bg-gray-50 focus:shadow-[0_0_0_2px_#D43C2E]", className)
+    className: classNames("ListItemLink", className)
   }, props, {
     ref: forwardedRef
   }), /*#__PURE__*/reactExports.createElement("div", {
-    className: "ListItemHeading font-medium leading-tight mb-1.5 text-gray-900"
+    className: "ListItemHeading"
   }, title), /*#__PURE__*/reactExports.createElement("p", {
-    className: "ListItemText text-gray-500 leading-relaxed font-normal"
+    className: "ListItemText"
   }, children)))));
   ListItem.displayName = "ListItem";
   ListItem.propTypes = {

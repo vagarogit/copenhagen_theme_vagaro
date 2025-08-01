@@ -240,7 +240,7 @@
 
 
   <!-- Mobile menu, show/hide based on menu state -->
-  <div class="lg:hidden hidden" id="user-nav-mobile" aria-expanded="false">
+  <div class="lg:hidden hidden transition-all duration-200 ease-out opacity-0 scale-95" id="user-nav-mobile" aria-expanded="false">
     <div class="space-y-1 pb-4 pt-2 border-t border-gray-200 shadow-lg">
       {{#if signed_in}}
         <div class="flex items-center px-4 py-2">
