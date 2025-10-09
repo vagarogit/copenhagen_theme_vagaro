@@ -416,6 +416,9 @@
   .mb-8 {
     margin-bottom: calc(var(--spacing) * 8);
   }
+  .mb-12 {
+    margin-bottom: calc(var(--spacing) * 12);
+  }
   .mb-16 {
     margin-bottom: calc(var(--spacing) * 16);
   }
@@ -791,6 +794,9 @@
   .gap-x-6 {
     column-gap: calc(var(--spacing) * 6);
   }
+  .gap-x-8 {
+    column-gap: calc(var(--spacing) * 8);
+  }
   .space-x-3 {
     :where(& > :not(:last-child)) {
       --tw-space-x-reverse: 0;
@@ -817,6 +823,9 @@
   }
   .gap-y-8 {
     row-gap: calc(var(--spacing) * 8);
+  }
+  .gap-y-12 {
+    row-gap: calc(var(--spacing) * 12);
   }
   .divide-y {
     :where(& > :not(:last-child)) {
@@ -1967,6 +1976,11 @@
   .lg\:gap-16 {
     @media (width >= 64rem) {
       gap: calc(var(--spacing) * 16);
+    }
+  }
+  .lg\:gap-x-12 {
+    @media (width >= 64rem) {
+      column-gap: calc(var(--spacing) * 12);
     }
   }
   .lg\:gap-x-20 {

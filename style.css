@@ -1180,18 +1180,34 @@ h1, h2, h3, h4, h5, h6 {
 
 /* New Footer Styles */
 #footer-links-container {
-  /* Ensure 6 columns on large screens, responsive on smaller screens */
-}
-@media (max-width: 768px) {
-  #footer-links-container {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 2rem 1rem !important;
-  }
+  /* Ensure proper spacing and alignment */
+  /* Mobile: Single column */
+  /* Tablet: 2 columns */
+  /* Medium screens: 3 columns */
+  /* Large screens: 6 columns */
 }
 @media (max-width: 640px) {
   #footer-links-container {
     grid-template-columns: 1fr !important;
-    gap: 2rem !important;
+    gap: 3rem !important;
+  }
+}
+@media (min-width: 641px) and (max-width: 768px) {
+  #footer-links-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 3rem 2rem !important;
+  }
+}
+@media (min-width: 769px) and (max-width: 1023px) {
+  #footer-links-container {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 3rem 2rem !important;
+  }
+}
+@media (min-width: 1024px) {
+  #footer-links-container {
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 0 3rem !important;
   }
 }
 
@@ -1230,6 +1246,68 @@ select:focus {
   max-height: 4rem;
   width: auto;
   object-fit: contain;
+}
+
+/* App download section styling */
+.app-download-section .download-box {
+  background: rgba(55, 65, 81, 0.8);
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+}
+.app-download-section .download-box h3 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+.app-download-section .download-box .app-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+@media (min-width: 640px) {
+  .app-download-section .download-box .app-buttons {
+    flex-direction: row;
+  }
+}
+.app-download-section .download-box .app-buttons img {
+  height: 3rem;
+  width: auto;
+  transition: opacity 0.2s ease-in-out;
+}
+.app-download-section .download-box .app-buttons img:hover {
+  opacity: 0.8;
+}
+
+/* Footer navigation improvements */
+.footer-nav-section h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+.footer-nav-section ul li {
+  margin-bottom: 0.75rem;
+}
+.footer-nav-section ul li a {
+  font-size: 0.875rem;
+  color: rgb(209, 213, 219);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.footer-nav-section ul li a:hover {
+  color: white;
+}
+.footer-nav-section ul li button {
+  font-size: 0.875rem;
+  color: rgb(209, 213, 219);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease-in-out;
+}
+.footer-nav-section ul li button:hover {
+  color: white;
 }
 
 /***** Breadcrumbs *****/
