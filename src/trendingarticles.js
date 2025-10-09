@@ -60,7 +60,8 @@ document.addEventListener("DOMContentLoaded", function () {
           articleLink.target = "_blank";
 
           var titleSpan = document.createElement("span");
-          titleSpan.className = "text-gray-900 flex-grow group-hover:text-primary";
+          titleSpan.className =
+            "text-gray-900 flex-grow group-hover:text-primary";
           titleSpan.textContent = response[i].articleTitle;
 
           var arrowImg = document.createElement("img");

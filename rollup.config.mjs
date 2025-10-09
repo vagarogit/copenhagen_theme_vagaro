@@ -27,7 +27,10 @@ export default defineConfig([
     },
     onwarn: (warning, warn) => {
       // Suppress "use client" directive warnings from Radix UI
-      if (warning.code === 'MODULE_LEVEL_DIRECTIVE' && warning.message.includes('"use client"')) {
+      if (
+        warning.code === "MODULE_LEVEL_DIRECTIVE" &&
+        warning.message.includes('"use client"')
+      ) {
         return;
       }
       // Use default warning handler for other warnings
@@ -40,15 +43,15 @@ export default defineConfig([
       }),
       replace({
         preventAssignment: true,
-        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV || "development"),
+        "process.env.NODE_ENV": JSON.stringify(
+          process.env.NODE_ENV || "development"
+        ),
       }),
       babel({
         babelHelpers: "bundled",
         extensions: [".js", ".jsx"],
         exclude: "node_modules/**",
-        presets: [
-          ["@babel/preset-react", { runtime: "classic" }]
-        ],
+        presets: [["@babel/preset-react", { runtime: "classic" }]],
       }),
       commonjs(),
       isProduction && terser(),
@@ -63,7 +66,8 @@ export default defineConfig([
     input: {
       "new-request-form": "src/modules/new-request-form/index.tsx",
       "flash-notifications": "src/modules/flash-notifications/index.ts",
-      "category-accordions": "src/modules/category-accordions/categoryAccordionsBundle.ts",
+      "category-accordions":
+        "src/modules/category-accordions/categoryAccordionsBundle.ts",
     },
     output: {
       dir: "assets",
@@ -103,7 +107,11 @@ export default defineConfig([
         const translationFileMatch = id.match(TRANSLATION_FILE_REGEX);
         if (translationFileMatch) {
           // Only include English locales to reduce bundle size
-          if (id.includes('/en-us.json') || id.includes('/en-gb.json') || id.includes('/en-ca.json')) {
+          if (
+            id.includes("/en-us.json") ||
+            id.includes("/en-gb.json") ||
+            id.includes("/en-ca.json")
+          ) {
             return `${translationFileMatch[1]}-translations`;
           }
           // Exclude non-English translations from bundling
@@ -127,7 +135,7 @@ export default defineConfig([
       "@zendeskgarden/react-loaders",
       "@zendeskgarden/react-tags",
       "@zendeskgarden/react-tooltips",
-      "@zendeskgarden/svg-icons"
+      "@zendeskgarden/svg-icons",
     ],
     plugins: [
       nodeResolve({
@@ -160,16 +168,22 @@ export default defineConfig([
       }),
       json(),
       dynamicImportVars(),
-      isProduction && terser({
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-          pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
-        },
-        mangle: {
-          safari10: true
-        }
-      }),
+      isProduction &&
+        terser({
+          compress: {
+            drop_console: true,
+            drop_debugger: true,
+            pure_funcs: [
+              "console.log",
+              "console.info",
+              "console.debug",
+              "console.warn",
+            ],
+          },
+          mangle: {
+            safari10: true,
+          },
+        }),
       generateImportMap(),
     ],
     watch: {

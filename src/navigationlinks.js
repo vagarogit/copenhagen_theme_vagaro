@@ -435,7 +435,19 @@ class NavigationLinksManager {
         // Create the mega menu and append to body for true full width
         const businessMegaMenuWrapper = document.createElement("div");
         businessMegaMenuWrapper.id = "business-types-mega-menu-wrapper";
+        businessMegaMenuWrapper.className = "mega-menu-full-width";
         businessMegaMenuWrapper.innerHTML = businessTypesHTML;
+
+        // Ensure the wrapper itself has full viewport width styles
+        businessMegaMenuWrapper.style.cssText = `
+          position: fixed !important;
+          top: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          width: 100vw !important;
+          z-index: 50 !important;
+          display: none;
+        `;
 
         // Remove any existing mega menu
         const existingBusinessMegaMenu = document.getElementById(
