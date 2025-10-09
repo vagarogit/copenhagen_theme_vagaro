@@ -12,6 +12,35 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
   // Set to "features" or "business-types" to force that menu open for styling
   const [activeMenu, setActiveMenu] = React.useState(""); // Change this to control which menu is open
 
+  // Effect to handle blur on main content when navigation is open
+  React.useEffect(() => {
+    const mainContentElements = [
+      document.getElementById("main-content"),
+      ...document.querySelectorAll('[id="main-content"]'),
+      ...document.querySelectorAll(".container"),
+      ...document.querySelectorAll(".section"),
+    ].filter(Boolean);
+
+    if (activeMenu) {
+      // Navigation is open - add blur
+      mainContentElements.forEach((element) => {
+        element.classList.add("main-content-blur");
+      });
+    } else {
+      // Navigation is closed - remove blur
+      mainContentElements.forEach((element) => {
+        element.classList.remove("main-content-blur");
+      });
+    }
+
+    // Cleanup function
+    return () => {
+      mainContentElements.forEach((element) => {
+        element.classList.remove("main-content-blur");
+      });
+    };
+  }, [activeMenu]);
+
   // Render business types content
   const renderBusinessTypes = () => {
     if (!businessTypes || !isLoaded) {

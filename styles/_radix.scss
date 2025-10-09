@@ -403,6 +403,21 @@
 	}
 }
 
+/* Blur effect for main content when navigation is open */
+.main-content-blur {
+	filter: blur(3px);
+	transition: filter 250ms ease;
+	pointer-events: none;
+}
+
+/* Ensure main content transitions smoothly */
+#main-content,
+[id="main-content"],
+.container,
+.section {
+	transition: filter 250ms ease;
+}
+
 @keyframes fadeOut {
 	from {
 		opacity: 1;
