@@ -1,5 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import NavigationMenuDemo from "./radix.jsx";
 
 // Global data store for navigation data

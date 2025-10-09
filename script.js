@@ -4300,11 +4300,11 @@
   }
 
   var reactExports = react.exports;
-  var React = /*@__PURE__*/getDefaultExportFromCjs(reactExports);
+  var React2 = /*@__PURE__*/getDefaultExportFromCjs(reactExports);
 
-  var React$1 = /*#__PURE__*/_mergeNamespaces({
+  var React = /*#__PURE__*/_mergeNamespaces({
     __proto__: null,
-    default: React
+    default: React2
   }, [reactExports]);
 
   var reactDom = {exports: {}};
@@ -33031,7 +33031,7 @@
   };
 
   // src/use-controllable-state.tsx
-  var useInsertionEffect = React$1[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
+  var useInsertionEffect = React[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
   function useControllableState({
     prop,
     defaultProp,
@@ -33229,7 +33229,7 @@
   }
 
   // packages/react/id/src/id.tsx
-  var useReactId = React$1[" useId ".trim().toString()] || (() => void 0);
+  var useReactId = React[" useId ".trim().toString()] || (() => void 0);
   var count = 0;
   function useId(deterministicId) {
     const [id, setId] = reactExports.useState(useReactId());
@@ -33248,14 +33248,14 @@
     );
     const CollectionProvider = (props) => {
       const { scope, children } = props;
-      const ref = React.useRef(null);
-      const itemMap = React.useRef(/* @__PURE__ */ new Map()).current;
+      const ref = React2.useRef(null);
+      const itemMap = React2.useRef(/* @__PURE__ */ new Map()).current;
       return /* @__PURE__ */ jsxRuntimeExports.jsx(CollectionProviderImpl, { scope, itemMap, collectionRef: ref, children });
     };
     CollectionProvider.displayName = PROVIDER_NAME;
     const COLLECTION_SLOT_NAME = name + "CollectionSlot";
     const CollectionSlotImpl = createSlot(COLLECTION_SLOT_NAME);
-    const CollectionSlot = React.forwardRef(
+    const CollectionSlot = React2.forwardRef(
       (props, forwardedRef) => {
         const { scope, children } = props;
         const context = useCollectionContext(COLLECTION_SLOT_NAME, scope);
@@ -33267,13 +33267,13 @@
     const ITEM_SLOT_NAME = name + "CollectionItemSlot";
     const ITEM_DATA_ATTR = "data-radix-collection-item";
     const CollectionItemSlotImpl = createSlot(ITEM_SLOT_NAME);
-    const CollectionItemSlot = React.forwardRef(
+    const CollectionItemSlot = React2.forwardRef(
       (props, forwardedRef) => {
         const { scope, children, ...itemData } = props;
-        const ref = React.useRef(null);
+        const ref = React2.useRef(null);
         const composedRefs = useComposedRefs(forwardedRef, ref);
         const context = useCollectionContext(ITEM_SLOT_NAME, scope);
-        React.useEffect(() => {
+        React2.useEffect(() => {
           context.itemMap.set(ref, { ref, ...itemData });
           return () => void context.itemMap.delete(ref);
         });
@@ -33283,7 +33283,7 @@
     CollectionItemSlot.displayName = ITEM_SLOT_NAME;
     function useCollection(scope) {
       const context = useCollectionContext(name + "CollectionConsumer", scope);
-      const getItems = React.useCallback(() => {
+      const getItems = React2.useCallback(() => {
         const collectionNode = context.collectionRef.current;
         if (!collectionNode) return [];
         const orderedNodes = Array.from(collectionNode.querySelectorAll(`[${ITEM_DATA_ATTR}]`));
@@ -35400,76 +35400,52 @@
           className: "List one"
         }, "Loading business types...");
       }
+      const categories = {
+        beauty: "Beauty",
+        wellness: "Wellness",
+        fitness: "Fitness"
+      };
       return /*#__PURE__*/reactExports.createElement("div", {
-        className: "List one",
-        style: {
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "2rem",
-          padding: "2rem"
-        }
-      }, /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("h3", {
-        style: {
-          fontWeight: "bold",
-          marginBottom: "1rem",
-          color: "var(--violet-11)"
-        }
-      }, "Beauty"), businessTypes.beauty?.map(item => /*#__PURE__*/reactExports.createElement(ListItem, {
+        className: "List bg-white p-8 w-full fullwidth"
+      }, /*#__PURE__*/reactExports.createElement("div", {
+        className: "grid grid-cols-3 gap-12"
+      }, /*#__PURE__*/reactExports.createElement("div", {
+        className: ""
+      }, /*#__PURE__*/reactExports.createElement("h3", {
+        className: "text-lg font-bold mb-6 text-primary uppercase tracking-wide"
+      }, categories.beauty), /*#__PURE__*/reactExports.createElement("div", {
+        className: "space-y-4 grid grid-cols-1 col-span-1 md:grid-cols-2"
+      }, businessTypes.beauty?.map(item => /*#__PURE__*/reactExports.createElement(BusinessTypeItem, {
         key: item.id,
         href: item.link,
-        title: item.name
-      }, item.iconImage?.url && /*#__PURE__*/reactExports.createElement("img", {
-        src: item.iconImage.url,
-        alt: item.name,
-        style: {
-          width: "16px",
-          height: "16px",
-          marginRight: "8px"
-        }
+        title: item.name,
+        icon: item.iconImage?.url
       })))), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("h3", {
-        style: {
-          fontWeight: "bold",
-          marginBottom: "1rem",
-          color: "var(--violet-11)"
-        }
-      }, "Wellness"), businessTypes.wellness?.map(item => /*#__PURE__*/reactExports.createElement(ListItem, {
+        className: "text-lg font-bold mb-6 text-primary uppercase tracking-wide"
+      }, categories.wellness), /*#__PURE__*/reactExports.createElement("div", {
+        className: "space-y-4 grid grid-cols-1 col-span-1 md:grid-cols-2"
+      }, businessTypes.wellness?.map(item => /*#__PURE__*/reactExports.createElement(BusinessTypeItem, {
         key: item.id,
         href: item.link,
-        title: item.name
-      }, item.iconImage?.url && /*#__PURE__*/reactExports.createElement("img", {
-        src: item.iconImage.url,
-        alt: item.name,
-        style: {
-          width: "16px",
-          height: "16px",
-          marginRight: "8px"
-        }
+        title: item.name,
+        icon: item.iconImage?.url
       })))), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("h3", {
-        style: {
-          fontWeight: "bold",
-          marginBottom: "1rem",
-          color: "var(--violet-11)"
-        }
-      }, "Fitness"), businessTypes.fitness?.map(item => /*#__PURE__*/reactExports.createElement(ListItem, {
+        className: "text-lg font-bold mb-6 text-primary uppercase tracking-wide"
+      }, categories.fitness), /*#__PURE__*/reactExports.createElement("div", {
+        className: "space-y-4 grid grid-cols-1 col-span-1 md:grid-cols-2"
+      }, businessTypes.fitness?.map(item => /*#__PURE__*/reactExports.createElement(BusinessTypeItem, {
         key: item.id,
         href: item.link,
-        title: item.name
-      }, item.iconImage?.url && /*#__PURE__*/reactExports.createElement("img", {
-        src: item.iconImage.url,
-        alt: item.name,
-        style: {
-          width: "16px",
-          height: "16px",
-          marginRight: "8px"
-        }
-      })))));
+        title: item.name,
+        icon: item.iconImage?.url
+      }))))));
     };
 
     // Render features content
     const renderFeatures = () => {
       if (!features || !isLoaded) {
         return /*#__PURE__*/reactExports.createElement("div", {
-          className: "List two"
+          className: "List fullwidth"
         }, "Loading features...");
       }
 
@@ -35481,7 +35457,7 @@
         columns[index % 5].push(item);
       });
       return /*#__PURE__*/reactExports.createElement("div", {
-        className: "List two",
+        className: "List fullwidth",
         style: {
           display: "grid",
           gridTemplateColumns: "repeat(5, 1fr)",
@@ -35513,14 +35489,14 @@
       href: "https://github.com/radix-ui"
     }, "Book a Service")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Trigger, {
       className: "NavigationMenuTrigger"
-    }, "Business Types", " ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
+    }, "Business Types ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
       className: "CaretDown",
       "aria-hidden": true
     })), /*#__PURE__*/reactExports.createElement(Content, {
       className: "NavigationMenuContent"
     }, renderBusinessTypes())), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Trigger, {
       className: "NavigationMenuTrigger"
-    }, "Features", " ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
+    }, "Features ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
       className: "CaretDown",
       "aria-hidden": true
     })), /*#__PURE__*/reactExports.createElement(Content, {
@@ -35530,19 +35506,19 @@
       href: "https://github.com/radix-ui"
     }, "Products")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://github.com/radix-ui"
+      href: "https://www.vagaro.com/pro/pos-hardware"
     }, "Multi-location")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
       href: "https://www.vagaro.com/pro/pricing"
     }, "Pricing")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://github.com/radix-ui"
+      href: "https://www.vagaro.com/pro/contact-sales-team"
     }, "Contact Sales")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://github.com/radix-ui"
+      href: "https://vagaro.zendesk.com/hc/en-us"
     }, "Support")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://github.com/radix-ui"
+      href: "https://www.vagaro.com/pro/resources"
     }, "Resources")), /*#__PURE__*/reactExports.createElement(Indicator, {
       className: "NavigationMenuIndicator"
     }, /*#__PURE__*/reactExports.createElement("div", {
@@ -35559,6 +35535,29 @@
       features: propTypesExports.PropTypes.array,
       isLoaded: propTypesExports.PropTypes.bool
     })
+  };
+  const BusinessTypeItem = ({
+    href,
+    title,
+    icon
+  }) => /*#__PURE__*/reactExports.createElement(Link, {
+    asChild: true
+  }, /*#__PURE__*/reactExports.createElement("a", {
+    href: href,
+    className: "flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+  }, icon && /*#__PURE__*/reactExports.createElement("div", {
+    className: "w-8 h-8 flex items-center justify-center bg-gray-100 rounded-lg group-hover:bg-gray-200 transition-colors"
+  }, /*#__PURE__*/reactExports.createElement("img", {
+    src: icon,
+    alt: title,
+    className: "w-5 h-5 object-contain"
+  })), /*#__PURE__*/reactExports.createElement("span", {
+    className: "text-gray-700 font-medium group-hover:text-gray-900 transition-colors"
+  }, title)));
+  BusinessTypeItem.propTypes = {
+    href: propTypesExports.PropTypes.string,
+    title: propTypesExports.PropTypes.string,
+    icon: propTypesExports.PropTypes.string
   };
   const ListItem = /*#__PURE__*/reactExports.forwardRef(({
     className,
@@ -35583,6 +35582,8 @@
     title: propTypesExports.PropTypes.string
   };
 
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+
   // Global data store for navigation data
   window.navigationData = {
     businessTypes: null,
@@ -35606,7 +35607,7 @@
     const fallbackNav = document.getElementById("fallback-navigation");
     if (mountPoint) {
       // Mount the React component with navigation data
-      ReactDOM.render(/*#__PURE__*/React.createElement(NavigationMenuDemo, {
+      reactDomExports.render(/*#__PURE__*/reactExports.createElement(NavigationMenuDemo, {
         navigationData: window.navigationData
       }), mountPoint);
 
