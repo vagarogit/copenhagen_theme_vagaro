@@ -791,16 +791,204 @@
   /**
    * Footer Links Utility
    *
-   * Fetches and renders footer links from Hygraph CMS endpoint
+   * Renders footer links using static navigation data
    */
 
   class FooterLinksManager {
-    constructor(endpoint, options = {}) {
-      this.endpoint = endpoint;
+    constructor(endpoint = null, options = {}) {
+      this.endpoint = endpoint; // Keep for backward compatibility but not used
       this.options = {
         timeout: 10000,
         retries: 3,
         ...options
+      };
+      // Use global navigation data if available, otherwise fallback
+      this.navigationData = window.footerNavigationData || this.getDefaultNavigationData();
+    }
+
+    /**
+     * Get default navigation data as fallback
+     */
+    getDefaultNavigationData() {
+      return {
+        findBusinesses: [{
+          id: 'find-salon',
+          name: 'Salon',
+          href: 'https://www.vagaro.com/listings/hair/san-francisco--ca'
+        }, {
+          id: 'find-spa',
+          name: 'Spa',
+          href: 'https://www.vagaro.com/listings/spa/san-francisco--ca'
+        }, {
+          id: 'find-medical-spa',
+          name: 'Medical Spa',
+          href: 'https://www.vagaro.com/listings/med-spa/san-francisco--ca'
+        }, {
+          id: 'find-barber',
+          name: 'Barber',
+          href: 'https://www.vagaro.com/listings/barber/san-francisco--ca'
+        }, {
+          id: 'find-daily-deals',
+          name: 'Daily Deals',
+          href: 'https://www.vagaro.com/deals/san-francisco--ca'
+        }],
+        businessSoftware: [{
+          id: 'booth-renter',
+          name: 'Booth Renter',
+          href: '/pro/booth-renter'
+        }, {
+          id: 'salon',
+          name: 'Salon',
+          href: '/pro/salon-software'
+        }, {
+          id: 'spa',
+          name: 'Spa',
+          href: '/pro/spa-software'
+        }, {
+          id: 'medical-spa',
+          name: 'Medical Spa',
+          href: '/pro/medical-spa-software'
+        }, {
+          id: 'barber',
+          name: 'Barber',
+          href: '/pro/barber-software'
+        }, {
+          id: 'tanning',
+          name: 'Tanning',
+          href: '/pro/tanning-salon-software'
+        }, {
+          id: 'nail',
+          name: 'Nail',
+          href: '/pro/nail-salon-software'
+        }, {
+          id: 'pilates',
+          name: 'Pilates',
+          href: '/pro/pilates-software'
+        }, {
+          id: 'mental-health',
+          name: 'Mental Health',
+          href: '/pro/mental-health-software'
+        }],
+        businessFeatures: [{
+          id: 'online-booking',
+          name: 'Online Booking',
+          href: '/pro/online-booking'
+        }, {
+          id: 'calendar',
+          name: 'Calendar',
+          href: '/pro/calendar'
+        }, {
+          id: 'pay-later',
+          name: 'Pay Later',
+          href: '/pro/pay-later'
+        }, {
+          id: 'mysite',
+          name: 'MySite',
+          href: '/pro/booking-website-builder'
+        }, {
+          id: 'forms',
+          name: 'Forms',
+          href: '/pro/forms'
+        }, {
+          id: 'reports',
+          name: 'Reports',
+          href: '/pro/reports'
+        }, {
+          id: 'vagaro-capital',
+          name: 'Vagaro Capital',
+          href: '/pro/vagaro-capital'
+        }, {
+          id: 'branded-app',
+          name: 'Branded App',
+          href: '/pro/branded-app'
+        }],
+        businessProducts: [{
+          id: 'paypro',
+          name: 'PayPro',
+          href: '/pro/pos-hardware/terminal'
+        }, {
+          id: 'paypro-mini',
+          name: 'PayPro Mini',
+          href: '/pro/pos-hardware/tablet'
+        }, {
+          id: 'paypro-duo',
+          name: 'PayPro Duo',
+          href: '/pro/pos-hardware/terminal-dual-screen'
+        }, {
+          id: 'card-reader',
+          name: 'Card Reader',
+          href: '/pro/pos-hardware/credit-card-reader'
+        }, {
+          id: 'pay-swivel-stand',
+          name: 'Pay Swivel Stand',
+          href: '/pro/pos-hardware/stand'
+        }, {
+          id: 'qr-scanner',
+          name: 'QR Scanner',
+          href: '/pro/pos-hardware/barcode-scanner'
+        }, {
+          id: 'receipt-printer',
+          name: 'Receipt Printer',
+          href: '/pro/pos-hardware/thermal-receipt-printer'
+        }, {
+          id: 'cash-drawer',
+          name: 'Cash Drawer',
+          href: '/pro/pos-hardware/cash-register'
+        }],
+        company: [{
+          id: 'about-us',
+          name: 'About Us',
+          href: '/pro/about-us'
+        }, {
+          id: 'careers',
+          name: 'Careers',
+          href: '/pro/careers'
+        }, {
+          id: 'contact-us',
+          name: 'Contact Us',
+          href: '/pro/contact'
+        }, {
+          id: 'vagaro-cares',
+          name: 'Vagaro Cares',
+          href: '/pro/vagaro-cares'
+        }, {
+          id: 'updates',
+          name: 'Updates',
+          href: '/pro/updates'
+        }, {
+          id: 'partnerships',
+          name: 'Partnerships',
+          href: '/pro/partners'
+        }, {
+          id: 'mysite-updates',
+          name: 'MySite Updates',
+          href: '/pro/mysite-updates'
+        }, {
+          id: 'iconic-25',
+          name: 'iconic.25',
+          href: 'https://mysite.vagaro.com/iconic25'
+        }],
+        resources: [{
+          id: 'status',
+          name: 'Status',
+          href: 'https://status.vagaro.com/'
+        }, {
+          id: 'support',
+          name: 'Support',
+          href: 'https://support.vagaro.com/'
+        }, {
+          id: 'blog',
+          name: 'Blog',
+          href: 'https://www.vagaro.com/learn'
+        }, {
+          id: 'newsroom',
+          name: 'Newsroom',
+          href: 'https://www.vagaro.com/news'
+        }, {
+          id: 'compare-us',
+          name: 'Compare Us',
+          href: '/pro/compare'
+        }]
       };
     }
 
@@ -870,18 +1058,32 @@
      * Render footer section HTML
      */
     renderFooterSection(title, items) {
-      const linksHtml = items.map(item => `
-      <li>
-        <a href="https://www.vagaro.com/${item.link}" 
-           class="text-base font-normal text-white/80 hover:text-gray-300"
-           ${item.externalLink ? 'target="_blank" rel="noopener"' : ""}>
-          ${item.name}
-        </a>
-      </li>
-    `).join("");
+      const linksHtml = items.map(item => {
+        if (item.isInteractive && item.onClick) {
+          return `
+              <li>
+                <button onclick="${item.onClick}" 
+                       class="text-sm text-gray-300 hover:text-white underline bg-transparent border-none cursor-pointer">
+                  ${item.name}
+                </button>
+              </li>
+            `;
+        }
+        const href = item.href.startsWith('http') ? item.href : `https://www.vagaro.com${item.href}`;
+        const target = item.href.startsWith('http') ? 'target="_blank" rel="noopener"' : '';
+        return `
+            <li>
+              <a href="${href}" 
+                 class="text-sm text-gray-300 hover:text-white"
+                 ${target}>
+                ${item.name}
+              </a>
+            </li>
+          `;
+      }).join("");
       return `
-      <div class="${title !== "Get Started" ? "mt-10 md:mt-0" : ""}">
-        <h3 class="text-base font-semibold text-white">${title}</h3>
+      <div>
+        <h3 class="text-sm font-semibold text-white">${title}</h3>
         <ul role="list" class="mt-6 space-y-4">
           ${linksHtml}
         </ul>
@@ -892,7 +1094,7 @@
     /**
      * Update footer links in the DOM
      */
-    async updateFooterLinks(containerId = "footer-links-container") {
+    updateFooterLinks(containerId = "footer-links-container") {
       try {
         const container = document.getElementById(containerId);
         if (!container) {
@@ -900,45 +1102,41 @@
           return;
         }
 
-        // Show loading state
-        container.innerHTML = '<div class="text-gray-400">Loading footer links...</div>';
-        const navigationMenu = await this.fetchFooterLinks();
+        // Use static navigation data
+        const data = this.navigationData;
 
-        // Render all sections
+        // Render all 6 sections
         const sectionsHtml = `
-        ${this.renderFooterSection("Get Started", navigationMenu.getStartedItems || [])}
-        ${this.renderFooterSection("Company", navigationMenu.companyItems || [])}
-        ${this.renderFooterSection("Resources", navigationMenu.resourcesItems || [])}
+        ${this.renderFooterSection("Find Businesses", data.findBusinesses)}
+        ${this.renderFooterSection("Business Software", data.businessSoftware)}
+        ${this.renderFooterSection("Business Features", data.businessFeatures)}
+        ${this.renderFooterSection("Business Products", data.businessProducts)}
+        ${this.renderFooterSection("Company", data.company)}
+        ${this.renderFooterSection("Resources", data.resources)}
       `;
         container.innerHTML = sectionsHtml;
       } catch (error) {
         console.error("Failed to update footer links:", error);
-        // Fallback to static content or show error
+        // Fallback to static content
         const container = document.getElementById(containerId);
         if (container) {
-          container.innerHTML = '<div class="text-gray-400">Failed to load footer links</div>';
+          container.innerHTML = `
+          <div class="col-span-6 text-center text-gray-400">
+            <p>Footer links temporarily unavailable</p>
+          </div>
+        `;
         }
       }
     }
 
     /**
-     * Initialize footer links with retry logic
+     * Initialize footer links
      */
-    async init(containerId) {
-      let attempts = 0;
-      while (attempts < this.options.retries) {
-        try {
-          await this.updateFooterLinks(containerId);
-          return; // Success
-        } catch (error) {
-          attempts++;
-          if (attempts < this.options.retries) {
-            console.log(`Retrying footer links fetch (${attempts}/${this.options.retries})...`);
-            await new Promise(resolve => setTimeout(resolve, 1000 * attempts));
-          } else {
-            console.error("Failed to load footer links after all retries");
-          }
-        }
+    init(containerId) {
+      try {
+        this.updateFooterLinks(containerId);
+      } catch (error) {
+        console.error("Failed to initialize footer links:", error);
       }
     }
   }
@@ -948,12 +1146,7 @@
 
   // Initialize when DOM is ready
   document.addEventListener("DOMContentLoaded", function () {
-    // Replace with your actual Hygraph endpoint
-    const HYGRAPH_ENDPOINT = "https://us-west-2.cdn.hygraph.com/content/cld3gw4bb0hr001ue9afzcunb/master";
-    const footerManager = new FooterLinksManager(HYGRAPH_ENDPOINT, {
-      timeout: 8000,
-      retries: 2
-    });
+    const footerManager = new FooterLinksManager();
 
     // Initialize footer links
     footerManager.init("footer-links-container");
@@ -35397,6 +35590,17 @@
     // Set to "features" or "business-types" to force that menu open for styling
     const [activeMenu, setActiveMenu] = reactExports.useState(""); // Change this to control which menu is open
 
+    // Responsive logic - hide desktop navigation on mobile
+    const [isMobile, setIsMobile] = reactExports.useState(false);
+    reactExports.useEffect(() => {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 1024);
+      };
+      checkMobile();
+      window.addEventListener("resize", checkMobile);
+      return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
     // Effect to handle blur on main content when navigation is open
     reactExports.useEffect(() => {
       const mainContentElements = [document.getElementById("main-content"), ...document.querySelectorAll('[id="main-content"]'), ...document.querySelectorAll(".container"), ...document.querySelectorAll(".section")].filter(Boolean);
@@ -35419,6 +35623,11 @@
         });
       };
     }, [activeMenu]);
+
+    // Don't render desktop navigation on mobile
+    if (isMobile) {
+      return null;
+    }
 
     // Render business types content
     const renderBusinessTypes = () => {
@@ -35683,6 +35892,341 @@
     icon: propTypesExports.PropTypes.string
   };
 
+  /* eslint-disable @shopify/jsx-no-hardcoded-content */
+  const MobileNavigation = ({
+    navigationData = {},
+    isOpen,
+    onClose,
+    userInfo = {}
+  }) => {
+    const {
+      businessTypes,
+      features,
+      isLoaded
+    } = navigationData;
+    const {
+      isSignedIn,
+      userAvatar,
+      userName
+    } = userInfo;
+    const [expandedSection, setExpandedSection] = reactExports.useState(null);
+
+    // Handle escape key to close navigation
+    reactExports.useEffect(() => {
+      const handleEscape = event => {
+        if (event.key === 'Escape' && isOpen) {
+          onClose();
+        }
+      };
+      if (isOpen) {
+        document.addEventListener('keydown', handleEscape);
+        // Prevent body scroll when mobile nav is open
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = '';
+      };
+    }, [isOpen, onClose]);
+
+    // Handle backdrop click to close navigation
+    const handleBackdropClick = event => {
+      if (event.target === event.currentTarget) {
+        onClose();
+      }
+    };
+
+    // Toggle expanded sections
+    const toggleSection = sectionName => {
+      setExpandedSection(expandedSection === sectionName ? null : sectionName);
+    };
+
+    // Render business types section
+    const renderBusinessTypes = () => {
+      if (!businessTypes || !isLoaded) {
+        return /*#__PURE__*/reactExports.createElement("div", {
+          className: "text-gray-500 text-sm p-4"
+        }, "Loading business types...");
+      }
+      const categories = {
+        beauty: {
+          title: "Beauty",
+          items: businessTypes.beauty || []
+        },
+        wellness: {
+          title: "Wellness",
+          items: businessTypes.wellness || []
+        },
+        fitness: {
+          title: "Fitness",
+          items: businessTypes.fitness || []
+        }
+      };
+      return /*#__PURE__*/reactExports.createElement("div", {
+        className: "space-y-4"
+      }, Object.entries(categories).map(([key, category]) => /*#__PURE__*/reactExports.createElement("div", {
+        key: key
+      }, /*#__PURE__*/reactExports.createElement("h4", {
+        className: "text-sm font-semibold text-gray-900 uppercase mb-2"
+      }, category.title), /*#__PURE__*/reactExports.createElement("div", {
+        className: "space-y-1"
+      }, category.items.map(item => /*#__PURE__*/reactExports.createElement(MobileNavItem, {
+        key: item.id,
+        href: item.link,
+        title: item.name,
+        icon: item.iconImage?.url,
+        onClick: onClose
+      }))))));
+    };
+
+    // Render features section
+    const renderFeatures = () => {
+      if (!features || !isLoaded) {
+        return /*#__PURE__*/reactExports.createElement("div", {
+          className: "text-gray-500 text-sm p-4"
+        }, "Loading features...");
+      }
+
+      // Group features into categories (same logic as desktop)
+      const categories = {
+        "RUN YOUR BUSINESS": [],
+        "GROW YOUR BUSINESS": [],
+        "SIMPLIFY PAYMENTS": [],
+        "ELEVATE CLIENT EXPERIENCE": [],
+        "BUILD YOUR BRAND": []
+      };
+      features.forEach(item => {
+        const itemName = item.name.toLowerCase();
+        if (itemName.includes("calendar") || itemName.includes("payroll") || itemName.includes("e-prescribe") || itemName.includes("reports") || itemName.includes("rent collection") || itemName.includes("vagaro ai") || itemName.includes("forms")) {
+          categories["RUN YOUR BUSINESS"].push(item);
+        } else if (itemName.includes("marketplace") || itemName.includes("online store") || itemName.includes("memberships") || itemName.includes("inventory") || itemName.includes("vagaro capital")) {
+          categories["GROW YOUR BUSINESS"].push(item);
+        } else if (itemName.includes("paypro") || itemName.includes("pos") || itemName.includes("buy now") || itemName.includes("pay later") || itemName.includes("invoices") || itemName.includes("payments")) {
+          categories["SIMPLIFY PAYMENTS"].push(item);
+        } else if (itemName.includes("online booking") || itemName.includes("customer tracking") || itemName.includes("vagaro connect") || itemName.includes("notifications") || itemName.includes("live stream") || itemName.includes("mobile apps")) {
+          categories["ELEVATE CLIENT EXPERIENCE"].push(item);
+        } else {
+          categories["BUILD YOUR BRAND"].push(item);
+        }
+      });
+      return /*#__PURE__*/reactExports.createElement("div", {
+        className: "space-y-4"
+      }, Object.entries(categories).map(([categoryTitle, items]) => {
+        if (items.length === 0) return null;
+        return /*#__PURE__*/reactExports.createElement("div", {
+          key: categoryTitle
+        }, /*#__PURE__*/reactExports.createElement("h4", {
+          className: "text-sm font-semibold text-gray-900 uppercase mb-2"
+        }, categoryTitle), /*#__PURE__*/reactExports.createElement("div", {
+          className: "space-y-1"
+        }, items.map(item => /*#__PURE__*/reactExports.createElement(MobileNavItem, {
+          key: item.id,
+          href: item.link,
+          title: item.name,
+          icon: item.iconImage?.url,
+          onClick: onClose
+        }))));
+      }));
+    };
+    if (!isOpen) return null;
+    return /*#__PURE__*/reactExports.createElement("div", {
+      className: "mobile-nav-overlay fixed inset-0 z-50 lg:hidden",
+      onClick: handleBackdropClick,
+      role: "dialog",
+      "aria-modal": "true",
+      "aria-label": "Mobile Navigation"
+    }, /*#__PURE__*/reactExports.createElement("div", {
+      className: "absolute inset-0 bg-black bg-opacity-50"
+    }), /*#__PURE__*/reactExports.createElement("div", {
+      className: "mobile-nav-drawer absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-xl transform transition-transform duration-300 ease-in-out"
+    }, /*#__PURE__*/reactExports.createElement("div", {
+      className: "flex items-center justify-between p-4 border-b border-gray-200"
+    }, /*#__PURE__*/reactExports.createElement("div", {
+      className: "flex items-center space-x-3"
+    }, isSignedIn && userAvatar && /*#__PURE__*/reactExports.createElement("img", {
+      src: userAvatar,
+      alt: userName || "User",
+      className: "w-8 h-8 rounded-full"
+    }), /*#__PURE__*/reactExports.createElement("span", {
+      className: "font-medium text-gray-900"
+    }, isSignedIn ? userName || "Menu" : "Menu")), /*#__PURE__*/reactExports.createElement("button", {
+      onClick: onClose,
+      className: "p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary",
+      "aria-label": "Close navigation"
+    }, /*#__PURE__*/reactExports.createElement("svg", {
+      className: "w-6 h-6",
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor"
+    }, /*#__PURE__*/reactExports.createElement("path", {
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      strokeWidth: 2,
+      d: "M6 18L18 6M6 6l12 12"
+    })))), /*#__PURE__*/reactExports.createElement("div", {
+      className: "flex-1 overflow-y-auto"
+    }, /*#__PURE__*/reactExports.createElement("nav", {
+      className: "p-4 space-y-6"
+    }, isSignedIn && /*#__PURE__*/reactExports.createElement("div", {
+      className: "pb-4 border-b border-gray-200"
+    }, /*#__PURE__*/reactExports.createElement("div", {
+      className: "space-y-2"
+    }, /*#__PURE__*/reactExports.createElement("a", {
+      href: "/hc/en-us/profiles",
+      className: "flex items-center space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors",
+      onClick: onClose
+    }, /*#__PURE__*/reactExports.createElement("svg", {
+      className: "w-5 h-5 text-gray-400",
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor"
+    }, /*#__PURE__*/reactExports.createElement("path", {
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      strokeWidth: 2,
+      d: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+    })), /*#__PURE__*/reactExports.createElement("span", {
+      className: "text-gray-700"
+    }, "My Profile")), /*#__PURE__*/reactExports.createElement("a", {
+      href: "/hc/en-us/requests",
+      className: "flex items-center space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors",
+      onClick: onClose
+    }, /*#__PURE__*/reactExports.createElement("svg", {
+      className: "w-5 h-5 text-gray-400",
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor"
+    }, /*#__PURE__*/reactExports.createElement("path", {
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      strokeWidth: 2,
+      d: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+    })), /*#__PURE__*/reactExports.createElement("span", {
+      className: "text-gray-700"
+    }, "My Requests")))), /*#__PURE__*/reactExports.createElement("div", {
+      className: "space-y-4"
+    }, /*#__PURE__*/reactExports.createElement(MobileNavItem, {
+      href: "https://github.com/radix-ui",
+      title: "Book a Service",
+      onClick: onClose,
+      className: "text-lg font-medium"
+    }), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("button", {
+      onClick: () => toggleSection('business-types'),
+      className: "flex items-center justify-between w-full p-2 text-left text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md transition-colors",
+      "aria-expanded": expandedSection === 'business-types'
+    }, /*#__PURE__*/reactExports.createElement("span", null, "Business Types"), /*#__PURE__*/reactExports.createElement("svg", {
+      className: classNames("w-5 h-5 text-gray-400 transition-transform duration-200", expandedSection === 'business-types' ? "rotate-180" : ""),
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor"
+    }, /*#__PURE__*/reactExports.createElement("path", {
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      strokeWidth: 2,
+      d: "M19 9l-7 7-7-7"
+    }))), expandedSection === 'business-types' && /*#__PURE__*/reactExports.createElement("div", {
+      className: "mt-2 pl-4 border-l-2 border-gray-100"
+    }, renderBusinessTypes())), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("button", {
+      onClick: () => toggleSection('features'),
+      className: "flex items-center justify-between w-full p-2 text-left text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md transition-colors",
+      "aria-expanded": expandedSection === 'features'
+    }, /*#__PURE__*/reactExports.createElement("span", null, "Features"), /*#__PURE__*/reactExports.createElement("svg", {
+      className: classNames("w-5 h-5 text-gray-400 transition-transform duration-200", expandedSection === 'features' ? "rotate-180" : ""),
+      fill: "none",
+      viewBox: "0 0 24 24",
+      stroke: "currentColor"
+    }, /*#__PURE__*/reactExports.createElement("path", {
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      strokeWidth: 2,
+      d: "M19 9l-7 7-7-7"
+    }))), expandedSection === 'features' && /*#__PURE__*/reactExports.createElement("div", {
+      className: "mt-2 pl-4 border-l-2 border-gray-100"
+    }, renderFeatures())), /*#__PURE__*/reactExports.createElement(MobileNavItem, {
+      href: "https://github.com/radix-ui",
+      title: "Products",
+      onClick: onClose,
+      className: "text-lg font-medium"
+    }), /*#__PURE__*/reactExports.createElement(MobileNavItem, {
+      href: "https://www.vagaro.com/pro/pos-hardware",
+      title: "Multi-location",
+      onClick: onClose,
+      className: "text-lg font-medium"
+    }), /*#__PURE__*/reactExports.createElement(MobileNavItem, {
+      href: "https://www.vagaro.com/pro/pricing",
+      title: "Pricing",
+      onClick: onClose,
+      className: "text-lg font-medium"
+    }), /*#__PURE__*/reactExports.createElement(MobileNavItem, {
+      href: "https://www.vagaro.com/pro/contact-sales-team",
+      title: "Contact Sales",
+      onClick: onClose,
+      className: "text-lg font-medium"
+    }), /*#__PURE__*/reactExports.createElement(MobileNavItem, {
+      href: "https://vagaro.zendesk.com/hc/en-us",
+      title: "Support",
+      onClick: onClose,
+      className: "text-lg font-medium"
+    }), /*#__PURE__*/reactExports.createElement(MobileNavItem, {
+      href: "https://www.vagaro.com/pro/resources",
+      title: "Resources",
+      onClick: onClose,
+      className: "text-lg font-medium"
+    })), !isSignedIn && /*#__PURE__*/reactExports.createElement("div", {
+      className: "pt-4 border-t border-gray-200 space-y-3"
+    }, /*#__PURE__*/reactExports.createElement("a", {
+      href: "#",
+      className: "block w-full text-center py-2 px-4 text-charcoal font-medium hover:text-gray-900 transition-colors",
+      onClick: onClose
+    }, "Log In"), /*#__PURE__*/reactExports.createElement("a", {
+      href: "https://www.vagaro.com/pro/pricing",
+      className: "block w-full text-center py-3 px-4 bg-primary hover:bg-charcoal text-white font-medium rounded-full transition-colors",
+      onClick: onClose
+    }, "Sign Up"))))));
+  };
+  MobileNavigation.propTypes = {
+    navigationData: propTypesExports.PropTypes.shape({
+      businessTypes: propTypesExports.PropTypes.object,
+      features: propTypesExports.PropTypes.array,
+      isLoaded: propTypesExports.PropTypes.bool
+    }),
+    isOpen: propTypesExports.PropTypes.bool.isRequired,
+    onClose: propTypesExports.PropTypes.func.isRequired,
+    userInfo: propTypesExports.PropTypes.shape({
+      isSignedIn: propTypesExports.PropTypes.bool,
+      userAvatar: propTypesExports.PropTypes.string,
+      userName: propTypesExports.PropTypes.string
+    })
+  };
+
+  // Mobile Navigation Item Component
+  const MobileNavItem = ({
+    href,
+    title,
+    icon,
+    onClick,
+    className = ""
+  }) => /*#__PURE__*/reactExports.createElement("a", {
+    href: href,
+    className: classNames("flex items-center space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors text-gray-700 hover:text-gray-900", className),
+    onClick: onClick
+  }, icon && /*#__PURE__*/reactExports.createElement("div", {
+    className: "w-6 h-6 flex items-center justify-center bg-gray-100 rounded-full"
+  }, /*#__PURE__*/reactExports.createElement("img", {
+    src: icon,
+    alt: title,
+    className: "w-4 h-4"
+  })), /*#__PURE__*/reactExports.createElement("span", null, title));
+  MobileNavItem.propTypes = {
+    href: propTypesExports.PropTypes.string.isRequired,
+    title: propTypesExports.PropTypes.string.isRequired,
+    icon: propTypesExports.PropTypes.string,
+    onClick: propTypesExports.PropTypes.func,
+    className: propTypesExports.PropTypes.string
+  };
+
   /* eslint-disable @typescript-eslint/no-unused-vars */
 
   // Global data store for navigation data
@@ -35692,17 +36236,49 @@
     isLoaded: false
   };
 
+  // Global mobile navigation state
+  window.mobileNavState = {
+    isOpen: false,
+    userInfo: {
+      isSignedIn: false,
+      userAvatar: null,
+      userName: null
+    }
+  };
+
   // Event system for data updates
   window.updateNavigationData = data => {
     window.navigationData = {
       ...data,
       isLoaded: true
     };
-    // Re-render Radix component with new data
+    // Re-render both desktop and mobile components with new data
     mountRadixNavigation();
+    mountMobileNavigation();
   };
 
-  // Function to mount the Radix Navigation Menu
+  // Function to update user info for mobile navigation
+  window.updateUserInfo = userInfo => {
+    window.mobileNavState.userInfo = {
+      ...window.mobileNavState.userInfo,
+      ...userInfo
+    };
+    mountMobileNavigation();
+  };
+
+  // Function to toggle mobile navigation
+  window.toggleMobileNavigation = () => {
+    window.mobileNavState.isOpen = !window.mobileNavState.isOpen;
+    mountMobileNavigation();
+  };
+
+  // Function to close mobile navigation
+  window.closeMobileNavigation = () => {
+    window.mobileNavState.isOpen = false;
+    mountMobileNavigation();
+  };
+
+  // Function to mount the Desktop Radix Navigation Menu
   function mountRadixNavigation() {
     const mountPoint = document.getElementById("radix-navigation-root");
     const fallbackNav = document.getElementById("fallback-navigation");
@@ -35716,22 +36292,201 @@
       if (fallbackNav) {
         fallbackNav.style.display = "none";
       }
-      console.log("[Radix Navigation] Successfully mounted with data:", window.navigationData);
+      console.log("[Desktop Navigation] Successfully mounted with data:", window.navigationData);
       return true;
     }
-    console.error("[Radix Navigation] Mount point not found");
+    console.error("[Desktop Navigation] Mount point not found");
     return false;
   }
 
-  // Initialize when DOM is ready
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountRadixNavigation);
-  } else {
-    // DOM is already ready
-    mountRadixNavigation();
+  // Function to mount the Mobile Navigation
+  function mountMobileNavigation() {
+    let mobileNavContainer = document.getElementById("mobile-navigation-root");
+
+    // Create mobile navigation container if it doesn't exist
+    if (!mobileNavContainer) {
+      mobileNavContainer = document.createElement("div");
+      mobileNavContainer.id = "mobile-navigation-root";
+      document.body.appendChild(mobileNavContainer);
+    }
+
+    // Mount the mobile navigation component
+    reactDomExports.render(/*#__PURE__*/reactExports.createElement(MobileNavigation, {
+      navigationData: window.navigationData,
+      isOpen: window.mobileNavState.isOpen,
+      onClose: window.closeMobileNavigation,
+      userInfo: window.mobileNavState.userInfo
+    }), mobileNavContainer);
+    console.log("[Mobile Navigation] Successfully mounted with state:", window.mobileNavState);
+    return true;
   }
 
-  // Export for use in other modules
+  // Initialize both components when DOM is ready
+  function initializeNavigation() {
+    mountRadixNavigation();
+    mountMobileNavigation();
+
+    // Initialize user info from Zendesk helpers if available
+    const userAvatar = document.querySelector('.user-avatar')?.src;
+    const userName = document.querySelector('#user-name')?.textContent;
+    const isSignedIn = document.body.classList.contains('signed-in') || document.querySelector('.user-avatar') !== null || window.HelpCenter?.user?.signed_in;
+    if (isSignedIn || userAvatar || userName) {
+      window.updateUserInfo({
+        isSignedIn: !!isSignedIn,
+        userAvatar: userAvatar || null,
+        userName: userName || null
+      });
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initializeNavigation);
+  } else {
+    // DOM is already ready
+    initializeNavigation();
+  }
+
+  // Export functions for use in other modules
   window.mountRadixNavigation = mountRadixNavigation;
+  window.mountMobileNavigation = mountMobileNavigation;
+  window.toggleMobileNavigation = window.toggleMobileNavigation;
+  window.closeMobileNavigation = window.closeMobileNavigation;
+  window.updateUserInfo = window.updateUserInfo;
+
+  // Mobile Navigation Integration Script
+  // This script handles the integration between Zendesk's existing mobile menu button
+  // and our new React-based mobile navigation component
+
+  (function () {
+
+    // Wait for the navigation integration to be available
+    function waitForNavigation() {
+      if (window.toggleMobileNavigation && window.updateUserInfo) {
+        initializeMobileNavIntegration();
+      } else {
+        setTimeout(waitForNavigation, 100);
+      }
+    }
+    function initializeMobileNavIntegration() {
+      // Update user info from Zendesk context
+      updateUserInfoFromZendesk();
+
+      // Set up mobile menu button event listeners
+      setupMobileMenuButton();
+
+      // Listen for Zendesk user state changes
+      setupZendeskListeners();
+      console.log('[Mobile Nav Integration] Initialized successfully');
+    }
+    function updateUserInfoFromZendesk() {
+      // Get user info from various Zendesk sources
+      const userAvatar = document.querySelector('.user-avatar')?.src || document.querySelector('[class*="avatar"]')?.src;
+      const userName = document.querySelector('#user-name')?.textContent?.trim() || document.querySelector('[data-user-name]')?.textContent?.trim() || document.querySelector('.user-name')?.textContent?.trim();
+
+      // Check if user is signed in through multiple methods
+      const isSignedIn = !!(document.body.classList.contains('signed-in') || document.querySelector('.user-avatar') || document.querySelector('#user-name') || window.HelpCenter?.user?.signed_in ||
+      // Check for Zendesk's signed_in variable if available
+      typeof signed_in !== 'undefined' && signed_in);
+
+      // Update the mobile navigation with user info
+      if (window.updateUserInfo) {
+        window.updateUserInfo({
+          isSignedIn: isSignedIn,
+          userAvatar: userAvatar || null,
+          userName: userName || null
+        });
+      }
+      console.log('[Mobile Nav Integration] User info updated:', {
+        isSignedIn,
+        userAvatar: !!userAvatar,
+        userName: !!userName
+      });
+    }
+    function setupMobileMenuButton() {
+      const mobileMenuButton = document.querySelector('.menu-button-mobile');
+      if (mobileMenuButton) {
+        // Update aria-expanded attribute when mobile nav opens/closes
+        const originalToggle = window.toggleMobileNavigation;
+        window.toggleMobileNavigation = function () {
+          originalToggle();
+
+          // Update aria-expanded attribute
+          const isOpen = window.mobileNavState?.isOpen;
+          mobileMenuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        };
+
+        // Also handle the original navigation.js mobile menu functionality
+        // to ensure we don't break existing behavior
+        const originalMenuButton = document.querySelector('#user-nav-mobile');
+        if (originalMenuButton) {
+          // Hide the original mobile menu since we're replacing it
+          originalMenuButton.style.display = 'none';
+        }
+      }
+    }
+    function setupZendeskListeners() {
+      // Listen for Zendesk authentication changes
+      if (window.HelpCenter) {
+        // Monitor for user state changes
+        const originalUserUpdate = window.HelpCenter.user;
+        if (originalUserUpdate) {
+          // Create a proxy to detect changes
+          let userProxy = new Proxy(originalUserUpdate, {
+            set: function (target, property, value) {
+              target[property] = value;
+              if (property === 'signed_in') {
+                setTimeout(updateUserInfoFromZendesk, 100);
+              }
+              return true;
+            }
+          });
+          window.HelpCenter.user = userProxy;
+        }
+      }
+
+      // Listen for DOM changes that might indicate user state changes
+      const observer = new MutationObserver(function (mutations) {
+        let shouldUpdate = false;
+        mutations.forEach(function (mutation) {
+          // Check if user-related elements were added/removed
+          if (mutation.type === 'childList') {
+            const addedNodes = Array.from(mutation.addedNodes);
+            const removedNodes = Array.from(mutation.removedNodes);
+            const userRelatedChange = [...addedNodes, ...removedNodes].some(node => {
+              if (node.nodeType === Node.ELEMENT_NODE) {
+                return node.classList?.contains('user-avatar') || node.classList?.contains('user-name') || node.id === 'user-name' || node.querySelector?.('.user-avatar, .user-name, #user-name');
+              }
+              return false;
+            });
+            if (userRelatedChange) {
+              shouldUpdate = true;
+            }
+          }
+
+          // Check for attribute changes on user elements
+          if (mutation.type === 'attributes' && (mutation.target.classList?.contains('user-avatar') || mutation.target.id === 'user-name')) {
+            shouldUpdate = true;
+          }
+        });
+        if (shouldUpdate) {
+          setTimeout(updateUserInfoFromZendesk, 100);
+        }
+      });
+
+      // Start observing
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['src', 'class']
+      });
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', waitForNavigation);
+    } else {
+      waitForNavigation();
+    }
+  })();
 
 })();

@@ -12,6 +12,20 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
   // Set to "features" or "business-types" to force that menu open for styling
   const [activeMenu, setActiveMenu] = React.useState(""); // Change this to control which menu is open
 
+  // Responsive logic - hide desktop navigation on mobile
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   // Effect to handle blur on main content when navigation is open
   React.useEffect(() => {
     const mainContentElements = [
@@ -40,6 +54,11 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
       });
     };
   }, [activeMenu]);
+
+  // Don't render desktop navigation on mobile
+  if (isMobile) {
+    return null;
+  }
 
   // Render business types content
   const renderBusinessTypes = () => {

@@ -1178,6 +1178,60 @@ h1, h2, h3, h4, h5, h6 {
   color: lighten($text_color, 20%);
 }
 
+/* New Footer Styles */
+#footer-links-container {
+  /* Ensure 6 columns on large screens, responsive on smaller screens */
+}
+@media (max-width: 768px) {
+  #footer-links-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem 1rem !important;
+  }
+}
+@media (max-width: 640px) {
+  #footer-links-container {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+/* Country selector styling */
+select {
+  /* Style the dropdown arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+select:focus {
+  outline: none;
+}
+
+/* Social media icons hover effects */
+.social-icon {
+  transition: color 0.2s ease-in-out;
+}
+.social-icon:hover {
+  transform: translateY(-1px);
+}
+
+/* Footer section spacing */
+.footer-section h3 {
+  margin-bottom: 1.5rem;
+}
+.footer-section ul li {
+  margin-bottom: 1rem;
+}
+.footer-section ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* Compliance badges */
+.compliance-badges img {
+  max-height: 4rem;
+  width: auto;
+  object-fit: contain;
+}
+
 /***** Breadcrumbs *****/
 .breadcrumbs {
   margin: 0 0 15px 0;
@@ -6471,4 +6525,118 @@ zd-summary-block {
   to {
     opacity: 0;
   }
+}
+/* Mobile Navigation Styles */
+.mobile-nav-overlay {
+  backdrop-filter: blur(4px);
+  animation: fadeIn 300ms ease;
+}
+
+.mobile-nav-drawer {
+  animation: slideInFromRight 300ms ease;
+  box-shadow: -10px 0 25px -5px rgba(0, 0, 0, 0.1), -10px 0 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.mobile-nav-drawer.closing {
+  animation: slideOutToRight 300ms ease;
+}
+
+/* Mobile navigation responsive behavior */
+@media (min-width: 1024px) {
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+}
+/* Hide desktop navigation on mobile */
+@media (max-width: 1023px) {
+  .NavigationMenuRoot {
+    display: none;
+  }
+}
+/* Mobile navigation animations */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes slideOutToRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+/* Enhanced mobile navigation item styles */
+.mobile-nav-item {
+  min-height: 44px; /* Touch-friendly minimum height */
+  display: flex;
+  align-items: center;
+  transition: all 200ms ease;
+}
+
+.mobile-nav-item:active {
+  background-color: var(--gray-50);
+  transform: scale(0.98);
+}
+
+/* Mobile navigation section headers */
+.mobile-nav-section-header {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mauve-11);
+  margin-bottom: 0.5rem;
+}
+
+/* Mobile navigation user section */
+.mobile-nav-user-section {
+  border-bottom: 1px solid var(--mauve-6);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Mobile navigation auth buttons */
+.mobile-nav-auth-buttons {
+  border-top: 1px solid var(--mauve-6);
+  padding-top: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Ensure proper z-index stacking */
+.mobile-nav-overlay {
+  z-index: 9999;
+}
+
+/* Mobile navigation focus styles for accessibility */
+.mobile-nav-drawer button:focus,
+.mobile-nav-drawer a:focus {
+  outline: 2px solid var(--violet-9);
+  outline-offset: 2px;
+}
+
+/* Mobile navigation scrollbar styling */
+.mobile-nav-drawer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-nav-drawer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-nav-drawer::-webkit-scrollbar-thumb {
+  background: var(--mauve-8);
+  border-radius: 2px;
+}
+
+.mobile-nav-drawer::-webkit-scrollbar-thumb:hover {
+  background: var(--mauve-9);
 }

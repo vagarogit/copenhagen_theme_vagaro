@@ -82,12 +82,13 @@
           <button
             type="button"
             class="menu-button-mobile relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-            aria-controls="user-nav-mobile"
+            aria-controls="mobile-navigation-root"
             aria-expanded="false"
             aria-label="{{t 'toggle_navigation'}}"
+            onclick="if (window.toggleMobileNavigation) { window.toggleMobileNavigation(); }"
           >
             {{#if signed_in}}
-              {{user_avatar class="size-8 rounded-full mr-2"}}
+              {{user_avatar class="size-8 rounded-full mr-2 user-avatar"}}
             {{/if}}
             <svg
               class="size-6"

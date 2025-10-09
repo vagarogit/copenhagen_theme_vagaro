@@ -12,3 +12,6 @@ import "./navigationlinks";
 
 // Import Radix Navigation Integration
 import "./modules/radix-navigation-integration.jsx";
+
+// Import Mobile Navigation Integration
+import "./modules/mobile-nav-integration.js";

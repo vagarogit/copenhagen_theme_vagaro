@@ -1,16 +1,81 @@
 /**
  * Footer Links Utility
  *
- * Fetches and renders footer links from Hygraph CMS endpoint
+ * Renders footer links using static navigation data
  */
 
 class FooterLinksManager {
-  constructor(endpoint, options = {}) {
-    this.endpoint = endpoint;
+  constructor(endpoint = null, options = {}) {
+    this.endpoint = endpoint; // Keep for backward compatibility but not used
     this.options = {
       timeout: 10000,
       retries: 3,
       ...options,
+    };
+    // Use global navigation data if available, otherwise fallback
+    this.navigationData = window.footerNavigationData || this.getDefaultNavigationData();
+  }
+
+  /**
+   * Get default navigation data as fallback
+   */
+  getDefaultNavigationData() {
+    return {
+      findBusinesses: [
+        { id: 'find-salon', name: 'Salon', href: 'https://www.vagaro.com/listings/hair/san-francisco--ca' },
+        { id: 'find-spa', name: 'Spa', href: 'https://www.vagaro.com/listings/spa/san-francisco--ca' },
+        { id: 'find-medical-spa', name: 'Medical Spa', href: 'https://www.vagaro.com/listings/med-spa/san-francisco--ca' },
+        { id: 'find-barber', name: 'Barber', href: 'https://www.vagaro.com/listings/barber/san-francisco--ca' },
+        { id: 'find-daily-deals', name: 'Daily Deals', href: 'https://www.vagaro.com/deals/san-francisco--ca' }
+      ],
+      businessSoftware: [
+        { id: 'booth-renter', name: 'Booth Renter', href: '/pro/booth-renter' },
+        { id: 'salon', name: 'Salon', href: '/pro/salon-software' },
+        { id: 'spa', name: 'Spa', href: '/pro/spa-software' },
+        { id: 'medical-spa', name: 'Medical Spa', href: '/pro/medical-spa-software' },
+        { id: 'barber', name: 'Barber', href: '/pro/barber-software' },
+        { id: 'tanning', name: 'Tanning', href: '/pro/tanning-salon-software' },
+        { id: 'nail', name: 'Nail', href: '/pro/nail-salon-software' },
+        { id: 'pilates', name: 'Pilates', href: '/pro/pilates-software' },
+        { id: 'mental-health', name: 'Mental Health', href: '/pro/mental-health-software' }
+      ],
+      businessFeatures: [
+        { id: 'online-booking', name: 'Online Booking', href: '/pro/online-booking' },
+        { id: 'calendar', name: 'Calendar', href: '/pro/calendar' },
+        { id: 'pay-later', name: 'Pay Later', href: '/pro/pay-later' },
+        { id: 'mysite', name: 'MySite', href: '/pro/booking-website-builder' },
+        { id: 'forms', name: 'Forms', href: '/pro/forms' },
+        { id: 'reports', name: 'Reports', href: '/pro/reports' },
+        { id: 'vagaro-capital', name: 'Vagaro Capital', href: '/pro/vagaro-capital' },
+        { id: 'branded-app', name: 'Branded App', href: '/pro/branded-app' }
+      ],
+      businessProducts: [
+        { id: 'paypro', name: 'PayPro', href: '/pro/pos-hardware/terminal' },
+        { id: 'paypro-mini', name: 'PayPro Mini', href: '/pro/pos-hardware/tablet' },
+        { id: 'paypro-duo', name: 'PayPro Duo', href: '/pro/pos-hardware/terminal-dual-screen' },
+        { id: 'card-reader', name: 'Card Reader', href: '/pro/pos-hardware/credit-card-reader' },
+        { id: 'pay-swivel-stand', name: 'Pay Swivel Stand', href: '/pro/pos-hardware/stand' },
+        { id: 'qr-scanner', name: 'QR Scanner', href: '/pro/pos-hardware/barcode-scanner' },
+        { id: 'receipt-printer', name: 'Receipt Printer', href: '/pro/pos-hardware/thermal-receipt-printer' },
+        { id: 'cash-drawer', name: 'Cash Drawer', href: '/pro/pos-hardware/cash-register' }
+      ],
+      company: [
+        { id: 'about-us', name: 'About Us', href: '/pro/about-us' },
+        { id: 'careers', name: 'Careers', href: '/pro/careers' },
+        { id: 'contact-us', name: 'Contact Us', href: '/pro/contact' },
+        { id: 'vagaro-cares', name: 'Vagaro Cares', href: '/pro/vagaro-cares' },
+        { id: 'updates', name: 'Updates', href: '/pro/updates' },
+        { id: 'partnerships', name: 'Partnerships', href: '/pro/partners' },
+        { id: 'mysite-updates', name: 'MySite Updates', href: '/pro/mysite-updates' },
+        { id: 'iconic-25', name: 'iconic.25', href: 'https://mysite.vagaro.com/iconic25' }
+      ],
+      resources: [
+        { id: 'status', name: 'Status', href: 'https://status.vagaro.com/' },
+        { id: 'support', name: 'Support', href: 'https://support.vagaro.com/' },
+        { id: 'blog', name: 'Blog', href: 'https://www.vagaro.com/learn' },
+        { id: 'newsroom', name: 'Newsroom', href: 'https://www.vagaro.com/news' },
+        { id: 'compare-us', name: 'Compare Us', href: '/pro/compare' }
+      ]
     };
   }
 
@@ -86,21 +151,37 @@ class FooterLinksManager {
   renderFooterSection(title, items) {
     const linksHtml = items
       .map(
-        (item) => `
-      <li>
-        <a href="https://www.vagaro.com/${item.link}" 
-           class="text-base font-normal text-white/80 hover:text-gray-300"
-           ${item.externalLink ? 'target="_blank" rel="noopener"' : ""}>
-          ${item.name}
-        </a>
-      </li>
-    `
+        (item) => {
+          if (item.isInteractive && item.onClick) {
+            return `
+              <li>
+                <button onclick="${item.onClick}" 
+                       class="text-sm text-gray-300 hover:text-white underline bg-transparent border-none cursor-pointer">
+                  ${item.name}
+                </button>
+              </li>
+            `;
+          }
+          
+          const href = item.href.startsWith('http') ? item.href : `https://www.vagaro.com${item.href}`;
+          const target = item.href.startsWith('http') ? 'target="_blank" rel="noopener"' : '';
+          
+          return `
+            <li>
+              <a href="${href}" 
+                 class="text-sm text-gray-300 hover:text-white"
+                 ${target}>
+                ${item.name}
+              </a>
+            </li>
+          `;
+        }
       )
       .join("");
 
     return `
-      <div class="${title !== "Get Started" ? "mt-10 md:mt-0" : ""}">
-        <h3 class="text-base font-semibold text-white">${title}</h3>
+      <div>
+        <h3 class="text-sm font-semibold text-white">${title}</h3>
         <ul role="list" class="mt-6 space-y-4">
           ${linksHtml}
         </ul>
@@ -111,7 +192,7 @@ class FooterLinksManager {
   /**
    * Update footer links in the DOM
    */
-  async updateFooterLinks(containerId = "footer-links-container") {
+  updateFooterLinks(containerId = "footer-links-container") {
     try {
       const container = document.getElementById(containerId);
       if (!container) {
@@ -119,61 +200,42 @@ class FooterLinksManager {
         return;
       }
 
-      // Show loading state
-      container.innerHTML =
-        '<div class="text-gray-400">Loading footer links...</div>';
+      // Use static navigation data
+      const data = this.navigationData;
 
-      const navigationMenu = await this.fetchFooterLinks();
-
-      // Render all sections
+      // Render all 6 sections
       const sectionsHtml = `
-        ${this.renderFooterSection(
-          "Get Started",
-          navigationMenu.getStartedItems || []
-        )}
-        ${this.renderFooterSection(
-          "Company",
-          navigationMenu.companyItems || []
-        )}
-        ${this.renderFooterSection(
-          "Resources",
-          navigationMenu.resourcesItems || []
-        )}
+        ${this.renderFooterSection("Find Businesses", data.findBusinesses)}
+        ${this.renderFooterSection("Business Software", data.businessSoftware)}
+        ${this.renderFooterSection("Business Features", data.businessFeatures)}
+        ${this.renderFooterSection("Business Products", data.businessProducts)}
+        ${this.renderFooterSection("Company", data.company)}
+        ${this.renderFooterSection("Resources", data.resources)}
       `;
 
       container.innerHTML = sectionsHtml;
     } catch (error) {
       console.error("Failed to update footer links:", error);
-      // Fallback to static content or show error
+      // Fallback to static content
       const container = document.getElementById(containerId);
       if (container) {
-        container.innerHTML =
-          '<div class="text-gray-400">Failed to load footer links</div>';
+        container.innerHTML = `
+          <div class="col-span-6 text-center text-gray-400">
+            <p>Footer links temporarily unavailable</p>
+          </div>
+        `;
       }
     }
   }
 
   /**
-   * Initialize footer links with retry logic
+   * Initialize footer links
    */
-  async init(containerId) {
-    let attempts = 0;
-
-    while (attempts < this.options.retries) {
-      try {
-        await this.updateFooterLinks(containerId);
-        return; // Success
-      } catch (error) {
-        attempts++;
-        if (attempts < this.options.retries) {
-          console.log(
-            `Retrying footer links fetch (${attempts}/${this.options.retries})...`
-          );
-          await new Promise((resolve) => setTimeout(resolve, 1000 * attempts));
-        } else {
-          console.error("Failed to load footer links after all retries");
-        }
-      }
+  init(containerId) {
+    try {
+      this.updateFooterLinks(containerId);
+    } catch (error) {
+      console.error("Failed to initialize footer links:", error);
     }
   }
 }
@@ -183,15 +245,8 @@ window.FooterLinksManager = FooterLinksManager;
 
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
-  // Replace with your actual Hygraph endpoint
-  const HYGRAPH_ENDPOINT =
-    "https://us-west-2.cdn.hygraph.com/content/cld3gw4bb0hr001ue9afzcunb/master";
-
-  const footerManager = new FooterLinksManager(HYGRAPH_ENDPOINT, {
-    timeout: 8000,
-    retries: 2,
-  });
-
+  const footerManager = new FooterLinksManager();
+  
   // Initialize footer links
   footerManager.init("footer-links-container");
 });
