@@ -10,7 +10,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
 
   // For development: manually set which menu item should be open
   // Set to "features" or "business-types" to force that menu open for styling
-  const [activeMenu, setActiveMenu] = React.useState("features"); // Change this to control which menu is open
+  const [activeMenu, setActiveMenu] = React.useState(""); // Change this to control which menu is open
 
   // Render business types content
   const renderBusinessTypes = () => {
