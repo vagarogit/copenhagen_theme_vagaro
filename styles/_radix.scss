@@ -301,6 +301,22 @@
 	transform: rotate(-180deg);
 }
 
+/* Style the trigger when the menu is open */
+.NavigationMenuTrigger[data-state="open"] {
+	background-color: var(--violet-4);
+	color: var(--violet-11);
+}
+
+/* Style the entire navigation item when open */
+.NavigationMenuRoot [data-state="open"] {
+	/* Add any styles you want for the open state */
+}
+
+/* Style the content when it's open */
+.NavigationMenuContent[data-state="open"] {
+	/* Add styles for the open content */
+}
+
 .Arrow {
 	position: relative;
 	top: 70%;

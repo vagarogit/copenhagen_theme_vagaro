@@ -8,6 +8,10 @@ import { PropTypes } from "prop-types";
 const NavigationMenuDemo = ({ navigationData = {} }) => {
   const { businessTypes, features, isLoaded } = navigationData;
 
+  // For development: manually set which menu item should be open
+  // Set to "features" or "business-types" to force that menu open for styling
+  const [activeMenu, setActiveMenu] = React.useState("features"); // Change this to control which menu is open
+
   // Render business types content
   const renderBusinessTypes = () => {
     if (!businessTypes || !isLoaded) {
@@ -84,47 +88,92 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
       return <div className="List fullwidth">Loading features...</div>;
     }
 
-    // Group features into columns (5 columns as per original design)
-    const columns = Array.from({ length: 5 }, () => []);
-    features.forEach((item, index) => {
-      columns[index % 5].push(item);
+    // Group features into 5 specific categories based on the screenshot
+    const categories = {
+      "RUN YOUR BUSINESS": [],
+      "GROW YOUR BUSINESS": [],
+      "SIMPLIFY PAYMENTS": [],
+      "ELEVATE CLIENT EXPERIENCE": [],
+      "BUILD YOUR BRAND": [],
+    };
+
+    // Categorize features based on their names
+    features.forEach((item) => {
+      const itemName = item.name.toLowerCase();
+
+      if (
+        itemName.includes("calendar") ||
+        itemName.includes("payroll") ||
+        itemName.includes("e-prescribe") ||
+        itemName.includes("reports") ||
+        itemName.includes("rent collection") ||
+        itemName.includes("vagaro ai") ||
+        itemName.includes("forms")
+      ) {
+        categories["RUN YOUR BUSINESS"].push(item);
+      } else if (
+        itemName.includes("marketplace") ||
+        itemName.includes("online store") ||
+        itemName.includes("memberships") ||
+        itemName.includes("inventory") ||
+        itemName.includes("vagaro capital")
+      ) {
+        categories["GROW YOUR BUSINESS"].push(item);
+      } else if (
+        itemName.includes("paypro") ||
+        itemName.includes("pos") ||
+        itemName.includes("buy now") ||
+        itemName.includes("pay later") ||
+        itemName.includes("invoices") ||
+        itemName.includes("payments")
+      ) {
+        categories["SIMPLIFY PAYMENTS"].push(item);
+      } else if (
+        itemName.includes("online booking") ||
+        itemName.includes("customer tracking") ||
+        itemName.includes("vagaro connect") ||
+        itemName.includes("notifications") ||
+        itemName.includes("live stream") ||
+        itemName.includes("mobile apps")
+      ) {
+        categories["ELEVATE CLIENT EXPERIENCE"].push(item);
+      } else {
+        // Default to BUILD YOUR BRAND for MySite, Marketing, Design Services, Branded App
+        categories["BUILD YOUR BRAND"].push(item);
+      }
     });
 
     return (
-      <div
-        className="List fullwidth"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
-          gap: "1rem",
-          padding: "2rem",
-        }}
-      >
-        {columns.map((column, columnIndex) => (
-          <div key={columnIndex}>
-            {column.map((item) => (
-              <ListItem key={item.id} href={item.link} title={item.name}>
-                {item.iconImage?.url && (
-                  <img
-                    src={item.iconImage.url}
-                    alt={item.name}
-                    style={{
-                      width: "16px",
-                      height: "16px",
-                      marginRight: "8px",
-                    }}
+      <div className="List bg-white p-8 w-full fullwidth">
+        <div className="grid grid-cols-5 gap-8">
+          {Object.entries(categories).map(([categoryTitle, categoryItems]) => (
+            <div key={categoryTitle} className="space-y-4">
+              <h3 className="text-lg font-bold mb-4 text-primary uppercase text-nowrap">
+                {categoryTitle}
+              </h3>
+              <div className="space-y-2">
+                {categoryItems.map((item) => (
+                  <ListItem
+                    key={item.id}
+                    href={item.link}
+                    title={item.name}
+                    icon={item.iconImage?.url}
                   />
-                )}
-              </ListItem>
-            ))}
-          </div>
-        ))}
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   };
 
   return (
-    <NavigationMenu.Root className="NavigationMenuRoot">
+    <NavigationMenu.Root
+      className="NavigationMenuRoot"
+      value={activeMenu}
+      onValueChange={setActiveMenu}
+    >
       <NavigationMenu.List className="NavigationMenuList">
         <NavigationMenu.Item>
           <NavigationMenu.Link
@@ -135,7 +184,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
           </NavigationMenu.Link>
         </NavigationMenu.Item>
         {/* Business Types Menu */}
-        <NavigationMenu.Item>
+        <NavigationMenu.Item value="business-types">
           <NavigationMenu.Trigger className="NavigationMenuTrigger">
             Business Types <CaretDownIcon className="CaretDown" aria-hidden />
           </NavigationMenu.Trigger>
@@ -145,7 +194,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
 
         {/* Features Menu */}
-        <NavigationMenu.Item>
+        <NavigationMenu.Item value="features">
           <NavigationMenu.Trigger className="NavigationMenuTrigger">
             Features <CaretDownIcon className="CaretDown" aria-hidden />
           </NavigationMenu.Trigger>
@@ -247,7 +296,7 @@ BusinessTypeItem.propTypes = {
 };
 
 const ListItem = React.forwardRef(
-  ({ className, children, title, ...props }, forwardedRef) => (
+  ({ className, children, title, icon, ...props }, forwardedRef) => (
     <li>
       <NavigationMenu.Link asChild>
         <a
@@ -255,7 +304,19 @@ const ListItem = React.forwardRef(
           {...props}
           ref={forwardedRef}
         >
-          <div className="ListItemHeading">{title}</div>
+          <div className="ListItemHeading flex items-center gap-2">
+            {icon && (
+              <img
+                src={icon}
+                alt={title}
+                style={{
+                  width: "16px",
+                  height: "16px",
+                }}
+              />
+            )}
+            {title}
+          </div>
           <p className="ListItemText">{children}</p>
         </a>
       </NavigationMenu.Link>
@@ -268,6 +329,7 @@ ListItem.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   title: PropTypes.string,
+  icon: PropTypes.string,
 };
 
 export default NavigationMenuDemo;
