@@ -266,7 +266,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         {/* Business Types Menu */}
         <NavigationMenu.Item value="business-types">
-          <NavigationMenu.Trigger className="NavigationMenuTrigger">
+          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-50">
             Business Types <CaretDownIcon className="CaretDown" aria-hidden />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent">
@@ -276,7 +276,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
 
         {/* Features Menu */}
         <NavigationMenu.Item value="features">
-          <NavigationMenu.Trigger className="NavigationMenuTrigger">
+          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-50">
             Features <CaretDownIcon className="CaretDown" aria-hidden />
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent">
@@ -359,7 +359,7 @@ const BusinessTypeItem = ({ href, title, icon }) => (
       className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
     >
       {icon && (
-        <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors">
+        <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
           <img src={icon} alt={title} className="w-5 h-5 " />
         </div>
       )}
@@ -389,7 +389,7 @@ const ListItem = React.forwardRef(
           ref={forwardedRef}
         >
           <div className="ListItemHeading flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors">
+            <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
               {icon && <img src={icon} alt={title} className="w-5 h-5" />}
             </div>
             {title}

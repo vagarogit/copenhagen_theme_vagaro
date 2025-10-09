@@ -35556,7 +35556,7 @@
     }, "Book a Service")), /*#__PURE__*/reactExports.createElement(Item, {
       value: "business-types"
     }, /*#__PURE__*/reactExports.createElement(Trigger, {
-      className: "NavigationMenuTrigger"
+      className: "NavigationMenuTrigger hover:bg-gray-50"
     }, "Business Types ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
       className: "CaretDown",
       "aria-hidden": true
@@ -35565,7 +35565,7 @@
     }, renderBusinessTypes())), /*#__PURE__*/reactExports.createElement(Item, {
       value: "features"
     }, /*#__PURE__*/reactExports.createElement(Trigger, {
-      className: "NavigationMenuTrigger"
+      className: "NavigationMenuTrigger hover:bg-gray-50"
     }, "Features ", /*#__PURE__*/reactExports.createElement(CaretDownIcon, {
       className: "CaretDown",
       "aria-hidden": true
@@ -35616,7 +35616,7 @@
     href: href,
     className: "flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
   }, icon && /*#__PURE__*/reactExports.createElement("div", {
-    className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors"
+    className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors"
   }, /*#__PURE__*/reactExports.createElement("img", {
     src: icon,
     alt: title,
@@ -35644,7 +35644,7 @@
   }), /*#__PURE__*/reactExports.createElement("div", {
     className: "ListItemHeading flex items-center gap-3"
   }, /*#__PURE__*/reactExports.createElement("div", {
-    className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors"
+    className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors"
   }, icon && /*#__PURE__*/reactExports.createElement("img", {
     src: icon,
     alt: title,

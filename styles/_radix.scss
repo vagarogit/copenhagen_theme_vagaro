@@ -64,6 +64,8 @@
   --indigo-10: hsl(226, 58%, 51%);
   --indigo-11: hsl(226, 55%, 45%);
   --indigo-12: hsl(226, 62%, 17%);
+
+  --gray-50: #f9fafb;
 }
 
 /* reset */
@@ -106,7 +108,7 @@
 }
 .NavigationMenuTrigger:hover,
 .NavigationMenuLink:hover {
-	background-color: var(--mauve-1);
+	background-color: var(--gray-50);
 }
 
 .NavigationMenuTrigger {
@@ -232,7 +234,7 @@
 	box-shadow: 0 0 0 2px var(--black-a7);
 }
 .ListItemLink:hover {
-	background-color: var(--black-a9);
+	background-color: var(--gray-50);
 }
 
 .ListItemHeading {
@@ -302,8 +304,8 @@
 
 /* Style the trigger when the menu is open */
 .NavigationMenuTrigger[data-state="open"] {
-	background-color: var(--violet-4);
-	color: var(--violet-11);
+	background-color: var(--gray-50);
+	color: #333333;
 }
 
 /* Style the entire navigation item when open */
