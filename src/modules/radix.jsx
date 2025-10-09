@@ -88,7 +88,15 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
       return <div className="List fullwidth">Loading features...</div>;
     }
 
-    // Group features into 5 specific categories based on the screenshot
+    // Group features into 5 specific categories in the order they appear in if statements
+    const categoryOrder = [
+      "RUN YOUR BUSINESS",
+      "GROW YOUR BUSINESS",
+      "SIMPLIFY PAYMENTS",
+      "ELEVATE CLIENT EXPERIENCE",
+      "BUILD YOUR BRAND",
+    ];
+
     const categories = {
       "RUN YOUR BUSINESS": [],
       "GROW YOUR BUSINESS": [],
@@ -143,16 +151,84 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
       }
     });
 
+    // Define sorting order for items within each category based on if statement order
+    const sortingPriority = {
+      "RUN YOUR BUSINESS": [
+        "calendar",
+        "payroll",
+        "e-prescribe",
+        "reports",
+        "rent collection",
+        "vagaro ai",
+        "forms",
+      ],
+      "GROW YOUR BUSINESS": [
+        "marketplace",
+        "online store",
+        "memberships",
+        "inventory",
+        "vagaro capital",
+      ],
+      "SIMPLIFY PAYMENTS": [
+        "paypro",
+        "pos",
+        "buy now",
+        "pay later",
+        "invoices",
+        "payments",
+      ],
+      "ELEVATE CLIENT EXPERIENCE": [
+        "online booking",
+        "customer tracking",
+        "vagaro connect",
+        "notifications",
+        "live stream",
+        "mobile apps",
+      ],
+      "BUILD YOUR BRAND": [], // No specific order for default category
+    };
+
+    // Sort items within each category based on the priority order
+    Object.keys(categories).forEach((categoryKey) => {
+      const priorities = sortingPriority[categoryKey];
+      if (priorities && priorities.length > 0) {
+        categories[categoryKey].sort((a, b) => {
+          const aName = a.name.toLowerCase();
+          const bName = b.name.toLowerCase();
+
+          // Find the priority index for each item
+          let aPriority = priorities.length; // Default to end if not found
+          let bPriority = priorities.length; // Default to end if not found
+
+          for (let i = 0; i < priorities.length; i++) {
+            if (aName.includes(priorities[i])) {
+              aPriority = i;
+              break;
+            }
+          }
+
+          for (let i = 0; i < priorities.length; i++) {
+            if (bName.includes(priorities[i])) {
+              bPriority = i;
+              break;
+            }
+          }
+
+          return aPriority - bPriority;
+        });
+      }
+    });
+
     return (
       <div className="List bg-white p-8 w-full fullwidth">
         <div className="grid grid-cols-5 gap-8">
-          {Object.entries(categories).map(([categoryTitle, categoryItems]) => (
+          {categoryOrder.map((categoryTitle) => (
             <div key={categoryTitle} className="space-y-4">
               <h3 className="text-lg font-bold mb-4 text-primary uppercase text-nowrap">
                 {categoryTitle}
               </h3>
-              <div className="space-y-2">
-                {categoryItems.map((item) => (
+              <div className="space-y-2 ">
+                {categories[categoryTitle].map((item) => (
                   <ListItem
                     key={item.id}
                     href={item.link}
@@ -282,7 +358,7 @@ const BusinessTypeItem = ({ href, title, icon }) => (
           <img src={icon} alt={title} className="w-5 h-5 object-contain" />
         </div>
       )}
-      <span className="text-gray-700 font-medium group-hover:text-gray-900 transition-colors">
+      <span className="text-charcoal font-medium group-hover:text-gray-900 transition-colors text-lg">
         {title}
       </span>
     </a>
@@ -317,7 +393,7 @@ const ListItem = React.forwardRef(
             )}
             {title}
           </div>
-          <p className="ListItemText">{children}</p>
+          <p className="">{children}</p>
         </a>
       </NavigationMenu.Link>
     </li>

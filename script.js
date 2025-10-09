@@ -35453,7 +35453,8 @@
         }, "Loading features...");
       }
 
-      // Group features into 5 specific categories based on the screenshot
+      // Group features into 5 specific categories in the order they appear in if statements
+      const categoryOrder = ["RUN YOUR BUSINESS", "GROW YOUR BUSINESS", "SIMPLIFY PAYMENTS", "ELEVATE CLIENT EXPERIENCE", "BUILD YOUR BRAND"];
       const categories = {
         "RUN YOUR BUSINESS": [],
         "GROW YOUR BUSINESS": [],
@@ -35478,18 +35479,56 @@
           categories["BUILD YOUR BRAND"].push(item);
         }
       });
+
+      // Define sorting order for items within each category based on if statement order
+      const sortingPriority = {
+        "RUN YOUR BUSINESS": ["calendar", "payroll", "e-prescribe", "reports", "rent collection", "vagaro ai", "forms"],
+        "GROW YOUR BUSINESS": ["marketplace", "online store", "memberships", "inventory", "vagaro capital"],
+        "SIMPLIFY PAYMENTS": ["paypro", "pos", "buy now", "pay later", "invoices", "payments"],
+        "ELEVATE CLIENT EXPERIENCE": ["online booking", "customer tracking", "vagaro connect", "notifications", "live stream", "mobile apps"],
+        "BUILD YOUR BRAND": [] // No specific order for default category
+      };
+
+      // Sort items within each category based on the priority order
+      Object.keys(categories).forEach(categoryKey => {
+        const priorities = sortingPriority[categoryKey];
+        if (priorities && priorities.length > 0) {
+          categories[categoryKey].sort((a, b) => {
+            const aName = a.name.toLowerCase();
+            const bName = b.name.toLowerCase();
+
+            // Find the priority index for each item
+            let aPriority = priorities.length; // Default to end if not found
+            let bPriority = priorities.length; // Default to end if not found
+
+            for (let i = 0; i < priorities.length; i++) {
+              if (aName.includes(priorities[i])) {
+                aPriority = i;
+                break;
+              }
+            }
+            for (let i = 0; i < priorities.length; i++) {
+              if (bName.includes(priorities[i])) {
+                bPriority = i;
+                break;
+              }
+            }
+            return aPriority - bPriority;
+          });
+        }
+      });
       return /*#__PURE__*/reactExports.createElement("div", {
         className: "List bg-white p-8 w-full fullwidth"
       }, /*#__PURE__*/reactExports.createElement("div", {
         className: "grid grid-cols-5 gap-8"
-      }, Object.entries(categories).map(([categoryTitle, categoryItems]) => /*#__PURE__*/reactExports.createElement("div", {
+      }, categoryOrder.map(categoryTitle => /*#__PURE__*/reactExports.createElement("div", {
         key: categoryTitle,
         className: "space-y-4"
       }, /*#__PURE__*/reactExports.createElement("h3", {
         className: "text-lg font-bold mb-4 text-primary uppercase text-nowrap"
       }, categoryTitle), /*#__PURE__*/reactExports.createElement("div", {
-        className: "space-y-2"
-      }, categoryItems.map(item => /*#__PURE__*/reactExports.createElement(ListItem, {
+        className: "space-y-2 "
+      }, categories[categoryTitle].map(item => /*#__PURE__*/reactExports.createElement(ListItem, {
         key: item.id,
         href: item.link,
         title: item.name,
@@ -35574,7 +35613,7 @@
     alt: title,
     className: "w-5 h-5 object-contain"
   })), /*#__PURE__*/reactExports.createElement("span", {
-    className: "text-gray-700 font-medium group-hover:text-gray-900 transition-colors"
+    className: "text-charcoal font-medium group-hover:text-gray-900 transition-colors text-lg"
   }, title)));
   BusinessTypeItem.propTypes = {
     href: propTypesExports.PropTypes.string,
@@ -35603,7 +35642,7 @@
       height: "16px"
     }
   }), title), /*#__PURE__*/reactExports.createElement("p", {
-    className: "ListItemText"
+    className: ""
   }, children)))));
   ListItem.displayName = "ListItem";
   ListItem.propTypes = {
