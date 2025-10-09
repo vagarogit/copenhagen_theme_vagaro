@@ -26,13 +26,14 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
 
     return (
       <div className="List bg-white p-8 w-full fullwidth">
-        <div className="grid grid-cols-3 gap-12">
+        <div className="grid grid-cols-3 gap-4">
           {/* Beauty Column */}
           <div className="">
-            <h3 className="text-lg font-bold mb-6 text-primary uppercase tracking-wide">
+            <h3 className="text-lg font-bold text-primary uppercase ">
               {categories.beauty}
             </h3>
-            <div className="space-y-4 grid grid-cols-1 col-span-1 md:grid-cols-2">
+            <div className="h-px bg-gray-400" />
+            <div className="grid grid-cols-1 col-span-1 md:grid-cols-2">
               {businessTypes.beauty?.map((item) => (
                 <BusinessTypeItem
                   key={item.id}
@@ -46,10 +47,11 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
 
           {/* Wellness Column */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-primary uppercase tracking-wide">
+            <h3 className="text-lg font-bold  text-primary uppercase">
               {categories.wellness}
             </h3>
-            <div className="space-y-4 grid grid-cols-1 col-span-1 md:grid-cols-2">
+            <div className="h-px bg-gray-400" />
+            <div className=" grid grid-cols-1 col-span-1 md:grid-cols-2">
               {businessTypes.wellness?.map((item) => (
                 <BusinessTypeItem
                   key={item.id}
@@ -63,10 +65,11 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
 
           {/* Fitness Column */}
           <div>
-            <h3 className="text-lg font-bold mb-6 text-primary uppercase tracking-wide">
+            <h3 className="text-lg font-bold  text-primary uppercase ">
               {categories.fitness}
             </h3>
-            <div className="space-y-4 grid grid-cols-1 col-span-1 md:grid-cols-2">
+            <div className="h-px bg-gray-400" />
+            <div className="grid grid-cols-1 col-span-1 md:grid-cols-2">
               {businessTypes.fitness?.map((item) => (
                 <BusinessTypeItem
                   key={item.id}
@@ -220,20 +223,22 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
     });
 
     return (
-      <div className="List bg-white p-8 w-full fullwidth">
-        <div className="grid grid-cols-5 gap-8">
+      <div className="List bg-white w-full fullwidth">
+        <div className="grid grid-cols-5 mx-auto gap-x-5">
           {categoryOrder.map((categoryTitle) => (
-            <div key={categoryTitle} className="space-y-4">
-              <h3 className="text-lg font-bold mb-4 text-primary uppercase text-nowrap">
+            <div key={categoryTitle} className="space-y-1">
+              <h3 className="text-lg font-bold  text-primary uppercase text-nowrap">
                 {categoryTitle}
               </h3>
-              <div className="space-y-2 ">
+              <div className="h-px w-[90%] bg-gray-400" />
+              <div className="space-y-1">
                 {categories[categoryTitle].map((item) => (
                   <ListItem
                     key={item.id}
                     href={item.link}
                     title={item.name}
                     icon={item.iconImage?.url}
+                    className="hover:bg-gray-50"
                   />
                 ))}
               </div>
@@ -354,11 +359,11 @@ const BusinessTypeItem = ({ href, title, icon }) => (
       className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
     >
       {icon && (
-        <div className="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-lg group-hover:bg-gray-200 transition-colors">
-          <img src={icon} alt={title} className="w-5 h-5 object-contain" />
+        <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors">
+          <img src={icon} alt={title} className="w-5 h-5 " />
         </div>
       )}
-      <span className="text-charcoal font-medium group-hover:text-gray-900 transition-colors text-lg">
+      <span className="text-charcoal font-medium group-hover:text-gray-900 transition-colors text-base">
         {title}
       </span>
     </a>
@@ -376,21 +381,17 @@ const ListItem = React.forwardRef(
     <li>
       <NavigationMenu.Link asChild>
         <a
-          className={classNames("ListItemLink", className)}
+          className={classNames(
+            "ListItemLink pr-1 py-2 text-base font-semibold",
+            className
+          )}
           {...props}
           ref={forwardedRef}
         >
-          <div className="ListItemHeading flex items-center gap-2">
-            {icon && (
-              <img
-                src={icon}
-                alt={title}
-                style={{
-                  width: "16px",
-                  height: "16px",
-                }}
-              />
-            )}
+          <div className="ListItemHeading flex items-center gap-3">
+            <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors">
+              {icon && <img src={icon} alt={title} className="w-5 h-5" />}
+            </div>
             {title}
           </div>
           <p className="">{children}</p>

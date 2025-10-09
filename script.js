@@ -35412,31 +35412,37 @@
       return /*#__PURE__*/reactExports.createElement("div", {
         className: "List bg-white p-8 w-full fullwidth"
       }, /*#__PURE__*/reactExports.createElement("div", {
-        className: "grid grid-cols-3 gap-12"
+        className: "grid grid-cols-3 gap-4"
       }, /*#__PURE__*/reactExports.createElement("div", {
         className: ""
       }, /*#__PURE__*/reactExports.createElement("h3", {
-        className: "text-lg font-bold mb-6 text-primary uppercase tracking-wide"
+        className: "text-lg font-bold text-primary uppercase "
       }, categories.beauty), /*#__PURE__*/reactExports.createElement("div", {
-        className: "space-y-4 grid grid-cols-1 col-span-1 md:grid-cols-2"
+        className: "h-px bg-gray-400"
+      }), /*#__PURE__*/reactExports.createElement("div", {
+        className: "grid grid-cols-1 col-span-1 md:grid-cols-2"
       }, businessTypes.beauty?.map(item => /*#__PURE__*/reactExports.createElement(BusinessTypeItem, {
         key: item.id,
         href: item.link,
         title: item.name,
         icon: item.iconImage?.url
       })))), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("h3", {
-        className: "text-lg font-bold mb-6 text-primary uppercase tracking-wide"
+        className: "text-lg font-bold  text-primary uppercase"
       }, categories.wellness), /*#__PURE__*/reactExports.createElement("div", {
-        className: "space-y-4 grid grid-cols-1 col-span-1 md:grid-cols-2"
+        className: "h-px bg-gray-400"
+      }), /*#__PURE__*/reactExports.createElement("div", {
+        className: " grid grid-cols-1 col-span-1 md:grid-cols-2"
       }, businessTypes.wellness?.map(item => /*#__PURE__*/reactExports.createElement(BusinessTypeItem, {
         key: item.id,
         href: item.link,
         title: item.name,
         icon: item.iconImage?.url
       })))), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("h3", {
-        className: "text-lg font-bold mb-6 text-primary uppercase tracking-wide"
+        className: "text-lg font-bold  text-primary uppercase "
       }, categories.fitness), /*#__PURE__*/reactExports.createElement("div", {
-        className: "space-y-4 grid grid-cols-1 col-span-1 md:grid-cols-2"
+        className: "h-px bg-gray-400"
+      }), /*#__PURE__*/reactExports.createElement("div", {
+        className: "grid grid-cols-1 col-span-1 md:grid-cols-2"
       }, businessTypes.fitness?.map(item => /*#__PURE__*/reactExports.createElement(BusinessTypeItem, {
         key: item.id,
         href: item.link,
@@ -35518,21 +35524,24 @@
         }
       });
       return /*#__PURE__*/reactExports.createElement("div", {
-        className: "List bg-white p-8 w-full fullwidth"
+        className: "List bg-white w-full fullwidth"
       }, /*#__PURE__*/reactExports.createElement("div", {
-        className: "grid grid-cols-5 gap-8"
+        className: "grid grid-cols-5 mx-auto gap-x-5"
       }, categoryOrder.map(categoryTitle => /*#__PURE__*/reactExports.createElement("div", {
         key: categoryTitle,
-        className: "space-y-4"
+        className: "space-y-1"
       }, /*#__PURE__*/reactExports.createElement("h3", {
-        className: "text-lg font-bold mb-4 text-primary uppercase text-nowrap"
+        className: "text-lg font-bold  text-primary uppercase text-nowrap"
       }, categoryTitle), /*#__PURE__*/reactExports.createElement("div", {
-        className: "space-y-2 "
+        className: "h-px w-[90%] bg-gray-400"
+      }), /*#__PURE__*/reactExports.createElement("div", {
+        className: "space-y-1"
       }, categories[categoryTitle].map(item => /*#__PURE__*/reactExports.createElement(ListItem, {
         key: item.id,
         href: item.link,
         title: item.name,
-        icon: item.iconImage?.url
+        icon: item.iconImage?.url,
+        className: "hover:bg-gray-50"
       })))))));
     };
     return /*#__PURE__*/reactExports.createElement(Root2, {
@@ -35607,13 +35616,13 @@
     href: href,
     className: "flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
   }, icon && /*#__PURE__*/reactExports.createElement("div", {
-    className: "w-8 h-8 flex items-center justify-center bg-gray-100 rounded-lg group-hover:bg-gray-200 transition-colors"
+    className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors"
   }, /*#__PURE__*/reactExports.createElement("img", {
     src: icon,
     alt: title,
-    className: "w-5 h-5 object-contain"
+    className: "w-5 h-5 "
   })), /*#__PURE__*/reactExports.createElement("span", {
-    className: "text-charcoal font-medium group-hover:text-gray-900 transition-colors text-lg"
+    className: "text-charcoal font-medium group-hover:text-gray-900 transition-colors text-base"
   }, title)));
   BusinessTypeItem.propTypes = {
     href: propTypesExports.PropTypes.string,
@@ -35629,19 +35638,18 @@
   }, forwardedRef) => /*#__PURE__*/reactExports.createElement("li", null, /*#__PURE__*/reactExports.createElement(Link, {
     asChild: true
   }, /*#__PURE__*/reactExports.createElement("a", _extends({
-    className: classNames("ListItemLink", className)
+    className: classNames("ListItemLink pr-1 py-2 text-base font-semibold", className)
   }, props, {
     ref: forwardedRef
   }), /*#__PURE__*/reactExports.createElement("div", {
-    className: "ListItemHeading flex items-center gap-2"
+    className: "ListItemHeading flex items-center gap-3"
+  }, /*#__PURE__*/reactExports.createElement("div", {
+    className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors"
   }, icon && /*#__PURE__*/reactExports.createElement("img", {
     src: icon,
     alt: title,
-    style: {
-      width: "16px",
-      height: "16px"
-    }
-  }), title), /*#__PURE__*/reactExports.createElement("p", {
+    className: "w-5 h-5"
+  })), title), /*#__PURE__*/reactExports.createElement("p", {
     className: ""
   }, children)))));
   ListItem.displayName = "ListItem";

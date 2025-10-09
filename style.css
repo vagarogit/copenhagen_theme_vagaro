@@ -6140,24 +6140,24 @@ zd-summary-block {
 
 .NavigationMenuTrigger,
 .NavigationMenuLink {
-  padding: 8px 12px;
+  padding: 16px 16px;
   outline: none;
   user-select: none;
   font-weight: 500;
   line-height: 1;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 16px !important;
   color: #333333;
 }
 
 .NavigationMenuTrigger:focus,
 .NavigationMenuLink:focus {
-  box-shadow: 0 0 0 2px var(--violet-7);
+  box-shadow: 0 0 0 2px var(--black-a7);
 }
 
 .NavigationMenuTrigger:hover,
 .NavigationMenuLink:hover {
-  background-color: var(--violet-3);
+  background-color: var(--mauve-1);
 }
 
 .NavigationMenuTrigger {
@@ -6170,7 +6170,7 @@ zd-summary-block {
 .NavigationMenuLink {
   display: block;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1;
 }
 
@@ -6276,31 +6276,28 @@ zd-summary-block {
   outline: none;
   text-decoration: none;
   user-select: none;
-  padding: 12px;
   border-radius: 6px;
-  font-size: 15px;
   line-height: 1;
 }
 
 .ListItemLink:focus {
-  box-shadow: 0 0 0 2px var(--violet-7);
+  box-shadow: 0 0 0 2px var(--black-a7);
 }
 
 .ListItemLink:hover {
-  background-color: var(--mauve-3);
+  background-color: var(--black-a9);
 }
 
 .ListItemHeading {
   font-weight: 500;
   line-height: 1.2;
-  margin-bottom: 5px;
-  color: var(--violet-12);
+  margin-bottom: 3px;
+  color: var(--black-a12);
 }
 
 .ListItemText {
   color: var(--mauve-11);
   line-height: 1.4;
-  font-weight: initial;
 }
 
 .Callout {
