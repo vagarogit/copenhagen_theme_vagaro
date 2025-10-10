@@ -5425,10 +5425,6 @@ zd-summary-block {
   text-align: left;
   margin-bottom: 0;
 }
-.video-section .video-section-controls {
-  display: flex;
-  gap: 10px;
-}
 .video-section .glide__arrow {
   position: static;
   transform: none;
