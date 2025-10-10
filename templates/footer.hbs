@@ -1,43 +1,47 @@
-<div class="w-full p-16" 
+<div class="w-full px-8 pt-32 md:pt-24" 
  style="background: linear-gradient(180deg, #121212 0%, rgba(18, 18, 18, 0.28) 184.81%), url({{asset 'background-footer.png'}}) lightgray -91.275px -73.808px / 118.815% 118.11% no-repeat;"
 >
- <div class="bg-charcoal p-16 rounded-2xl">
+ <div class="bg-footer-gray p-16 rounded-2xl">
 
    <footer class="container mx-auto">
-    <div class="mx-auto pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
+    <div class="mx-auto pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-4">
       
       <!-- App Download Section -->
-      <div class="mb-16 flex flex-col items-center justify-center gap-8 lg:flex-row lg:gap-16">
+      <div class="mb-16 md:mb-20 flex flex-col items-center justify-center gap-3 lg:flex-row lg:gap-16">
         <!-- For Businesses -->
-        <div class="flex flex-col items-center gap-4 bg-gray-800 rounded-2xl px-8 py-6">
-          <h3 class="text-base font-medium text-white">For businesses</h3>
-          <div class="flex flex-col gap-3 sm:flex-row">
-            <a href="https://apps.apple.com/app/apple-store/id346778559?pt=317944&ct=Vagaro-Pro-App-Page&mt=8"
+        <div class="flex flex-col items-center bg-ink-darker rounded-2xl px-8 py-4">
+          <h3 class="text-left text-base font-semibold text-white">For businesses</h3>
+          <div class="flex flex-col gap-6 sm:flex-row">
+           <div class="div">
+             <a href="https://apps.apple.com/app/apple-store/id346778559?pt=317944&ct=Vagaro-Pro-App-Page&mt=8"
               target="_blank" id="b2b-apple-store">
               <img class="h-12 w-auto"
-                src="{{asset 'apple-download-app-store-white-text.svg'}}" alt="Download on the App Store" />
+                src="{{asset 'apple-app-store-badge.svg'}}" alt="Download on the App Store" />
             </a>
-            <a href="https://play.google.com/store/apps/details?id=com.semaphore.login" target="_blank"
+           </div>
+          <div class="div">
+              <a href="https://play.google.com/store/apps/details?id=com.semaphore.login" target="_blank"
               id="b2b-google-store">
               <img class="h-12 w-auto"
-                src="{{asset 'play-store-button-text.svg'}}" alt="Get it on Google Play" />
+                src="{{asset 'google-play-badge.svg'}}" alt="Get it on Google Play" />
             </a>
+          </div>
           </div>
         </div>
 
         <!-- For Customers -->
-        <div class="flex flex-col items-center gap-4 bg-gray-800 rounded-2xl px-8 py-6">
-          <h3 class="text-base font-medium text-white">For customers</h3>
-          <div class="flex flex-col gap-3 sm:flex-row">
-            <a href="https://apps.apple.com/app/apple-store/id364275742?pt=317944&ct=Vagaro-Consumer-App-Page&mt=8"
+        <div class="flex flex-col items-center bg-ink-darker rounded-2xl px-8 py-4">
+          <h3 class="text-left text-base font-semibold text-white">For customers</h3>
+          <div class="flex flex-col gap-6 sm:flex-row">
+            <a href="https://apps.apple.com/us/app/vagaro/id536110000"
               target="_blank" id="b2c-apple-store">
               <img class="h-12 w-auto"
-                src="{{asset 'apple-download-app-store-white-text.svg'}}" alt="Download on the App Store" />
+                src="{{asset 'apple-app-store-badge.svg'}}" alt="Download on the App Store" />
             </a>
-            <a href="https://play.google.com/store/apps/details?id=com.vagaro.consumer" target="_blank"
+            <a href="https://play.google.com/store/apps/details?id=com.vagaro&hl=en_US" target="_blank"
               id="b2c-google-store">
               <img class="h-12 w-auto"
-                src="{{asset 'play-store-button-text.svg'}}" alt="Get it on Google Play" />
+                src="{{asset 'google-play-badge.svg'}}" alt="Get it on Google Play" />
             </a>
           </div>
         </div>
@@ -49,37 +53,37 @@
           <!-- Dynamic footer links will be loaded here -->
           <!-- Fallback static content -->
           <div>
-            <h3 class="text-sm font-semibold text-white mb-6">Find Businesses</h3>
+            <h3 class="text-left text-base font-semibold text-white">Find Businesses</h3>
             <ul role="list" class="space-y-3">
               <li><a href="#" class="text-sm text-gray-300 hover:text-white">Loading...</a></li>
             </ul>
           </div>
           <div>
-            <h3 class="text-sm font-semibold text-white mb-6">Business Software</h3>
+            <h3 class="text-left text-base font-semibold text-white">Business Software</h3>
+            <ul role="list" class="space-y-3">
+              <li><a href="#" class="text-left text-base font-semibold text-white">Loading...</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-left text-base font-semibold text-white">Business Features</h3>
             <ul role="list" class="space-y-3">
               <li><a href="#" class="text-sm text-gray-300 hover:text-white">Loading...</a></li>
             </ul>
           </div>
           <div>
-            <h3 class="text-sm font-semibold text-white mb-6">Business Features</h3>
+            <h3 class="text-left text-base font-semibold text-white">Business Products</h3>
             <ul role="list" class="space-y-3">
               <li><a href="#" class="text-sm text-gray-300 hover:text-white">Loading...</a></li>
             </ul>
           </div>
           <div>
-            <h3 class="text-sm font-semibold text-white mb-6">Business Products</h3>
+            <h3 class="text-left text-base font-semibold text-white">Company</h3>
             <ul role="list" class="space-y-3">
               <li><a href="#" class="text-sm text-gray-300 hover:text-white">Loading...</a></li>
             </ul>
           </div>
           <div>
-            <h3 class="text-sm font-semibold text-white mb-6">Company</h3>
-            <ul role="list" class="space-y-3">
-              <li><a href="#" class="text-sm text-gray-300 hover:text-white">Loading...</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-sm font-semibold text-white mb-6">Resources</h3>
+            <h3 class="text-left text-base font-semibold text-white">Resources</h3>
             <ul role="list" class="space-y-3">
               <li><a href="#" class="text-sm text-gray-300 hover:text-white">Loading...</a></li>
             </ul>
@@ -148,7 +152,7 @@
       </div>
       <!-- Legal Links -->
       <div class="border-t border-white/20 py-6">
-        <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-white">
+        <div class="flex flex-wrap justify-start gap-x-6 gap-y-2 text-sm text-white">
           <a href="/pro/privacy" class="hover:text-gray-300 underline">Privacy Policy</a>
           <a href="/pro/user-agreement" class="hover:text-gray-300 underline">User Agreement</a>
           <a href="/pro/vagaro-customer-participation-agreement" class="hover:text-gray-300 underline">Participation Agreement</a>
