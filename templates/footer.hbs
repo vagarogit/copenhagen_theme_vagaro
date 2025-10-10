@@ -1,17 +1,17 @@
 <div class="w-full px-8 pt-32 md:pt-24 pb-16" 
  style="background: linear-gradient(180deg, #121212 0%, rgba(18, 18, 18, 0.28) 184.81%), url({{asset 'background-footer.png'}}) lightgray -91.275px -73.808px / 118.815% 118.11% no-repeat;"
 >
- <div class="bg-footer-gray p-16 rounded-2xl">
+ <div class="bg-footer-gray p-0 md:p-16 rounded-2xl w-full">
 
    <footer class="container mx-auto">
-    <div class="mx-auto pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-4">
+    <div class="mx-auto pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-4 w-full">
       
       <!-- App Download Section -->
       <div class="mb-16 md:mb-20 flex flex-col items-center justify-center gap-3 lg:flex-row lg:gap-16">
         <!-- For Businesses -->
         <div class="flex flex-col items-center bg-ink-darker rounded-2xl px-8 py-4">
           <h3 class="text-left text-base font-semibold text-white">For businesses</h3>
-          <div class="flex flex-col gap-6 sm:flex-row">
+          <div class="flex gap-6">
            <div class="div">
              <a href="https://apps.apple.com/app/apple-store/id346778559?pt=317944&ct=Vagaro-Pro-App-Page&mt=8"
               target="_blank" id="b2b-apple-store">
@@ -32,7 +32,7 @@
         <!-- For Customers -->
         <div class="flex flex-col items-center bg-ink-darker rounded-2xl px-8 py-4">
           <h3 class="text-left text-base font-semibold text-white">For customers</h3>
-          <div class="flex flex-col gap-6 sm:flex-row">
+          <div class="flex gap-6">
             <a href="https://apps.apple.com/us/app/vagaro/id536110000"
               target="_blank" id="b2c-apple-store">
               <img class="h-12 w-auto"
@@ -49,7 +49,7 @@
 
       <!-- Navigation Links Section -->
       <div class="mb-12">
-        <div id="footer-links-container" class="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-6 lg:gap-x-12">
+        <div id="footer-links-container" class="w-full grid grid-cols-2 md:gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-6 lg:gap-x-12">
           <!-- Dynamic footer links will be loaded here -->
           <!-- Fallback static content -->
           <div>
@@ -95,14 +95,14 @@
       <div class=" border-white/80 py-4 border-y">
         <div class="flex flex-col items-center justify-between gap-6 md:flex-row px-2">
           <!-- Country Selector -->
-          <div class="inline-flex h-14 w-full min-w-[260px] max-w-none items-center justify-between gap-3 rounded-full bg-ink-darker px-4 text-left text-white outline-none ring-1 ring-white/10 hover:bg-charcoal focus-visible:ring-2 focus-visible:ring-white/40 md:max-w-xs lg:max-w-[220px]">
+          <div class="inline-flex h-14 w-full min-w-[260px] max-w-[200px] items-center justify-between gap-3 rounded-full bg-ink-darker px-4 text-left text-white outline-none ring-1 ring-white/10 hover:bg-charcoal focus-visible:ring-2 focus-visible:ring-white/40 md:max-w-xs lg:max-w-[220px]">
           <div class="flex items-center gap-4">
             <img src="{{asset 'flag-us.svg'}}" alt="United States" class="h-5 w-auto" />
             <span class="text-white text-base">United States</span>
           </div>
-            <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {{!-- <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
+            </svg> --}}
           </div>
 
           <!-- Social Media Icons -->
@@ -163,11 +163,11 @@
       <!-- Copyright and Compliance -->
       <div class="pt-2 text-left">
         
-        <div class="space-y-2 text-base text-white/60 text-left">
+        <div class="space-y-8 md:space-y-2 text-base text-white/60 text-left">
           <p>&copy; 2025 Vagaro, Inc</p>
           <p>&copy; 2025 Vagaro Merchant Services is a registered ISO of PNC Bank, N.A., Pittsburgh, PA</p>
         </div>
-   <div class="flex justify-center gap-16 mt-16">
+   <div class="flex justify-center gap-16 mt-16 pb-16 md:pb-2">
           <img class="h-16" src="{{asset 'pci-assets.png'}}" alt="PCI DSS Compliant" />
           <img class="h-16" src="{{asset 'hippa.webp'}}" alt="HIPAA Compliant" />
         </div>

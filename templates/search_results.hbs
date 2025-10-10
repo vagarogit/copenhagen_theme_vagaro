@@ -11,8 +11,8 @@
     </div>
   </div>
 
-  <div class="search-results">
-    <aside class="search-results-sidebar">
+  <div class="search-results w-full overflow-hidden">
+    <aside class="search-results-sidebar w-full lg:w-auto">
       {{#if source_filters}}
         <section class="filters-in-section collapsible-sidebar">
           <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_source_menu'}}">
@@ -139,7 +139,7 @@
       {{/if}}
     </aside>
 
-    <section id="main-content" class="search-results-column">
+    <section id="main-content" class="search-results-column w-full min-w-0">
       <h1 class="search-results-subheading">
         {{#if results}}
           {{#is current_filter.identifier 'unified'}}
@@ -166,13 +166,13 @@
         {{/if}}
       </h1>
       {{#if results}}
-        <ul class="search-results-list">
+        <ul class="search-results-list w-full">
           {{#each results}}
-            <li>
-              <article>
+            <li class="w-full">
+              <article class="w-full overflow-hidden">
                 <header>
-                  <div class="search-result-title-container">
-                    <h2 class="search-result-title">
+                  <div class="search-result-title-container w-full">
+                    <h2 class="search-result-title break-words">
                       <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}}>
                         {{title}}
                         {{#if is_external}}
@@ -233,7 +233,7 @@
                     <span class="meta-data">{{date created_at}}</span>
                   </div>
                 </header>
-                <p class="search-result-description">{{text}}</p>
+                <p class="search-result-description break-words">{{text}}</p>
               </article>
             </li>
           {{/each}}

@@ -1179,38 +1179,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* New Footer Styles */
-#footer-links-container {
-  /* Ensure proper spacing and alignment */
-  /* Mobile: Single column */
-  /* Tablet: 2 columns */
-  /* Medium screens: 3 columns */
-  /* Large screens: 6 columns */
-}
-@media (max-width: 640px) {
-  #footer-links-container {
-    grid-template-columns: 1fr !important;
-    gap: 3rem !important;
-  }
-}
-@media (min-width: 641px) and (max-width: 768px) {
-  #footer-links-container {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 3rem 2rem !important;
-  }
-}
-@media (min-width: 769px) and (max-width: 1023px) {
-  #footer-links-container {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 3rem 2rem !important;
-  }
-}
-@media (min-width: 1024px) {
-  #footer-links-container {
-    grid-template-columns: repeat(6, 1fr) !important;
-    gap: 0 3rem !important;
-  }
-}
-
+/* Grid layout is now handled by Tailwind classes in the template */
 /* Country selector styling */
 select {
   /* Style the dropdown arrow */
@@ -1466,12 +1435,42 @@ select:focus {
   pointer-events: none;
   transition: color border 0.12s ease-in-out;
 }
+@media (max-width: 768px) {
+  .search-icon {
+    left: 38px !important;
+  }
+}
+@media (min-width: 768px) {
+  .search-icon {
+    left: 39px;
+  }
+}
+@media (min-width: 1024px) {
+  .search-icon {
+    left: 15px;
+  }
+}
 .search:focus-within .search-icon {
   color: #CC4744;
 }
 [dir=rtl] .search-icon {
   left: auto;
   right: 15px;
+}
+@media (max-width: 768px) {
+  [dir=rtl] .search-icon {
+    right: 31px;
+  }
+}
+@media (min-width: 768px) {
+  [dir=rtl] .search-icon {
+    right: 39px;
+  }
+}
+@media (min-width: 1024px) {
+  [dir=rtl] .search-icon {
+    right: 15px;
+  }
 }
 
 /***** Hero component *****/

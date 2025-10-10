@@ -28,33 +28,7 @@
 }
 
 /* New Footer Styles */
-#footer-links-container {
-  /* Ensure proper spacing and alignment */
-  
-  /* Mobile: Single column */
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr !important;
-    gap: 3rem !important;
-  }
-  
-  /* Tablet: 2 columns */
-  @media (min-width: 641px) and (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 3rem 2rem !important;
-  }
-  
-  /* Medium screens: 3 columns */
-  @media (min-width: 769px) and (max-width: 1023px) {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 3rem 2rem !important;
-  }
-  
-  /* Large screens: 6 columns */
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(6, 1fr) !important;
-    gap: 0 3rem !important;
-  }
-}
+/* Grid layout is now handled by Tailwind classes in the template */
 
 /* Country selector styling */
 select {

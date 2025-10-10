@@ -159,7 +159,7 @@ $padding-right: 20px;
 .search-icon {
   @include vertical-align;
   position: absolute;
-  left: 15px;
+  left: 15px; // Default desktop position
   z-index: 1;
   width: 20px;
   height: 20px;
@@ -167,12 +167,39 @@ $padding-right: 20px;
   pointer-events: none;
   transition: color $input-transition;
 
+  // Mobile positioning - account for px-4 (16px) container padding
+  @include mobile {
+    left: 38px !important; // 15px base + 16px mobile padding
+  }
+
+  // Tablet positioning - account for sm:px-6 (24px) container padding  
+  @include tablet {
+    left: 39px; // 15px base + 24px tablet padding
+  }
+
+  // Desktop positioning - md:px-0 (no container padding)
+  @include desktop {
+    left: 15px; // Original position
+  }
+
   .search:focus-within & {
     color: $brand_color;
   }
 
   [dir="rtl"] & {
     left: auto;
-    right: 15px;
+    right: 15px; // Default desktop position
+    
+    @include mobile {
+      right: 31px; // 15px base + 16px mobile padding
+    }
+
+    @include tablet {
+      right: 39px; // 15px base + 24px tablet padding
+    }
+
+    @include desktop {
+      right: 15px; // Original position
+    }
   }
 }

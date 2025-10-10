@@ -35590,6 +35590,14 @@
     // Set to "features" or "business-types" to force that menu open for styling
     const [activeMenu, setActiveMenu] = reactExports.useState(""); // Change this to control which menu is open
 
+    // Check if eB_2 cookie exists - pure JavaScript function
+    const checkForEb2Cookie = () => {
+      const cookies = document.cookie.split(";");
+      const eB_2Cookie = cookies.find(cookie => cookie.trim().startsWith("eB_2="));
+      return !!eB_2Cookie;
+    };
+    const isLoggedIn = checkForEb2Cookie();
+
     // Responsive logic - hide desktop navigation on mobile
     const [isMobile, setIsMobile] = reactExports.useState(false);
     reactExports.useEffect(() => {
@@ -35821,7 +35829,12 @@
     }, "Support")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
       href: "https://www.vagaro.com/pro/resources"
-    }, "Resources")), /*#__PURE__*/reactExports.createElement(Indicator, {
+    }, "Resources")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
+      className: "NavigationMenuLink border-primary",
+      href: isLoggedIn ? "https://us04.vagaro.com/merchants/calendar" : "https://support.vagaro.com/hc/en-us/signin?return_to=https%3A%2F%2Fsupport.vagaro.com%2Fhc%2Fen-us"
+    }, /*#__PURE__*/reactExports.createElement("span", {
+      className: "text-primary font-semibold"
+    }, isLoggedIn ? "Go to My Business" : "Sign in"))), /*#__PURE__*/reactExports.createElement(Indicator, {
       className: "NavigationMenuIndicator"
     }, /*#__PURE__*/reactExports.createElement("div", {
       className: "Arrow"

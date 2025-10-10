@@ -8,7 +8,7 @@
   <div class="w-full flex flex-col gap-6">
     <span class="text-6xl font-semibold text-gray-900">Let's Get You Some Answers.</span>
     <p class="text-gray-600 text-xl max-w-2xl mx-auto">Our support articles library is regularly updated to ensure you have access to the latest information and support resources.</p>
-    <div class="search-container min-w-2xl max-w-2xl mx-auto z-0">
+    <div class="search-container w-full max-w-2xl mx-auto z-0 px-4 sm:px-6 md:px-0">
       {{search submit=false instant=settings.instant_search class='search search-full' placeholder='Search support articles...'}}
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
         <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
@@ -30,7 +30,7 @@
     <h2 class="visibility-hidden">{{ t 'categories' }}</h2>
 
     <section class="categories blocks" id="categories-section">
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+      <ul class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
         {{#each categories}}
           {{#if ../has_multiple_categories}}
           {{!-- category-item --}}
