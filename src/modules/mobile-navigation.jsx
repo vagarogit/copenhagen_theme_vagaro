@@ -3,31 +3,44 @@ import * as React from "react";
 import classNames from "classnames";
 import { PropTypes } from "prop-types";
 
-const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} }) => {
+const MobileNavigation = ({
+  navigationData = {},
+  isOpen,
+  onClose,
+  userInfo = {},
+}) => {
   const { businessTypes, features, isLoaded } = navigationData;
   const { isSignedIn, userAvatar, userName } = userInfo;
-  
+
   const [expandedSection, setExpandedSection] = React.useState(null);
+
+  // Utility function to format links - convert relative links to absolute Vagaro URLs
+  const formatLink = (link) => {
+    if (!link) return "#";
+    return link.startsWith("http")
+      ? link
+      : `https://www.vagaro.com/pro/${link}`;
+  };
 
   // Handle escape key to close navigation
   React.useEffect(() => {
     const handleEscape = (event) => {
-      if (event.key === 'Escape' && isOpen) {
+      if (event.key === "Escape" && isOpen) {
         onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
+      document.addEventListener("keydown", handleEscape);
       // Prevent body scroll when mobile nav is open
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = '';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
 
@@ -46,7 +59,11 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
   // Render business types section
   const renderBusinessTypes = () => {
     if (!businessTypes || !isLoaded) {
-      return <div className="text-gray-500 text-sm p-4">Loading business types...</div>;
+      return (
+        <div className="text-gray-500 text-sm p-4">
+          Loading business types...
+        </div>
+      );
     }
 
     const categories = {
@@ -59,14 +76,14 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
       <div className="space-y-4">
         {Object.entries(categories).map(([key, category]) => (
           <div key={key}>
-            <h4 className="text-sm font-semibold text-gray-900 uppercase mb-2">
+            <h4 className="text-base font-semibold text-primary uppercase mb-2">
               {category.title}
             </h4>
             <div className="space-y-1">
               {category.items.map((item) => (
                 <MobileNavItem
                   key={item.id}
-                  href={item.link}
+                  href={formatLink(item.link)}
                   title={item.name}
                   icon={item.iconImage?.url}
                   onClick={onClose}
@@ -82,7 +99,9 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
   // Render features section
   const renderFeatures = () => {
     if (!features || !isLoaded) {
-      return <div className="text-gray-500 text-sm p-4">Loading features...</div>;
+      return (
+        <div className="text-gray-500 text-sm p-4">Loading features...</div>
+      );
     }
 
     // Group features into categories (same logic as desktop)
@@ -142,17 +161,17 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
       <div className="space-y-4">
         {Object.entries(categories).map(([categoryTitle, items]) => {
           if (items.length === 0) return null;
-          
+
           return (
             <div key={categoryTitle}>
-              <h4 className="text-sm font-semibold text-gray-900 uppercase mb-2">
+              <h4 className="text-sm font-semibold text-primary uppercase mb-2">
                 {categoryTitle}
               </h4>
               <div className="space-y-1">
                 {items.map((item) => (
                   <MobileNavItem
                     key={item.id}
-                    href={item.link}
+                    href={formatLink(item.link)}
                     title={item.name}
                     icon={item.iconImage?.url}
                     onClick={onClose}
@@ -169,7 +188,7 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
   if (!isOpen) return null;
 
   return (
-    <div 
+    <div
       className="mobile-nav-overlay fixed inset-0 z-50 lg:hidden"
       onClick={handleBackdropClick}
       role="dialog"
@@ -178,30 +197,40 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
     >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black bg-opacity-50" />
-      
+
       {/* Navigation Drawer */}
       <div className="mobile-nav-drawer absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <div className="flex items-center space-x-3">
             {isSignedIn && userAvatar && (
-              <img 
-                src={userAvatar} 
-                alt={userName || "User"} 
+              <img
+                src={userAvatar}
+                alt={userName || "User"}
                 className="w-8 h-8 rounded-full"
               />
             )}
-            <span className="font-medium text-gray-900">
-              {isSignedIn ? (userName || "Menu") : "Menu"}
+            <span className="font-medium text-primary">
+              {isSignedIn ? userName || "Menu" : "Menu"}
             </span>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+            className="p-2 rounded-md text-primary hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
             aria-label="Close navigation"
           >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -213,23 +242,43 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
             {isSignedIn && (
               <div className="pb-4 border-b border-gray-200">
                 <div className="space-y-2">
-                  <a 
-                    href="/hc/en-us/profiles" 
+                  <a
+                    href="/hc/en-us/profiles"
                     className="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors"
                     onClick={onClose}
                   >
-                    <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    <svg
+                      className="w-5 h-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                      />
                     </svg>
                     <span className="text-gray-700">My Profile</span>
                   </a>
-                  <a 
-                    href="/hc/en-us/requests" 
+                  <a
+                    href="/hc/en-us/requests"
                     className="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors"
                     onClick={onClose}
                   >
-                    <svg className="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    <svg
+                      className="w-5 h-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
                     </svg>
                     <span className="text-gray-700">My Requests</span>
                   </a>
@@ -241,7 +290,7 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
             <div className="space-y-4">
               {/* Book a Service */}
               <MobileNavItem
-                href="https://github.com/radix-ui"
+                href="https://www.vagaro.com"
                 title="Book a Service"
                 onClick={onClose}
                 className="text-lg font-medium"
@@ -250,24 +299,29 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
               {/* Business Types */}
               <div>
                 <button
-                  onClick={() => toggleSection('business-types')}
+                  onClick={() => toggleSection("business-types")}
                   className="flex items-center justify-between w-full p-2 text-left text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
-                  aria-expanded={expandedSection === 'business-types'}
+                  aria-expanded={expandedSection === "business-types"}
                 >
                   <span>Business Types</span>
-                  <svg 
+                  <svg
                     className={classNames(
                       "w-5 h-5 text-gray-400 transition-transform duration-200",
-                      expandedSection === 'business-types' ? "rotate-180" : ""
+                      expandedSection === "business-types" ? "rotate-180" : ""
                     )}
-                    fill="none" 
-                    viewBox="0 0 24 24" 
+                    fill="none"
+                    viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
-                {expandedSection === 'business-types' && (
+                {expandedSection === "business-types" && (
                   <div className="mt-2 pl-4 border-l-2 border-gray-100">
                     {renderBusinessTypes()}
                   </div>
@@ -277,24 +331,29 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
               {/* Features */}
               <div>
                 <button
-                  onClick={() => toggleSection('features')}
+                  onClick={() => toggleSection("features")}
                   className="flex items-center justify-between w-full p-2 text-left text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
-                  aria-expanded={expandedSection === 'features'}
+                  aria-expanded={expandedSection === "features"}
                 >
                   <span>Features</span>
-                  <svg 
+                  <svg
                     className={classNames(
                       "w-5 h-5 text-gray-400 transition-transform duration-200",
-                      expandedSection === 'features' ? "rotate-180" : ""
+                      expandedSection === "features" ? "rotate-180" : ""
                     )}
-                    fill="none" 
-                    viewBox="0 0 24 24" 
+                    fill="none"
+                    viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
-                {expandedSection === 'features' && (
+                {expandedSection === "features" && (
                   <div className="mt-2 pl-4 border-l-2 border-gray-100">
                     {renderFeatures()}
                   </div>
@@ -308,35 +367,35 @@ const MobileNavigation = ({ navigationData = {}, isOpen, onClose, userInfo = {} 
                 onClick={onClose}
                 className="text-lg font-medium"
               />
-              
+
               <MobileNavItem
                 href="https://www.vagaro.com/pro/pos-hardware"
                 title="Multi-location"
                 onClick={onClose}
                 className="text-lg font-medium"
               />
-              
+
               <MobileNavItem
                 href="https://www.vagaro.com/pro/pricing"
                 title="Pricing"
                 onClick={onClose}
                 className="text-lg font-medium"
               />
-              
+
               <MobileNavItem
                 href="https://www.vagaro.com/pro/contact-sales-team"
                 title="Contact Sales"
                 onClick={onClose}
                 className="text-lg font-medium"
               />
-              
+
               <MobileNavItem
                 href="https://vagaro.zendesk.com/hc/en-us"
                 title="Support"
                 onClick={onClose}
                 className="text-lg font-medium"
               />
-              
+
               <MobileNavItem
                 href="https://www.vagaro.com/pro/resources"
                 title="Resources"

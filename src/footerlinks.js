@@ -50,18 +50,46 @@ class FooterLinksManager {
         },
       ],
       businessSoftware: [
-        { id: "booth-renter", name: "Booth Renter", href: "/pro/booth-renter" },
-        { id: "salon", name: "Salon", href: "/pro/salon-software" },
-        { id: "spa", name: "Spa", href: "/pro/spa-software" },
+        {
+          id: "booth-renter",
+          name: "Booth Renter",
+          href: "https://www.vagaro.com/pro/booth-renter",
+        },
+        {
+          id: "salon",
+          name: "Salon",
+          href: "https://www.vagaro.com/pro/salon-software",
+        },
+        {
+          id: "spa",
+          name: "Spa",
+          href: "https://www.vagaro.com/pro/spa-software",
+        },
         {
           id: "medical-spa",
           name: "Medical Spa",
-          href: "/pro/medical-spa-software",
+          href: "https://www.vagaro.com/pro/medical-spa-software",
         },
-        { id: "barber", name: "Barber", href: "/pro/barber-software" },
-        { id: "tanning", name: "Tanning", href: "/pro/tanning-salon-software" },
-        { id: "nail", name: "Nail", href: "/pro/nail-salon-software" },
-        { id: "pilates", name: "Pilates", href: "/pro/pilates-software" },
+        {
+          id: "barber",
+          name: "Barber",
+          href: "https://www.vagaro.com/pro/barber-software",
+        },
+        {
+          id: "tanning",
+          name: "Tanning",
+          href: "https://www.vagaro.com/pro/tanning-salon-software",
+        },
+        {
+          id: "nail",
+          name: "Nail",
+          href: "https://www.vagaro.com/pro/nail-salon-software",
+        },
+        {
+          id: "pilates",
+          name: "Pilates",
+          href: "https://www.vagaro.com/pro/pilates-software",
+        },
         {
           id: "mental-health",
           name: "Mental Health",
@@ -74,67 +102,119 @@ class FooterLinksManager {
           name: "Online Booking",
           href: "/pro/online-booking",
         },
-        { id: "calendar", name: "Calendar", href: "/pro/calendar" },
-        { id: "pay-later", name: "Pay Later", href: "/pro/pay-later" },
-        { id: "mysite", name: "MySite", href: "/pro/booking-website-builder" },
-        { id: "forms", name: "Forms", href: "/pro/forms" },
-        { id: "reports", name: "Reports", href: "/pro/reports" },
+        {
+          id: "calendar",
+          name: "Calendar",
+          href: "https://www.vagaro.com/pro/calendar",
+        },
+        {
+          id: "pay-later",
+          name: "Pay Later",
+          href: "https://www.vagaro.com/pro/pay-later",
+        },
+        {
+          id: "mysite",
+          name: "MySite",
+          href: "https://www.vagaro.com/pro/booking-website-builder",
+        },
+        {
+          id: "forms",
+          name: "Forms",
+          href: "https://www.vagaro.com/pro/forms",
+        },
+        {
+          id: "reports",
+          name: "Reports",
+          href: "https://www.vagaro.com/pro/reports",
+        },
         {
           id: "vagaro-capital",
           name: "Vagaro Capital",
-          href: "/pro/vagaro-capital",
+          href: "https://www.vagaro.com/pro/vagaro-capital",
         },
-        { id: "branded-app", name: "Branded App", href: "/pro/branded-app" },
+        {
+          id: "branded-app",
+          name: "Branded App",
+          href: "https://www.vagaro.com/pro/branded-app",
+        },
       ],
       businessProducts: [
-        { id: "paypro", name: "PayPro", href: "/pro/pos-hardware/terminal" },
+        {
+          id: "paypro",
+          name: "PayPro",
+          href: "https://www.vagaro.com/pro/pos-hardware/terminal",
+        },
         {
           id: "paypro-mini",
           name: "PayPro Mini",
-          href: "/pro/pos-hardware/tablet",
+          href: "https://www.vagaro.com/pro/pos-hardware/tablet",
         },
         {
           id: "paypro-duo",
           name: "PayPro Duo",
-          href: "/pro/pos-hardware/terminal-dual-screen",
+          href: "https://www.vagaro.com/pro/pos-hardware/terminal-dual-screen",
         },
         {
           id: "card-reader",
           name: "Card Reader",
-          href: "/pro/pos-hardware/credit-card-reader",
+          href: "https://www.vagaro.com/pro/pos-hardware/credit-card-reader",
         },
         {
           id: "pay-swivel-stand",
           name: "Pay Swivel Stand",
-          href: "/pro/pos-hardware/stand",
+          href: "https://www.vagaro.com/pro/pos-hardware/stand",
         },
         {
           id: "qr-scanner",
           name: "QR Scanner",
-          href: "/pro/pos-hardware/barcode-scanner",
+          href: "https://www.vagaro.com/pro/pos-hardware/barcode-scanner",
         },
         {
           id: "receipt-printer",
           name: "Receipt Printer",
-          href: "/pro/pos-hardware/thermal-receipt-printer",
+          href: "https://www.vagaro.com/pro/pos-hardware/thermal-receipt-printer",
         },
         {
           id: "cash-drawer",
           name: "Cash Drawer",
-          href: "/pro/pos-hardware/cash-register",
+          href: "https://www.vagaro.com/pro/pos-hardware/cash-register",
         },
       ],
       company: [
-        { id: "about-us", name: "About Us", href: "/pro/about-us" },
-        { id: "careers", name: "Careers", href: "/pro/careers" },
-        { id: "contact-us", name: "Contact Us", href: "/pro/contact" },
-        { id: "vagaro-cares", name: "Vagaro Cares", href: "/pro/vagaro-cares" },
-        { id: "updates", name: "Updates", href: "/pro/updates" },
-        { id: "partnerships", name: "Partnerships", href: "/pro/partners" },
+        {
+          id: "about-us",
+          name: "About Us",
+          href: "https://www.vagaro.com/pro/about-us",
+        },
+        {
+          id: "careers",
+          name: "Careers",
+          href: "https://www.vagaro.com/pro/careers",
+        },
+        {
+          id: "contact-us",
+          name: "Contact Us",
+          href: "https://www.vagaro.com/pro/contact",
+        },
+        {
+          id: "vagaro-cares",
+          name: "Vagaro Cares",
+          href: "https://www.vagaro.com/pro/vagaro-cares",
+        },
+        {
+          id: "updates",
+          name: "Updates",
+          href: "https://www.vagaro.com/pro/updates",
+        },
+        {
+          id: "partnerships",
+          name: "Partnerships",
+          href: "https://www.vagaro.com/pro/partners",
+        },
         {
           id: "mysite-updates",
           name: "MySite Updates",
-          href: "/pro/mysite-updates",
+          href: "https://www.vagaro.com/pro/mysite-updates",
         },
         {
           id: "iconic-25",
@@ -151,7 +231,11 @@ class FooterLinksManager {
           name: "Newsroom",
           href: "https://www.vagaro.com/news",
         },
-        { id: "compare-us", name: "Compare Us", href: "/pro/compare" },
+        {
+          id: "compare-us",
+          name: "Compare Us",
+          href: "https://www.vagaro.com/pro/compare",
+        },
       ],
     };
   }
@@ -241,7 +325,7 @@ class FooterLinksManager {
 
         const href = item.href.startsWith("http")
           ? item.href
-          : `https://www.vagaro.com${item.href}`;
+          : `https://www.vagaro.com/pro/${item.href}`;
         const target = item.href.startsWith("http")
           ? 'target="_blank" rel="noopener"'
           : "";

@@ -8,6 +8,14 @@ import { PropTypes } from "prop-types";
 const NavigationMenuDemo = ({ navigationData = {} }) => {
   const { businessTypes, features, isLoaded } = navigationData;
 
+  // Utility function to format links - convert relative links to absolute Vagaro URLs
+  const formatLink = (link) => {
+    if (!link) return "#";
+    return link.startsWith("http")
+      ? link
+      : `https://www.vagaro.com/pro/${link}`;
+  };
+
   // For development: manually set which menu item should be open
   // Set to "features" or "business-types" to force that menu open for styling
   const [activeMenu, setActiveMenu] = React.useState(""); // Change this to control which menu is open
@@ -96,7 +104,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
               {businessTypes.beauty?.map((item) => (
                 <BusinessTypeItem
                   key={item.id}
-                  href={item.link}
+                  href={formatLink(item.link)}
                   title={item.name}
                   icon={item.iconImage?.url}
                 />
@@ -114,7 +122,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
               {businessTypes.wellness?.map((item) => (
                 <BusinessTypeItem
                   key={item.id}
-                  href={item.link}
+                  href={formatLink(item.link)}
                   title={item.name}
                   icon={item.iconImage?.url}
                 />
@@ -132,7 +140,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
               {businessTypes.fitness?.map((item) => (
                 <BusinessTypeItem
                   key={item.id}
-                  href={item.link}
+                  href={formatLink(item.link)}
                   title={item.name}
                   icon={item.iconImage?.url}
                 />
@@ -294,7 +302,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
                 {categories[categoryTitle].map((item) => (
                   <ListItem
                     key={item.id}
-                    href={item.link}
+                    href={formatLink(item.link)}
                     title={item.name}
                     icon={item.iconImage?.url}
                     className="hover:bg-gray-50"
@@ -318,9 +326,28 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         <NavigationMenu.Item>
           <NavigationMenu.Link
             className="NavigationMenuLink"
-            href="https://github.com/radix-ui"
+            href="https://www.vagaro.com/book-service"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Book a Service
+            <div className="flex items-center gap-2">
+              <span className="text-primary font-semibold">Book a Service</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="ml-1 h-4 w-4 text-primary"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                ></path>
+              </svg>
+            </div>
           </NavigationMenu.Link>
         </NavigationMenu.Item>
         {/* Business Types Menu */}
@@ -345,7 +372,9 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         <NavigationMenu.Item>
           <NavigationMenu.Link
             className="NavigationMenuLink"
-            href="https://github.com/radix-ui"
+            href="https://www.vagaro.com/pro/pos-hardware"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Products
           </NavigationMenu.Link>
@@ -353,7 +382,9 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         <NavigationMenu.Item>
           <NavigationMenu.Link
             className="NavigationMenuLink"
-            href="https://www.vagaro.com/pro/pos-hardware"
+            href="https://www.vagaro.com/pro/multi-location"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Multi-location
           </NavigationMenu.Link>
@@ -362,6 +393,8 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
           <NavigationMenu.Link
             className="NavigationMenuLink"
             href="https://www.vagaro.com/pro/pricing"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Pricing
           </NavigationMenu.Link>
@@ -370,6 +403,8 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
           <NavigationMenu.Link
             className="NavigationMenuLink"
             href="https://www.vagaro.com/pro/contact-sales-team"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Contact Sales
           </NavigationMenu.Link>
@@ -378,6 +413,8 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
           <NavigationMenu.Link
             className="NavigationMenuLink"
             href="https://vagaro.zendesk.com/hc/en-us"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Support
           </NavigationMenu.Link>
@@ -386,6 +423,8 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
           <NavigationMenu.Link
             className="NavigationMenuLink"
             href="https://www.vagaro.com/pro/resources"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Resources
           </NavigationMenu.Link>
@@ -398,6 +437,8 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
                 ? "https://us04.vagaro.com/merchants/calendar"
                 : "https://support.vagaro.com/hc/en-us/signin?return_to=https%3A%2F%2Fsupport.vagaro.com%2Fhc%2Fen-us"
             }
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <span className="text-primary font-semibold">
               {isLoggedIn ? "Go to My Business" : "Sign in"}
@@ -425,23 +466,28 @@ NavigationMenuDemo.propTypes = {
   }),
 };
 
-const BusinessTypeItem = ({ href, title, icon }) => (
-  <NavigationMenu.Link asChild>
-    <a
-      href={href}
-      className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
-    >
-      {icon && (
-        <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
-          <img src={icon} alt={title} className="w-5 h-5 " />
-        </div>
-      )}
-      <span className="text-charcoal font-medium group-hover:text-gray-900 transition-colors text-base">
-        {title}
-      </span>
-    </a>
-  </NavigationMenu.Link>
-);
+const BusinessTypeItem = ({ href, title, icon }) => {
+  // All navigation links should open in new tab since they're external to Zendesk
+  return (
+    <NavigationMenu.Link asChild>
+      <a
+        href={href}
+        className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {icon && (
+          <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
+            <img src={icon} alt={title} className="w-5 h-5 " />
+          </div>
+        )}
+        <span className="text-charcoal font-medium group-hover:text-gray-900 transition-colors text-base">
+          {title}
+        </span>
+      </a>
+    </NavigationMenu.Link>
+  );
+};
 
 BusinessTypeItem.propTypes = {
   href: PropTypes.string,
@@ -450,28 +496,34 @@ BusinessTypeItem.propTypes = {
 };
 
 const ListItem = React.forwardRef(
-  ({ className, children, title, icon, ...props }, forwardedRef) => (
-    <li>
-      <NavigationMenu.Link asChild>
-        <a
-          className={classNames(
-            "ListItemLink pr-1 py-2 text-base font-semibold",
-            className
-          )}
-          {...props}
-          ref={forwardedRef}
-        >
-          <div className="ListItemHeading flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
-              {icon && <img src={icon} alt={title} className="w-5 h-5" />}
+  ({ className, children, title, icon, href, ...props }, forwardedRef) => {
+    // All navigation links should open in new tab since they're external to Zendesk
+    return (
+      <li>
+        <NavigationMenu.Link asChild>
+          <a
+            className={classNames(
+              "ListItemLink pr-1 py-2 text-base font-semibold",
+              className
+            )}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            {...props}
+            ref={forwardedRef}
+          >
+            <div className="ListItemHeading flex items-center gap-3">
+              <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
+                {icon && <img src={icon} alt={title} className="w-5 h-5" />}
+              </div>
+              {title}
             </div>
-            {title}
-          </div>
-          <p className="">{children}</p>
-        </a>
-      </NavigationMenu.Link>
-    </li>
-  )
+            <p className="">{children}</p>
+          </a>
+        </NavigationMenu.Link>
+      </li>
+    );
+  }
 );
 
 ListItem.displayName = "ListItem";
@@ -480,6 +532,7 @@ ListItem.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string,
   icon: PropTypes.string,
+  href: PropTypes.string,
 };
 
 export default NavigationMenuDemo;

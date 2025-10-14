@@ -2169,6 +2169,145 @@ select:focus {
 .article-body li {
   margin-bottom: 0.25rem;
 }
+.article-body .orderedlist {
+  margin-bottom: 1rem;
+  padding-left: 0;
+}
+.article-body .orderedlist ol.orderedlist {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+.article-body .orderedlist ol.orderedlist[type="1"] {
+  list-style-type: decimal;
+}
+.article-body .orderedlist ol.orderedlist[type=a] {
+  list-style-type: lower-alpha;
+}
+.article-body .orderedlist ol.orderedlist[type=A] {
+  list-style-type: upper-alpha;
+}
+.article-body .orderedlist ol.orderedlist[type=i] {
+  list-style-type: lower-roman;
+}
+.article-body .orderedlist ol.orderedlist[type=I] {
+  list-style-type: upper-roman;
+}
+.article-body .orderedlist .listitem {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+.article-body .orderedlist .listitem p {
+  margin-bottom: 0.5rem;
+}
+.article-body .orderedlist .listitem p:last-child {
+  margin-bottom: 0;
+}
+.article-body .orderedlist .listitem .orderedlist {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.article-body .orderedlist .listitem .orderedlist ol.orderedlist {
+  padding-left: 2rem;
+}
+.article-body .procedure {
+  margin-bottom: 1rem;
+  padding-left: 0;
+}
+.article-body .procedure ol.procedure {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  list-style-type: decimal;
+}
+.article-body .procedure ol.procedure[type="1"] {
+  list-style-type: decimal;
+}
+.article-body .procedure ol.procedure[type=a] {
+  list-style-type: lower-alpha;
+}
+.article-body .procedure ol.procedure[type=A] {
+  list-style-type: upper-alpha;
+}
+.article-body .procedure .step {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+.article-body .procedure .step p {
+  margin-bottom: 0.5rem;
+}
+.article-body .procedure .step p:last-child {
+  margin-bottom: 0;
+}
+.article-body .procedure .step .orderedlist {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+.article-body .procedure .step .orderedlist ol.orderedlist {
+  padding-left: 2rem;
+}
+.article-body .procedure .step ol.substeps {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+  padding-left: 2rem;
+  list-style-type: lower-alpha;
+}
+.article-body .procedure .step ol.substeps .step {
+  margin-bottom: 0.5rem;
+}
+.article-body .itemizedlist {
+  margin-bottom: 1rem;
+  padding-left: 0;
+}
+.article-body .itemizedlist ul.itemizedlist {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+.article-body .itemizedlist ul.itemizedlist[style*="list-style-type: disc"] {
+  list-style-type: disc;
+}
+.article-body .itemizedlist ul.itemizedlist[style*="list-style-type: circle"] {
+  list-style-type: circle;
+}
+.article-body .itemizedlist ul.itemizedlist[style*="list-style-type: square"] {
+  list-style-type: square;
+}
+.article-body .itemizedlist .listitem {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+.article-body .itemizedlist .listitem p {
+  margin-bottom: 0.5rem;
+}
+.article-body .itemizedlist .listitem p:last-child {
+  margin-bottom: 0;
+}
+.article-body .guimenu,
+.article-body .guisubmenu,
+.article-body .guimenuitem {
+  font-weight: 600;
+  color: #374151;
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  border: 1px solid #d1d5db;
+}
+.article-body .inlinemediaobject {
+  display: inline-block;
+  vertical-align: middle;
+}
+.article-body .inlinemediaobject img {
+  max-height: 1.5em;
+  width: auto;
+  margin: 0 0.25rem;
+}
+.article-body .bold strong,
+.article-body span.bold strong {
+  font-weight: 700;
+  color: #111827;
+}
 .article-content {
   line-height: 1.6;
   margin: 40px 0;

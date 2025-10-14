@@ -136,6 +136,190 @@
     li {
       margin-bottom: 0.25rem;
     }
+
+    // Custom ordered list styles
+    .orderedlist {
+      margin-bottom: 1rem;
+      padding-left: 0;
+      
+      ol.orderedlist {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        
+        &[type="1"] {
+          list-style-type: decimal;
+        }
+        
+        &[type="a"] {
+          list-style-type: lower-alpha;
+        }
+        
+        &[type="A"] {
+          list-style-type: upper-alpha;
+        }
+        
+        &[type="i"] {
+          list-style-type: lower-roman;
+        }
+        
+        &[type="I"] {
+          list-style-type: upper-roman;
+        }
+      }
+      
+      .listitem {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+        
+        p {
+          margin-bottom: 0.5rem;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+        
+        // Nested ordered lists within list items
+        .orderedlist {
+          margin-top: 0.75rem;
+          margin-bottom: 0.5rem;
+          
+          ol.orderedlist {
+            padding-left: 2rem;
+          }
+        }
+      }
+    }
+
+    // Procedure list styles
+    .procedure {
+      margin-bottom: 1rem;
+      padding-left: 0;
+      
+      ol.procedure {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        list-style-type: decimal;
+        
+        &[type="1"] {
+          list-style-type: decimal;
+        }
+        
+        &[type="a"] {
+          list-style-type: lower-alpha;
+        }
+        
+        &[type="A"] {
+          list-style-type: upper-alpha;
+        }
+      }
+      
+      .step {
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
+        
+        p {
+          margin-bottom: 0.5rem;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+        
+        // Nested ordered lists within procedure steps
+        .orderedlist {
+          margin-top: 0.75rem;
+          margin-bottom: 0.5rem;
+          
+          ol.orderedlist {
+            padding-left: 2rem;
+          }
+        }
+        
+        // Substeps within procedure steps
+        ol.substeps {
+          margin-top: 0.75rem;
+          margin-bottom: 0.5rem;
+          padding-left: 2rem;
+          list-style-type: lower-alpha;
+          
+          .step {
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+    }
+
+    // Itemized list (bullet list) styles
+    .itemizedlist {
+      margin-bottom: 1rem;
+      padding-left: 0;
+      
+      ul.itemizedlist {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+        
+        &[style*="list-style-type: disc"] {
+          list-style-type: disc;
+        }
+        
+        &[style*="list-style-type: circle"] {
+          list-style-type: circle;
+        }
+        
+        &[style*="list-style-type: square"] {
+          list-style-type: square;
+        }
+      }
+      
+      .listitem {
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+        
+        p {
+          margin-bottom: 0.5rem;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    // GUI element styles for procedures
+    .guimenu,
+    .guisubmenu,
+    .guimenuitem {
+      font-weight: 600;
+      color: #374151;
+      background-color: #f3f4f6;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      border: 1px solid #d1d5db;
+    }
+
+    // Inline media object styles
+    .inlinemediaobject {
+      display: inline-block;
+      vertical-align: middle;
+      
+      img {
+        max-height: 1.5em;
+        width: auto;
+        margin: 0 0.25rem;
+      }
+    }
+
+    // Bold/strong text styles
+    .bold strong,
+    span.bold strong {
+      font-weight: 700;
+      color: #111827;
+    }
   }
 
   &-content {

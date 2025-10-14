@@ -835,35 +835,35 @@
         businessSoftware: [{
           id: "booth-renter",
           name: "Booth Renter",
-          href: "/pro/booth-renter"
+          href: "https://www.vagaro.com/pro/booth-renter"
         }, {
           id: "salon",
           name: "Salon",
-          href: "/pro/salon-software"
+          href: "https://www.vagaro.com/pro/salon-software"
         }, {
           id: "spa",
           name: "Spa",
-          href: "/pro/spa-software"
+          href: "https://www.vagaro.com/pro/spa-software"
         }, {
           id: "medical-spa",
           name: "Medical Spa",
-          href: "/pro/medical-spa-software"
+          href: "https://www.vagaro.com/pro/medical-spa-software"
         }, {
           id: "barber",
           name: "Barber",
-          href: "/pro/barber-software"
+          href: "https://www.vagaro.com/pro/barber-software"
         }, {
           id: "tanning",
           name: "Tanning",
-          href: "/pro/tanning-salon-software"
+          href: "https://www.vagaro.com/pro/tanning-salon-software"
         }, {
           id: "nail",
           name: "Nail",
-          href: "/pro/nail-salon-software"
+          href: "https://www.vagaro.com/pro/nail-salon-software"
         }, {
           id: "pilates",
           name: "Pilates",
-          href: "/pro/pilates-software"
+          href: "https://www.vagaro.com/pro/pilates-software"
         }, {
           id: "mental-health",
           name: "Mental Health",
@@ -876,93 +876,93 @@
         }, {
           id: "calendar",
           name: "Calendar",
-          href: "/pro/calendar"
+          href: "https://www.vagaro.com/pro/calendar"
         }, {
           id: "pay-later",
           name: "Pay Later",
-          href: "/pro/pay-later"
+          href: "https://www.vagaro.com/pro/pay-later"
         }, {
           id: "mysite",
           name: "MySite",
-          href: "/pro/booking-website-builder"
+          href: "https://www.vagaro.com/pro/booking-website-builder"
         }, {
           id: "forms",
           name: "Forms",
-          href: "/pro/forms"
+          href: "https://www.vagaro.com/pro/forms"
         }, {
           id: "reports",
           name: "Reports",
-          href: "/pro/reports"
+          href: "https://www.vagaro.com/pro/reports"
         }, {
           id: "vagaro-capital",
           name: "Vagaro Capital",
-          href: "/pro/vagaro-capital"
+          href: "https://www.vagaro.com/pro/vagaro-capital"
         }, {
           id: "branded-app",
           name: "Branded App",
-          href: "/pro/branded-app"
+          href: "https://www.vagaro.com/pro/branded-app"
         }],
         businessProducts: [{
           id: "paypro",
           name: "PayPro",
-          href: "/pro/pos-hardware/terminal"
+          href: "https://www.vagaro.com/pro/pos-hardware/terminal"
         }, {
           id: "paypro-mini",
           name: "PayPro Mini",
-          href: "/pro/pos-hardware/tablet"
+          href: "https://www.vagaro.com/pro/pos-hardware/tablet"
         }, {
           id: "paypro-duo",
           name: "PayPro Duo",
-          href: "/pro/pos-hardware/terminal-dual-screen"
+          href: "https://www.vagaro.com/pro/pos-hardware/terminal-dual-screen"
         }, {
           id: "card-reader",
           name: "Card Reader",
-          href: "/pro/pos-hardware/credit-card-reader"
+          href: "https://www.vagaro.com/pro/pos-hardware/credit-card-reader"
         }, {
           id: "pay-swivel-stand",
           name: "Pay Swivel Stand",
-          href: "/pro/pos-hardware/stand"
+          href: "https://www.vagaro.com/pro/pos-hardware/stand"
         }, {
           id: "qr-scanner",
           name: "QR Scanner",
-          href: "/pro/pos-hardware/barcode-scanner"
+          href: "https://www.vagaro.com/pro/pos-hardware/barcode-scanner"
         }, {
           id: "receipt-printer",
           name: "Receipt Printer",
-          href: "/pro/pos-hardware/thermal-receipt-printer"
+          href: "https://www.vagaro.com/pro/pos-hardware/thermal-receipt-printer"
         }, {
           id: "cash-drawer",
           name: "Cash Drawer",
-          href: "/pro/pos-hardware/cash-register"
+          href: "https://www.vagaro.com/pro/pos-hardware/cash-register"
         }],
         company: [{
           id: "about-us",
           name: "About Us",
-          href: "/pro/about-us"
+          href: "https://www.vagaro.com/pro/about-us"
         }, {
           id: "careers",
           name: "Careers",
-          href: "/pro/careers"
+          href: "https://www.vagaro.com/pro/careers"
         }, {
           id: "contact-us",
           name: "Contact Us",
-          href: "/pro/contact"
+          href: "https://www.vagaro.com/pro/contact"
         }, {
           id: "vagaro-cares",
           name: "Vagaro Cares",
-          href: "/pro/vagaro-cares"
+          href: "https://www.vagaro.com/pro/vagaro-cares"
         }, {
           id: "updates",
           name: "Updates",
-          href: "/pro/updates"
+          href: "https://www.vagaro.com/pro/updates"
         }, {
           id: "partnerships",
           name: "Partnerships",
-          href: "/pro/partners"
+          href: "https://www.vagaro.com/pro/partners"
         }, {
           id: "mysite-updates",
           name: "MySite Updates",
-          href: "/pro/mysite-updates"
+          href: "https://www.vagaro.com/pro/mysite-updates"
         }, {
           id: "iconic-25",
           name: "iconic.25",
@@ -987,7 +987,7 @@
         }, {
           id: "compare-us",
           name: "Compare Us",
-          href: "/pro/compare"
+          href: "https://www.vagaro.com/pro/compare"
         }]
       };
     }
@@ -1069,7 +1069,7 @@
               </li>
             `;
         }
-        const href = item.href.startsWith("http") ? item.href : `https://www.vagaro.com${item.href}`;
+        const href = item.href.startsWith("http") ? item.href : `https://www.vagaro.com/pro/${item.href}`;
         const target = item.href.startsWith("http") ? 'target="_blank" rel="noopener"' : "";
         return `
             <li>
@@ -35586,6 +35586,12 @@
       isLoaded
     } = navigationData;
 
+    // Utility function to format links - convert relative links to absolute Vagaro URLs
+    const formatLink = link => {
+      if (!link) return "#";
+      return link.startsWith("http") ? link : `https://www.vagaro.com/pro/${link}`;
+    };
+
     // For development: manually set which menu item should be open
     // Set to "features" or "business-types" to force that menu open for styling
     const [activeMenu, setActiveMenu] = reactExports.useState(""); // Change this to control which menu is open
@@ -35663,7 +35669,7 @@
         className: "grid grid-cols-1 col-span-1 md:grid-cols-2"
       }, businessTypes.beauty?.map(item => /*#__PURE__*/reactExports.createElement(BusinessTypeItem, {
         key: item.id,
-        href: item.link,
+        href: formatLink(item.link),
         title: item.name,
         icon: item.iconImage?.url
       })))), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("h3", {
@@ -35674,7 +35680,7 @@
         className: " grid grid-cols-1 col-span-1 md:grid-cols-2"
       }, businessTypes.wellness?.map(item => /*#__PURE__*/reactExports.createElement(BusinessTypeItem, {
         key: item.id,
-        href: item.link,
+        href: formatLink(item.link),
         title: item.name,
         icon: item.iconImage?.url
       })))), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("h3", {
@@ -35685,7 +35691,7 @@
         className: "grid grid-cols-1 col-span-1 md:grid-cols-2"
       }, businessTypes.fitness?.map(item => /*#__PURE__*/reactExports.createElement(BusinessTypeItem, {
         key: item.id,
-        href: item.link,
+        href: formatLink(item.link),
         title: item.name,
         icon: item.iconImage?.url
       }))))));
@@ -35778,7 +35784,7 @@
         className: "space-y-1"
       }, categories[categoryTitle].map(item => /*#__PURE__*/reactExports.createElement(ListItem, {
         key: item.id,
-        href: item.link,
+        href: formatLink(item.link),
         title: item.name,
         icon: item.iconImage?.url,
         className: "hover:bg-gray-50"
@@ -35792,8 +35798,26 @@
       className: "NavigationMenuList"
     }, /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://github.com/radix-ui"
-    }, "Book a Service")), /*#__PURE__*/reactExports.createElement(Item, {
+      href: "https://www.vagaro.com/book-service",
+      target: "_blank",
+      rel: "noopener noreferrer"
+    }, /*#__PURE__*/reactExports.createElement("div", {
+      className: "flex items-center gap-2"
+    }, /*#__PURE__*/reactExports.createElement("span", {
+      className: "text-primary font-semibold"
+    }, "Book a Service"), /*#__PURE__*/reactExports.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      fill: "none",
+      viewBox: "0 0 24 24",
+      strokeWidth: "2",
+      stroke: "currentColor",
+      className: "ml-1 h-4 w-4 text-primary",
+      "aria-hidden": "true"
+    }, /*#__PURE__*/reactExports.createElement("path", {
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      d: "M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+    }))))), /*#__PURE__*/reactExports.createElement(Item, {
       value: "business-types"
     }, /*#__PURE__*/reactExports.createElement(Trigger, {
       className: "NavigationMenuTrigger hover:bg-gray-50"
@@ -35813,25 +35837,39 @@
       className: "NavigationMenuContent"
     }, renderFeatures())), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://github.com/radix-ui"
+      href: "https://www.vagaro.com/pro/pos-hardware",
+      target: "_blank",
+      rel: "noopener noreferrer"
     }, "Products")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://www.vagaro.com/pro/pos-hardware"
+      href: "https://www.vagaro.com/pro/multi-location",
+      target: "_blank",
+      rel: "noopener noreferrer"
     }, "Multi-location")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://www.vagaro.com/pro/pricing"
+      href: "https://www.vagaro.com/pro/pricing",
+      target: "_blank",
+      rel: "noopener noreferrer"
     }, "Pricing")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://www.vagaro.com/pro/contact-sales-team"
+      href: "https://www.vagaro.com/pro/contact-sales-team",
+      target: "_blank",
+      rel: "noopener noreferrer"
     }, "Contact Sales")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://vagaro.zendesk.com/hc/en-us"
+      href: "https://vagaro.zendesk.com/hc/en-us",
+      target: "_blank",
+      rel: "noopener noreferrer"
     }, "Support")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink",
-      href: "https://www.vagaro.com/pro/resources"
+      href: "https://www.vagaro.com/pro/resources",
+      target: "_blank",
+      rel: "noopener noreferrer"
     }, "Resources")), /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement(Link, {
       className: "NavigationMenuLink border-primary",
-      href: isLoggedIn ? "https://us04.vagaro.com/merchants/calendar" : "https://support.vagaro.com/hc/en-us/signin?return_to=https%3A%2F%2Fsupport.vagaro.com%2Fhc%2Fen-us"
+      href: isLoggedIn ? "https://us04.vagaro.com/merchants/calendar" : "https://support.vagaro.com/hc/en-us/signin?return_to=https%3A%2F%2Fsupport.vagaro.com%2Fhc%2Fen-us",
+      target: "_blank",
+      rel: "noopener noreferrer"
     }, /*#__PURE__*/reactExports.createElement("span", {
       className: "text-primary font-semibold"
     }, isLoggedIn ? "Go to My Business" : "Sign in"))), /*#__PURE__*/reactExports.createElement(Indicator, {
@@ -35855,20 +35893,25 @@
     href,
     title,
     icon
-  }) => /*#__PURE__*/reactExports.createElement(Link, {
-    asChild: true
-  }, /*#__PURE__*/reactExports.createElement("a", {
-    href: href,
-    className: "flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group"
-  }, icon && /*#__PURE__*/reactExports.createElement("div", {
-    className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors"
-  }, /*#__PURE__*/reactExports.createElement("img", {
-    src: icon,
-    alt: title,
-    className: "w-5 h-5 "
-  })), /*#__PURE__*/reactExports.createElement("span", {
-    className: "text-charcoal font-medium group-hover:text-gray-900 transition-colors text-base"
-  }, title)));
+  }) => {
+    // All navigation links should open in new tab since they're external to Zendesk
+    return /*#__PURE__*/reactExports.createElement(Link, {
+      asChild: true
+    }, /*#__PURE__*/reactExports.createElement("a", {
+      href: href,
+      className: "flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors group",
+      target: "_blank",
+      rel: "noopener noreferrer"
+    }, icon && /*#__PURE__*/reactExports.createElement("div", {
+      className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors"
+    }, /*#__PURE__*/reactExports.createElement("img", {
+      src: icon,
+      alt: title,
+      className: "w-5 h-5 "
+    })), /*#__PURE__*/reactExports.createElement("span", {
+      className: "text-charcoal font-medium group-hover:text-gray-900 transition-colors text-base"
+    }, title)));
+  };
   BusinessTypeItem.propTypes = {
     href: propTypesExports.PropTypes.string,
     title: propTypesExports.PropTypes.string,
@@ -35879,30 +35922,38 @@
     children,
     title,
     icon,
+    href,
     ...props
-  }, forwardedRef) => /*#__PURE__*/reactExports.createElement("li", null, /*#__PURE__*/reactExports.createElement(Link, {
-    asChild: true
-  }, /*#__PURE__*/reactExports.createElement("a", _extends({
-    className: classNames("ListItemLink pr-1 py-2 text-base font-semibold", className)
-  }, props, {
-    ref: forwardedRef
-  }), /*#__PURE__*/reactExports.createElement("div", {
-    className: "ListItemHeading flex items-center gap-3"
-  }, /*#__PURE__*/reactExports.createElement("div", {
-    className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors"
-  }, icon && /*#__PURE__*/reactExports.createElement("img", {
-    src: icon,
-    alt: title,
-    className: "w-5 h-5"
-  })), title), /*#__PURE__*/reactExports.createElement("p", {
-    className: ""
-  }, children)))));
+  }, forwardedRef) => {
+    // All navigation links should open in new tab since they're external to Zendesk
+    return /*#__PURE__*/reactExports.createElement("li", null, /*#__PURE__*/reactExports.createElement(Link, {
+      asChild: true
+    }, /*#__PURE__*/reactExports.createElement("a", _extends({
+      className: classNames("ListItemLink pr-1 py-2 text-base font-semibold", className),
+      href: href,
+      target: "_blank",
+      rel: "noopener noreferrer"
+    }, props, {
+      ref: forwardedRef
+    }), /*#__PURE__*/reactExports.createElement("div", {
+      className: "ListItemHeading flex items-center gap-3"
+    }, /*#__PURE__*/reactExports.createElement("div", {
+      className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors"
+    }, icon && /*#__PURE__*/reactExports.createElement("img", {
+      src: icon,
+      alt: title,
+      className: "w-5 h-5"
+    })), title), /*#__PURE__*/reactExports.createElement("p", {
+      className: ""
+    }, children))));
+  });
   ListItem.displayName = "ListItem";
   ListItem.propTypes = {
     className: propTypesExports.PropTypes.string,
     children: propTypesExports.PropTypes.node,
     title: propTypesExports.PropTypes.string,
-    icon: propTypesExports.PropTypes.string
+    icon: propTypesExports.PropTypes.string,
+    href: propTypesExports.PropTypes.string
   };
 
   /* eslint-disable @shopify/jsx-no-hardcoded-content */
@@ -35924,23 +35975,29 @@
     } = userInfo;
     const [expandedSection, setExpandedSection] = reactExports.useState(null);
 
+    // Utility function to format links - convert relative links to absolute Vagaro URLs
+    const formatLink = link => {
+      if (!link) return "#";
+      return link.startsWith("http") ? link : `https://www.vagaro.com/pro/${link}`;
+    };
+
     // Handle escape key to close navigation
     reactExports.useEffect(() => {
       const handleEscape = event => {
-        if (event.key === 'Escape' && isOpen) {
+        if (event.key === "Escape" && isOpen) {
           onClose();
         }
       };
       if (isOpen) {
-        document.addEventListener('keydown', handleEscape);
+        document.addEventListener("keydown", handleEscape);
         // Prevent body scroll when mobile nav is open
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
       } else {
-        document.body.style.overflow = '';
+        document.body.style.overflow = "";
       }
       return () => {
-        document.removeEventListener('keydown', handleEscape);
-        document.body.style.overflow = '';
+        document.removeEventListener("keydown", handleEscape);
+        document.body.style.overflow = "";
       };
     }, [isOpen, onClose]);
 
@@ -35982,12 +36039,12 @@
       }, Object.entries(categories).map(([key, category]) => /*#__PURE__*/reactExports.createElement("div", {
         key: key
       }, /*#__PURE__*/reactExports.createElement("h4", {
-        className: "text-sm font-semibold text-gray-900 uppercase mb-2"
+        className: "text-base font-semibold text-primary uppercase mb-2"
       }, category.title), /*#__PURE__*/reactExports.createElement("div", {
         className: "space-y-1"
       }, category.items.map(item => /*#__PURE__*/reactExports.createElement(MobileNavItem, {
         key: item.id,
-        href: item.link,
+        href: formatLink(item.link),
         title: item.name,
         icon: item.iconImage?.url,
         onClick: onClose
@@ -36031,12 +36088,12 @@
         return /*#__PURE__*/reactExports.createElement("div", {
           key: categoryTitle
         }, /*#__PURE__*/reactExports.createElement("h4", {
-          className: "text-sm font-semibold text-gray-900 uppercase mb-2"
+          className: "text-sm font-semibold text-primary uppercase mb-2"
         }, categoryTitle), /*#__PURE__*/reactExports.createElement("div", {
           className: "space-y-1"
         }, items.map(item => /*#__PURE__*/reactExports.createElement(MobileNavItem, {
           key: item.id,
-          href: item.link,
+          href: formatLink(item.link),
           title: item.name,
           icon: item.iconImage?.url,
           onClick: onClose
@@ -36063,10 +36120,10 @@
       alt: userName || "User",
       className: "w-8 h-8 rounded-full"
     }), /*#__PURE__*/reactExports.createElement("span", {
-      className: "font-medium text-gray-900"
+      className: "font-medium text-primary"
     }, isSignedIn ? userName || "Menu" : "Menu")), /*#__PURE__*/reactExports.createElement("button", {
       onClick: onClose,
-      className: "p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary",
+      className: "p-2 rounded-md text-primary hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary",
       "aria-label": "Close navigation"
     }, /*#__PURE__*/reactExports.createElement("svg", {
       className: "w-6 h-6",
@@ -36121,16 +36178,16 @@
     }, "My Requests")))), /*#__PURE__*/reactExports.createElement("div", {
       className: "space-y-4"
     }, /*#__PURE__*/reactExports.createElement(MobileNavItem, {
-      href: "https://github.com/radix-ui",
+      href: "https://www.vagaro.com",
       title: "Book a Service",
       onClick: onClose,
       className: "text-lg font-medium"
     }), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("button", {
-      onClick: () => toggleSection('business-types'),
+      onClick: () => toggleSection("business-types"),
       className: "flex items-center justify-between w-full p-2 text-left text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md transition-colors",
-      "aria-expanded": expandedSection === 'business-types'
+      "aria-expanded": expandedSection === "business-types"
     }, /*#__PURE__*/reactExports.createElement("span", null, "Business Types"), /*#__PURE__*/reactExports.createElement("svg", {
-      className: classNames("w-5 h-5 text-gray-400 transition-transform duration-200", expandedSection === 'business-types' ? "rotate-180" : ""),
+      className: classNames("w-5 h-5 text-gray-400 transition-transform duration-200", expandedSection === "business-types" ? "rotate-180" : ""),
       fill: "none",
       viewBox: "0 0 24 24",
       stroke: "currentColor"
@@ -36139,14 +36196,14 @@
       strokeLinejoin: "round",
       strokeWidth: 2,
       d: "M19 9l-7 7-7-7"
-    }))), expandedSection === 'business-types' && /*#__PURE__*/reactExports.createElement("div", {
+    }))), expandedSection === "business-types" && /*#__PURE__*/reactExports.createElement("div", {
       className: "mt-2 pl-4 border-l-2 border-gray-100"
     }, renderBusinessTypes())), /*#__PURE__*/reactExports.createElement("div", null, /*#__PURE__*/reactExports.createElement("button", {
-      onClick: () => toggleSection('features'),
+      onClick: () => toggleSection("features"),
       className: "flex items-center justify-between w-full p-2 text-left text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md transition-colors",
-      "aria-expanded": expandedSection === 'features'
+      "aria-expanded": expandedSection === "features"
     }, /*#__PURE__*/reactExports.createElement("span", null, "Features"), /*#__PURE__*/reactExports.createElement("svg", {
-      className: classNames("w-5 h-5 text-gray-400 transition-transform duration-200", expandedSection === 'features' ? "rotate-180" : ""),
+      className: classNames("w-5 h-5 text-gray-400 transition-transform duration-200", expandedSection === "features" ? "rotate-180" : ""),
       fill: "none",
       viewBox: "0 0 24 24",
       stroke: "currentColor"
@@ -36155,7 +36212,7 @@
       strokeLinejoin: "round",
       strokeWidth: 2,
       d: "M19 9l-7 7-7-7"
-    }))), expandedSection === 'features' && /*#__PURE__*/reactExports.createElement("div", {
+    }))), expandedSection === "features" && /*#__PURE__*/reactExports.createElement("div", {
       className: "mt-2 pl-4 border-l-2 border-gray-100"
     }, renderFeatures())), /*#__PURE__*/reactExports.createElement(MobileNavItem, {
       href: "https://github.com/radix-ui",
