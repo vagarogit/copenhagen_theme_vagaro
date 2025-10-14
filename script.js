@@ -36110,7 +36110,7 @@
     }, /*#__PURE__*/reactExports.createElement("div", {
       className: "absolute inset-0 bg-black bg-opacity-50"
     }), /*#__PURE__*/reactExports.createElement("div", {
-      className: "mobile-nav-drawer absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-xl transform transition-transform duration-300 ease-in-out"
+      className: "mobile-nav-drawer absolute right-0 top-0 h-full w-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out"
     }, /*#__PURE__*/reactExports.createElement("div", {
       className: "flex items-center justify-between p-4 border-b border-gray-200"
     }, /*#__PURE__*/reactExports.createElement("div", {
@@ -36280,15 +36280,17 @@
     className = ""
   }) => /*#__PURE__*/reactExports.createElement("a", {
     href: href,
-    className: classNames("flex items-center space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors text-gray-700 hover:text-gray-900", className),
+    className: classNames("flex items-center text-base space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors text-gray-700 hover:text-gray-900", className),
     onClick: onClick
   }, icon && /*#__PURE__*/reactExports.createElement("div", {
-    className: "w-6 h-6 flex items-center justify-center bg-gray-100 rounded-full"
+    className: "w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full"
   }, /*#__PURE__*/reactExports.createElement("img", {
     src: icon,
     alt: title,
-    className: "w-4 h-4"
-  })), /*#__PURE__*/reactExports.createElement("span", null, title));
+    className: "w-6 h-6"
+  })), /*#__PURE__*/reactExports.createElement("span", {
+    className: "text-base font-semibold"
+  }, title));
   MobileNavItem.propTypes = {
     href: propTypesExports.PropTypes.string.isRequired,
     title: propTypesExports.PropTypes.string.isRequired,
