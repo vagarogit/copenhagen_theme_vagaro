@@ -176,7 +176,7 @@
       </div>
       {{#if settings.show_article_comments}}
         <div class="article-comments" id="article-comments">
-          <section class="comments">
+          <section class="comments py-16">
             <header class="comment-overview">
               <h2 class="comment-heading">
                 {{t 'comments'}}
@@ -199,7 +199,7 @@
               {{/if}}
             </header>
 
-            <ul id="comments" class="comment-list bg-slate-400">
+            <ul id="comments" class="comment-list bg-white">
               {{#each comments}}
                 <li id="{{anchor}}" class="comment">
                   <div class="comment-wrapper">
@@ -213,7 +213,7 @@
                           {{/if}}
                           <img src="{{author.avatar_url}}" alt="" class="user-avatar"/>
                         </div>
-                        <div class="comment-meta">
+                        <div class="comment-meta flex flex-col">
                           <span title="{{author.name}}" id="{{anchor}}-author">
                             {{#link 'user_profile' id=author.id}}
                               {{author.name}}
@@ -311,9 +311,12 @@
             {{/form}}
 
             <p class="comment-callout">{{comment_callout}}</p>
+                
           </section>
+          
         </div>
       {{/if}}
+  
     </article>
 
     <!-- Table of Contents -->

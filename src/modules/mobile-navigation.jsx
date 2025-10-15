@@ -10,7 +10,7 @@ const MobileNavigation = ({
   userInfo = {},
 }) => {
   const { businessTypes, features, isLoaded } = navigationData;
-  const { isSignedIn, userAvatar, userName } = userInfo;
+  const { isSignedIn } = userInfo;
 
   const [expandedSection, setExpandedSection] = React.useState(null);
 
@@ -100,7 +100,7 @@ const MobileNavigation = ({
   const renderFeatures = () => {
     if (!features || !isLoaded) {
       return (
-        <div className="text-gray-500 text-sm p-4">Loading features...</div>
+        <div className="text-gray-500 text-base p-4">Loading features...</div>
       );
     }
 
@@ -164,7 +164,7 @@ const MobileNavigation = ({
 
           return (
             <div key={categoryTitle}>
-              <h4 className="text-sm font-semibold text-primary uppercase mb-2">
+              <h4 className="text-base font-semibold text-primary uppercase mb-2">
                 {categoryTitle}
               </h4>
               <div className="space-y-1">
@@ -201,22 +201,30 @@ const MobileNavigation = ({
       {/* Navigation Drawer */}
       <div className="mobile-nav-drawer absolute right-0 top-0 h-full w-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
-          <div className="flex items-center space-x-3">
-            {isSignedIn && userAvatar && (
-              <img
-                src={userAvatar}
-                alt={userName || "User"}
-                className="w-8 h-8 rounded-full"
-              />
-            )}
-            <span className="font-medium text-primary">
-              {isSignedIn ? userName || "Menu" : "Menu"}
-            </span>
+        <div className="relative flex items-center justify-center p-4 border-b border-gray-200">
+          <div className="absolute left-4 flex h-16 items-center">
+            <a href="/">
+              <svg
+                width="80"
+                height="40"
+                viewBox="0 0 320.06 291.85"
+                className="fill-primary"
+              >
+                <path d="M160.05,291.82c-19.02,0-37.55-9.86-47.72-27.49L7.36,82.52C-7.81,56.26,1.22,22.56,27.49,7.39,40.21,.05,55.03-1.9,69.22,1.9s26.05,12.9,33.4,25.63l65.62,113.66-15.59,9L87.03,36.52c-4.94-8.56-12.92-14.68-22.47-17.24-9.55-2.56-19.52-1.25-28.08,3.7-17.67,10.2-23.74,32.87-13.54,50.54L127.91,255.33c10.2,17.67,32.87,23.74,50.54,13.54l9,15.59c-8.64,4.99-18.08,7.36-27.41,7.36Z"></path>
+                <path d="M160.02,291.85c-9.53,0-18.94-2.5-27.41-7.39-26.26-15.16-35.29-48.87-20.13-75.13L217.44,27.52C232.61,1.26,266.31-7.77,292.58,7.39c26.26,15.16,35.29,48.87,20.13,75.13l-104.97,181.81c-7.34,12.72-19.21,21.82-33.4,25.63-4.74,1.27-9.55,1.9-14.32,1.9ZM265.14,18.03c-12.8,0-25.26,6.64-32.11,18.49l-104.96,181.81c-10.2,17.67-4.12,40.34,13.54,50.54,8.56,4.94,18.53,6.25,28.08,3.7,9.55-2.56,17.53-8.68,22.47-17.24l104.97-181.81c10.2-17.67,4.12-40.34-13.54-50.54-5.81-3.36-12.17-4.95-18.44-4.95Z"></path>
+                <circle cx="161.58" cy="234.28" r="15.49"></circle>
+              </svg>
+            </a>
           </div>
+          <a
+            href="https://www.vagaro.com/pro/pricing"
+            className="flex items-center justify-center bg-primary hover:bg-charcoal hover:border-solid text-md text-white font-medium py-2 px-4 rounded-full w-[152px] h-[40px]"
+          >
+            <span className="text-white font-semibold">Sign Up</span>
+          </a>
           <button
             onClick={onClose}
-            className="p-2 rounded-md text-primary hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+            className="absolute right-4 p-2 rounded-md text-primary hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
             aria-label="Close navigation"
           >
             <svg
@@ -260,7 +268,9 @@ const MobileNavigation = ({
                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                       />
                     </svg>
-                    <span className="text-gray-700">My Profile</span>
+                    <span className="text-gray-900 text-lg font-semibold">
+                      My Profile
+                    </span>
                   </a>
                   <a
                     href="/hc/en-us/requests"
@@ -280,7 +290,9 @@ const MobileNavigation = ({
                         d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                       />
                     </svg>
-                    <span className="text-gray-700">My Requests</span>
+                    <span className="text-gray-900 text-lg font-semibold">
+                      My Requests
+                    </span>
                   </a>
                 </div>
               </div>
@@ -293,14 +305,14 @@ const MobileNavigation = ({
                 href="https://www.vagaro.com"
                 title="Book a Service"
                 onClick={onClose}
-                className="text-lg font-medium"
+                className="text-lg font-semibold"
               />
 
               {/* Business Types */}
               <div>
                 <button
                   onClick={() => toggleSection("business-types")}
-                  className="flex items-center justify-between w-full p-2 text-left text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+                  className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors focus:outline-none"
                   aria-expanded={expandedSection === "business-types"}
                 >
                   <span>Business Types</span>
@@ -322,9 +334,7 @@ const MobileNavigation = ({
                   </svg>
                 </button>
                 {expandedSection === "business-types" && (
-                  <div className="mt-2 pl-4 border-l-2 border-gray-100">
-                    {renderBusinessTypes()}
-                  </div>
+                  <div className="mt-2">{renderBusinessTypes()}</div>
                 )}
               </div>
 
@@ -332,7 +342,7 @@ const MobileNavigation = ({
               <div>
                 <button
                   onClick={() => toggleSection("features")}
-                  className="flex items-center justify-between w-full p-2 text-left text-lg font-medium text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+                  className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
                   aria-expanded={expandedSection === "features"}
                 >
                   <span>Features</span>
@@ -354,53 +364,51 @@ const MobileNavigation = ({
                   </svg>
                 </button>
                 {expandedSection === "features" && (
-                  <div className="mt-2 pl-4 border-l-2 border-gray-100">
-                    {renderFeatures()}
-                  </div>
+                  <div className="mt-2">{renderFeatures()}</div>
                 )}
               </div>
 
               {/* Other Navigation Items */}
               <MobileNavItem
-                href="https://github.com/radix-ui"
+                href="https://www.vagaro.com/pro/pos-hardware"
                 title="Products"
                 onClick={onClose}
-                className="text-lg font-medium"
+                className="text-lg font-semibold"
               />
 
               <MobileNavItem
-                href="https://www.vagaro.com/pro/pos-hardware"
+                href="https://www.vagaro.com/pro/multi-location"
                 title="Multi-location"
                 onClick={onClose}
-                className="text-lg font-medium"
+                className="text-lg font-semibold"
               />
 
               <MobileNavItem
                 href="https://www.vagaro.com/pro/pricing"
                 title="Pricing"
                 onClick={onClose}
-                className="text-lg font-medium"
+                className="text-lg font-semibold"
               />
 
               <MobileNavItem
                 href="https://www.vagaro.com/pro/contact-sales-team"
                 title="Contact Sales"
                 onClick={onClose}
-                className="text-lg font-medium"
+                className="text-lg font-semibold"
               />
 
               <MobileNavItem
                 href="https://vagaro.zendesk.com/hc/en-us"
                 title="Support"
                 onClick={onClose}
-                className="text-lg font-medium"
+                className="text-lg font-semibold"
               />
 
               <MobileNavItem
                 href="https://www.vagaro.com/pro/resources"
                 title="Resources"
                 onClick={onClose}
-                className="text-lg font-medium"
+                className="text-lg font-semibold"
               />
             </div>
 
@@ -409,14 +417,14 @@ const MobileNavigation = ({
               <div className="pt-4 border-t border-gray-200 space-y-3">
                 <a
                   href="#"
-                  className="block w-full text-center py-2 px-4 text-charcoal font-medium hover:text-gray-900 transition-colors"
+                  className="block w-full text-center py-2 px-4 text-charcoal font-semibold hover:text-gray-900 transition-colors"
                   onClick={onClose}
                 >
                   Log In
                 </a>
                 <a
                   href="https://www.vagaro.com/pro/pricing"
-                  className="block w-full text-center py-3 px-4 bg-primary hover:bg-charcoal text-white font-medium rounded-full transition-colors"
+                  className="block w-full text-center py-3 px-4 bg-primary hover:bg-charcoal text-white font-semibold rounded-full transition-colors"
                   onClick={onClose}
                 >
                   Sign Up
@@ -450,7 +458,7 @@ const MobileNavItem = ({ href, title, icon, onClick, className = "" }) => (
   <a
     href={href}
     className={classNames(
-      "flex items-center text-base space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors text-gray-700 hover:text-gray-900",
+      "flex items-center text-lg space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors text-gray-900 hover:text-gray-900",
       className
     )}
     onClick={onClick}
@@ -460,7 +468,7 @@ const MobileNavItem = ({ href, title, icon, onClick, className = "" }) => (
         <img src={icon} alt={title} className="w-6 h-6" />
       </div>
     )}
-    <span className="text-base font-semibold">{title}</span>
+    <span className="text-lg font-semibold">{title}</span>
   </a>
 );
 

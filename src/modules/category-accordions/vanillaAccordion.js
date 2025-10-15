@@ -123,10 +123,54 @@ export function initVanillaAccordions() {
         // Clone the articles list
         const articlesListClone = articlesList.cloneNode(true);
         accordionPanel.appendChild(articlesListClone);
-      }
 
-      // Add "see all" link if available
-      if (seeAllLink) {
+        // If there are more articles, fetch them all in the background
+        if (seeAllLink) {
+          // Add a loading indicator
+          const loadingIndicator = document.createElement("div");
+          loadingIndicator.className = "loading-more-articles";
+          loadingIndicator.textContent = "Loading all articles...";
+          accordionPanel.appendChild(loadingIndicator);
+
+          // Get the section URL
+          const sectionUrl = sectionTitle.getAttribute("href");
+
+          // Fetch all articles asynchronously (non-blocking, preserves order)
+          fetch(sectionUrl)
+            .then((response) => response.text())
+            .then((html) => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, "text/html");
+              const fullArticlesList = doc.querySelector(".article-list");
+
+              if (fullArticlesList) {
+                // Replace the cloned list with the full list
+                const currentArticlesList =
+                  accordionPanel.querySelector(".article-list");
+                if (currentArticlesList) {
+                  currentArticlesList.replaceWith(
+                    fullArticlesList.cloneNode(true)
+                  );
+                }
+              }
+
+              // Remove loading indicator
+              if (loadingIndicator.parentNode) {
+                loadingIndicator.remove();
+              }
+            })
+            .catch((error) => {
+              console.error("Error fetching all articles:", error);
+              // Keep the see all link as fallback
+              const seeAllLinkClone = seeAllLink.cloneNode(true);
+              accordionPanel.appendChild(seeAllLinkClone);
+              if (loadingIndicator.parentNode) {
+                loadingIndicator.remove();
+              }
+            });
+        }
+      } else if (seeAllLink) {
+        // If no articles list but there's a see all link, keep it
         const seeAllLinkClone = seeAllLink.cloneNode(true);
         accordionPanel.appendChild(seeAllLinkClone);
       }

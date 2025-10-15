@@ -93,13 +93,13 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
 
     return (
       <div className="List bg-white p-8 w-full fullwidth">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4 w-full xl:container mx-auto">
           {/* Beauty Column */}
           <div className="">
             <h3 className="text-lg font-bold text-primary uppercase ">
               {categories.beauty}
             </h3>
-            <div className="h-px bg-gray-400" />
+            <div className="h-px bg-gray-400 max-w-[90%]" />
             <div className="grid grid-cols-1 col-span-1 md:grid-cols-2">
               {businessTypes.beauty?.map((item) => (
                 <BusinessTypeItem
@@ -117,7 +117,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
             <h3 className="text-lg font-bold  text-primary uppercase">
               {categories.wellness}
             </h3>
-            <div className="h-px bg-gray-400" />
+            <div className="h-px bg-gray-400 max-w-[90%]" />
             <div className=" grid grid-cols-1 col-span-1 md:grid-cols-2">
               {businessTypes.wellness?.map((item) => (
                 <BusinessTypeItem
@@ -135,8 +135,8 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
             <h3 className="text-lg font-bold  text-primary uppercase ">
               {categories.fitness}
             </h3>
-            <div className="h-px bg-gray-400" />
-            <div className="grid grid-cols-1 col-span-1 md:grid-cols-2">
+            <div className="h-px bg-gray-400 max-w-[90%]" />
+            <div className="grid grid-cols-1 col-span-1 md:grid-cols-2 xl:max-w-7xl mx-auto">
               {businessTypes.fitness?.map((item) => (
                 <BusinessTypeItem
                   key={item.id}
@@ -291,7 +291,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
 
     return (
       <div className="List bg-white w-full fullwidth">
-        <div className="grid grid-cols-5 mx-auto gap-x-5">
+        <div className="grid grid-cols-5 gap-x-5 xl:container mx-auto">
           {categoryOrder.map((categoryTitle) => (
             <div key={categoryTitle} className="space-y-1">
               <h3 className="text-lg font-bold  text-primary uppercase text-nowrap">
@@ -331,7 +331,9 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
             rel="noopener noreferrer"
           >
             <div className="flex items-center gap-2">
-              <span className="text-primary font-semibold">Book a Service</span>
+              <span className="text-primary font-semibold text-nowrap">
+                Book a Service
+              </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -352,8 +354,8 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         {/* Business Types Menu */}
         <NavigationMenu.Item value="business-types">
-          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-50">
-            Business Types <CaretDownIcon className="CaretDown" aria-hidden />
+          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-50 text-nowrap">
+            Business Types
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent">
             {renderBusinessTypes()}
@@ -363,7 +365,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         {/* Features Menu */}
         <NavigationMenu.Item value="features">
           <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-50">
-            Features <CaretDownIcon className="CaretDown" aria-hidden />
+            Features
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent">
             {renderFeatures()}

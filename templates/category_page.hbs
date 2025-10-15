@@ -2,24 +2,28 @@
 <div class="container">
   <div class="sub-nav">
     {{breadcrumbs}}
-    <div class="search-container">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-        <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-        <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-      </svg>
-      {{search scoped=settings.scoped_kb_search submit=false}}
-    </div>
   </div>
 
   <div class="category-container">
-    <div class="category-content">
-      <header class="page-header">
+
+    
+    <div class="category-content flex flex-col gap-4">
+      
+      {{!-- Search above category listing --}}
+      <div class="search-container w-full max-w-2xl mx-auto z-0 px-4 sm:px-6 md:px-0">
+        {{search submit=false instant=settings.instant_search class='search search-full' placeholder='Search articles in this category...'}}
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
+          <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
+          <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
+        </svg>
+      </div>
+     
+        <header class="page-header">
         <h1 class="text-3xl font-bold">{{category.name}}</h1>
         {{#if category.description}}
           <p class="page-header-description">{{category.description}}</p>
         {{/if}}
       </header>
-
       <div id="main-content">
         {{!-- React Accordion Container --}}
         <div id="category-accordions-container"></div>
