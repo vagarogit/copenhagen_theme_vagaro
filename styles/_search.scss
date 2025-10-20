@@ -169,7 +169,7 @@ $padding-right: 20px;
 
   // Mobile positioning - account for px-4 (16px) container padding
   @include mobile {
-    left: 38px !important; // 15px base + 16px mobile padding
+    left: 16px !important; // Adjusted for better mobile positioning
   }
 
   // Tablet positioning - account for sm:px-6 (24px) container padding  

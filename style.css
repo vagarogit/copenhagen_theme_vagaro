@@ -1484,7 +1484,7 @@ select:focus {
 }
 @media (max-width: 768px) {
   .search-icon {
-    left: 38px !important;
+    left: 16px !important;
   }
 }
 @media (min-width: 768px) {
@@ -1674,6 +1674,7 @@ select:focus {
   .sub-nav .search-container .search-icon {
     width: 16px;
     height: 16px;
+    left: 10px;
   }
 }
 .sub-nav input[type=search] {
@@ -1690,7 +1691,7 @@ select:focus {
   .sub-nav input[type=search] {
     padding: 12px 12px 12px 40px;
     font-size: 16px;
-    border-radius: 8px;
+    border-radius: 30px;
   }
 }
 
