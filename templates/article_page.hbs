@@ -1,6 +1,6 @@
 <div class="container-divider"></div>
 <div class="container">
-  <div class="sub-nav">
+  <div class="sub-nav my-8">
     {{breadcrumbs}}
     <div class="search-container">
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="mx-auto px-4 lg:flex lg:gap-10" id="article-container">
+  <div class="mx-auto md:px-4 lg:flex lg:gap-10" id="article-container">
 
     <article id="main-content" class="w-full md: max-w-6xl">
       <header class="article-header">
@@ -55,7 +55,7 @@
       </div>
 
       <section class="article-info">
-        <div class="article-content pr-12">
+        <div class="article-content">
           <div class="article-body text-base leading-relaxed">{{article.body}}</div>
 
           {{#if (compare article.content_tags.length ">" 0)}}
@@ -139,6 +139,34 @@
           </a>
         </div>
       </footer>
+
+      {{#if settings.show_articles_in_section}}
+        <div class="section-articles-container lg:hidden mb-8">
+          <h3 class="section-articles-heading">Articles in this section</h3>
+          <nav class="section-articles-nav">
+            <ul class="section-articles-list">
+              {{#each section.articles}}
+                <li class="section-article-item">
+                  <a href="{{url}}"
+                     class="section-article-link {{#is id ../article.id}}current-article{{/is}}"
+                     {{#is id ../article.id}}aria-current="page"{{/is}}>
+                       {{title}}
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+            {{#if section.more_articles}}
+              <a href="{{section.url}}" class="section-more-link">{{t 'see_more'}}</a>
+            {{/if}}
+          </nav>
+        </div>
+      {{/if}}
+
+      {{#if settings.show_related_articles}}
+        <div class="custom-related-articles-sidebar lg:hidden mb-8">
+          {{related_articles}}
+        </div>
+      {{/if}}
 
       <div class="article-relatives">
         {{!-- {{#if settings.show_recently_viewed_articles}}

@@ -185,6 +185,9 @@ template {
   margin: 20px 0;
   position: relative;
   padding-left: 48px;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 .important::before {
   content: "";
@@ -241,6 +244,17 @@ template {
   margin-bottom: 10px;
 }
 
+.alert, .warning, .caution {
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 20px !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  border-radius: 8px;
+  position: relative;
+}
+
 .tip {
   background-color: rgba(232, 249, 243, 0.3) !important;
   border: 1px solid rgb(142, 227, 200);
@@ -250,7 +264,9 @@ template {
   margin: 8px 0;
   position: relative;
   padding-left: 48px;
-  width: 100%;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 .tip::before {
   content: "";
@@ -268,6 +284,17 @@ template {
   color: #333333;
   margin-top: 0;
   margin-bottom: 10px;
+}
+
+.alert, .warning, .caution {
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 20px !important;
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+  border-radius: 8px;
+  position: relative;
 }
 
 /***** Base *****/
