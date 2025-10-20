@@ -36,7 +36,6 @@
 
   &-header {
     @include tablet {
-      flex-direction: row;
       margin-top: 0;
     }
 
@@ -363,6 +362,11 @@
     flex: 1 0 auto; //Explicit values needed whith flex-direction: column for IE11
     margin-bottom: 20px;
     padding: 0;
+    display: none;
+
+    @include desktop {
+      display: block;
+    }
   }
 
   &-relatives {
@@ -473,6 +477,100 @@
   }
 }
 
+// Articles in this section styling (right sidebar)
+.section-articles-container {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.section-articles-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: #111827;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #d1d5db;
+}
+
+.section-articles-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section-article-item {
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.section-article-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #374151;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @include mobile {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  &:hover {
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+    transform: translateX(4px);
+    text-decoration: none;
+    color: $brand_color;
+  }
+
+  &.current-article {
+    background-color: $brand_color;
+    color: white;
+    border-color: $brand_color;
+    font-weight: 600;
+
+    &:hover {
+      background-color: darken($brand_color, 10%);
+      border-color: darken($brand_color, 10%);
+      color: white;
+    }
+  }
+}
+
+.section-more-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  color: $brand_color;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #f3f4f6;
+    text-decoration: none;
+  }
+}
+
 .recent-articles,
 .related-articles {
   &-title {
@@ -483,8 +581,82 @@
     margin-bottom: 15px;
   }
 }
+
+// Custom Related Articles Sidebar Section (right sidebar)
+.custom-related-articles-sidebar {
+  margin-top: 0;
+  margin-bottom: 24px;
+
+  .related-articles {
+    padding: 16px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+
+    &-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+      color: #111827;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #d1d5db;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 12px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      // Limit to 8 items
+      &:nth-child(n+9) {
+        display: none;
+      }
+    }
+
+    a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      background-color: white;
+      border: 1px solid #e5e7eb;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      color: #374151;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      @include mobile {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+        line-height: 1.3;
+      }
+
+      &:hover {
+        background-color: #f3f4f6;
+        border-color: #d1d5db;
+        transform: translateX(4px);
+        text-decoration: none;
+        color: $brand_color;
+      }
+    }
+  }
+}
+
 .mediaobject {
- 
+
 
   img {
     margin-top: 1rem;

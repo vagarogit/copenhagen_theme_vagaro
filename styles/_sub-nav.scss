@@ -7,6 +7,11 @@
   justify-content: space-between;
   margin-bottom: 55px;
 
+  @include mobile {
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
   @include tablet {
     flex-direction: row;
   }
@@ -14,26 +19,60 @@
   // Inner pages breadcrumbs
   .breadcrumbs {
     margin: 0;
+
+    @include mobile {
+      order: 1;
+      width: 100%;
+    }
   }
 
   // Inner pages search field
   .search-container {
+    position: relative;
     max-width: 300px;
     width: 100%;
+
+    @include mobile {
+      order: 2;
+      max-width: 100%;
+    }
 
     @include tablet {
       flex: 0 1 300px;
     }
+
+    // Make search icon more prominent on mobile
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      z-index: 1;
+
+      @include mobile {
+        width: 16px;
+        height: 16px;
+      }
+    }
   }
 
   input[type="search"] {
-    &::after { 
-      font-size: $font-size-base; 
+    padding-left: 40px;
+
+    &::after {
+      font-size: $font-size-base;
     }
-    
+
     &::placeholder {
       color: #666666;
       font-size: 16px;
+    }
+
+    @include mobile {
+      padding: 12px 12px 12px 40px;
+      font-size: 16px;
+      border-radius: 8px;
     }
   }
 }
