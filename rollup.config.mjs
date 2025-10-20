@@ -81,23 +81,9 @@ export default defineConfig([
           return undefined; // Don't bundle, make external
         }
 
-        // Exclude large Garden components from bundling to reduce bundle size
-        if (
-          id.includes("node_modules/@zendeskgarden/react-forms") ||
-          id.includes("node_modules/@zendeskgarden/react-dropdowns") ||
-          id.includes("node_modules/@zendeskgarden/react-buttons") ||
-          id.includes("node_modules/@zendeskgarden/react-notifications") ||
-          id.includes("node_modules/@zendeskgarden/react-typography") ||
-          id.includes("node_modules/@zendeskgarden/react-theming") ||
-          id.includes("node_modules/@zendeskgarden/react-modals") ||
-          id.includes("node_modules/@zendeskgarden/react-accordions") ||
-          id.includes("node_modules/@zendeskgarden/react-datepickers") ||
-          id.includes("node_modules/@zendeskgarden/react-loaders") ||
-          id.includes("node_modules/@zendeskgarden/react-tags") ||
-          id.includes("node_modules/@zendeskgarden/react-tooltips")
-        ) {
-          return undefined; // Don't bundle, make external
-        }
+        // Bundle Garden components to avoid module resolution issues
+        // Note: These were previously external but caused module resolution errors
+        // when not available via CDN
 
         if (id.includes("node_modules") || id.includes("src/modules/shared")) {
           return "shared";
@@ -123,18 +109,7 @@ export default defineConfig([
     },
     external: [
       "@zendesk/help-center-wysiwyg",
-      "@zendeskgarden/react-forms",
-      "@zendeskgarden/react-dropdowns.next",
-      "@zendeskgarden/react-buttons",
-      "@zendeskgarden/react-notifications",
-      "@zendeskgarden/react-typography",
-      "@zendeskgarden/react-theming",
-      "@zendeskgarden/react-modals",
-      "@zendeskgarden/react-accordions",
-      "@zendeskgarden/react-datepickers",
-      "@zendeskgarden/react-loaders",
-      "@zendeskgarden/react-tags",
-      "@zendeskgarden/react-tooltips",
+      // Garden components are now bundled instead of external to avoid module resolution issues
       "@zendeskgarden/svg-icons",
     ],
     plugins: [
