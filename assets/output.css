@@ -1571,13 +1571,6 @@
       }
     }
   }
-  .hover\:fill-white {
-    &:hover {
-      @media (hover: hover) {
-        fill: var(--color-white);
-      }
-    }
-  }
   .hover\:text-charcoal {
     &:hover {
       @media (hover: hover) {
