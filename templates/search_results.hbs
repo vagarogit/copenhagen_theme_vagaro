@@ -187,6 +187,7 @@
           Displaying 1 - {{#if results}}{{results.length}}{{else}}0{{/if}} of {{results_count}} results for '{{query}}'
         {{/if}}
       </div>
+      {{generative_answers}}
       {{#if results}}
         <ul class="search-results-list w-full">
           {{#each results}}
