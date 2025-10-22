@@ -163,7 +163,7 @@ $padding-right: 20px;
 .search-icon {
   @include vertical-align;
   position: absolute;
-  left: 15px; // Default desktop position
+  left: 25px; // Default desktop position
   z-index: 1;
   width: 20px;
   height: 20px;
@@ -241,7 +241,7 @@ $padding-right: 20px;
 
   .search-icon {
     position: absolute;
-    left: 36px;
+    left: 26px;
     top: 50%;
     transform: translateY(-50%);
     width: 16px;

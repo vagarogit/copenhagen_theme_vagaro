@@ -1481,7 +1481,7 @@ select:focus {
   top: 50%;
   transform: translateY(-50%);
   position: absolute;
-  left: 15px;
+  left: 25px;
   z-index: 1;
   width: 20px;
   height: 20px;
@@ -1555,7 +1555,7 @@ select:focus {
 }
 .hero .search-icon {
   position: absolute;
-  left: 36px;
+  left: 26px;
   top: 50%;
   transform: translateY(-50%);
   width: 16px;
