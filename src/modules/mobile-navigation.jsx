@@ -12,7 +12,7 @@ const MobileNavigation = ({
   const { businessTypes, features, isLoaded } = navigationData;
   const { isSignedIn } = userInfo;
 
-  const [expandedSection, setExpandedSection] = React.useState(null);
+  const [activePanel, setActivePanel] = React.useState(null);
 
   // Utility function to format links - convert relative links to absolute Vagaro URLs
   const formatLink = (link) => {
@@ -22,11 +22,15 @@ const MobileNavigation = ({
       : `https://www.vagaro.com/pro/${link}`;
   };
 
-  // Handle escape key to close navigation
+  // Handle escape key to close panel or navigation
   React.useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === "Escape" && isOpen) {
-        onClose();
+        if (activePanel) {
+          setActivePanel(null);
+        } else {
+          onClose();
+        }
       }
     };
 
@@ -42,7 +46,7 @@ const MobileNavigation = ({
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, activePanel]);
 
   // Handle backdrop click to close navigation
   const handleBackdropClick = (event) => {
@@ -51,9 +55,14 @@ const MobileNavigation = ({
     }
   };
 
-  // Toggle expanded sections
-  const toggleSection = (sectionName) => {
-    setExpandedSection(expandedSection === sectionName ? null : sectionName);
+  // Open a sliding panel
+  const openPanel = (panelName) => {
+    setActivePanel(panelName);
+  };
+
+  // Close the active panel
+  const closePanel = () => {
+    setActivePanel(null);
   };
 
   // Render business types section
@@ -309,68 +318,46 @@ const MobileNavigation = ({
               />
 
               {/* Business Types */}
-              <div>
-                <button
-                  onClick={() => toggleSection("business-types")}
-                  className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors focus:outline-none"
-                  aria-expanded={expandedSection === "business-types"}
+              <button
+                onClick={() => openPanel("business-types")}
+                className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors focus:outline-none"
+              >
+                <span>Business Types</span>
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <span>Business Types</span>
-                  <svg
-                    className={classNames(
-                      "w-5 h-5 text-gray-400 transition-transform duration-200",
-                      expandedSection === "business-types" ? "rotate-180" : ""
-                    )}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                {expandedSection === "business-types" && (
-                  <div className="mt-2 max-h-[480px] overflow-y-auto">
-                    {renderBusinessTypes()}
-                  </div>
-                )}
-              </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
 
               {/* Features */}
-              <div>
-                <button
-                  onClick={() => toggleSection("features")}
-                  className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
-                  aria-expanded={expandedSection === "features"}
+              <button
+                onClick={() => openPanel("features")}
+                className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors focus:outline-none"
+              >
+                <span>Features</span>
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <span>Features</span>
-                  <svg
-                    className={classNames(
-                      "w-5 h-5 text-gray-400 transition-transform duration-200",
-                      expandedSection === "features" ? "rotate-180" : ""
-                    )}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                {expandedSection === "features" && (
-                  <div className="mt-2 max-h-[480px] overflow-y-auto">
-                    {renderFeatures()}
-                  </div>
-                )}
-              </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
 
               {/* Other Navigation Items */}
               <MobileNavItem
@@ -436,6 +423,87 @@ const MobileNavigation = ({
               </div>
             )}
           </nav>
+        </div>
+
+        {/* Sliding Panels */}
+        {/* Business Types Panel */}
+        <div
+          className={classNames(
+            "absolute inset-0 bg-white transform transition-transform duration-300 ease-in-out",
+            activePanel === "business-types"
+              ? "translate-x-0"
+              : "translate-x-full"
+          )}
+        >
+          <div className="flex flex-col h-full">
+            {/* Panel Header */}
+            <div className="relative flex items-center justify-center h-16 border-b border-gray-200 px-4">
+              <h2 className="text-lg font-semibold text-primary leading-none m-0">
+                Business Types
+              </h2>
+              <button
+                onClick={closePanel}
+                className="absolute right-4 p-2 rounded-md text-primary hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                aria-label="Close panel"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            {/* Panel Content */}
+            <div className="flex-1 overflow-y-auto p-4">
+              {renderBusinessTypes()}
+            </div>
+          </div>
+        </div>
+
+        {/* Features Panel */}
+        <div
+          className={classNames(
+            "absolute inset-0 bg-white transform transition-transform duration-300 ease-in-out",
+            activePanel === "features" ? "translate-x-0" : "translate-x-full"
+          )}
+        >
+          <div className="flex flex-col h-full">
+            {/* Panel Header */}
+            <div className="relative flex items-center justify-center h-16 border-b border-gray-200 px-4">
+              <h2 className="text-lg font-semibold text-primary leading-none m-0">
+                Features
+              </h2>
+              <button
+                onClick={closePanel}
+                className="absolute right-4 p-2 rounded-md text-primary hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                aria-label="Close panel"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            {/* Panel Content */}
+            <div className="flex-1 overflow-y-auto p-4">{renderFeatures()}</div>
+          </div>
         </div>
       </div>
     </div>
