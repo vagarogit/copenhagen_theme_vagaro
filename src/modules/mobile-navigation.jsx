@@ -334,7 +334,9 @@ const MobileNavigation = ({
                   </svg>
                 </button>
                 {expandedSection === "business-types" && (
-                  <div className="mt-2">{renderBusinessTypes()}</div>
+                  <div className="mt-2 max-h-[480px] overflow-y-auto">
+                    {renderBusinessTypes()}
+                  </div>
                 )}
               </div>
 
@@ -364,7 +366,9 @@ const MobileNavigation = ({
                   </svg>
                 </button>
                 {expandedSection === "features" && (
-                  <div className="mt-2">{renderFeatures()}</div>
+                  <div className="mt-2 max-h-[480px] overflow-y-auto">
+                    {renderFeatures()}
+                  </div>
                 )}
               </div>
 

@@ -19,10 +19,10 @@
   <div class="mx-auto">
     <!-- Top row with logo and auth buttons -->
     <div
-      class="relative flex h-16 justify-center items-center border-b border-gray-100 mx-auto px-8"
+      class="relative flex h-16 justify-center items-center border-b border-gray-100 mx-auto px-4 border w-full"
     >
       <!-- Logo -->
-      <div class="absolute left-8 flex shrink-0 items-center">
+      <div class="absolute left-4 lg:left-8 flex shrink-0 items-center">
         {{#link "help_center" class="flex items-center"}}
           <img
             src="{{asset 'logo.svg'}}"
@@ -41,7 +41,7 @@
       </a>
 
       <!-- Auth & Region -->
-      <div class="absolute right-8 flex items-center space-x-4">
+      <div class="absolute right-4 lg:right-8 flex items-center space-x-4">
         <button
           type="button"
           class="text-gray-600 hover:text-gray-900 lg:hidden hidden"
