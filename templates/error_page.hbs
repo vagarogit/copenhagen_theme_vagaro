@@ -1,21 +1,142 @@
 <div class="container-divider"></div>
 <div id="main-content" class="error-page">
-  <h1>{{t 'oops'}}</h1>
+  <section class="error-page-section">
+    <div class="error-page-container">
+      <div class="error-page-content">
+        <div class="error-page-text">
+          <h1 class="error-page-title">
+            {{#is error 'not_found'}}
+              Looks like this link was a no show
+            {{/is}}
+            {{#is error 'unauthorized'}}
+              {{t 'oops'}}
+            {{/is}}
+            {{#is error 'forbidden'}}
+              {{t 'oops'}}
+            {{/is}}
+            {{#unless error}}
+              {{t 'oops'}}
+            {{/unless}}
+          </h1>
+          
+          <p class="error-page-description">
+            {{#is error 'not_found'}}
+              Check out some of our favorite support sections:
+            {{/is}}
+            {{#is error 'unauthorized'}}
+              {{t 'not_authorized'}}
+            {{/is}}
+            {{#is error 'forbidden'}}
+              {{t 'not_authorized'}}
+            {{/is}}
+            {{#unless error}}
+              {{t 'mistyped_address_or_moved_page'}}
+            {{/unless}}
+          </p>
 
-  {{#is error 'unauthorized'}}
-    <h2>{{link 'sign_in'}}</h2>
-  {{/is}}
+          {{#is error 'not_found'}}
+            <div class="error-page-links">
+              <div class="error-page-link-grid">
+                <a href="https://support.vagaro.com/hc/en-us/" class="error-page-link">
+                  <div class="error-page-link-icon">
+                   <img src="{{asset 'home.svg'}}" alt="Home" class="error-page-icon">
+                  </div>
+                  <span class="error-page-link-text">Home</span>
+                </a>
+                
+                <a href="/hc/en-us/categories/115000066034-Getting-Started-with-Vagaro" class="error-page-link">
+                  <div class="error-page-link-icon">
+                    <img src="{{asset 'key.svg'}}" alt="Getting Started" class="error-page-icon">
+                  </div>
+                  <span class="error-page-link-text">Getting Started</span>
+                </a>
+                
+                <a href="/hc/en-us/categories/115000065974-Credit-Card-Processing" class="error-page-link">
+                  <div class="error-page-link-icon">
+                    <img src="{{asset 'credit-card.svg'}}" alt="Card Processing" class="error-page-icon">
+                  </div>
+                  <span class="error-page-link-text">Card Processing</span>
+                </a>
+                
+                <a href="/hc/en-us/categories/22542821917083-Checkout" class="error-page-link">
+                  <div class="error-page-link-icon">
+                     <img src="{{asset 'bag-shopping.svg'}}" alt="Checkout" class="error-page-icon">
+                  </div>
+                  <span class="error-page-link-text">Checkout</span>
+                </a>
+                
+                <a href="/hc/en-us/categories/20043786980251-MySite" class="error-page-link">
+                  <div class="error-page-link-icon">
+                    <img src="{{asset 'browser.svg'}}" alt="MySite" class="error-page-icon">
+                  </div>
+                  <span class="error-page-link-text">MySite</span>
+                </a>
+                
+                <a href="/hc/en-us/categories/115000066094-Business-Settings" class="error-page-link">
+                  <div class="error-page-link-icon">
+                    <img src="{{asset 'gears.svg'}}" alt="Business Settings" class="error-page-icon">
+                  </div>
+                  <span class="error-page-link-text">Business Settings</span>
+                </a>
+              </div>
+            </div>
+          {{/is}}
 
-  {{#is error 'forbidden'}}
-    <h2>{{t 'not_authorized'}}</h2>
-  {{/is}}
+          {{#is error 'unauthorized'}}
+            <div class="error-page-actions">
+              {{link 'sign_in' class="error-page-button"}}
+            </div>
+          {{/is}}
 
-  {{#is error 'not_found'}}
-    <h2>{{t 'nonexistent_page'}}</h2>
-    <p>{{t 'mistyped_address_or_moved_page'}}</p>
-  {{/is}}
+          {{#is error 'forbidden'}}
+            <div class="error-page-actions">
+              {{#link 'help_center' class="error-page-button"}}
+                {{t 'back_to_homepage'}}
+              {{/link}}
+            </div>
+          {{/is}}
 
-  {{#link 'help_center'}}
-    {{t 'back_to_homepage'}}
-  {{/link}}
+          {{#unless error}}
+            <div class="error-page-actions">
+              {{#link 'help_center' class="error-page-button"}}
+                {{t 'back_to_homepage'}}
+              {{/link}}
+            </div>
+          {{/unless}}
+        </div>
+      </div>
+      
+      <div class="error-page-visual">
+        <div class="error-page-illustration">
+          {{#is error 'not_found'}}
+            <div class="error-page-404">
+              <span class="error-page-404-number">404</span>
+              <div class="error-page-404-decoration"></div>
+            </div>
+          {{/is}}
+          {{#is error 'unauthorized'}}
+            <div class="error-page-icon-large">
+              <svg class="error-page-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+          {{/is}}
+          {{#is error 'forbidden'}}
+            <div class="error-page-icon-large">
+              <svg class="error-page-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L18.364 5.636M5.636 18.364l12.728-12.728"></path>
+              </svg>
+            </div>
+          {{/is}}
+          {{#unless error}}
+            <div class="error-page-icon-large">
+              <svg class="error-page-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+              </svg>
+            </div>
+          {{/unless}}
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

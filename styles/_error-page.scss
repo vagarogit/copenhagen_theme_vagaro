@@ -1,0 +1,421 @@
+/***** Error Page Styles *****/
+
+.error-page-section {
+  background-color: $background_color;
+  padding: 2rem 0;
+  min-height: 60vh;
+  
+  @include tablet {
+    padding: 3rem 0;
+  }
+  
+  @include desktop {
+    padding: 4rem 0;
+  }
+}
+
+.error-page-container {
+  @include max-width-container;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  
+  @include tablet {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+  
+  @include desktop {
+    gap: 4rem;
+  }
+}
+
+.error-page-content {
+  flex: 1;
+  width: 100%;
+  
+  @include tablet {
+    max-width: 50%;
+  }
+}
+
+.error-page-text {
+  text-align: center;
+  
+  @include tablet {
+    text-align: left;
+  }
+}
+
+.error-page-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: $brand_color;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  
+  @include tablet {
+    font-size: 2.5rem;
+  }
+  
+  @include desktop {
+    font-size: 3rem;
+  }
+}
+
+.error-page-description {
+  font-size: 1.125rem;
+  color: $text_color;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  
+  @include tablet {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.error-page-links {
+  margin-top: 2rem;
+}
+
+.error-page-link-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  @include desktop {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.error-page-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: $background_color;
+  border: 1px solid $low-contrast-border-color;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: $text_color;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: $primary-shade;
+    border-color: $brand_color;
+    color: $text_color;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:focus {
+    outline: 2px solid $brand_color;
+    outline-offset: 2px;
+  }
+  
+  @include tablet {
+    padding: 1rem 1.25rem;
+    gap: 1rem;
+  }
+}
+
+.error-page-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: $primary-shade;
+  border-radius: 50%;
+  flex-shrink: 0;
+  
+  @include tablet {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.error-page-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: $brand_color;
+  
+  @include tablet {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.error-page-link-text {
+  font-weight: 600;
+  font-size: 0.875rem;
+  
+  @include tablet {
+    font-size: 1rem;
+  }
+}
+
+.error-page-actions {
+  margin-top: 2rem;
+  text-align: center;
+  
+  @include tablet {
+    text-align: left;
+  }
+}
+
+.error-page-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: $brand_color;
+  color: $brand_text_color;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: $hover-button-color;
+    color: $brand_text_color;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:focus {
+    outline: 2px solid $brand_color;
+    outline-offset: 2px;
+  }
+  
+  @include tablet {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+  }
+}
+
+.error-page-visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  
+  @include tablet {
+    max-width: 50%;
+  }
+}
+
+.error-page-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  
+  @include tablet {
+    max-width: 500px;
+  }
+}
+
+.error-page-404 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  
+  @include tablet {
+    height: 400px;
+  }
+}
+
+.error-page-404-number {
+  font-size: 8rem;
+  font-weight: 900;
+  color: $brand_color;
+  opacity: 0.1;
+  position: relative;
+  z-index: 1;
+  
+  @include tablet {
+    font-size: 10rem;
+  }
+  
+  @include desktop {
+    font-size: 12rem;
+  }
+}
+
+.error-page-404-decoration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border: 3px solid $brand_color;
+  border-radius: 50%;
+  opacity: 0.2;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border: 2px solid $brand_color;
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border: 1px solid $brand_color;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+  
+  @include tablet {
+    width: 250px;
+    height: 250px;
+    
+    &::before {
+      width: 200px;
+      height: 200px;
+    }
+    
+    &::after {
+      width: 125px;
+      height: 125px;
+    }
+  }
+}
+
+.error-page-icon-large {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  background-color: $primary-shade;
+  border-radius: 50%;
+  margin: 0 auto;
+  
+  @include tablet {
+    width: 250px;
+    height: 250px;
+  }
+  
+  @include desktop {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.error-page-icon-svg {
+  width: 80px;
+  height: 80px;
+  color: $brand_color;
+  
+  @include tablet {
+    width: 100px;
+    height: 100px;
+  }
+  
+  @include desktop {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+// Responsive adjustments
+@include mobile {
+  .error-page-container {
+    padding: 0 1rem;
+  }
+  
+  .error-page-title {
+    font-size: 1.75rem;
+  }
+  
+  .error-page-description {
+    font-size: 1rem;
+  }
+  
+  .error-page-link-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .error-page-404-number {
+    font-size: 6rem;
+  }
+  
+  .error-page-404-decoration {
+    width: 150px;
+    height: 150px;
+    
+    &::before {
+      width: 120px;
+      height: 120px;
+    }
+    
+    &::after {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  
+  .error-page-icon-large {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .error-page-icon-svg {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .error-page-link {
+    border-width: 2px;
+  }
+  
+  .error-page-button {
+    border: 2px solid $brand_color;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .error-page-link,
+  .error-page-button {
+    transition: none;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+}

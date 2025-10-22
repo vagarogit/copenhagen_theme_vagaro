@@ -85,6 +85,7 @@
     --color-ink-darker: #333333;
     --color-footer-gray: #1E1E1E;
     --color-primary: #cc4744;
+    --color-primary-hover: #b43136;
     --color-wave-gray: #f3f3f3;
   }
 }
@@ -1512,6 +1513,13 @@
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-gray-300);
+      }
+    }
+  }
+  .hover\:bg-\[\#333333\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #333333;
       }
     }
   }
