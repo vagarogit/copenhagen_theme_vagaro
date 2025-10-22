@@ -116,3 +116,8 @@ ul {
 .visibility-hidden {
   @include visually-hidden;
 }
+
+// Hide Osano cookie preferences button
+.osano-cm-window__widget {
+  display: none !important;
+}

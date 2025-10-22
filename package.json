@@ -1,6 +1,6 @@
 {
   "name": "copenhagen_theme",
-  "version": "4.0.17",
+  "version": "4.0.18",
   "repository": "git@github.com:zendesk/copenhagen_theme.git",
   "scripts": {
     "start": "concurrently -k -r 'rollup -c -w' 'npx @tailwindcss/cli -i ./styles/input.css -o ./assets/output.css --watch' 'wait-on script.js style.css && zcli themes:preview'",

@@ -113,17 +113,17 @@
           {{/if}}
         </div>
         {{#with article}}
-          <div class="article-votes">
-            <h2 class="article-votes-question" id="article-votes-label">{{t 'was_this_article_helpful'}}</h2>
-            <div class="article-votes-controls" role="group" aria-labelledby="article-votes-label">
-              {{vote 'up' class='button article-vote article-vote-up' selected_class="button-primary"}}
-              {{vote 'down' class='button article-vote article-vote-down' selected_class="button-primary"}}
+          <div class="article-votes mx-auto text-center">
+           
+            <div class="flex flex-col items-center gap-6 pt-8">
+              <p class="text-2xl font-semibold text-gray-800">Have more questions?</p>
+              <a href="https://support.vagaro.com/hc/en-us/requests/new" 
+                 class="inline-flex items-center px-6 py-3 bg-primary text-white font-semibold rounded-full hover:bg-charcoal transition-colors duration-200 text-lg" 
+                 id="submit-request-button"
+                 target="_blank">
+                Submit a request
+              </a>
             </div>
-            <div class=" text-base pt-8">
-              {{!-- {{vote 'label' class='article-vote-label'}} --}}
-              Have more questions? <a href="https://support.vagaro.com/hc/en-us/requests/new" class="text-blue-600" target="_blank">Submit a request</a>
-
-            </di>
           </div>
         {{/with}}
 

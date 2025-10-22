@@ -426,6 +426,10 @@ ul {
   white-space: nowrap;
 }
 
+.osano-cm-window__widget {
+  display: none !important;
+}
+
 /***** Buttons *****/
 .button, .pagination-next-link, .pagination-prev-link, .pagination-first-link, .pagination-last-link, .subscriptions-subscribe button, .requests-table-toolbar .organization-subscribe button, .community-follow button, .article-subscribe button, .section-subscribe button, .split-button button {
   background-color: transparent;
@@ -1367,7 +1371,7 @@ select:focus {
   transition: border 0.12s ease-in-out;
 }
 .search:focus-within {
-  border-color: #CC4744;
+  border-color: #666;
 }
 .search input[type=search],
 .search .clear-button {
@@ -1442,6 +1446,8 @@ select:focus {
 [dir=ltr] .search .clear-button {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+  border-bottom-right-radius: 30px;
+  border-top-right-radius: 30px;
   border-left-color: transparent;
 }
 [dir=ltr] .search .clear-button:focus {
@@ -1463,6 +1469,8 @@ select:focus {
 [dir=rtl] .search .clear-button {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  border-bottom-left-radius: 30px;
+  border-top-left-radius: 30px;
   border-right-color: transparent;
 }
 [dir=rtl] .search .clear-button:focus {
@@ -1520,17 +1528,7 @@ select:focus {
   }
 }
 
-/***** Hero component *****/
-.hero {
-  background-color: #ffffff;
-  padding: 48px 20px;
-  text-align: center;
-  width: 100%;
-}
-.hero-inner {
-  max-width: 720px;
-  margin: 0 auto;
-}
+/***** Hero search styles *****/
 .hero .search {
   background: #fff;
   border-radius: 8px;
@@ -1558,11 +1556,49 @@ select:focus {
 }
 .hero .search-icon {
   position: absolute;
-  left: 20px;
+  left: 36px;
   top: 50%;
   transform: translateY(-50%);
   width: 16px;
   height: 16px;
+}
+
+@media (max-width: 767px) {
+  .hero .search {
+    padding: 5px;
+  }
+  .hero .search input[type=search] {
+    font-size: 14px;
+    height: 36px;
+    padding-left: 32px;
+    padding-right: 22px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+  .hero .search-icon {
+    left: 26px;
+    width: 16px;
+    height: 16px;
+  }
+}
+/***** Hero component *****/
+.hero {
+  background-color: #ffffff;
+  padding: 48px 20px;
+  text-align: center;
+  width: 100%;
+}
+.hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+@media (max-width: 767px) {
+  .hero {
+    padding: 24px 16px;
+  }
+  .hero-inner {
+    max-width: 100%;
+  }
 }
 
 .page-header {
@@ -5216,18 +5252,27 @@ select:focus {
   content: " ⌄";
   font-weight: bold;
 }
+.search-results-count {
+  font-size: 14px;
+  color: #2F3941;
+  margin-bottom: 24px;
+  margin-top: 24px;
+}
 .search-results-subheading {
   font-size: 18px;
   font-weight: 600;
 }
 .search-results-list {
   margin-bottom: 25px;
+  list-style: none;
+  padding: 0;
 }
 .search-results-list > li {
-  padding: 20px 0;
+  padding: 0;
+  margin-bottom: 32px;
 }
 .search-results-list > li:first-child {
-  border-top: 1px solid #ddd;
+  border-top: none;
 }
 .search-results .no-results {
   display: flex;
@@ -5256,14 +5301,13 @@ select:focus {
   color: $link_color;
 }
 
+.search-result-card h2 {
+  margin: 0 0 4px 0 !important;
+}
 .search-result-title-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.search-result-title {
-  font-size: 16px;
-  margin-bottom: 0;
 }
 .search-result-votes, .search-result-meta-count {
   color: lighten($text_color, 20%);
@@ -5314,19 +5358,32 @@ select:focus {
   margin: 0;
 }
 .search-result-description {
-  margin-top: 10px;
-  margin-bottom: 0;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #2F3941;
   word-break: break-word;
+  min-height: 4.5em;
+}
+.search-result-description::before {
+  content: "... ";
+  color: #68737D;
+}
+.search-result-description em {
+  font-style: normal;
+  font-weight: 600;
+  color: #000;
 }
 
-/* By default use bold instead of italic to highlight */
-.search-results-description em {
+/* Keyword highlighting in search results */
+.search-result-description em {
   font-style: normal;
-  font-weight: bold;
+  font-weight: 600;
+  color: #000;
 }
 
 /* Add a yellow background for Chinese */
-html[lang|=zh] .search-results-description em {
+html[lang|=zh] .search-result-description em {
   font-style: normal;
   background: yellow;
 }

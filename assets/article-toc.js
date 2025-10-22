@@ -73,16 +73,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Create TOC HTML
   const tocList = document.createElement('ul');
-  tocList.className = 'space-y-2';
+  tocList.className = 'section-articles-list';
 
   headingData.forEach(heading => {
     const listItem = document.createElement('li');
-    listItem.className = 'mb-3';
+    listItem.className = 'section-article-item';
 
     const link = document.createElement('a');
     link.href = `#${heading.id}`;
     link.textContent = heading.text;
-    link.className = 'block py-1 text-black hover:text-gray-900 transition-colors border-l-2 border-transparent pl-3 -ml-3 font-normal text-base';
+    link.className = 'section-article-link';
     
     // Add click handler for smooth scrolling
     link.addEventListener('click', function(e) {
@@ -109,11 +109,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Create TOC content function
   function createTOCContent(container, isMobile = false) {
+    // Add section-articles-container styling to the container
+    if (!isMobile) {
+      container.className = 'section-articles-container';
+    }
+    
     const tocTitle = document.createElement('h3');
-    tocTitle.textContent = 'What’s in this article?';
+    tocTitle.textContent = 'What\'s in this article?';
     tocTitle.className = isMobile 
       ? 'text-2xl font-semibold text-gray-700 mb-4'
-      : 'text-2xl font-semibold text-black tracking-normal mb-6 sticky top-0 bg-white py-2';
+      : 'section-articles-heading';
 
     const tocListClone = tocList.cloneNode(true);
     
@@ -133,14 +138,12 @@ document.addEventListener('DOMContentLoaded', function() {
     allContainers.forEach(container => {
       const links = container.querySelectorAll('a');
       links.forEach(link => {
-        link.classList.remove('text-primary', 'border-primary', 'font-normal');
-        link.classList.add('text-gray-600', 'border-transparent');
+        link.classList.remove('current-article');
       });
     });
     
     if (activeLink) {
-      activeLink.classList.remove('text-gray-600', 'border-transparent');
-      activeLink.classList.add('text-primary', 'border-primary', 'font-normal');
+      activeLink.classList.add('current-article');
       return;
     }
 
@@ -163,8 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
       allContainers.forEach(container => {
         const activeLink = container.querySelector(`a[href="#${currentHeading.id}"]`);
         if (activeLink) {
-          activeLink.classList.remove('text-gray-600', 'border-transparent');
-          activeLink.classList.add('text-primary', 'border-primary', 'font-medium');
+          activeLink.classList.add('current-article');
         }
       });
     }

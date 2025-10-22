@@ -2,7 +2,7 @@
 import * as React from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
-import { CaretDownIcon } from "@radix-ui/react-icons";
+
 import { PropTypes } from "prop-types";
 
 const NavigationMenuDemo = ({ navigationData = {} }) => {
@@ -383,7 +383,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink text-nowrap"
             href="https://www.vagaro.com/pro/multi-location"
             target="_blank"
             rel="noopener noreferrer"
@@ -393,7 +393,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink text-nowrap"
             href="https://www.vagaro.com/pro/pricing"
             target="_blank"
             rel="noopener noreferrer"
@@ -403,7 +403,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink text-nowrap"
             href="https://www.vagaro.com/pro/contact-sales-team"
             target="_blank"
             rel="noopener noreferrer"
@@ -413,7 +413,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink"
+            className="NavigationMenuLink text-nowrap"
             href="https://vagaro.zendesk.com/hc/en-us"
             target="_blank"
             rel="noopener noreferrer"
@@ -433,7 +433,7 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
-            className="NavigationMenuLink border-primary"
+            className="NavigationMenuLink border-primary text-nowrap"
             href={
               isLoggedIn
                 ? "https://us04.vagaro.com/merchants/calendar"

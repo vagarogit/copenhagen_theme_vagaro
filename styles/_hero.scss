@@ -10,41 +10,12 @@
     margin: 0 auto;
   }
 
-  .search {
-    background: #fff;
-    border-radius: 8px;
-    padding: 7px;
-    width: 100%;
-    position: relative;
-   
-    input[type="search"] {
-      background: transparent;
-      border: none;
-      font-size: 16px;
-      height: 40px;
-      padding-left: 40px;
-      width: 100%;
-      text-align: left;
-      display: flex;
-      align-items: center;
+  // Mobile breakpoint
+  @media (max-width: 767px) {
+    padding: 24px 16px;
 
-      &:focus {
-        outline: none;
-      }
-      
-      &::placeholder {
-        color: #666666;
-        font-size: 16px;
-      }
+    &-inner {
+      max-width: 100%;
     }
-  }
-
-  .search-icon {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
   }
 }

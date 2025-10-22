@@ -2,17 +2,59 @@
 <div class="container">
   <div class="sub-nav">
     {{breadcrumbs}}
-    <div class="search-container">
+  </div>
+<section id="main-content" class="section hero z-10">
+  <div class="w-full flex flex-col gap-6">
+    <div class="search-container w-full max-w-2xl mx-auto z-0 px-4 sm:px-6 md:px-0">
+      {{search submit=false instant=settings.instant_search class='search search-full' placeholder='Search support articles...'}}
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
         <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
         <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
       </svg>
-      {{search submit=false}}
     </div>
+
+    <!-- Tabbed Navigation -->
+    <div class="w-full max-w-6xl mx-auto px-4 sm:px-6 md:px-0">
+      <div class="border-b border-gray-200">
+        <nav aria-label="Search filter tabs" class="-mb-px flex">
+          {{#is current_filter.identifier 'unified'}}
+            <a href="?query={{query}}" aria-current="page" class="flex-1 border-b-2 border-blue-500 px-1 py-4 text-center text-sm font-medium text-blue-600">All Results</a>
+          {{else}}
+            <a href="?query={{query}}" class="flex-1 border-b-2 border-transparent px-1 py-4 text-center text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">All Results</a>
+          {{/is}}
+          {{#each type_filters}}
+            {{#is identifier 'knowledge_base'}}
+              {{#if ../current_filter}}
+                {{#is ../current_filter.identifier 'knowledge_base'}}
+                  <a href="{{url}}" aria-current="page" class="flex-1 border-b-2 border-blue-500 px-1 py-2 text-center text-sm font-medium text-blue-600">Help Articles</a>
+                {{else}}
+                  <a href="{{url}}" class="flex-1 border-b-2 border-transparent px-1 py-4 text-center text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Help Articles</a>
+                {{/is}}
+              {{else}}
+                <a href="{{url}}" class="flex-1 border-b-2 border-transparent px-1 py-4 text-center text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Help Articles</a>
+              {{/if}}
+            {{/is}}
+            {{#is identifier 'community'}}
+              {{#if ../current_filter}}
+                {{#is ../current_filter.identifier 'community'}}
+                  <a href="{{url}}" aria-current="page" class="flex-1 border-b-2 border-gray-800 px-1 py-4 text-center text-sm font-medium text-charcoal">Community Answers</a>
+                {{else}}
+                  <a href="{{url}}" class="flex-1 border-b-2 border-transparent px-1 py-4 text-center text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Community Answers</a>
+                {{/is}}
+              {{else}}
+                <a href="{{url}}" class="flex-1 border-b-2 border-transparent px-1 py-4 text-center text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Community Answers</a>
+              {{/if}}
+            {{/is}}
+          {{/each}}
+        </nav>
+      </div>
+    </div>
+
   </div>
 
-  <div class="search-results w-full overflow-hidden">
-    <aside class="search-results-sidebar w-full lg:w-auto">
+</section>
+  <div class="search-results w-full overflow-hidden max-w-4xl mx-auto px-4 sm:px-6 md:px-0">
+    <aside class="search-results-sidebar w-full lg:w-auto" style="display: none;">
       {{#if source_filters}}
         <section class="filters-in-section collapsible-sidebar">
           <button type="button" class="collapsible-sidebar-toggle" aria-expanded="false" aria-label="{{t 'search_result_source_menu'}}">
@@ -139,101 +181,28 @@
       {{/if}}
     </aside>
 
-    <section id="main-content" class="search-results-column w-full min-w-0">
-      <h1 class="search-results-subheading">
+    <section class="search-results-column w-full min-w-0">
+      <div class="search-results-count">
         {{#if results}}
-          {{#is current_filter.identifier 'unified'}}
-            {{#if content_tag_filters }}
-              {{#each (filter content_tag_filters on="selected" equals=true)}}
-                {{t 'results_content_tag' content_tag=name count=../results_count}}
-              {{/each}}
-            {{else}}
-              {{t 'results' query=query count=results_count}}
-            {{/if}}
-          {{else}}
-            {{#if content_tag_filters }}
-              {{#each (filter content_tag_filters on="selected" equals=true)}}
-                {{t 'results_content_tag' content_tag=name count=../results_count}}
-              {{/each}}
-            {{else}}
-              {{#unless current_subfilter.identifier}}
-                {{t 'results' query=query count=results_count}}
-              {{else}}
-                {{t 'results_with_scope' query=query count=results_count scope_name=current_subfilter.name}}
-              {{/unless}}
-            {{/if}}
-          {{/is}}
+          Displaying 1 - {{#if results}}{{results.length}}{{else}}0{{/if}} of {{results_count}} results for '{{query}}'
         {{/if}}
-      </h1>
+      </div>
       {{#if results}}
         <ul class="search-results-list w-full">
           {{#each results}}
             <li class="w-full">
-              <article class="w-full overflow-hidden">
-                <header>
-                  <div class="search-result-title-container w-full">
-                    <h2 class="search-result-title break-words">
-                      <a href="{{url}}" {{#if is_external}} target="_blank" {{/if}}>
-                        {{title}}
-                        {{#if is_external}}
-                          <svg viewBox="0 0 12 12" height="12" id="zd-svg-icon-12-new-window-fill">
-                            <path fill="none" stroke="currentColor" stroke-linecap="round" d="M10.5 8.5V10c0 .28-.22.5-.5.5H2c-.28 0-.5-.22-.5-.5V2c0-.28.22-.5.5-.5h1.5M6 6l4-4"></path>
-                            <path fill="currentColor" d="M10.5 6.5a.47.47 0 0 1-.35-.15l-4.5-4.5a.474.474 0 0 1-.11-.54C5.62 1.12 5.8 1 6 1h4c.55 0 1 .45 1 1v4c0 .2-.12.38-.31.46-.06.03-.13.04-.19.04z"></path>
-                          </svg>
-                        {{/if}}
-                      </a>
-                    </h2>
-                    <div class="search-result-icons">
-                      {{#if vote_sum}}
-                        <span class="search-result-votes">
-                          <span class="visibility-hidden">
-                            {{t 'votes_sum' count=vote_sum}}
-                          </span>
-                          <span aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-result-votes-icon">
-                              <g fill="none" stroke="currentColor">
-                                <path stroke-linejoin="round" d="M10.77 4.5a.73.73 0 01.73.73C11.43 7 11.21 11.5 10 11.5H5a.5.5 0 01-.5-.5V4.5s1-.5 1-3a1 1 0 012 0v3z"/>
-                                <rect width="2" height="7" x=".5" y="4.5" rx=".5" ry=".5"/>
-                              </g>
-                            </svg>
-                            {{vote_sum}}
-                          </span>
-                        </span>
-                      {{/if}}
-                      {{#if comment_count}}
-                        <span class="search-result-meta-count">
-                          <span class="visibility-hidden">
-                            {{t 'comments_count' count=comment_count}}
-                          </span>
-                          <span aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-result-meta-count-icon">
-                              <path fill="none" stroke="currentColor" d="M1 .5h10c.3 0 .5.2.5.5v7c0 .3-.2.5-.5.5H6l-2.6 2.6c-.3.3-.9.1-.9-.4V8.5H1C.7 8.5.5 8.3.5 8V1C.5.7.7.5 1 .5z"/>
-                            </svg>
-                            {{comment_count}}
-                          </span>
-                        </span>
-                      {{/if}}
-                    </div>
-                  </div>
-                  <div class="search-result-meta-container">
-                    <nav 
-                      {{#is type 'article'}}aria-label='{{t 'article_location_with_title' title=title}}'{{/is}}
-                      {{#is type 'community_post'}}aria-label='{{t 'post_location_with_title' title=title}}'{{/is}}
-                      {{#is type 'external_content_record'}}aria-label='{{t 'external_content_location_with_title' title=title}}'{{/is}}
-                    >
-                      <ol class="breadcrumbs search-result-breadcrumbs">
-                        {{#each path_steps}}
-                          <li><a href="{{url}}" target="{{target}}">{{name}}</a></li>
-                        {{/each}}
-                      </ol>
-                    </nav>
-                    {{#unless is_external}}
-                      <span class="meta-data">{{author.name}}</span>
-                    {{/unless}}
-                    <span class="meta-data">{{date created_at}}</span>
-                  </div>
-                </header>
-                <p class="search-result-description break-words">{{text}}</p>
+              <article class="search-result-card w-full">
+                <div class="text-xs font-semibold text-gray-600 uppercase tracking-wide mb-1">
+                  {{#is type 'article'}}Support Article{{/is}}
+                  {{#is type 'community_post'}}Community Answer{{/is}}
+                  {{#is type 'external_content_record'}}External Content{{/is}}
+                </div>
+                <h2 class="m-0 mb-1 text-lg font-semibold leading-snug">
+                  <a href="{{url}}" class="text-blue-600 hover:underline no-underline" {{#if is_external}} target="_blank" {{/if}}>
+                    {{title}}
+                  </a>
+                </h2>
+                <p class="search-result-description m-0">{{text}}</p>
               </article>
             </li>
           {{/each}}
