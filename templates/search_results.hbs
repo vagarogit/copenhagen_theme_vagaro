@@ -53,7 +53,7 @@
   </div>
 
 </section>
-  <div class="search-results w-full overflow-hidden max-w-4xl mx-auto px-4 sm:px-6 md:px-0">
+  <div class="search-results w-full overflow-hidden max-w-5xl mx-auto px-4 sm:px-6 md:px-0">
     <aside class="search-results-sidebar w-full lg:w-auto" style="display: none;">
       {{#if source_filters}}
         <section class="filters-in-section collapsible-sidebar">
@@ -182,6 +182,7 @@
     </aside>
 
     <section class="search-results-column w-full min-w-0">
+      {{generative_answers}}
       <div class="search-results-count">
         {{#if results}}
           Displaying 1 - {{#if results}}{{results.length}}{{else}}0{{/if}} of {{results_count}} results for '{{query}}'
