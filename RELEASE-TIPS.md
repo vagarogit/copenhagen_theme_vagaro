@@ -150,3 +150,35 @@ Or create an alias in your `.zshrc`:
 alias release="yarn build && git add . && git status"
 ```
 
+## Theme Thumbnail Customization
+
+### Making Your Theme Stand Out
+
+The `thumbnail.png` file in the root directory is what appears in the Zendesk theme library. Customize it to make your theme easily identifiable.
+
+**Thumbnail Specifications:**
+- **File:** `thumbnail.png` (root directory)
+- **Dimensions:** 1280x800 pixels (16:10 aspect ratio) recommended
+- **Format:** PNG or JPG
+- **File size:** Keep under 200KB
+- **Design tips:**
+  - Use your brand colors (Vagaro: #D43C2E red, #17494D teal)
+  - Include your logo or brand elements
+  - Make it visually distinct from default Copenhagen themes
+  - Ensure text is readable at thumbnail size
+
+**To Update Thumbnail:**
+```bash
+# 1. Replace thumbnail.png with your custom artwork
+# 2. Optimize image size if needed
+# 3. Commit the change
+git add thumbnail.png
+git commit -m "chore: update theme thumbnail artwork"
+git push
+```
+
+**Current thumbnail location:**
+```
+thumbnail.png (48KB)
+```
+
