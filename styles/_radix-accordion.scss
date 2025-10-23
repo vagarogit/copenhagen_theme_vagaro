@@ -1,0 +1,230 @@
+/**
+ * Radix Accordion Styles
+ * Using stock Radix UI CSS patterns
+ * Adapted for Vagaro design system
+ */
+
+/* Accordion Root Container */
+#radix-article-accordions-root .AccordionRoot {
+  width: 100%;
+  background-color: transparent;
+}
+
+/* Accordion Item */
+#radix-article-accordions-root .AccordionItem {
+  overflow: hidden;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: white;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:focus-within {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 0 2px #2563eb;
+  }
+
+  &[data-state="open"] {
+    background-color: white;
+  }
+}
+
+/* Accordion Header */
+#radix-article-accordions-root .AccordionHeader {
+  display: flex;
+
+}
+
+/* Accordion Trigger (Button) - Stock Radix approach */
+#radix-article-accordions-root .AccordionTrigger {
+  font-family: inherit;
+  background-color: transparent;
+  padding: 18px 24px;
+  min-height: 56px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Stock Radix - puts chevron on right */
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #1f2937;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border: none;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background-color: #fafafa;
+  }
+
+  &[data-state="open"] > .AccordionChevron {
+    transform: rotate(180deg);
+  }
+}
+
+/* Accordion Title */
+#radix-article-accordions-root .AccordionTitle {
+  flex: 1;
+}
+
+/* Accordion Chevron Icon - Stock Radix approach */
+#radix-article-accordions-root .AccordionChevron {
+  color: #6b7280;
+  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  flex-shrink: 0;
+  margin-left: 16px;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Accordion Content - Stock Radix approach */
+#radix-article-accordions-root .AccordionContent {
+  overflow: hidden;
+  font-size: 15px;
+  color: #4b5563;
+  background-color: white;
+
+  &[data-state="open"] {
+    animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  &[data-state="closed"] {
+    animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
+  }
+}
+
+/* Accordion Content Text (Inner wrapper) - Stock Radix approach */
+#radix-article-accordions-root .AccordionContentText {
+  padding: 0 24px 24px 24px;
+
+  /* Basic content elements */
+  p,
+  .procedure,
+  .itemizedlist,
+  .tip {
+    margin-bottom: 1rem;
+    display: block !important;
+  }
+
+  /* Ordered lists */
+  ol,
+  ol.procedure {
+    padding-left: 1.5rem;
+    display: block !important;
+    list-style-type: decimal !important;
+    margin-bottom: 1rem;
+
+    li,
+    li.step {
+      margin-bottom: 0.5rem;
+      display: list-item !important;
+      padding-left: 0.5rem;
+    }
+  }
+
+  /* Unordered lists */
+  ul,
+  ul.itemizedlist {
+    padding-left: 1.5rem;
+    display: block !important;
+    list-style-type: disc !important;
+    margin-bottom: 1rem;
+
+    li,
+    li.listitem {
+      display: list-item !important;
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+  }
+
+  /* Nested content */
+  li > p {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Tips and callouts */
+  .tip {
+    background-color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    border-left: 4px solid #3b82f6;
+    margin: 1rem 0;
+
+    .title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1e3a8a;
+    }
+  }
+
+  /* Links */
+  a,
+  a.link {
+    color: #2563eb;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  /* Bold text */
+  .bold,
+  strong,
+  b {
+    font-weight: 700;
+  }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.375rem;
+    margin: 1rem 0;
+  }
+
+  /* Code blocks */
+  code,
+  pre {
+    background-color: #f3f4f6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    font-size: 0.875rem;
+  }
+
+  pre {
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+}
+
+/* Animations - Stock Radix approach */
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}

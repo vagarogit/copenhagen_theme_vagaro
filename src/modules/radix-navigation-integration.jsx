@@ -31,7 +31,10 @@ window.updateNavigationData = (data) => {
 
 // Function to update user info for mobile navigation
 window.updateUserInfo = (userInfo) => {
-  window.mobileNavState.userInfo = { ...window.mobileNavState.userInfo, ...userInfo };
+  window.mobileNavState.userInfo = {
+    ...window.mobileNavState.userInfo,
+    ...userInfo,
+  };
   mountMobileNavigation();
 };
 
@@ -78,7 +81,7 @@ export function mountRadixNavigation() {
 // Function to mount the Mobile Navigation
 export function mountMobileNavigation() {
   let mobileNavContainer = document.getElementById("mobile-navigation-root");
-  
+
   // Create mobile navigation container if it doesn't exist
   if (!mobileNavContainer) {
     mobileNavContainer = document.createElement("div");
@@ -108,13 +111,14 @@ export function mountMobileNavigation() {
 function initializeNavigation() {
   mountRadixNavigation();
   mountMobileNavigation();
-  
+
   // Initialize user info from Zendesk helpers if available
-  const userAvatar = document.querySelector('.user-avatar')?.src;
-  const userName = document.querySelector('#user-name')?.textContent;
-  const isSignedIn = document.body.classList.contains('signed-in') || 
-                     document.querySelector('.user-avatar') !== null ||
-                     window.HelpCenter?.user?.signed_in;
+  const userAvatar = document.querySelector(".user-avatar")?.src;
+  const userName = document.querySelector("#user-name")?.textContent;
+  const isSignedIn =
+    document.body.classList.contains("signed-in") ||
+    document.querySelector(".user-avatar") !== null ||
+    window.HelpCenter?.user?.signed_in;
 
   if (isSignedIn || userAvatar || userName) {
     window.updateUserInfo({
@@ -135,6 +139,3 @@ if (document.readyState === "loading") {
 // Export functions for use in other modules
 window.mountRadixNavigation = mountRadixNavigation;
 window.mountMobileNavigation = mountMobileNavigation;
-window.toggleMobileNavigation = window.toggleMobileNavigation;
-window.closeMobileNavigation = window.closeMobileNavigation;
-window.updateUserInfo = window.updateUserInfo;

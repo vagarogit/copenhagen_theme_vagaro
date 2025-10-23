@@ -63,11 +63,24 @@ export default defineConfig([
   // Configuration for bundling modules in the src/modules directory
   {
     context: "this",
+    onwarn: (warning, warn) => {
+      // Suppress "use client" directive warnings from Radix UI
+      if (
+        warning.code === "MODULE_LEVEL_DIRECTIVE" &&
+        warning.message.includes('"use client"')
+      ) {
+        return;
+      }
+      // Use default warning handler for other warnings
+      warn(warning);
+    },
     input: {
       "new-request-form": "src/modules/new-request-form/index.tsx",
       "flash-notifications": "src/modules/flash-notifications/index.ts",
       "category-accordions":
         "src/modules/category-accordions/categoryAccordionsBundle.ts",
+      "article-accordions":
+        "src/modules/article-accordions/articleAccordionsBundle.ts",
     },
     output: {
       dir: "assets",
@@ -114,9 +127,15 @@ export default defineConfig([
     ],
     plugins: [
       nodeResolve({
-        extensions: [".js"],
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
         preferBuiltins: false,
         browser: true,
+      }),
+      babel({
+        babelHelpers: "bundled",
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        exclude: "node_modules/**",
+        presets: [["@babel/preset-react", { runtime: "classic" }]],
       }),
       commonjs(),
       typescript(),

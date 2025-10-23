@@ -162,11 +162,11 @@ var l=requireObjectAssign(),n=60103,p=60106;react_production_min.Fragment=60107;
 }
 
 var reactExports = react.exports;
-var React__default = /*@__PURE__*/getDefaultExportFromCjs(reactExports);
+var React = /*@__PURE__*/getDefaultExportFromCjs(reactExports);
 
-var React = /*#__PURE__*/_mergeNamespaces({
+var React$1 = /*#__PURE__*/_mergeNamespaces({
 	__proto__: null,
-	default: React__default
+	default: React
 }, [reactExports]);
 
 /** @license React v17.0.2
@@ -579,17 +579,14 @@ var ReactDOM = /*@__PURE__*/getDefaultExportFromCjs(reactDomExports);
 const FLASH_NOTIFICATIONS_KEY = "HC_FLASH_NOTIFICATIONS";
 
 function addFlashNotification(notification) {
-    try {
-        const currentValue = window.sessionStorage.getItem(FLASH_NOTIFICATIONS_KEY);
-        const notifications = currentValue
-            ? JSON.parse(currentValue)
-            : [];
-        notifications.push(notification);
-        window.sessionStorage.setItem(FLASH_NOTIFICATIONS_KEY, JSON.stringify(notifications));
-    }
-    catch (e) {
-        console.error("Cannot add flash notification", e);
-    }
+  try {
+    const currentValue = window.sessionStorage.getItem(FLASH_NOTIFICATIONS_KEY);
+    const notifications = currentValue ? JSON.parse(currentValue) : [];
+    notifications.push(notification);
+    window.sessionStorage.setItem(FLASH_NOTIFICATIONS_KEY, JSON.stringify(notifications));
+  } catch (e) {
+    console.error("Cannot add flash notification", e);
+  }
 }
 
 const consoleLogger = {
@@ -2966,13 +2963,14 @@ instance.loadNamespaces;
 instance.loadLanguages;
 
 async function loadTranslations(locale, dynamicImport) {
-    try {
-        const { default: translations } = await dynamicImport();
-        instance.addResourceBundle(locale, "translation", translations);
-    }
-    catch (e) {
-        console.error(`Cannot load translations for ${locale}`);
-    }
+  try {
+    const {
+      default: translations
+    } = await dynamicImport();
+    instance.addResourceBundle(locale, "translation", translations);
+  } catch (e) {
+    console.error(`Cannot load translations for ${locale}`);
+  }
 }
 
 function warn() {
@@ -3231,18 +3229,18 @@ const useTranslation = function (ns) {
 };
 
 function initI18next(locale) {
-    instance.use(initReactI18next).init({
-        resources: {
-            [`${locale}`]: {},
-        },
-        lng: locale,
-        lowerCaseLng: true,
-        interpolation: {
-            escapeValue: false,
-        },
-        keySeparator: false,
-        pluralSeparator: ".",
-    });
+  instance.use(initReactI18next).init({
+    resources: {
+      [`${locale}`]: {}
+    },
+    lng: locale,
+    lowerCaseLng: true,
+    interpolation: {
+      escapeValue: false
+    },
+    keySeparator: false,
+    pluralSeparator: "."
+  });
 }
 
 var reactIs$2 = {exports: {}};
@@ -4099,7 +4097,7 @@ var hoistNonReactStatics_cjs = hoistNonReactStatics;
 
 var m = /*@__PURE__*/getDefaultExportFromCjs(hoistNonReactStatics_cjs);
 
-function y(){return (y=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r]);}return e}).apply(this,arguments)}var v=function(e,t){for(var n=[e[0]],r=0,o=t.length;r<o;r+=1)n.push(t[r],e[r+1]);return n},g=function(t){return null!==t&&"object"==typeof t&&"[object Object]"===(t.toString?t.toString():Object.prototype.toString.call(t))&&!reactIsExports$1.typeOf(t)},S=Object.freeze([]),w=Object.freeze({});function E(e){return "function"==typeof e}function b(e){return e.displayName||e.name||"Component"}function _(e){return e&&"string"==typeof e.styledComponentId}var N="undefined"!=typeof process&&void 0!==process.env&&(process.env.REACT_APP_SC_ATTR||process.env.SC_ATTR)||"data-styled",C="undefined"!=typeof window&&"HTMLElement"in window,I=Boolean("boolean"==typeof SC_DISABLE_SPEEDY?SC_DISABLE_SPEEDY:"undefined"!=typeof process&&void 0!==process.env&&(void 0!==process.env.REACT_APP_SC_DISABLE_SPEEDY&&""!==process.env.REACT_APP_SC_DISABLE_SPEEDY?"false"!==process.env.REACT_APP_SC_DISABLE_SPEEDY&&process.env.REACT_APP_SC_DISABLE_SPEEDY:void 0!==process.env.SC_DISABLE_SPEEDY&&""!==process.env.SC_DISABLE_SPEEDY?"false"!==process.env.SC_DISABLE_SPEEDY&&process.env.SC_DISABLE_SPEEDY:"production"!=="production"));function D(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];throw new Error("An error occurred. See https://git.io/JUIaE#"+e+" for more information."+(n.length>0?" Args: "+n.join(", "):""))}var j=function(){function e(e){this.groupSizes=new Uint32Array(512),this.length=512,this.tag=e;}var t=e.prototype;return t.indexOfGroup=function(e){for(var t=0,n=0;n<e;n++)t+=this.groupSizes[n];return t},t.insertRules=function(e,t){if(e>=this.groupSizes.length){for(var n=this.groupSizes,r=n.length,o=r;e>=o;)(o<<=1)<0&&D(16,""+e);this.groupSizes=new Uint32Array(o),this.groupSizes.set(n),this.length=o;for(var s=r;s<o;s++)this.groupSizes[s]=0;}for(var i=this.indexOfGroup(e+1),a=0,c=t.length;a<c;a++)this.tag.insertRule(i,t[a])&&(this.groupSizes[e]++,i++);},t.clearGroup=function(e){if(e<this.length){var t=this.groupSizes[e],n=this.indexOfGroup(e),r=n+t;this.groupSizes[e]=0;for(var o=n;o<r;o++)this.tag.deleteRule(n);}},t.getGroup=function(e){var t="";if(e>=this.length||0===this.groupSizes[e])return t;for(var n=this.groupSizes[e],r=this.indexOfGroup(e),o=r+n,s=r;s<o;s++)t+=this.tag.getRule(s)+"/*!sc*/\n";return t},e}(),T=new Map,x=new Map,k=1,V=function(e){if(T.has(e))return T.get(e);for(;x.has(k);)k++;var t=k++;return T.set(e,t),x.set(t,e),t},B=function(e){return x.get(e)},z=function(e,t){t>=k&&(k=t+1),T.set(e,t),x.set(t,e);},M="style["+N+'][data-styled-version="5.3.11"]',G=new RegExp("^"+N+'\\.g(\\d+)\\[id="([\\w\\d-]+)"\\].*?"([^"]*)'),L=function(e,t,n){for(var r,o=n.split(","),s=0,i=o.length;s<i;s++)(r=o[s])&&e.registerName(t,r);},F=function(e,t){for(var n=(t.textContent||"").split("/*!sc*/\n"),r=[],o=0,s=n.length;o<s;o++){var i=n[o].trim();if(i){var a=i.match(G);if(a){var c=0|parseInt(a[1],10),u=a[2];0!==c&&(z(u,c),L(e,u,a[3]),e.getTag().insertRules(c,r)),r.length=0;}else r.push(i);}}},Y=function(){return "undefined"!=typeof __webpack_nonce__?__webpack_nonce__:null},q=function(e){var t=document.head,n=e||t,r=document.createElement("style"),o=function(e){for(var t=e.childNodes,n=t.length;n>=0;n--){var r=t[n];if(r&&1===r.nodeType&&r.hasAttribute(N))return r}}(n),s=void 0!==o?o.nextSibling:null;r.setAttribute(N,"active"),r.setAttribute("data-styled-version","5.3.11");var i=Y();return i&&r.setAttribute("nonce",i),n.insertBefore(r,s),r},H=function(){function e(e){var t=this.element=q(e);t.appendChild(document.createTextNode("")),this.sheet=function(e){if(e.sheet)return e.sheet;for(var t=document.styleSheets,n=0,r=t.length;n<r;n++){var o=t[n];if(o.ownerNode===e)return o}D(17);}(t),this.length=0;}var t=e.prototype;return t.insertRule=function(e,t){try{return this.sheet.insertRule(t,e),this.length++,!0}catch(e){return !1}},t.deleteRule=function(e){this.sheet.deleteRule(e),this.length--;},t.getRule=function(e){var t=this.sheet.cssRules[e];return void 0!==t&&"string"==typeof t.cssText?t.cssText:""},e}(),$=function(){function e(e){var t=this.element=q(e);this.nodes=t.childNodes,this.length=0;}var t=e.prototype;return t.insertRule=function(e,t){if(e<=this.length&&e>=0){var n=document.createTextNode(t),r=this.nodes[e];return this.element.insertBefore(n,r||null),this.length++,!0}return !1},t.deleteRule=function(e){this.element.removeChild(this.nodes[e]),this.length--;},t.getRule=function(e){return e<this.length?this.nodes[e].textContent:""},e}(),W=function(){function e(e){this.rules=[],this.length=0;}var t=e.prototype;return t.insertRule=function(e,t){return e<=this.length&&(this.rules.splice(e,0,t),this.length++,!0)},t.deleteRule=function(e){this.rules.splice(e,1),this.length--;},t.getRule=function(e){return e<this.length?this.rules[e]:""},e}(),U=C,J={isServer:!C,useCSSOMInjection:!I},X=function(){function e(e,t,n){void 0===e&&(e=w),void 0===t&&(t={}),this.options=y({},J,{},e),this.gs=t,this.names=new Map(n),this.server=!!e.isServer,!this.server&&C&&U&&(U=!1,function(e){for(var t=document.querySelectorAll(M),n=0,r=t.length;n<r;n++){var o=t[n];o&&"active"!==o.getAttribute(N)&&(F(e,o),o.parentNode&&o.parentNode.removeChild(o));}}(this));}e.registerId=function(e){return V(e)};var t=e.prototype;return t.reconstructWithOptions=function(t,n){return void 0===n&&(n=!0),new e(y({},this.options,{},t),this.gs,n&&this.names||void 0)},t.allocateGSInstance=function(e){return this.gs[e]=(this.gs[e]||0)+1},t.getTag=function(){return this.tag||(this.tag=(n=(t=this.options).isServer,r=t.useCSSOMInjection,o=t.target,e=n?new W(o):r?new H(o):new $(o),new j(e)));var e,t,n,r,o;},t.hasNameForId=function(e,t){return this.names.has(e)&&this.names.get(e).has(t)},t.registerName=function(e,t){if(V(e),this.names.has(e))this.names.get(e).add(t);else {var n=new Set;n.add(t),this.names.set(e,n);}},t.insertRules=function(e,t,n){this.registerName(e,t),this.getTag().insertRules(V(e),n);},t.clearNames=function(e){this.names.has(e)&&this.names.get(e).clear();},t.clearRules=function(e){this.getTag().clearGroup(V(e)),this.clearNames(e);},t.clearTag=function(){this.tag=void 0;},t.toString=function(){return function(e){for(var t=e.getTag(),n=t.length,r="",o=0;o<n;o++){var s=B(o);if(void 0!==s){var i=e.names.get(s),a=t.getGroup(o);if(i&&a&&i.size){var c=N+".g"+o+'[id="'+s+'"]',u="";void 0!==i&&i.forEach((function(e){e.length>0&&(u+=e+",");})),r+=""+a+c+'{content:"'+u+'"}/*!sc*/\n';}}}return r}(this)},e}(),Z=/(a)(d)/gi,K=function(e){return String.fromCharCode(e+(e>25?39:97))};function Q(e){var t,n="";for(t=Math.abs(e);t>52;t=t/52|0)n=K(t%52)+n;return (K(t%52)+n).replace(Z,"$1-$2")}var ee=function(e,t){for(var n=t.length;n;)e=33*e^t.charCodeAt(--n);return e},te=function(e){return ee(5381,e)};function ne(e){for(var t=0;t<e.length;t+=1){var n=e[t];if(E(n)&&!_(n))return !1}return !0}var re=te("5.3.11"),oe=function(){function e(e,t,n){this.rules=e,this.staticRulesId="",this.isStatic=(void 0===n||n.isStatic)&&ne(e),this.componentId=t,this.baseHash=ee(re,t),this.baseStyle=n,X.registerId(t);}return e.prototype.generateAndInjectStyles=function(e,t,n){var r=this.componentId,o=[];if(this.baseStyle&&o.push(this.baseStyle.generateAndInjectStyles(e,t,n)),this.isStatic&&!n.hash)if(this.staticRulesId&&t.hasNameForId(r,this.staticRulesId))o.push(this.staticRulesId);else {var s=_e(this.rules,e,t,n).join(""),i=Q(ee(this.baseHash,s)>>>0);if(!t.hasNameForId(r,i)){var a=n(s,"."+i,void 0,r);t.insertRules(r,i,a);}o.push(i),this.staticRulesId=i;}else {for(var c=this.rules.length,u=ee(this.baseHash,n.hash),l="",d=0;d<c;d++){var h=this.rules[d];if("string"==typeof h)l+=h;else if(h){var p=_e(h,e,t,n),f=Array.isArray(p)?p.join(""):p;u=ee(u,f+d),l+=f;}}if(l){var m=Q(u>>>0);if(!t.hasNameForId(r,m)){var y=n(l,"."+m,void 0,r);t.insertRules(r,m,y);}o.push(m);}}return o.join(" ")},e}(),se=/^\s*\/\/.*$/gm,ie=[":","[",".","#"];function ae(e){var t,n,r,o,s=void 0===e?w:e,i=s.options,a=void 0===i?w:i,c=s.plugins,u=void 0===c?S:c,l=new stylis_min(a),d=[],p=function(e){function t(t){if(t)try{e(t+"}");}catch(e){}}return function(n,r,o,s,i,a,c,u,l,d){switch(n){case 1:if(0===l&&64===r.charCodeAt(0))return e(r+";"),"";break;case 2:if(0===u)return r+"/*|*/";break;case 3:switch(u){case 102:case 112:return e(o[0]+r),"";default:return r+(0===d?"/*|*/":"")}case-2:r.split("/*|*/}").forEach(t);}}}((function(e){d.push(e);})),f=function(e,r,s){return 0===r&&-1!==ie.indexOf(s[n.length])||s.match(o)?e:"."+t};function m(e,s,i,a){void 0===a&&(a="&");var c=e.replace(se,""),u=s&&i?i+" "+s+" { "+c+" }":c;return t=a,n=s,r=new RegExp("\\"+n+"\\b","g"),o=new RegExp("(\\"+n+"\\b){2,}"),l(i||!s?"":s,u)}return l.use([].concat(u,[function(e,t,o){2===e&&o.length&&o[0].lastIndexOf(n)>0&&(o[0]=o[0].replace(r,f));},p,function(e){if(-2===e){var t=d;return d=[],t}}])),m.hash=u.length?u.reduce((function(e,t){return t.name||D(15),ee(e,t.name)}),5381).toString():"",m}var ce=React__default.createContext();ce.Consumer;var le=React__default.createContext(),de=(le.Consumer,new X),he=ae();function pe(){return reactExports.useContext(ce)||de}function fe(){return reactExports.useContext(le)||he}var ye=function(){function e(e,t){var n=this;this.inject=function(e,t){void 0===t&&(t=he);var r=n.name+t.hash;e.hasNameForId(n.id,r)||e.insertRules(n.id,r,t(n.rules,r,"@keyframes"));},this.toString=function(){return D(12,String(n.name))},this.name=e,this.id="sc-keyframes-"+e,this.rules=t;}return e.prototype.getName=function(e){return void 0===e&&(e=he),this.name+e.hash},e}(),ve=/([A-Z])/,ge=/([A-Z])/g,Se=/^ms-/,we=function(e){return "-"+e.toLowerCase()};function Ee(e){return ve.test(e)?e.replace(ge,we).replace(Se,"-ms-"):e}var be=function(e){return null==e||!1===e||""===e};function _e(e,n,r,o){if(Array.isArray(e)){for(var s,i=[],a=0,c=e.length;a<c;a+=1)""!==(s=_e(e[a],n,r,o))&&(Array.isArray(s)?i.push.apply(i,s):i.push(s));return i}if(be(e))return "";if(_(e))return "."+e.styledComponentId;if(E(e)){if("function"!=typeof(l=e)||l.prototype&&l.prototype.isReactComponent||!n)return e;var u=e(n);return _e(u,n,r,o)}var l;return e instanceof ye?r?(e.inject(r,o),e.getName(o)):e:g(e)?function e(t,n){var r,o,s=[];for(var i in t)t.hasOwnProperty(i)&&!be(t[i])&&(Array.isArray(t[i])&&t[i].isCss||E(t[i])?s.push(Ee(i)+":",t[i],";"):g(t[i])?s.push.apply(s,e(t[i],i)):s.push(Ee(i)+": "+(r=i,null==(o=t[i])||"boolean"==typeof o||""===o?"":"number"!=typeof o||0===o||r in unitlessKeys||r.startsWith("--")?String(o).trim():o+"px")+";"));return n?[n+" {"].concat(s,["}"]):s}(e):e.toString()}var Ne=function(e){return Array.isArray(e)&&(e.isCss=!0),e};function Ae(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];return E(e)||g(e)?Ne(_e(v(S,[e].concat(n)))):0===n.length&&1===e.length&&"string"==typeof e[0]?e:Ne(_e(v(e,n)))}var Oe=function(e,t,n){return void 0===n&&(n=w),e.theme!==n.theme&&e.theme||t||n.theme},Re=/[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~-]+/g,De=/(^-|-$)/g;function je(e){return e.replace(Re,"-").replace(De,"")}var Te=function(e){return Q(te(e)>>>0)};function xe(e){return "string"==typeof e&&("production"==="production")}var ke=function(e){return "function"==typeof e||"object"==typeof e&&null!==e&&!Array.isArray(e)},Ve=function(e){return "__proto__"!==e&&"constructor"!==e&&"prototype"!==e};function Be(e,t,n){var r=e[n];ke(t)&&ke(r)?ze(r,t):e[n]=t;}function ze(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];for(var o=0,s=n;o<s.length;o++){var i=s[o];if(ke(i))for(var a in i)Ve(a)&&Be(e,i[a],a);}return e}var Me=React__default.createContext();Me.Consumer;function Le(e){var t=reactExports.useContext(Me),n=reactExports.useMemo((function(){return function(e,t){if(!e)return D(14);if(E(e)){var n=e(t);return n}return Array.isArray(e)||"object"!=typeof e?D(8):t?y({},t,{},e):e}(e.theme,t)}),[e.theme,t]);return e.children?React__default.createElement(Me.Provider,{value:n},e.children):null}var Fe={};function Ye(e,t,n){var o=_(e),i=!xe(e),a=t.attrs,c=void 0===a?S:a,l=t.componentId,d=void 0===l?function(e,t){var n="string"!=typeof e?"sc":je(e);Fe[n]=(Fe[n]||0)+1;var r=n+"-"+Te("5.3.11"+n+Fe[n]);return t?t+"-"+r:r}(t.displayName,t.parentComponentId):l,h=t.displayName,p=void 0===h?function(e){return xe(e)?"styled."+e:"Styled("+b(e)+")"}(e):h,v=t.displayName&&t.componentId?je(t.displayName)+"-"+t.componentId:t.componentId||d,g=o&&e.attrs?Array.prototype.concat(e.attrs,c).filter(Boolean):c,N=t.shouldForwardProp;o&&e.shouldForwardProp&&(N=t.shouldForwardProp?function(n,r,o){return e.shouldForwardProp(n,r,o)&&t.shouldForwardProp(n,r,o)}:e.shouldForwardProp);var A,C=new oe(n,v,o?e.componentStyle:void 0),I=C.isStatic&&0===c.length,P=function(e,t){return function(e,t,n,r){var o=e.attrs,i=e.componentStyle,a=e.defaultProps,c=e.foldedComponentIds,l=e.shouldForwardProp,d=e.styledComponentId,h=e.target,p=function(e,t,n){void 0===e&&(e=w);var r=y({},t,{theme:e}),o={};return n.forEach((function(e){var t,n,s,i=e;for(t in E(i)&&(i=i(r)),i)r[t]=o[t]="className"===t?(n=o[t],s=i[t],n&&s?n+" "+s:n||s):i[t];})),[r,o]}(Oe(t,reactExports.useContext(Me),a)||w,t,o),m=p[0],v=p[1],g=function(e,t,n,r){var o=pe(),s=fe(),i=t?e.generateAndInjectStyles(w,o,s):e.generateAndInjectStyles(n,o,s);return i}(i,r,m),S=n,b=v.$as||t.$as||v.as||t.as||h,_=xe(b),N=v!==t?y({},t,{},v):t,A={};for(var C in N)"$"!==C[0]&&"as"!==C&&("forwardedAs"===C?A.as=N[C]:(l?l(C,isPropValid,b):!_||isPropValid(C))&&(A[C]=N[C]));return t.style&&v.style!==t.style&&(A.style=y({},t.style,{},v.style)),A.className=Array.prototype.concat(c,d,g!==d?g:null,t.className,v.className).filter(Boolean).join(" "),A.ref=S,reactExports.createElement(b,A)}(A,e,t,I)};return P.displayName=p,(A=React__default.forwardRef(P)).attrs=g,A.componentStyle=C,A.displayName=p,A.shouldForwardProp=N,A.foldedComponentIds=o?Array.prototype.concat(e.foldedComponentIds,e.styledComponentId):S,A.styledComponentId=v,A.target=o?e.target:e,A.withComponent=function(e){var r=t.componentId,o=function(e,t){if(null==e)return {};var n,r,o={},s=Object.keys(e);for(r=0;r<s.length;r++)n=s[r],t.indexOf(n)>=0||(o[n]=e[n]);return o}(t,["componentId"]),s=r&&r+"-"+(xe(e)?e:je(b(e)));return Ye(e,y({},o,{attrs:g,componentId:s}),n)},Object.defineProperty(A,"defaultProps",{get:function(){return this._foldedDefaultProps},set:function(t){this._foldedDefaultProps=o?ze({},e.defaultProps,t):t;}}),Object.defineProperty(A,"toString",{value:function(){return "."+A.styledComponentId}}),i&&m(A,e,{attrs:!0,componentStyle:!0,displayName:!0,foldedComponentIds:!0,shouldForwardProp:!0,styledComponentId:!0,target:!0,withComponent:!0}),A}var qe=function(e){return function e(t,r,o){if(void 0===o&&(o=w),!reactIsExports$1.isValidElementType(r))return D(1,String(r));var s=function(){return t(r,o,Ae.apply(void 0,arguments))};return s.withConfig=function(n){return e(t,r,y({},o,{},n))},s.attrs=function(n){return e(t,r,y({},o,{attrs:Array.prototype.concat(o.attrs,n).filter(Boolean)}))},s}(Ye,e)};["a","abbr","address","area","article","aside","audio","b","base","bdi","bdo","big","blockquote","body","br","button","canvas","caption","cite","code","col","colgroup","data","datalist","dd","del","details","dfn","dialog","div","dl","dt","em","embed","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","head","header","hgroup","hr","html","i","iframe","img","input","ins","kbd","keygen","label","legend","li","link","main","map","mark","marquee","menu","menuitem","meta","meter","nav","noscript","object","ol","optgroup","option","output","p","param","picture","pre","progress","q","rp","rt","ruby","s","samp","script","section","select","small","source","span","strong","style","sub","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","title","tr","track","u","ul","var","video","wbr","circle","clipPath","defs","ellipse","foreignObject","g","image","line","linearGradient","marker","mask","path","pattern","polygon","polyline","radialGradient","rect","stop","svg","text","textPath","tspan"].forEach((function(e){qe[e]=qe(e);}));function We(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];var o=Ae.apply(void 0,[e].concat(n)).join(""),s=Te(o);return new ye(s,o)}var styled = qe;
+function y(){return (y=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r]);}return e}).apply(this,arguments)}var v=function(e,t){for(var n=[e[0]],r=0,o=t.length;r<o;r+=1)n.push(t[r],e[r+1]);return n},g=function(t){return null!==t&&"object"==typeof t&&"[object Object]"===(t.toString?t.toString():Object.prototype.toString.call(t))&&!reactIsExports$1.typeOf(t)},S=Object.freeze([]),w=Object.freeze({});function E(e){return "function"==typeof e}function b(e){return e.displayName||e.name||"Component"}function _(e){return e&&"string"==typeof e.styledComponentId}var N="undefined"!=typeof process&&void 0!==process.env&&(process.env.REACT_APP_SC_ATTR||process.env.SC_ATTR)||"data-styled",C="undefined"!=typeof window&&"HTMLElement"in window,I=Boolean("boolean"==typeof SC_DISABLE_SPEEDY?SC_DISABLE_SPEEDY:"undefined"!=typeof process&&void 0!==process.env&&(void 0!==process.env.REACT_APP_SC_DISABLE_SPEEDY&&""!==process.env.REACT_APP_SC_DISABLE_SPEEDY?"false"!==process.env.REACT_APP_SC_DISABLE_SPEEDY&&process.env.REACT_APP_SC_DISABLE_SPEEDY:void 0!==process.env.SC_DISABLE_SPEEDY&&""!==process.env.SC_DISABLE_SPEEDY?"false"!==process.env.SC_DISABLE_SPEEDY&&process.env.SC_DISABLE_SPEEDY:"production"!=="production"));function D(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];throw new Error("An error occurred. See https://git.io/JUIaE#"+e+" for more information."+(n.length>0?" Args: "+n.join(", "):""))}var j=function(){function e(e){this.groupSizes=new Uint32Array(512),this.length=512,this.tag=e;}var t=e.prototype;return t.indexOfGroup=function(e){for(var t=0,n=0;n<e;n++)t+=this.groupSizes[n];return t},t.insertRules=function(e,t){if(e>=this.groupSizes.length){for(var n=this.groupSizes,r=n.length,o=r;e>=o;)(o<<=1)<0&&D(16,""+e);this.groupSizes=new Uint32Array(o),this.groupSizes.set(n),this.length=o;for(var s=r;s<o;s++)this.groupSizes[s]=0;}for(var i=this.indexOfGroup(e+1),a=0,c=t.length;a<c;a++)this.tag.insertRule(i,t[a])&&(this.groupSizes[e]++,i++);},t.clearGroup=function(e){if(e<this.length){var t=this.groupSizes[e],n=this.indexOfGroup(e),r=n+t;this.groupSizes[e]=0;for(var o=n;o<r;o++)this.tag.deleteRule(n);}},t.getGroup=function(e){var t="";if(e>=this.length||0===this.groupSizes[e])return t;for(var n=this.groupSizes[e],r=this.indexOfGroup(e),o=r+n,s=r;s<o;s++)t+=this.tag.getRule(s)+"/*!sc*/\n";return t},e}(),T=new Map,x=new Map,k=1,V=function(e){if(T.has(e))return T.get(e);for(;x.has(k);)k++;var t=k++;return T.set(e,t),x.set(t,e),t},B=function(e){return x.get(e)},z=function(e,t){t>=k&&(k=t+1),T.set(e,t),x.set(t,e);},M="style["+N+'][data-styled-version="5.3.11"]',G=new RegExp("^"+N+'\\.g(\\d+)\\[id="([\\w\\d-]+)"\\].*?"([^"]*)'),L=function(e,t,n){for(var r,o=n.split(","),s=0,i=o.length;s<i;s++)(r=o[s])&&e.registerName(t,r);},F=function(e,t){for(var n=(t.textContent||"").split("/*!sc*/\n"),r=[],o=0,s=n.length;o<s;o++){var i=n[o].trim();if(i){var a=i.match(G);if(a){var c=0|parseInt(a[1],10),u=a[2];0!==c&&(z(u,c),L(e,u,a[3]),e.getTag().insertRules(c,r)),r.length=0;}else r.push(i);}}},Y=function(){return "undefined"!=typeof __webpack_nonce__?__webpack_nonce__:null},q=function(e){var t=document.head,n=e||t,r=document.createElement("style"),o=function(e){for(var t=e.childNodes,n=t.length;n>=0;n--){var r=t[n];if(r&&1===r.nodeType&&r.hasAttribute(N))return r}}(n),s=void 0!==o?o.nextSibling:null;r.setAttribute(N,"active"),r.setAttribute("data-styled-version","5.3.11");var i=Y();return i&&r.setAttribute("nonce",i),n.insertBefore(r,s),r},H=function(){function e(e){var t=this.element=q(e);t.appendChild(document.createTextNode("")),this.sheet=function(e){if(e.sheet)return e.sheet;for(var t=document.styleSheets,n=0,r=t.length;n<r;n++){var o=t[n];if(o.ownerNode===e)return o}D(17);}(t),this.length=0;}var t=e.prototype;return t.insertRule=function(e,t){try{return this.sheet.insertRule(t,e),this.length++,!0}catch(e){return !1}},t.deleteRule=function(e){this.sheet.deleteRule(e),this.length--;},t.getRule=function(e){var t=this.sheet.cssRules[e];return void 0!==t&&"string"==typeof t.cssText?t.cssText:""},e}(),$=function(){function e(e){var t=this.element=q(e);this.nodes=t.childNodes,this.length=0;}var t=e.prototype;return t.insertRule=function(e,t){if(e<=this.length&&e>=0){var n=document.createTextNode(t),r=this.nodes[e];return this.element.insertBefore(n,r||null),this.length++,!0}return !1},t.deleteRule=function(e){this.element.removeChild(this.nodes[e]),this.length--;},t.getRule=function(e){return e<this.length?this.nodes[e].textContent:""},e}(),W=function(){function e(e){this.rules=[],this.length=0;}var t=e.prototype;return t.insertRule=function(e,t){return e<=this.length&&(this.rules.splice(e,0,t),this.length++,!0)},t.deleteRule=function(e){this.rules.splice(e,1),this.length--;},t.getRule=function(e){return e<this.length?this.rules[e]:""},e}(),U=C,J={isServer:!C,useCSSOMInjection:!I},X=function(){function e(e,t,n){void 0===e&&(e=w),void 0===t&&(t={}),this.options=y({},J,{},e),this.gs=t,this.names=new Map(n),this.server=!!e.isServer,!this.server&&C&&U&&(U=!1,function(e){for(var t=document.querySelectorAll(M),n=0,r=t.length;n<r;n++){var o=t[n];o&&"active"!==o.getAttribute(N)&&(F(e,o),o.parentNode&&o.parentNode.removeChild(o));}}(this));}e.registerId=function(e){return V(e)};var t=e.prototype;return t.reconstructWithOptions=function(t,n){return void 0===n&&(n=!0),new e(y({},this.options,{},t),this.gs,n&&this.names||void 0)},t.allocateGSInstance=function(e){return this.gs[e]=(this.gs[e]||0)+1},t.getTag=function(){return this.tag||(this.tag=(n=(t=this.options).isServer,r=t.useCSSOMInjection,o=t.target,e=n?new W(o):r?new H(o):new $(o),new j(e)));var e,t,n,r,o;},t.hasNameForId=function(e,t){return this.names.has(e)&&this.names.get(e).has(t)},t.registerName=function(e,t){if(V(e),this.names.has(e))this.names.get(e).add(t);else {var n=new Set;n.add(t),this.names.set(e,n);}},t.insertRules=function(e,t,n){this.registerName(e,t),this.getTag().insertRules(V(e),n);},t.clearNames=function(e){this.names.has(e)&&this.names.get(e).clear();},t.clearRules=function(e){this.getTag().clearGroup(V(e)),this.clearNames(e);},t.clearTag=function(){this.tag=void 0;},t.toString=function(){return function(e){for(var t=e.getTag(),n=t.length,r="",o=0;o<n;o++){var s=B(o);if(void 0!==s){var i=e.names.get(s),a=t.getGroup(o);if(i&&a&&i.size){var c=N+".g"+o+'[id="'+s+'"]',u="";void 0!==i&&i.forEach((function(e){e.length>0&&(u+=e+",");})),r+=""+a+c+'{content:"'+u+'"}/*!sc*/\n';}}}return r}(this)},e}(),Z=/(a)(d)/gi,K=function(e){return String.fromCharCode(e+(e>25?39:97))};function Q(e){var t,n="";for(t=Math.abs(e);t>52;t=t/52|0)n=K(t%52)+n;return (K(t%52)+n).replace(Z,"$1-$2")}var ee=function(e,t){for(var n=t.length;n;)e=33*e^t.charCodeAt(--n);return e},te=function(e){return ee(5381,e)};function ne(e){for(var t=0;t<e.length;t+=1){var n=e[t];if(E(n)&&!_(n))return !1}return !0}var re=te("5.3.11"),oe=function(){function e(e,t,n){this.rules=e,this.staticRulesId="",this.isStatic=(void 0===n||n.isStatic)&&ne(e),this.componentId=t,this.baseHash=ee(re,t),this.baseStyle=n,X.registerId(t);}return e.prototype.generateAndInjectStyles=function(e,t,n){var r=this.componentId,o=[];if(this.baseStyle&&o.push(this.baseStyle.generateAndInjectStyles(e,t,n)),this.isStatic&&!n.hash)if(this.staticRulesId&&t.hasNameForId(r,this.staticRulesId))o.push(this.staticRulesId);else {var s=_e(this.rules,e,t,n).join(""),i=Q(ee(this.baseHash,s)>>>0);if(!t.hasNameForId(r,i)){var a=n(s,"."+i,void 0,r);t.insertRules(r,i,a);}o.push(i),this.staticRulesId=i;}else {for(var c=this.rules.length,u=ee(this.baseHash,n.hash),l="",d=0;d<c;d++){var h=this.rules[d];if("string"==typeof h)l+=h;else if(h){var p=_e(h,e,t,n),f=Array.isArray(p)?p.join(""):p;u=ee(u,f+d),l+=f;}}if(l){var m=Q(u>>>0);if(!t.hasNameForId(r,m)){var y=n(l,"."+m,void 0,r);t.insertRules(r,m,y);}o.push(m);}}return o.join(" ")},e}(),se=/^\s*\/\/.*$/gm,ie=[":","[",".","#"];function ae(e){var t,n,r,o,s=void 0===e?w:e,i=s.options,a=void 0===i?w:i,c=s.plugins,u=void 0===c?S:c,l=new stylis_min(a),d=[],p=function(e){function t(t){if(t)try{e(t+"}");}catch(e){}}return function(n,r,o,s,i,a,c,u,l,d){switch(n){case 1:if(0===l&&64===r.charCodeAt(0))return e(r+";"),"";break;case 2:if(0===u)return r+"/*|*/";break;case 3:switch(u){case 102:case 112:return e(o[0]+r),"";default:return r+(0===d?"/*|*/":"")}case-2:r.split("/*|*/}").forEach(t);}}}((function(e){d.push(e);})),f=function(e,r,s){return 0===r&&-1!==ie.indexOf(s[n.length])||s.match(o)?e:"."+t};function m(e,s,i,a){void 0===a&&(a="&");var c=e.replace(se,""),u=s&&i?i+" "+s+" { "+c+" }":c;return t=a,n=s,r=new RegExp("\\"+n+"\\b","g"),o=new RegExp("(\\"+n+"\\b){2,}"),l(i||!s?"":s,u)}return l.use([].concat(u,[function(e,t,o){2===e&&o.length&&o[0].lastIndexOf(n)>0&&(o[0]=o[0].replace(r,f));},p,function(e){if(-2===e){var t=d;return d=[],t}}])),m.hash=u.length?u.reduce((function(e,t){return t.name||D(15),ee(e,t.name)}),5381).toString():"",m}var ce=React.createContext();ce.Consumer;var le=React.createContext(),de=(le.Consumer,new X),he=ae();function pe(){return reactExports.useContext(ce)||de}function fe(){return reactExports.useContext(le)||he}var ye=function(){function e(e,t){var n=this;this.inject=function(e,t){void 0===t&&(t=he);var r=n.name+t.hash;e.hasNameForId(n.id,r)||e.insertRules(n.id,r,t(n.rules,r,"@keyframes"));},this.toString=function(){return D(12,String(n.name))},this.name=e,this.id="sc-keyframes-"+e,this.rules=t;}return e.prototype.getName=function(e){return void 0===e&&(e=he),this.name+e.hash},e}(),ve=/([A-Z])/,ge=/([A-Z])/g,Se=/^ms-/,we=function(e){return "-"+e.toLowerCase()};function Ee(e){return ve.test(e)?e.replace(ge,we).replace(Se,"-ms-"):e}var be=function(e){return null==e||!1===e||""===e};function _e(e,n,r,o){if(Array.isArray(e)){for(var s,i=[],a=0,c=e.length;a<c;a+=1)""!==(s=_e(e[a],n,r,o))&&(Array.isArray(s)?i.push.apply(i,s):i.push(s));return i}if(be(e))return "";if(_(e))return "."+e.styledComponentId;if(E(e)){if("function"!=typeof(l=e)||l.prototype&&l.prototype.isReactComponent||!n)return e;var u=e(n);return _e(u,n,r,o)}var l;return e instanceof ye?r?(e.inject(r,o),e.getName(o)):e:g(e)?function e(t,n){var r,o,s=[];for(var i in t)t.hasOwnProperty(i)&&!be(t[i])&&(Array.isArray(t[i])&&t[i].isCss||E(t[i])?s.push(Ee(i)+":",t[i],";"):g(t[i])?s.push.apply(s,e(t[i],i)):s.push(Ee(i)+": "+(r=i,null==(o=t[i])||"boolean"==typeof o||""===o?"":"number"!=typeof o||0===o||r in unitlessKeys||r.startsWith("--")?String(o).trim():o+"px")+";"));return n?[n+" {"].concat(s,["}"]):s}(e):e.toString()}var Ne=function(e){return Array.isArray(e)&&(e.isCss=!0),e};function Ae(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];return E(e)||g(e)?Ne(_e(v(S,[e].concat(n)))):0===n.length&&1===e.length&&"string"==typeof e[0]?e:Ne(_e(v(e,n)))}var Oe=function(e,t,n){return void 0===n&&(n=w),e.theme!==n.theme&&e.theme||t||n.theme},Re=/[!"#$%&'()*+,./:;<=>?@[\\\]^`{|}~-]+/g,De=/(^-|-$)/g;function je(e){return e.replace(Re,"-").replace(De,"")}var Te=function(e){return Q(te(e)>>>0)};function xe(e){return "string"==typeof e&&("production"==="production")}var ke=function(e){return "function"==typeof e||"object"==typeof e&&null!==e&&!Array.isArray(e)},Ve=function(e){return "__proto__"!==e&&"constructor"!==e&&"prototype"!==e};function Be(e,t,n){var r=e[n];ke(t)&&ke(r)?ze(r,t):e[n]=t;}function ze(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];for(var o=0,s=n;o<s.length;o++){var i=s[o];if(ke(i))for(var a in i)Ve(a)&&Be(e,i[a],a);}return e}var Me=React.createContext();Me.Consumer;function Le(e){var t=reactExports.useContext(Me),n=reactExports.useMemo((function(){return function(e,t){if(!e)return D(14);if(E(e)){var n=e(t);return n}return Array.isArray(e)||"object"!=typeof e?D(8):t?y({},t,{},e):e}(e.theme,t)}),[e.theme,t]);return e.children?React.createElement(Me.Provider,{value:n},e.children):null}var Fe={};function Ye(e,t,n){var o=_(e),i=!xe(e),a=t.attrs,c=void 0===a?S:a,l=t.componentId,d=void 0===l?function(e,t){var n="string"!=typeof e?"sc":je(e);Fe[n]=(Fe[n]||0)+1;var r=n+"-"+Te("5.3.11"+n+Fe[n]);return t?t+"-"+r:r}(t.displayName,t.parentComponentId):l,h=t.displayName,p=void 0===h?function(e){return xe(e)?"styled."+e:"Styled("+b(e)+")"}(e):h,v=t.displayName&&t.componentId?je(t.displayName)+"-"+t.componentId:t.componentId||d,g=o&&e.attrs?Array.prototype.concat(e.attrs,c).filter(Boolean):c,N=t.shouldForwardProp;o&&e.shouldForwardProp&&(N=t.shouldForwardProp?function(n,r,o){return e.shouldForwardProp(n,r,o)&&t.shouldForwardProp(n,r,o)}:e.shouldForwardProp);var A,C=new oe(n,v,o?e.componentStyle:void 0),I=C.isStatic&&0===c.length,P=function(e,t){return function(e,t,n,r){var o=e.attrs,i=e.componentStyle,a=e.defaultProps,c=e.foldedComponentIds,l=e.shouldForwardProp,d=e.styledComponentId,h=e.target,p=function(e,t,n){void 0===e&&(e=w);var r=y({},t,{theme:e}),o={};return n.forEach((function(e){var t,n,s,i=e;for(t in E(i)&&(i=i(r)),i)r[t]=o[t]="className"===t?(n=o[t],s=i[t],n&&s?n+" "+s:n||s):i[t];})),[r,o]}(Oe(t,reactExports.useContext(Me),a)||w,t,o),m=p[0],v=p[1],g=function(e,t,n,r){var o=pe(),s=fe(),i=t?e.generateAndInjectStyles(w,o,s):e.generateAndInjectStyles(n,o,s);return i}(i,r,m),S=n,b=v.$as||t.$as||v.as||t.as||h,_=xe(b),N=v!==t?y({},t,{},v):t,A={};for(var C in N)"$"!==C[0]&&"as"!==C&&("forwardedAs"===C?A.as=N[C]:(l?l(C,isPropValid,b):!_||isPropValid(C))&&(A[C]=N[C]));return t.style&&v.style!==t.style&&(A.style=y({},t.style,{},v.style)),A.className=Array.prototype.concat(c,d,g!==d?g:null,t.className,v.className).filter(Boolean).join(" "),A.ref=S,reactExports.createElement(b,A)}(A,e,t,I)};return P.displayName=p,(A=React.forwardRef(P)).attrs=g,A.componentStyle=C,A.displayName=p,A.shouldForwardProp=N,A.foldedComponentIds=o?Array.prototype.concat(e.foldedComponentIds,e.styledComponentId):S,A.styledComponentId=v,A.target=o?e.target:e,A.withComponent=function(e){var r=t.componentId,o=function(e,t){if(null==e)return {};var n,r,o={},s=Object.keys(e);for(r=0;r<s.length;r++)n=s[r],t.indexOf(n)>=0||(o[n]=e[n]);return o}(t,["componentId"]),s=r&&r+"-"+(xe(e)?e:je(b(e)));return Ye(e,y({},o,{attrs:g,componentId:s}),n)},Object.defineProperty(A,"defaultProps",{get:function(){return this._foldedDefaultProps},set:function(t){this._foldedDefaultProps=o?ze({},e.defaultProps,t):t;}}),Object.defineProperty(A,"toString",{value:function(){return "."+A.styledComponentId}}),i&&m(A,e,{attrs:!0,componentStyle:!0,displayName:!0,foldedComponentIds:!0,shouldForwardProp:!0,styledComponentId:!0,target:!0,withComponent:!0}),A}var qe=function(e){return function e(t,r,o){if(void 0===o&&(o=w),!reactIsExports$1.isValidElementType(r))return D(1,String(r));var s=function(){return t(r,o,Ae.apply(void 0,arguments))};return s.withConfig=function(n){return e(t,r,y({},o,{},n))},s.attrs=function(n){return e(t,r,y({},o,{attrs:Array.prototype.concat(o.attrs,n).filter(Boolean)}))},s}(Ye,e)};["a","abbr","address","area","article","aside","audio","b","base","bdi","bdo","big","blockquote","body","br","button","canvas","caption","cite","code","col","colgroup","data","datalist","dd","del","details","dfn","dialog","div","dl","dt","em","embed","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","head","header","hgroup","hr","html","i","iframe","img","input","ins","kbd","keygen","label","legend","li","link","main","map","mark","marquee","menu","menuitem","meta","meter","nav","noscript","object","ol","optgroup","option","output","p","param","picture","pre","progress","q","rp","rt","ruby","s","samp","script","section","select","small","source","span","strong","style","sub","summary","sup","table","tbody","td","textarea","tfoot","th","thead","time","title","tr","track","u","ul","var","video","wbr","circle","clipPath","defs","ellipse","foreignObject","g","image","line","linearGradient","marker","mask","path","pattern","polygon","polyline","radialGradient","rect","stop","svg","text","textPath","tspan"].forEach((function(e){qe[e]=qe(e);}));function We(e){for(var t=arguments.length,n=new Array(t>1?t-1:0),r=1;r<t;r++)n[r-1]=arguments[r];var o=Ae.apply(void 0,[e].concat(n)).join(""),s=Te(o);return new ye(s,o)}var styled = qe;
 
 var propTypes = {exports: {}};
 
@@ -4415,8 +4413,8 @@ var id = 0;
 function genId() {
   return ++id;
 }
-var maybeReactUseId = React["useId".toString()];
-function useId$1(providedId) {
+var maybeReactUseId = React$1["useId".toString()];
+function useId$2(providedId) {
   if (maybeReactUseId !== void 0) {
     let generatedId = maybeReactUseId();
     return providedId ?? generatedId;
@@ -4443,7 +4441,7 @@ function useId$1(providedId) {
  * found at http://www.apache.org/licenses/LICENSE-2.0.
  */
 
-function composeEventHandlers$1() {
+function composeEventHandlers$3() {
   for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
     fns[_key] = arguments[_key];
   }
@@ -4500,7 +4498,7 @@ const KEYS = {
 };
 
 let idCounter$1 = 0;
-const useId = id => useId$1(id) || `id:${idCounter$1++}`;
+const useId$1 = id => useId$2(id) || `id:${idCounter$1++}`;
 
 /**
 * Copyright Zendesk, Inc.
@@ -4810,14 +4808,14 @@ const ThemeProvider = _ref => {
   } = _ref;
   const scopeRef = reactExports.useRef(null);
   const relativeDocument = useDocument(theme);
-  const controlledScopeRef = focusVisibleRef === null ? React__default.createRef() : getControlledValue(focusVisibleRef, scopeRef);
+  const controlledScopeRef = focusVisibleRef === null ? React.createRef() : getControlledValue(focusVisibleRef, scopeRef);
   useFocusVisible({
     scope: controlledScopeRef,
     relativeDocument
   });
-  return React__default.createElement(Le, Object.assign({
+  return React.createElement(Le, Object.assign({
     theme: theme
-  }, other), focusVisibleRef === undefined ? React__default.createElement("div", {
+  }, other), focusVisibleRef === undefined ? React.createElement("div", {
     ref: scopeRef
   }, children) : children);
 };
@@ -7069,7 +7067,7 @@ function baseIsNative(value) {
   if (!isObject$1(value) || isMasked(value)) {
     return false;
   }
-  var pattern = (isFunction$2(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
+  var pattern = (isFunction$3(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
   return pattern.test(toSource(value));
 }
 
@@ -7265,7 +7263,7 @@ function eq(value, other) {
  * _.isFunction(/abc/);
  * // => false
  */
-function isFunction$2(value) {
+function isFunction$3(value) {
   // The use of `Object#toString` avoids issues with the `typeof` operator
   // in Safari 8-9 which returns 'object' for typed array and other constructors.
   var tag = isObject$1(value) ? objectToString.call(value) : '';
@@ -7656,17 +7654,17 @@ const focusStyles = _ref => {
 };
 
 function createTheme(settings) {
-    return {
-        ...DEFAULT_THEME,
-        rtl: document.dir === "rtl",
-        colors: {
-            ...DEFAULT_THEME.colors,
-            background: settings.background_color,
-            foreground: settings.text_color,
-            primaryHue: settings.brand_color,
-        },
-        components: {
-            "buttons.anchor": Ae `
+  return {
+    ...DEFAULT_THEME,
+    rtl: document.dir === "rtl",
+    colors: {
+      ...DEFAULT_THEME.colors,
+      background: settings.background_color,
+      foreground: settings.text_color,
+      primaryHue: settings.brand_color
+    },
+    components: {
+      "buttons.anchor": Ae`
         color: ${settings.link_color};
 
         :hover,
@@ -7679,14 +7677,13 @@ function createTheme(settings) {
           color: ${settings.visited_link_color};
         }
       `,
-            "buttons.button": Ae `
-        ${(props) => props.isPrimary &&
-                Ae `
+      "buttons.button": Ae`
+        ${props => props.isPrimary && Ae`
             color: ${settings.brand_text_color};
           `}
-      `,
-        },
-    };
+      `
+    }
+  };
 }
 
 /**
@@ -7876,7 +7873,7 @@ const StyledIcon$2 = styled(_ref => {
     children,
     ...props
   } = _ref;
-  return React__default.cloneElement(reactExports.Children.only(children), props);
+  return React.cloneElement(reactExports.Children.only(children), props);
 }).withConfig({
   displayName: "StyledIcon",
   componentId: "sc-msklws-0"
@@ -8067,22 +8064,22 @@ const useNotificationsContext = () => {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Alert = React__default.forwardRef((_ref, ref) => {
+const Alert = React.forwardRef((_ref, ref) => {
   let {
     role,
     ...props
   } = _ref;
   const hue = validationHues[props.type];
   const Icon = validationIcons[props.type];
-  return React__default.createElement(NotificationsContext.Provider, {
+  return React.createElement(NotificationsContext.Provider, {
     value: hue
-  }, React__default.createElement(StyledAlert, Object.assign({
+  }, React.createElement(StyledAlert, Object.assign({
     ref: ref,
     hue: hue,
     role: role === undefined ? 'alert' : role
-  }, props), React__default.createElement(StyledIcon$2, {
+  }, props), React.createElement(StyledIcon$2, {
     hue: hue
-  }, React__default.createElement(Icon, null)), props.children));
+  }, React.createElement(Icon, null)), props.children));
 });
 Alert.displayName = 'Alert';
 Alert.propTypes = {
@@ -8104,14 +8101,14 @@ const Notification = reactExports.forwardRef((_ref, ref) => {
   } = _ref;
   const Icon = type ? validationIcons[type] : SvgInfoStroke;
   const hue = type && validationHues[type];
-  return React__default.createElement(StyledNotification, Object.assign({
+  return React.createElement(StyledNotification, Object.assign({
     ref: ref,
     type: type,
     isFloating: true,
     role: "alert"
-  }, props), type && React__default.createElement(StyledIcon$2, {
+  }, props), type && React.createElement(StyledIcon$2, {
     hue: hue
-  }, React__default.createElement(Icon, null)), children);
+  }, React.createElement(Icon, null)), children);
 });
 Notification.displayName = 'Notification';
 Notification.propTypes = {
@@ -8149,14 +8146,14 @@ var SvgXStroke$5 = function SvgXStroke(props) {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Close$4 = React__default.forwardRef((props, ref) => {
+const Close$4 = React.forwardRef((props, ref) => {
   const ariaLabel = useText(Close$4, props, 'aria-label', 'Close');
   const hue = useNotificationsContext();
-  return React__default.createElement(StyledClose$3, Object.assign({
+  return React.createElement(StyledClose$3, Object.assign({
     ref: ref,
     hue: hue,
     "aria-label": ariaLabel
-  }, props), React__default.createElement(SvgXStroke$5, null));
+  }, props), React.createElement(SvgXStroke$5, null));
 });
 Close$4.displayName = 'Close';
 
@@ -8167,7 +8164,7 @@ Close$4.displayName = 'Close';
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Title = React__default.forwardRef((props, ref) => React__default.createElement(StyledTitle$2, Object.assign({
+const Title = React.forwardRef((props, ref) => React.createElement(StyledTitle$2, Object.assign({
   ref: ref
 }, props)));
 Title.displayName = 'Title';
@@ -8303,7 +8300,7 @@ var config = {
   disabled: false
 };
 
-var TransitionGroupContext = React__default.createContext(null);
+var TransitionGroupContext = React.createContext(null);
 
 var forceReflow = function forceReflow(node) {
   return node.scrollTop;
@@ -8705,14 +8702,14 @@ var Transition = /*#__PURE__*/function (_React$Component) {
     return (
       /*#__PURE__*/
       // allows for nested Transitions
-      React__default.createElement(TransitionGroupContext.Provider, {
+      React.createElement(TransitionGroupContext.Provider, {
         value: null
-      }, typeof children === 'function' ? children(status, childProps) : React__default.cloneElement(React__default.Children.only(children), childProps))
+      }, typeof children === 'function' ? children(status, childProps) : React.cloneElement(React.Children.only(children), childProps))
     );
   };
 
   return Transition;
-}(React__default.Component);
+}(React.Component);
 
 Transition.contextType = TransitionGroupContext;
 Transition.propTypes = {}; // Name the function so it is clearer in the documentation
@@ -8994,7 +8991,7 @@ var CSSTransition = /*#__PURE__*/function (_React$Component) {
         _this$props.classNames;
         var props = _objectWithoutPropertiesLoose$1(_this$props, ["classNames"]);
 
-    return /*#__PURE__*/React__default.createElement(Transition$1, _extends$V({}, props, {
+    return /*#__PURE__*/React.createElement(Transition$1, _extends$V({}, props, {
       onEnter: this.onEnter,
       onEntered: this.onEntered,
       onEntering: this.onEntering,
@@ -9005,7 +9002,7 @@ var CSSTransition = /*#__PURE__*/function (_React$Component) {
   };
 
   return CSSTransition;
-}(React__default.Component);
+}(React.Component);
 
 CSSTransition.defaultProps = {
   classNames: ''
@@ -9260,18 +9257,18 @@ var TransitionGroup = /*#__PURE__*/function (_React$Component) {
     delete props.exit;
 
     if (Component === null) {
-      return /*#__PURE__*/React__default.createElement(TransitionGroupContext.Provider, {
+      return /*#__PURE__*/React.createElement(TransitionGroupContext.Provider, {
         value: contextValue
       }, children);
     }
 
-    return /*#__PURE__*/React__default.createElement(TransitionGroupContext.Provider, {
+    return /*#__PURE__*/React.createElement(TransitionGroupContext.Provider, {
       value: contextValue
-    }, /*#__PURE__*/React__default.createElement(Component, props, children));
+    }, /*#__PURE__*/React.createElement(Component, props, children));
   };
 
   return TransitionGroup;
-}(React__default.Component);
+}(React.Component);
 
 TransitionGroup.propTypes = {};
 TransitionGroup.defaultProps = defaultProps$2;
@@ -9603,15 +9600,15 @@ const ToastSlot = _ref => {
     }
     return index >= limit;
   }, [limit, placement, toasts.length]);
-  return React__default.createElement(StyledTransitionContainer, Object.assign({
+  return React.createElement(StyledTransitionContainer, Object.assign({
     key: placement,
     toastPlacement: placement,
     toastZIndex: zIndex,
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave
-  }, props), React__default.createElement(TransitionGroup$1, null, toasts.map((toast, index) => {
-    const transitionRef = React__default.createRef();
-    return React__default.createElement(CSSTransition$1, {
+  }, props), React.createElement(TransitionGroup$1, null, toasts.map((toast, index) => {
+    const transitionRef = React.createRef();
+    return React.createElement(CSSTransition$1, {
       key: toast.id,
       timeout: {
         enter: 400,
@@ -9620,11 +9617,11 @@ const ToastSlot = _ref => {
       unmountOnExit: true,
       classNames: TRANSITION_CLASS,
       nodeRef: transitionRef
-    }, React__default.createElement(StyledFadeInTransition, {
+    }, React.createElement(StyledFadeInTransition, {
       ref: transitionRef,
       placement: placement,
       isHidden: isHidden(index)
-    }, React__default.createElement(Toast, {
+    }, React.createElement(Toast, {
       toast: toast,
       pauseTimers: pauseTimers || isHidden(index)
     })));
@@ -9655,14 +9652,14 @@ const ToastProvider = _ref => {
     if (placement === 'bottom' || placement === 'bottom-start' || placement === 'bottom-end') {
       matchingToasts = matchingToasts.reverse();
     }
-    return React__default.createElement(ToastSlot, Object.assign({
+    return React.createElement(ToastSlot, Object.assign({
       placement: placement,
       toasts: matchingToasts,
       zIndex: zIndex,
       limit: limit
     }, placementProps[placement]));
   }, [limit, state.toasts, zIndex, placementProps]);
-  return React__default.createElement(ToastContext.Provider, {
+  return React.createElement(ToastContext.Provider, {
     value: contextValue
   }, toastsByPlacement('top-start'), toastsByPlacement('top'), toastsByPlacement('top-end'), children, toastsByPlacement('bottom-start'), toastsByPlacement('bottom'), toastsByPlacement('bottom-end'));
 };
@@ -9676,31 +9673,51 @@ ToastProvider.propTypes = {
   placementProps: PropTypes.object
 };
 
-const ModalContainerContext = reactExports.createContext(null);
+const ModalContainerContext = /*#__PURE__*/reactExports.createContext(null);
 
 // z-index needs to be higher than the z-index of the navbar,
-const ModalContainer = styled.div `
+const ModalContainer = styled.div`
   z-index: 2147483647;
   position: fixed;
 `;
-function ModalContainerProvider({ children, }) {
-    const [container, setContainer] = reactExports.useState();
-    const containerRefCallback = (element) => {
-        setContainer(element);
-    };
-    return (jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [jsxRuntimeExports.jsx(ModalContainer, { ref: containerRefCallback }), container && (jsxRuntimeExports.jsx(ModalContainerContext.Provider, { value: container, children: children }))] }));
+function ModalContainerProvider({
+  children
+}) {
+  const [container, setContainer] = reactExports.useState();
+  const containerRefCallback = element => {
+    setContainer(element);
+  };
+  return jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, {
+    children: [jsxRuntimeExports.jsx(ModalContainer, {
+      ref: containerRefCallback
+    }), container && jsxRuntimeExports.jsx(ModalContainerContext.Provider, {
+      value: container,
+      children: children
+    })]
+  });
 }
 
-function ThemeProviders({ theme, children, }) {
-    return (jsxRuntimeExports.jsx(ThemeProvider, { theme: theme, children: jsxRuntimeExports.jsx(ToastProvider, { zIndex: 2147483647, children: jsxRuntimeExports.jsx(ModalContainerProvider, { children: children }) }) }));
+function ThemeProviders({
+  theme,
+  children
+}) {
+  return jsxRuntimeExports.jsx(ThemeProvider, {
+    theme: theme,
+    children: jsxRuntimeExports.jsx(ToastProvider, {
+      zIndex: 2147483647,
+      children: jsxRuntimeExports.jsx(ModalContainerProvider, {
+        children: children
+      })
+    })
+  });
 }
 
 function useModalContainer() {
-    const modalContainer = reactExports.useContext(ModalContainerContext);
-    if (modalContainer === null) {
-        throw new Error("useModalContainer should be used inside a ModalContainerProvider");
-    }
-    return modalContainer;
+  const modalContainer = reactExports.useContext(ModalContainerContext);
+  if (modalContainer === null) {
+    throw new Error("useModalContainer should be used inside a ModalContainerProvider");
+  }
+  return modalContainer;
 }
 
 /**
@@ -9716,7 +9733,7 @@ const useField = _ref => {
     hasHint,
     hasMessage
   } = _ref;
-  const prefix = useId(idPrefix);
+  const prefix = useId$1(idPrefix);
   const inputId = `${prefix}--input`;
   const labelId = `${prefix}--label`;
   const hintId = `${prefix}--hint`;
@@ -9985,13 +10002,13 @@ const MessageIcon$1 = _ref => {
   } = _ref;
   let retVal;
   if (validation === 'error') {
-    retVal = React__default.createElement(SvgAlertErrorStroke$2, props);
+    retVal = React.createElement(SvgAlertErrorStroke$2, props);
   } else if (validation === 'success') {
-    retVal = React__default.createElement(SvgCheckCircleStroke$3, props);
+    retVal = React.createElement(SvgCheckCircleStroke$3, props);
   } else if (validation === 'warning') {
-    retVal = React__default.createElement(SvgAlertWarningStroke$2, props);
+    retVal = React.createElement(SvgAlertWarningStroke$2, props);
   } else {
-    retVal = React__default.cloneElement(reactExports.Children.only(children));
+    retVal = React.cloneElement(reactExports.Children.only(children));
   }
   return retVal;
 };
@@ -10210,7 +10227,7 @@ _ref => {
     theme,
     ...props
   } = _ref;
-  return React__default.cloneElement(reactExports.Children.only(children), props);
+  return React.cloneElement(reactExports.Children.only(children), props);
 }).attrs({
   'data-garden-id': COMPONENT_ID$1K,
   'data-garden-version': '8.76.2'
@@ -10752,7 +10769,7 @@ const StyledFileIcon = styled(_ref => {
     theme,
     ...props
   } = _ref;
-  return React__default.cloneElement(reactExports.Children.only(children), props);
+  return React.cloneElement(reactExports.Children.only(children), props);
 }).attrs({
   'data-garden-id': COMPONENT_ID$1t,
   'data-garden-version': '8.76.2'
@@ -10959,7 +10976,7 @@ StyledToggleSvg$1.defaultProps = {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Field$1 = React__default.forwardRef((props, ref) => {
+const Field$1 = React.forwardRef((props, ref) => {
   const [hasHint, setHasHint] = reactExports.useState(false);
   const [hasMessage, setHasMessage] = reactExports.useState(false);
   const [isLabelActive, setIsLabelActive] = reactExports.useState(false);
@@ -10988,9 +11005,9 @@ const Field$1 = React__default.forwardRef((props, ref) => {
     setHasMessage,
     multiThumbRangeRef
   }), [propGetters, getInputProps, getMessageProps, isLabelActive, isLabelHovered, hasHint, hasMessage]);
-  return React__default.createElement(FieldContext$2.Provider, {
+  return React.createElement(FieldContext$2.Provider, {
     value: fieldProps
-  }, React__default.createElement(StyledField$1, Object.assign({}, props, {
+  }, React.createElement(StyledField$1, Object.assign({}, props, {
     ref: ref
   })));
 });
@@ -11028,7 +11045,7 @@ const useInputContext$1 = () => {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Hint$2 = React__default.forwardRef((props, ref) => {
+const Hint$2 = React.forwardRef((props, ref) => {
   const {
     hasHint,
     setHasHint,
@@ -11059,7 +11076,7 @@ const Hint$2 = React__default.forwardRef((props, ref) => {
   if (getHintProps) {
     combinedProps = getHintProps(combinedProps);
   }
-  return React__default.createElement(HintComponent, Object.assign({
+  return React.createElement(HintComponent, Object.assign({
     ref: ref
   }, combinedProps));
 });
@@ -11072,7 +11089,7 @@ Hint$2.displayName = 'Hint';
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Label$3 = React__default.forwardRef((props, ref) => {
+const Label$3 = React.forwardRef((props, ref) => {
   const fieldContext = useFieldContext$2();
   const fieldsetContext = useFieldsetContext$1();
   const type = useInputContext$1();
@@ -11087,19 +11104,19 @@ const Label$3 = React__default.forwardRef((props, ref) => {
       } = fieldContext;
       combinedProps = {
         ...combinedProps,
-        onMouseUp: composeEventHandlers$1(props.onMouseUp, () => {
+        onMouseUp: composeEventHandlers$3(props.onMouseUp, () => {
           setIsLabelActive(false);
         }),
-        onMouseDown: composeEventHandlers$1(props.onMouseDown, () => {
+        onMouseDown: composeEventHandlers$3(props.onMouseDown, () => {
           setIsLabelActive(true);
         }),
-        onMouseEnter: composeEventHandlers$1(props.onMouseEnter, () => {
+        onMouseEnter: composeEventHandlers$3(props.onMouseEnter, () => {
           setIsLabelHovered(true);
         }),
-        onMouseLeave: composeEventHandlers$1(props.onMouseLeave, () => {
+        onMouseLeave: composeEventHandlers$3(props.onMouseLeave, () => {
           setIsLabelHovered(false);
         }),
-        onClick: composeEventHandlers$1(props.onClick, () => {
+        onClick: composeEventHandlers$3(props.onClick, () => {
           multiThumbRangeRef.current && multiThumbRangeRef.current.focus();
         })
       };
@@ -11112,9 +11129,9 @@ const Label$3 = React__default.forwardRef((props, ref) => {
     };
   }
   if (type === 'radio') {
-    return React__default.createElement(StyledRadioLabel$1, Object.assign({
+    return React.createElement(StyledRadioLabel$1, Object.assign({
       ref: ref
-    }, combinedProps), React__default.createElement(StyledRadioSvg$1, null), props.children);
+    }, combinedProps), React.createElement(StyledRadioSvg$1, null), props.children);
   } else if (type === 'checkbox') {
     const onLabelSelect = e => {
       const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
@@ -11133,17 +11150,17 @@ const Label$3 = React__default.forwardRef((props, ref) => {
     };
     combinedProps = {
       ...combinedProps,
-      onClick: composeEventHandlers$1(combinedProps.onClick, onLabelSelect)
+      onClick: composeEventHandlers$3(combinedProps.onClick, onLabelSelect)
     };
-    return React__default.createElement(StyledCheckLabel$1, Object.assign({
+    return React.createElement(StyledCheckLabel$1, Object.assign({
       ref: ref
-    }, combinedProps), React__default.createElement(StyledCheckSvg$1, null), React__default.createElement(StyledDashSvg$1, null), props.children);
+    }, combinedProps), React.createElement(StyledCheckSvg$1, null), React.createElement(StyledDashSvg$1, null), props.children);
   } else if (type === 'toggle') {
-    return React__default.createElement(StyledToggleLabel$1, Object.assign({
+    return React.createElement(StyledToggleLabel$1, Object.assign({
       ref: ref
-    }, combinedProps), React__default.createElement(StyledToggleSvg$1, null), props.children);
+    }, combinedProps), React.createElement(StyledToggleSvg$1, null), props.children);
   }
-  return React__default.createElement(StyledLabel$2, Object.assign({
+  return React.createElement(StyledLabel$2, Object.assign({
     ref: ref
   }, combinedProps));
 });
@@ -11169,7 +11186,7 @@ const FILE_TYPE = ['pdf', 'zip', 'image', 'document', 'spreadsheet', 'presentati
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Message$2 = React__default.forwardRef((_ref, ref) => {
+const Message$2 = React.forwardRef((_ref, ref) => {
   let {
     validation,
     validationLabel,
@@ -11211,9 +11228,9 @@ const Message$2 = React__default.forwardRef((_ref, ref) => {
     combinedProps = getMessageProps(combinedProps);
   }
   const ariaLabel = useText(Message$2, combinedProps, 'validationLabel', validation, validation !== undefined);
-  return React__default.createElement(MessageComponent, Object.assign({
+  return React.createElement(MessageComponent, Object.assign({
     ref: ref
-  }, combinedProps), validation && React__default.createElement(StyledMessageIcon$1, {
+  }, combinedProps), validation && React.createElement(StyledMessageIcon$1, {
     validation: validation,
     "aria-label": ariaLabel
   }), children);
@@ -11231,7 +11248,7 @@ Message$2.propTypes = {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Checkbox = React__default.forwardRef((_ref, ref) => {
+const Checkbox = React.forwardRef((_ref, ref) => {
   let {
     indeterminate,
     children,
@@ -11261,9 +11278,9 @@ const Checkbox = React__default.forwardRef((_ref, ref) => {
   if (fieldContext) {
     combinedProps = fieldContext.getInputProps(combinedProps);
   }
-  return React__default.createElement(InputContext$1.Provider, {
+  return React.createElement(InputContext$1.Provider, {
     value: "checkbox"
-  }, React__default.createElement(StyledCheckInput$1, combinedProps), children);
+  }, React.createElement(StyledCheckInput$1, combinedProps), children);
 });
 Checkbox.displayName = 'Checkbox';
 Checkbox.propTypes = {
@@ -11290,14 +11307,14 @@ const useInputGroupContext = () => {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Input = React__default.forwardRef((_ref, ref) => {
+const Input = React.forwardRef((_ref, ref) => {
   let {
     onSelect,
     ...props
   } = _ref;
   const fieldContext = useFieldContext$2();
   const inputGroupContext = useInputGroupContext();
-  const onSelectHandler = props.readOnly ? composeEventHandlers$1(onSelect, event => {
+  const onSelectHandler = props.readOnly ? composeEventHandlers$3(onSelect, event => {
     event.currentTarget.select();
   }) : onSelect;
   let combinedProps = {
@@ -11315,7 +11332,7 @@ const Input = React__default.forwardRef((_ref, ref) => {
   if (fieldContext) {
     combinedProps = fieldContext.getInputProps(combinedProps);
   }
-  return React__default.createElement(StyledTextInput, combinedProps);
+  return React.createElement(StyledTextInput, combinedProps);
 });
 Input.propTypes = {
   isCompact: PropTypes.bool,
@@ -11335,7 +11352,7 @@ Input.displayName = 'Input';
 const parseStyleValue = value => {
   return parseInt(value, 10) || 0;
 };
-const Textarea = React__default.forwardRef((_ref, ref) => {
+const Textarea = React.forwardRef((_ref, ref) => {
   let {
     minRows,
     maxRows,
@@ -11404,7 +11421,7 @@ const Textarea = React__default.forwardRef((_ref, ref) => {
     computedStyle.height = state.height;
     computedStyle.overflow = state.overflow ? 'hidden' : undefined;
   }
-  const onSelectHandler = props.readOnly ? composeEventHandlers$1(onSelect, event => {
+  const onSelectHandler = props.readOnly ? composeEventHandlers$3(onSelect, event => {
     event.currentTarget.select();
   }) : onSelect;
   let combinedProps = {
@@ -11421,7 +11438,7 @@ const Textarea = React__default.forwardRef((_ref, ref) => {
   if (fieldContext) {
     combinedProps = fieldContext.getInputProps(combinedProps);
   }
-  return React__default.createElement(React__default.Fragment, null, React__default.createElement(StyledTextarea, combinedProps), isAutoResizable && React__default.createElement(StyledTextarea, {
+  return React.createElement(React.Fragment, null, React.createElement(StyledTextarea, combinedProps), isAutoResizable && React.createElement(StyledTextarea, {
     "aria-hidden": true,
     readOnly: true,
     isHidden: true,
@@ -11451,7 +11468,7 @@ Textarea.displayName = 'Textarea';
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const StartIconComponent$2 = props => React__default.createElement(StyledTextMediaFigure, Object.assign({
+const StartIconComponent$2 = props => React.createElement(StyledTextMediaFigure, Object.assign({
   position: "start"
 }, props));
 StartIconComponent$2.displayName = 'FauxInput.StartIcon';
@@ -11464,7 +11481,7 @@ const StartIcon$2 = StartIconComponent$2;
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const EndIconComponent$1 = props => React__default.createElement(StyledTextMediaFigure, Object.assign({
+const EndIconComponent$1 = props => React.createElement(StyledTextMediaFigure, Object.assign({
   position: "end"
 }, props));
 EndIconComponent$1.displayName = 'FauxInput.EndIcon';
@@ -11487,13 +11504,13 @@ const FauxInputComponent = reactExports.forwardRef((_ref, ref) => {
     ...props
   } = _ref;
   const [isFocused, setIsFocused] = reactExports.useState(false);
-  const onFocusHandler = composeEventHandlers$1(onFocus, () => {
+  const onFocusHandler = composeEventHandlers$3(onFocus, () => {
     setIsFocused(true);
   });
-  const onBlurHandler = composeEventHandlers$1(onBlur, () => {
+  const onBlurHandler = composeEventHandlers$3(onBlur, () => {
     setIsFocused(false);
   });
-  return React__default.createElement(StyledTextFauxInput, Object.assign({
+  return React.createElement(StyledTextFauxInput, Object.assign({
     onFocus: onFocusHandler,
     onBlur: onBlurHandler,
     isFocused: controlledIsFocused === undefined ? isFocused : controlledIsFocused,
@@ -11526,13 +11543,13 @@ FauxInput.StartIcon = StartIcon$2;
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const FileUpload = React__default.forwardRef((_ref, ref) => {
+const FileUpload = React.forwardRef((_ref, ref) => {
   let {
     disabled,
     ...props
   } = _ref;
   return (
-    React__default.createElement(StyledFileUpload, Object.assign({
+    React.createElement(StyledFileUpload, Object.assign({
       ref: ref,
       "aria-disabled": disabled
     }, props, {
@@ -11558,12 +11575,12 @@ const ItemComponent = reactExports.forwardRef((_ref, ref) => {
   let {
     ...props
   } = _ref;
-  return React__default.createElement(StyledFileListItem, Object.assign({}, props, {
+  return React.createElement(StyledFileListItem, Object.assign({}, props, {
     ref: ref
   }));
 });
 ItemComponent.displayName = 'FileList.Item';
-const Item = ItemComponent;
+const Item$1 = ItemComponent;
 
 /**
 * Copyright Zendesk, Inc.
@@ -11576,13 +11593,13 @@ const FileListComponent = reactExports.forwardRef((_ref, ref) => {
   let {
     ...props
   } = _ref;
-  return React__default.createElement(StyledFileList, Object.assign({}, props, {
+  return React.createElement(StyledFileList, Object.assign({}, props, {
     ref: ref
   }));
 });
 FileListComponent.displayName = 'FileList';
 const FileList = FileListComponent;
-FileList.Item = Item;
+FileList.Item = Item$1;
 
 /**
 * Copyright Zendesk, Inc.
@@ -11651,19 +11668,19 @@ const useFileContext = () => {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const CloseComponent$2 = React__default.forwardRef((props, ref) => {
+const CloseComponent$2 = React.forwardRef((props, ref) => {
   const fileContext = useFileContext();
-  const onMouseDown = composeEventHandlers$1(props.onMouseDown, event => event.preventDefault()
+  const onMouseDown = composeEventHandlers$3(props.onMouseDown, event => event.preventDefault()
   );
   const ariaLabel = useText(CloseComponent$2, props, 'aria-label', 'Close');
-  return React__default.createElement(StyledFileClose, Object.assign({
+  return React.createElement(StyledFileClose, Object.assign({
     ref: ref,
     "aria-label": ariaLabel
   }, props, {
     type: "button",
     tabIndex: -1,
     onMouseDown: onMouseDown
-  }), fileContext && fileContext.isCompact ? React__default.createElement(SvgXStroke$4, null) : React__default.createElement(SvgXStroke$3, null));
+  }), fileContext && fileContext.isCompact ? React.createElement(SvgXStroke$4, null) : React.createElement(SvgXStroke$3, null));
 });
 CloseComponent$2.displayName = 'File.Close';
 const Close$3 = CloseComponent$2;
@@ -11725,19 +11742,19 @@ var SvgTrashStroke = function SvgTrashStroke(props) {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const DeleteComponent = React__default.forwardRef((props, ref) => {
+const DeleteComponent = React.forwardRef((props, ref) => {
   const fileContext = useFileContext();
-  const onMouseDown = composeEventHandlers$1(props.onMouseDown, event => event.preventDefault()
+  const onMouseDown = composeEventHandlers$3(props.onMouseDown, event => event.preventDefault()
   );
   const ariaLabel = useText(DeleteComponent, props, 'aria-label', 'Delete');
-  return React__default.createElement(StyledFileDelete, Object.assign({
+  return React.createElement(StyledFileDelete, Object.assign({
     ref: ref,
     "aria-label": ariaLabel
   }, props, {
     type: "button",
     tabIndex: -1,
     onMouseDown: onMouseDown
-  }), fileContext && fileContext.isCompact ? React__default.createElement(SvgTrashStroke$1, null) : React__default.createElement(SvgTrashStroke, null));
+  }), fileContext && fileContext.isCompact ? React.createElement(SvgTrashStroke$1, null) : React.createElement(SvgTrashStroke, null));
 });
 DeleteComponent.displayName = 'File.Delete';
 const Delete = DeleteComponent;
@@ -12204,26 +12221,26 @@ var SvgFileErrorStroke = function SvgFileErrorStroke(props) {
 */
 
 const fileIconsDefault = {
-  pdf: React__default.createElement(SvgFilePdfStroke, null),
-  zip: React__default.createElement(SvgFileZipStroke, null),
-  image: React__default.createElement(SvgFileImageStroke, null),
-  document: React__default.createElement(SvgFileDocumentStroke, null),
-  spreadsheet: React__default.createElement(SvgFileSpreadsheetStroke, null),
-  presentation: React__default.createElement(SvgFilePresentationStroke, null),
-  generic: React__default.createElement(SvgFileGenericStroke, null),
-  success: React__default.createElement(SvgCheckCircleStroke$3, null),
-  error: React__default.createElement(SvgFileErrorStroke, null)
+  pdf: React.createElement(SvgFilePdfStroke, null),
+  zip: React.createElement(SvgFileZipStroke, null),
+  image: React.createElement(SvgFileImageStroke, null),
+  document: React.createElement(SvgFileDocumentStroke, null),
+  spreadsheet: React.createElement(SvgFileSpreadsheetStroke, null),
+  presentation: React.createElement(SvgFilePresentationStroke, null),
+  generic: React.createElement(SvgFileGenericStroke, null),
+  success: React.createElement(SvgCheckCircleStroke$3, null),
+  error: React.createElement(SvgFileErrorStroke, null)
 };
 const fileIconsCompact = {
-  pdf: React__default.createElement(SvgFilePdfStroke$1, null),
-  zip: React__default.createElement(SvgFileZipStroke$1, null),
-  image: React__default.createElement(SvgFileImageStroke$1, null),
-  document: React__default.createElement(SvgFileDocumentStroke$1, null),
-  spreadsheet: React__default.createElement(SvgFileSpreadsheetStroke$1, null),
-  presentation: React__default.createElement(SvgFilePresentationStroke$1, null),
-  generic: React__default.createElement(SvgFileGenericStroke$1, null),
-  success: React__default.createElement(SvgCheckCircleStroke$2, null),
-  error: React__default.createElement(SvgFileErrorStroke$1, null)
+  pdf: React.createElement(SvgFilePdfStroke$1, null),
+  zip: React.createElement(SvgFileZipStroke$1, null),
+  image: React.createElement(SvgFileImageStroke$1, null),
+  document: React.createElement(SvgFileDocumentStroke$1, null),
+  spreadsheet: React.createElement(SvgFileSpreadsheetStroke$1, null),
+  presentation: React.createElement(SvgFilePresentationStroke$1, null),
+  generic: React.createElement(SvgFileGenericStroke$1, null),
+  success: React.createElement(SvgCheckCircleStroke$2, null),
+  error: React.createElement(SvgFileErrorStroke$1, null)
 };
 
 /**
@@ -12246,16 +12263,16 @@ const FileComponent = reactExports.forwardRef((_ref, ref) => {
     isCompact
   }), [isCompact]);
   const validationType = validation || type;
-  return React__default.createElement(FileContext.Provider, {
+  return React.createElement(FileContext.Provider, {
     value: fileContextValue
-  }, React__default.createElement(StyledFile, Object.assign({}, props, {
+  }, React.createElement(StyledFile, Object.assign({}, props, {
     isCompact: isCompact,
     focusInset: focusInset,
     validation: validation,
     ref: ref
-  }), validationType && React__default.createElement(StyledFileIcon, {
+  }), validationType && React.createElement(StyledFileIcon, {
     isCompact: isCompact
-  }, isCompact ? fileIconsCompact[validationType] : fileIconsDefault[validationType]), reactExports.Children.map(children, child => typeof child === 'string' ? React__default.createElement("span", null, child) : child)));
+  }, isCompact ? fileIconsCompact[validationType] : fileIconsDefault[validationType]), reactExports.Children.map(children, child => typeof child === 'string' ? React.createElement("span", null, child) : child)));
 });
 FileComponent.displayName = 'File';
 FileComponent.propTypes = {
@@ -12275,7 +12292,7 @@ File.Delete = Delete;
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const MediaInput = React__default.forwardRef((_ref, ref) => {
+const MediaInput = React.forwardRef((_ref, ref) => {
   let {
     start,
     end,
@@ -12302,22 +12319,22 @@ const MediaInput = React__default.forwardRef((_ref, ref) => {
     onMouseOut,
     ...otherWrapperProps
   } = wrapperProps;
-  const onFauxInputClickHandler = composeEventHandlers$1(onClick, () => {
+  const onFauxInputClickHandler = composeEventHandlers$3(onClick, () => {
     inputRef.current && inputRef.current.focus();
   });
-  const onFauxInputFocusHandler = composeEventHandlers$1(onFocus, () => {
+  const onFauxInputFocusHandler = composeEventHandlers$3(onFocus, () => {
     setIsFocused(true);
   });
-  const onFauxInputBlurHandler = composeEventHandlers$1(onBlur, () => {
+  const onFauxInputBlurHandler = composeEventHandlers$3(onBlur, () => {
     setIsFocused(false);
   });
-  const onFauxInputMouseOverHandler = composeEventHandlers$1(onMouseOver, () => {
+  const onFauxInputMouseOverHandler = composeEventHandlers$3(onMouseOver, () => {
     setIsHovered(true);
   });
-  const onFauxInputMouseOutHandler = composeEventHandlers$1(onMouseOut, () => {
+  const onFauxInputMouseOutHandler = composeEventHandlers$3(onMouseOut, () => {
     setIsHovered(false);
   });
-  const onSelectHandler = readOnly ? composeEventHandlers$1(onSelect, event => {
+  const onSelectHandler = readOnly ? composeEventHandlers$3(onSelect, event => {
     event.currentTarget.select();
   }) : onSelect;
   let combinedProps = {
@@ -12332,7 +12349,7 @@ const MediaInput = React__default.forwardRef((_ref, ref) => {
     combinedProps = fieldContext.getInputProps(combinedProps);
     isLabelHovered = fieldContext.isLabelHovered;
   }
-  return React__default.createElement(FauxInput, Object.assign({
+  return React.createElement(FauxInput, Object.assign({
     tabIndex: null,
     onClick: onFauxInputClickHandler,
     onFocus: onFauxInputFocusHandler,
@@ -12350,11 +12367,11 @@ const MediaInput = React__default.forwardRef((_ref, ref) => {
     mediaLayout: true
   }, otherWrapperProps, {
     ref: wrapperRef
-  }), start && React__default.createElement(FauxInput.StartIcon, {
+  }), start && React.createElement(FauxInput.StartIcon, {
     isDisabled: disabled,
     isFocused: isFocused,
     isHovered: isHovered || isLabelHovered
-  }, start), React__default.createElement(StyledTextMediaInput, combinedProps), end && React__default.createElement(FauxInput.EndIcon, {
+  }, start), React.createElement(StyledTextMediaInput, combinedProps), end && React.createElement(FauxInput.EndIcon, {
     isDisabled: disabled,
     isFocused: isFocused,
     isHovered: isHovered || isLabelHovered
@@ -12462,7 +12479,7 @@ const StyledIcon$1 = styled(_ref => {
     isStart,
     ...props
   } = _ref;
-  return React__default.cloneElement(reactExports.Children.only(children), props);
+  return React.cloneElement(reactExports.Children.only(children), props);
 }).attrs({
   'data-garden-id': COMPONENT_ID$1k,
   'data-garden-version': '8.76.2'
@@ -12500,7 +12517,7 @@ StyledParagraph$2.defaultProps = {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Paragraph = reactExports.forwardRef((props, ref) => React__default.createElement(StyledParagraph$2, Object.assign({
+const Paragraph = reactExports.forwardRef((props, ref) => React.createElement(StyledParagraph$2, Object.assign({
   ref: ref
 }, props)));
 Paragraph.displayName = 'Paragraph';
@@ -12518,7 +12535,7 @@ Paragraph.defaultProps = {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const StartIconComponent$1 = props => React__default.createElement(StyledIcon$1, Object.assign({
+const StartIconComponent$1 = props => React.createElement(StyledIcon$1, Object.assign({
   isStart: true
 }, props));
 StartIconComponent$1.displayName = 'Span.StartIcon';
@@ -12531,7 +12548,7 @@ const StartIcon$1 = StartIconComponent$1;
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const IconComponent = props => React__default.createElement(StyledIcon$1, props);
+const IconComponent = props => React.createElement(StyledIcon$1, props);
 IconComponent.displayName = 'Span.Icon';
 const Icon = IconComponent;
 
@@ -12547,7 +12564,7 @@ const SpanComponent = reactExports.forwardRef((_ref, ref) => {
     tag,
     ...other
   } = _ref;
-  return React__default.createElement(StyledFont, Object.assign({
+  return React.createElement(StyledFont, Object.assign({
     as: tag,
     ref: ref,
     size: "inherit"
@@ -12841,7 +12858,7 @@ function getA11yStatusMessage$1(_ref2) {
  * @param {Object} props The props that may contain controlled values.
  * @returns {Object} The merged controlled state.
  */
-function getState(state, props) {
+function getState$2(state, props) {
   if (!state || !props) {
     return state;
   }
@@ -13081,7 +13098,7 @@ var updateA11yStatus = debounce$1(function (getA11yMessage, document) {
 var useIsomorphicLayoutEffect = typeof window !== 'undefined' && typeof window.document !== 'undefined' && typeof window.document.createElement !== 'undefined' ? reactExports.useLayoutEffect : reactExports.useEffect;
 
 // istanbul ignore next
-var useElementIds = 'useId' in React__default // Avoid conditional useId call
+var useElementIds = 'useId' in React // Avoid conditional useId call
 ? function useElementIds(_ref) {
   var id = _ref.id,
     labelId = _ref.labelId,
@@ -13090,7 +13107,7 @@ var useElementIds = 'useId' in React__default // Avoid conditional useId call
     toggleButtonId = _ref.toggleButtonId,
     inputId = _ref.inputId;
   // Avoid conditional useId call
-  var reactId = "downshift-" + React__default.useId();
+  var reactId = "downshift-" + React.useId();
   if (!id) {
     id = reactId;
   }
@@ -13167,7 +13184,7 @@ function useEnhancedReducer(reducer, props, createInitialState, isStateEqual) {
   var actionRef = reactExports.useRef();
   var enhancedReducer = reactExports.useCallback(function (state, action) {
     actionRef.current = action;
-    state = getState(state, action.props);
+    state = getState$2(state, action.props);
     var changes = reducer(state, action);
     var newState = action.props.stateReducer(state, _extends$V({}, action, {
       changes: changes
@@ -13185,7 +13202,7 @@ function useEnhancedReducer(reducer, props, createInitialState, isStateEqual) {
   }, [propsRef]);
   var action = actionRef.current;
   reactExports.useEffect(function () {
-    var prevState = getState(prevStateRef.current, action == null ? void 0 : action.props);
+    var prevState = getState$2(prevStateRef.current, action == null ? void 0 : action.props);
     var shouldCallOnChangeProps = action && prevStateRef.current && !isStateEqual(prevState, state);
     if (shouldCallOnChangeProps) {
       callOnChangeProps(action, prevState, state);
@@ -13426,8 +13443,8 @@ function isDropdownsStateEqual(prevState, newState) {
  * Tracks if it's the first render.
  */
 function useIsInitialMount() {
-  var isInitialMountRef = React__default.useRef(true);
-  React__default.useEffect(function () {
+  var isInitialMountRef = React.useRef(true);
+  React.useEffect(function () {
     isInitialMountRef.current = false;
     return function () {
       isInitialMountRef.current = true;
@@ -13676,7 +13693,7 @@ function useControlledReducer(reducer, props, createInitialState, isStateEqual) 
     previousSelectedItemRef.current = state.selectedItem === previousSelectedItemRef.current ? props.selectedItem : state.selectedItem;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.selectedItem, props.selectedItem]);
-  return [getState(state, props), dispatch];
+  return [getState$2(state, props), dispatch];
 }
 var defaultProps$1 = _extends$V({}, defaultProps$3, {
   getA11yStatusMessage: getA11yStatusMessage$1,
@@ -14312,7 +14329,7 @@ const useCombobox = _ref => {
   const useInputValueRef = reactExports.useRef(true);
   const matchTimeoutRef = reactExports.useRef();
   const previousStateRef = reactExports.useRef();
-  const prefix = useId(idPrefix);
+  const prefix = useId$1(idPrefix);
   const idRef = reactExports.useRef({
     label: `${prefix}--label`,
     hint: `${prefix}--hint`,
@@ -14630,8 +14647,8 @@ const useCombobox = _ref => {
       };
       return {
         ...triggerProps,
-        onBlur: composeEventHandlers$1(onBlur, handleBlur),
-        onClick: composeEventHandlers$1(onClick, handleClick),
+        onBlur: composeEventHandlers$3(onBlur, handleBlur),
+        onClick: composeEventHandlers$3(onClick, handleClick),
         'aria-controls': isAutocomplete ? triggerProps['aria-controls'] : undefined,
         'aria-expanded': undefined,
         'aria-disabled': disabled || undefined,
@@ -14691,8 +14708,8 @@ const useCombobox = _ref => {
         'aria-disabled': disabled || undefined,
         disabled: undefined,
         role: 'combobox',
-        onBlur: composeEventHandlers$1(onBlur, handleBlur),
-        onKeyDown: composeEventHandlers$1(onKeyDown, onDownshiftKeyDown, handleKeyDown),
+        onBlur: composeEventHandlers$3(onBlur, handleBlur),
+        onKeyDown: composeEventHandlers$3(onKeyDown, onDownshiftKeyDown, handleKeyDown),
         tabIndex: disabled ? -1 : 0
       };
     }
@@ -14714,7 +14731,7 @@ const useCombobox = _ref => {
     const handleClick = () => !isEditable && triggerRef.current?.focus();
     return {
       ...labelProps,
-      onClick: composeEventHandlers$1(onClick, handleClick),
+      onClick: composeEventHandlers$3(onClick, handleClick),
       htmlFor: isEditable ? htmlFor : undefined
     };
   }, [getFieldLabelProps, isEditable, triggerRef]);
@@ -14765,8 +14782,8 @@ const useCombobox = _ref => {
         disabled,
         role,
         'aria-autocomplete': isAutocomplete ? 'list' : undefined,
-        onChange: composeEventHandlers$1(_onChange, handleChange),
-        onClick: composeEventHandlers$1(onClick, handleClick),
+        onChange: composeEventHandlers$3(_onChange, handleChange),
+        onClick: composeEventHandlers$3(onClick, handleClick),
         ...getFieldInputProps({
           id: idRef.current.input,
           'aria-labelledby': idRef.current.label,
@@ -14795,7 +14812,7 @@ const useCombobox = _ref => {
       disabled,
       readOnly: true,
       tabIndex: -1,
-      onFocus: composeEventHandlers$1(onFocus, handleFocus),
+      onFocus: composeEventHandlers$3(onFocus, handleFocus),
       ...other
     };
   }, [getDownshiftInputProps, getFieldInputProps, handleDownshiftStateChange, hasHint, hasMessage, inputValue, inputRef, triggerRef, disabled, isAutocomplete, isEditable]);
@@ -14830,8 +14847,8 @@ const useCombobox = _ref => {
     return {
       'data-garden-container-id': 'containers.combobox.tag',
       'data-garden-container-version': '1.1.4',
-      onClick: composeEventHandlers$1(onClick, handleClick),
-      onKeyDown: composeEventHandlers$1(onKeyDown, handleKeyDown),
+      onClick: composeEventHandlers$3(onClick, handleClick),
+      onKeyDown: composeEventHandlers$3(onKeyDown, handleKeyDown),
       ...other
     };
   }, [triggerRef, setDownshiftSelection, getDownshiftInputProps, isEditable, inputRef]);
@@ -14895,7 +14912,7 @@ const useCombobox = _ref => {
         'aria-selected': ariaSelected,
         id: option ? idRef.current.getOptionId(disabledValues.indexOf(option.value), option.disabled, option.hidden) : undefined,
         ...optionProps,
-        onMouseDown: composeEventHandlers$1(onMouseDown, handleMouseDown)
+        onMouseDown: composeEventHandlers$3(onMouseDown, handleMouseDown)
       };
     }
     return getDownshiftOptionProps({
@@ -15146,13 +15163,13 @@ const MessageIcon = _ref => {
   } = _ref;
   let retVal;
   if (validation === 'error') {
-    retVal = React__default.createElement(SvgAlertErrorStroke$1, props);
+    retVal = React.createElement(SvgAlertErrorStroke$1, props);
   } else if (validation === 'success') {
-    retVal = React__default.createElement(SvgCheckCircleStroke$1, props);
+    retVal = React.createElement(SvgCheckCircleStroke$1, props);
   } else if (validation === 'warning') {
-    retVal = React__default.createElement(SvgAlertWarningStroke$1, props);
+    retVal = React.createElement(SvgAlertWarningStroke$1, props);
   } else {
-    retVal = React__default.cloneElement(reactExports.Children.only(children));
+    retVal = React.cloneElement(reactExports.Children.only(children));
   }
   return retVal;
 };
@@ -15681,7 +15698,7 @@ const useInputContext = () => {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Hint$1 = React__default.forwardRef((props, ref) => {
+const Hint$1 = React.forwardRef((props, ref) => {
   const {
     hasHint,
     setHasHint,
@@ -15712,7 +15729,7 @@ const Hint$1 = React__default.forwardRef((props, ref) => {
   if (getHintProps) {
     combinedProps = getHintProps(combinedProps);
   }
-  return React__default.createElement(HintComponent, Object.assign({
+  return React.createElement(HintComponent, Object.assign({
     ref: ref
   }, combinedProps));
 });
@@ -15725,7 +15742,7 @@ Hint$1.displayName = 'Hint';
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Label$2 = React__default.forwardRef((props, ref) => {
+const Label$2 = React.forwardRef((props, ref) => {
   const fieldContext = useFieldContext$1();
   const fieldsetContext = useFieldsetContext();
   const type = useInputContext();
@@ -15740,19 +15757,19 @@ const Label$2 = React__default.forwardRef((props, ref) => {
       } = fieldContext;
       combinedProps = {
         ...combinedProps,
-        onMouseUp: composeEventHandlers$1(props.onMouseUp, () => {
+        onMouseUp: composeEventHandlers$3(props.onMouseUp, () => {
           setIsLabelActive(false);
         }),
-        onMouseDown: composeEventHandlers$1(props.onMouseDown, () => {
+        onMouseDown: composeEventHandlers$3(props.onMouseDown, () => {
           setIsLabelActive(true);
         }),
-        onMouseEnter: composeEventHandlers$1(props.onMouseEnter, () => {
+        onMouseEnter: composeEventHandlers$3(props.onMouseEnter, () => {
           setIsLabelHovered(true);
         }),
-        onMouseLeave: composeEventHandlers$1(props.onMouseLeave, () => {
+        onMouseLeave: composeEventHandlers$3(props.onMouseLeave, () => {
           setIsLabelHovered(false);
         }),
-        onClick: composeEventHandlers$1(props.onClick, () => {
+        onClick: composeEventHandlers$3(props.onClick, () => {
           multiThumbRangeRef.current && multiThumbRangeRef.current.focus();
         })
       };
@@ -15765,9 +15782,9 @@ const Label$2 = React__default.forwardRef((props, ref) => {
     };
   }
   if (type === 'radio') {
-    return React__default.createElement(StyledRadioLabel, Object.assign({
+    return React.createElement(StyledRadioLabel, Object.assign({
       ref: ref
-    }, combinedProps), React__default.createElement(StyledRadioSvg, null), props.children);
+    }, combinedProps), React.createElement(StyledRadioSvg, null), props.children);
   } else if (type === 'checkbox') {
     const onLabelSelect = e => {
       const isFirefox = navigator?.userAgent.toLowerCase().indexOf('firefox') > -1;
@@ -15786,17 +15803,17 @@ const Label$2 = React__default.forwardRef((props, ref) => {
     };
     combinedProps = {
       ...combinedProps,
-      onClick: composeEventHandlers$1(combinedProps.onClick, onLabelSelect)
+      onClick: composeEventHandlers$3(combinedProps.onClick, onLabelSelect)
     };
-    return React__default.createElement(StyledCheckLabel, Object.assign({
+    return React.createElement(StyledCheckLabel, Object.assign({
       ref: ref
-    }, combinedProps), React__default.createElement(StyledCheckSvg, null), React__default.createElement(StyledDashSvg, null), props.children);
+    }, combinedProps), React.createElement(StyledCheckSvg, null), React.createElement(StyledDashSvg, null), props.children);
   } else if (type === 'toggle') {
-    return React__default.createElement(StyledToggleLabel, Object.assign({
+    return React.createElement(StyledToggleLabel, Object.assign({
       ref: ref
-    }, combinedProps), React__default.createElement(StyledToggleSvg, null), props.children);
+    }, combinedProps), React.createElement(StyledToggleSvg, null), props.children);
   }
-  return React__default.createElement(StyledLabel$1, Object.assign({
+  return React.createElement(StyledLabel$1, Object.assign({
     ref: ref
   }, combinedProps));
 });
@@ -15820,7 +15837,7 @@ const VALIDATION = ['success', 'warning', 'error'];
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Message$1 = React__default.forwardRef((_ref, ref) => {
+const Message$1 = React.forwardRef((_ref, ref) => {
   let {
     validation,
     validationLabel,
@@ -15862,9 +15879,9 @@ const Message$1 = React__default.forwardRef((_ref, ref) => {
     combinedProps = getMessageProps(combinedProps);
   }
   const ariaLabel = useText(Message$1, combinedProps, 'validationLabel', validation, validation !== undefined);
-  return React__default.createElement(MessageComponent, Object.assign({
+  return React.createElement(MessageComponent, Object.assign({
     ref: ref
-  }, combinedProps), validation && React__default.createElement(StyledMessageIcon, {
+  }, combinedProps), validation && React.createElement(StyledMessageIcon, {
     validation: validation,
     "aria-label": ariaLabel
   }), children);
@@ -16536,7 +16553,7 @@ const StyledAvatar$1 = styled(_ref => {
     children,
     ...props
   } = _ref;
-  return React__default.cloneElement(reactExports.Children.only(children), props);
+  return React.cloneElement(reactExports.Children.only(children), props);
 }).attrs({
   'data-garden-id': COMPONENT_ID$I,
   'data-garden-version': '8.76.6'
@@ -16691,13 +16708,13 @@ var SvgXStroke$2 = function SvgXStroke(props) {
 
 const CloseComponent$1 = reactExports.forwardRef((props, ref) => {
   const ariaLabel = useText(CloseComponent$1, props, 'aria-label', 'Remove');
-  return React__default.createElement(StyledClose$2, Object.assign({
+  return React.createElement(StyledClose$2, Object.assign({
     ref: ref,
     "aria-label": ariaLabel
   }, props, {
     type: "button",
     tabIndex: -1
-  }), React__default.createElement(SvgXStroke$2, null));
+  }), React.createElement(SvgXStroke$2, null));
 });
 CloseComponent$1.displayName = 'Tag.Close';
 const Close$2 = CloseComponent$1;
@@ -16709,7 +16726,7 @@ const Close$2 = CloseComponent$1;
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const AvatarComponent$1 = props => React__default.createElement(StyledAvatar$1, props);
+const AvatarComponent$1 = props => React.createElement(StyledAvatar$1, props);
 AvatarComponent$1.displayName = 'Tag.Avatar';
 const Avatar$1 = AvatarComponent$1;
 
@@ -16726,7 +16743,7 @@ const TagComponent$2 = reactExports.forwardRef((_ref, ref) => {
     hue,
     ...otherProps
   } = _ref;
-  return React__default.createElement(StyledTag$2, Object.assign({
+  return React.createElement(StyledTag$2, Object.assign({
     ref: ref,
     size: size,
     hue: hue
@@ -18581,7 +18598,7 @@ const Listbox = reactExports.forwardRef((_ref, ref) => {
     }
   }, [
   children, update]);
-  const Node = React__default.createElement(StyledFloatingListbox, {
+  const Node = React.createElement(StyledFloatingListbox, {
     "data-garden-animate": isVisible ? 'true' : 'false',
     isHidden: !isExpanded,
     position: placement === 'bottom-start' ? 'bottom' : 'top',
@@ -18591,11 +18608,11 @@ const Listbox = reactExports.forwardRef((_ref, ref) => {
     },
     zIndex: zIndex,
     ref: floatingRef
-  }, React__default.createElement(StyledListbox, Object.assign({
+  }, React.createElement(StyledListbox, Object.assign({
     isCompact: isCompact,
     maxHeight: maxHeight,
     minHeight: minHeight,
-    onMouseDown: composeEventHandlers$1(onMouseDown, handleMouseDown),
+    onMouseDown: composeEventHandlers$3(onMouseDown, handleMouseDown),
     style: {
       height
     }
@@ -18716,11 +18733,11 @@ const useTooltip = function (_temp) {
     } = _temp2 === void 0 ? {} : _temp2;
     return {
       tabIndex,
-      onMouseEnter: composeEventHandlers$1(onMouseEnter, () => openTooltip()),
-      onMouseLeave: composeEventHandlers$1(onMouseLeave, () => closeTooltip()),
-      onFocus: composeEventHandlers$1(onFocus, () => openTooltip()),
-      onBlur: composeEventHandlers$1(onBlur, () => closeTooltip(0)),
-      onKeyDown: composeEventHandlers$1(onKeyDown, event => {
+      onMouseEnter: composeEventHandlers$3(onMouseEnter, () => openTooltip()),
+      onMouseLeave: composeEventHandlers$3(onMouseLeave, () => closeTooltip()),
+      onFocus: composeEventHandlers$3(onFocus, () => openTooltip()),
+      onBlur: composeEventHandlers$3(onBlur, () => closeTooltip(0)),
+      onKeyDown: composeEventHandlers$3(onKeyDown, event => {
         if (event.key === KEYS.ESCAPE && visibility) {
           closeTooltip(0);
         }
@@ -18740,8 +18757,8 @@ const useTooltip = function (_temp) {
     } = _temp3 === void 0 ? {} : _temp3;
     return {
       role,
-      onMouseEnter: composeEventHandlers$1(onMouseEnter, () => openTooltip()),
-      onMouseLeave: composeEventHandlers$1(onMouseLeave, () => closeTooltip()),
+      onMouseEnter: composeEventHandlers$3(onMouseEnter, () => openTooltip()),
+      onMouseLeave: composeEventHandlers$3(onMouseLeave, () => closeTooltip()),
       'aria-hidden': !visibility,
       id: _id,
       ...other
@@ -19773,7 +19790,7 @@ var toStr$1 = Object.prototype.toString;
 var concat = Array.prototype.concat;
 var defineDataProperty = defineDataProperty$1;
 
-var isFunction$1 = function (fn) {
+var isFunction$2 = function (fn) {
 	return typeof fn === 'function' && toStr$1.call(fn) === '[object Function]';
 };
 
@@ -19785,7 +19802,7 @@ var defineProperty$2 = function (object, name, value, predicate) {
 			if (object[name] === value) {
 				return;
 			}
-		} else if (!isFunction$1(predicate) || !predicate()) {
+		} else if (!isFunction$2(predicate) || !predicate()) {
 			return;
 		}
 	}
@@ -20307,7 +20324,7 @@ var debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce;
  * @argument {Any} functionToCheck - variable to check
  * @returns {Boolean} answer to: is a function?
  */
-function isFunction(functionToCheck) {
+function isFunction$1(functionToCheck) {
   var getType = {};
   return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';
 }
@@ -21116,7 +21133,7 @@ function runModifiers(modifiers, data, ends) {
       console.warn('`modifier.function` is deprecated, use `modifier.fn`!');
     }
     var fn = modifier['function'] || modifier.fn; // eslint-disable-line dot-notation
-    if (modifier.enabled && isFunction(fn)) {
+    if (modifier.enabled && isFunction$1(fn)) {
       // Add properties to offsets to make them a complete clientRect object
       // we do this before each modifier to make sure the previous one doesn't
       // mess with these values
@@ -22743,7 +22760,7 @@ var Popper$1 = function () {
     // they could add new properties to their options configuration
     // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
     this.modifiers.forEach(function (modifierOptions) {
-      if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {
+      if (modifierOptions.enabled && isFunction$1(modifierOptions.onLoad)) {
         modifierOptions.onLoad(_this.reference, _this.popper, _this.options, modifierOptions, _this.state);
       }
     });
@@ -23157,7 +23174,7 @@ var safeInvoke = function safeInvoke(fn) {
  * Sets a ref using either a ref callback or a ref object
  */
 
-var setRef = function setRef(ref, node) {
+var setRef$1 = function setRef(ref, node) {
   // if its a function call it
   if (typeof ref === "function") {
     return safeInvoke(ref, node);
@@ -23202,7 +23219,7 @@ function (_React$Component) {
 
     _defineProperty$2(_assertThisInitialized(_assertThisInitialized(_this)), "setPopperNode", function (popperNode) {
       if (!popperNode || _this.popperNode === popperNode) return;
-      setRef(_this.props.innerRef, popperNode);
+      setRef$1(_this.props.innerRef, popperNode);
       _this.popperNode = popperNode;
 
       _this.updatePopperInstance();
@@ -23314,7 +23331,7 @@ function (_React$Component) {
   };
 
   _proto.componentWillUnmount = function componentWillUnmount() {
-    setRef(this.props.innerRef, null);
+    setRef$1(this.props.innerRef, null);
     this.destroyPopperInstance();
   };
 
@@ -23369,7 +23386,7 @@ function (_React$Component) {
     _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
 
     _defineProperty$2(_assertThisInitialized(_assertThisInitialized(_this)), "refHandler", function (node) {
-      setRef(_this.props.innerRef, node);
+      setRef$1(_this.props.innerRef, node);
       safeInvoke(_this.props.setReferenceNode, node);
     });
 
@@ -23379,7 +23396,7 @@ function (_React$Component) {
   var _proto = InnerReference.prototype;
 
   _proto.componentWillUnmount = function componentWillUnmount() {
-    setRef(this.props.innerRef, null);
+    setRef$1(this.props.innerRef, null);
   };
 
   _proto.render = function render() {
@@ -23674,14 +23691,14 @@ const Tooltip$1 = _ref => {
     }
   }, [controlledIsVisible, content]);
   const popperPlacement = rtl ? getRtlPopperPlacement$2(placement) : getPopperPlacement$2(placement);
-  const singleChild = React__default.Children.only(children);
+  const singleChild = React.Children.only(children);
   const modifiers = {
     preventOverflow: {
       boundariesElement: 'window'
     },
     ...popperModifiers
   };
-  return React__default.createElement(Manager, null, React__default.createElement(Reference, null, _ref2 => {
+  return React.createElement(Manager, null, React.createElement(Reference, null, _ref2 => {
     let {
       ref
     } = _ref2;
@@ -23689,7 +23706,7 @@ const Tooltip$1 = _ref => {
       ...singleChild.props,
       [refKey]: mergeRefs([ref, singleChild.ref ? singleChild.ref : null])
     }));
-  }), React__default.createElement(Popper, {
+  }), React.createElement(Popper, {
     placement: popperPlacement,
     eventsEnabled: controlledIsVisible && eventsEnabled,
     modifiers: modifiers
@@ -23718,22 +23735,22 @@ const Tooltip$1 = _ref => {
       hasArrow,
       placement: currentPlacement,
       size: computedSize,
-      onFocus: composeEventHandlers$1(onFocus, () => {
+      onFocus: composeEventHandlers$3(onFocus, () => {
         openTooltip();
       }),
-      onBlur: composeEventHandlers$1(onBlur, () => {
+      onBlur: composeEventHandlers$3(onBlur, () => {
         closeTooltip(0);
       }),
       'aria-hidden': !controlledIsVisible,
       type,
       ...otherTooltipProps
     };
-    const tooltip = React__default.createElement(StyledTooltipWrapper$1, {
+    const tooltip = React.createElement(StyledTooltipWrapper$1, {
       ref: controlledIsVisible ? ref : null,
       style: style,
       zIndex: zIndex,
       "aria-hidden": !controlledIsVisible
-    }, React__default.createElement(StyledTooltip$1, getTooltipProps(tooltipProps), content));
+    }, React.createElement(StyledTooltip$1, getTooltipProps(tooltipProps), content));
     if (appendToNode) {
       return reactDomExports.createPortal(tooltip, appendToNode);
     }
@@ -23806,21 +23823,21 @@ const TagComponent$1 = reactExports.forwardRef((_ref, ref) => {
   const theme = reactExports.useContext(Me) || DEFAULT_THEME;
   const doc = useDocument(theme);
   const handleClick = () => removeSelection(option.value);
-  return React__default.createElement(StyledTag$1, Object.assign({
+  return React.createElement(StyledTag$1, Object.assign({
     "aria-disabled": option.disabled,
     tabIndex: option.disabled ? undefined : 0
   }, tagProps, props, {
     size: isCompact ? 'medium' : 'large',
     ref: ref
-  }), children || React__default.createElement("span", null, text), !option.disabled && (removeLabel ?
-  React__default.createElement(Tooltip$1, {
+  }), children || React.createElement("span", null, text), !option.disabled && (removeLabel ?
+  React.createElement(Tooltip$1, {
     appendToNode: doc?.body,
     content: removeLabel,
     zIndex: tooltipZIndex
-  }, React__default.createElement(StyledTag$1.Close, {
+  }, React.createElement(StyledTag$1.Close, {
     "aria-label": removeLabel,
     onClick: handleClick
-  })) : React__default.createElement(StyledTag$1.Close, {
+  })) : React.createElement(StyledTag$1.Close, {
     onClick: handleClick
   })));
 });
@@ -23851,10 +23868,10 @@ const TagGroup = _ref => {
     optionTagProps,
     selection
   } = _ref;
-  return React__default.createElement(React__default.Fragment, null, selection.map((option, index) => {
+  return React.createElement(React.Fragment, null, selection.map((option, index) => {
     const key = toString(option);
     const disabled = isDisabled || option.disabled;
-    return React__default.createElement(Tag$1, Object.assign({
+    return React.createElement(Tag$1, Object.assign({
       key: key,
       hidden: !isExpanded && index >= maxTags,
       option: {
@@ -24061,23 +24078,23 @@ const Combobox = reactExports.forwardRef((_ref, ref) => {
     }
     return () => messageProps && setMessageProps(undefined);
   }, [getMessageProps, messageProps, setMessageProps]);
-  return React__default.createElement(ComboboxContext.Provider, {
+  return React.createElement(ComboboxContext.Provider, {
     value: contextValue
-  }, React__default.createElement(StyledCombobox, Object.assign({
+  }, React.createElement(StyledCombobox, Object.assign({
     isCompact: isCompact,
     tabIndex: -1
   }, props, {
     ref: ref
-  }), React__default.createElement(StyledTrigger, triggerProps, React__default.createElement(StyledContainer, null, startIcon && React__default.createElement(StyledInputIcon, {
+  }), React.createElement(StyledTrigger, triggerProps, React.createElement(StyledContainer, null, startIcon && React.createElement(StyledInputIcon, {
     isLabelHovered: isLabelHovered,
     isCompact: isCompact
-  }, startIcon), React__default.createElement(StyledInputGroup, null, isMultiselectable && Array.isArray(selection) && React__default.createElement(TagGroup, {
+  }, startIcon), React.createElement(StyledInputGroup, null, isMultiselectable && Array.isArray(selection) && React.createElement(TagGroup, {
     isDisabled: isDisabled,
     isExpanded: isTagGroupExpanded,
     maxTags: maxTags,
     optionTagProps: optionTagProps,
     selection: selection
-  }, selection.length > maxTags && React__default.createElement(StyledTagsButton, {
+  }, selection.length > maxTags && React.createElement(StyledTagsButton, {
     disabled: isDisabled,
     hidden: isTagGroupExpanded,
     isCompact: isCompact,
@@ -24086,7 +24103,7 @@ const Combobox = reactExports.forwardRef((_ref, ref) => {
   }, (() => {
     const value = selection.length - maxTags;
     return renderExpandTags ? renderExpandTags(value) : expandTags?.replace('{{value}}', value.toString());
-  })())), React__default.createElement(StyledValue, {
+  })())), React.createElement(StyledValue, {
     hidden: !isInputHidden,
     isAutocomplete: isAutocomplete,
     isBare: isBare,
@@ -24098,12 +24115,12 @@ const Combobox = reactExports.forwardRef((_ref, ref) => {
   }, renderValue ? renderValue({
     selection,
     inputValue
-  }) : inputValue || placeholder), React__default.createElement(StyledInput, inputProps)), (hasChevron || endIcon) && React__default.createElement(StyledInputIcon, {
+  }) : inputValue || placeholder), React.createElement(StyledInput, inputProps)), (hasChevron || endIcon) && React.createElement(StyledInputIcon, {
     isCompact: isCompact,
     isEnd: true,
     isLabelHovered: isLabelHovered,
     isRotated: hasChevron && isExpanded
-  }, hasChevron ? React__default.createElement(SvgChevronDownStroke$1, null) : endIcon))), React__default.createElement(Listbox, Object.assign({
+  }, hasChevron ? React.createElement(SvgChevronDownStroke$1, null) : endIcon))), React.createElement(Listbox, Object.assign({
     appendToNode: listboxAppendToNode,
     isCompact: isCompact,
     isExpanded: isExpanded,
@@ -24177,9 +24194,9 @@ const Field = reactExports.forwardRef((props, ref) => {
     messageProps,
     setMessageProps
   }), [labelProps, setLabelProps, hasHint, setHasHint, hintProps, setHintProps, hasMessage, setHasMessage, messageProps, setMessageProps]);
-  return React__default.createElement(FieldContext.Provider, {
+  return React.createElement(FieldContext.Provider, {
     value: contextValue
-  }, React__default.createElement(StyledField, Object.assign({}, props, {
+  }, React.createElement(StyledField, Object.assign({}, props, {
     ref: ref
   })));
 });
@@ -24201,7 +24218,7 @@ const Hint = reactExports.forwardRef((props, ref) => {
     setHasHint(true);
     return () => setHasHint(false);
   }, [setHasHint]);
-  return React__default.createElement(StyledHint, Object.assign({}, hintProps, props, {
+  return React.createElement(StyledHint, Object.assign({}, hintProps, props, {
     ref: ref
   }));
 });
@@ -24224,10 +24241,10 @@ const Label$1 = reactExports.forwardRef((_ref, ref) => {
   const {
     labelProps
   } = useFieldContext();
-  return React__default.createElement(StyledLabel, Object.assign({}, labelProps, {
-    onClick: composeEventHandlers$1(onClick, labelProps?.onClick),
-    onMouseEnter: composeEventHandlers$1(onMouseEnter, labelProps?.onMouseEnter),
-    onMouseLeave: composeEventHandlers$1(onMouseLeave, labelProps?.onMouseLeave)
+  return React.createElement(StyledLabel, Object.assign({}, labelProps, {
+    onClick: composeEventHandlers$3(onClick, labelProps?.onClick),
+    onMouseEnter: composeEventHandlers$3(onMouseEnter, labelProps?.onMouseEnter),
+    onMouseLeave: composeEventHandlers$3(onMouseLeave, labelProps?.onMouseLeave)
   }, props, {
     ref: ref
   }));
@@ -24254,7 +24271,7 @@ const Message = reactExports.forwardRef((props, ref) => {
     setHasMessage(true);
     return () => setHasMessage(false);
   }, [setHasMessage]);
-  return React__default.createElement(StyledMessage, Object.assign({}, messageProps, props, {
+  return React.createElement(StyledMessage, Object.assign({}, messageProps, props, {
     ref: ref
   }));
 });
@@ -24395,7 +24412,7 @@ const OptionMetaComponent = reactExports.forwardRef((props, ref) => {
   const {
     isDisabled
   } = useOptionContext();
-  return React__default.createElement(StyledOptionMeta, Object.assign({
+  return React.createElement(StyledOptionMeta, Object.assign({
     isDisabled: isDisabled
   }, props, {
     ref: ref
@@ -24447,13 +24464,13 @@ const OptionComponent = reactExports.forwardRef((_ref, ref) => {
   const renderActionIcon = iconType => {
     switch (iconType) {
       case 'add':
-        return React__default.createElement(SvgPlusStroke, null);
+        return React.createElement(SvgPlusStroke, null);
       case 'next':
-        return React__default.createElement(SvgChevronRightStroke$1, null);
+        return React.createElement(SvgChevronRightStroke$1, null);
       case 'previous':
-        return React__default.createElement(SvgChevronLeftStroke$1, null);
+        return React.createElement(SvgChevronLeftStroke$1, null);
       default:
-        return React__default.createElement(SvgCheckLgStroke, null);
+        return React.createElement(SvgCheckLgStroke, null);
     }
   };
   const option = toOption({
@@ -24467,16 +24484,16 @@ const OptionComponent = reactExports.forwardRef((_ref, ref) => {
     option,
     ref: mergeRefs([optionRef, ref])
   });
-  return React__default.createElement(OptionContext.Provider, {
+  return React.createElement(OptionContext.Provider, {
     value: contextValue
-  }, React__default.createElement(StyledOption, Object.assign({
+  }, React.createElement(StyledOption, Object.assign({
     isActive: isActive,
     isCompact: isCompact,
     $type: type
-  }, props, optionProps), React__default.createElement(StyledOptionTypeIcon, {
+  }, props, optionProps), React.createElement(StyledOptionTypeIcon, {
     isCompact: isCompact,
     type: type
-  }, renderActionIcon(type)), icon && React__default.createElement(StyledOptionIcon, null, icon), React__default.createElement(StyledOptionContent, null, children || label || toString({
+  }, renderActionIcon(type)), icon && React.createElement(StyledOptionIcon, null, icon), React.createElement(StyledOptionContent, null, children || label || toString({
     value
   }))));
 });
@@ -24522,23 +24539,23 @@ const OptGroup = reactExports.forwardRef((_ref, ref) => {
   const optGroupProps = getOptGroupProps({
     'aria-label': groupAriaLabel || label
   });
-  return React__default.createElement(StyledOption, Object.assign({
+  return React.createElement(StyledOption, Object.assign({
     isCompact: isCompact,
     $type: "group",
-    onMouseDown: composeEventHandlers$1(onMouseDown, handleMouseDown),
+    onMouseDown: composeEventHandlers$3(onMouseDown, handleMouseDown),
     role: "none"
   }, props, {
     ref: ref
-  }), React__default.createElement(StyledOptionContent, null, (content || label) && React__default.createElement(StyledOption, {
+  }), React.createElement(StyledOptionContent, null, (content || label) && React.createElement(StyledOption, {
     as: "div",
     isCompact: isCompact,
     $type: "header"
-  }, icon && React__default.createElement(StyledOptionTypeIcon, {
+  }, icon && React.createElement(StyledOptionTypeIcon, {
     isCompact: isCompact,
     type: "header"
-  }, icon), content || label), React__default.createElement(StyledOptGroup, Object.assign({
+  }, icon), content || label), React.createElement(StyledOptGroup, Object.assign({
     isCompact: isCompact
-  }, optGroupProps), React__default.createElement(StyledListboxSeparator, {
+  }, optGroupProps), React.createElement(StyledListboxSeparator, {
     role: "none"
   }), children)));
 });
@@ -24600,7 +24617,7 @@ const StyledIcon = styled(_ref => {
     theme,
     ...props
   } = _ref;
-  return React__default.cloneElement(reactExports.Children.only(children), props);
+  return React.cloneElement(reactExports.Children.only(children), props);
 }).attrs({
   'data-garden-id': COMPONENT_ID$y,
   'data-garden-version': '8.76.2'
@@ -24856,7 +24873,7 @@ const useSplitButtonContext = () => {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const StartIconComponent = props => React__default.createElement(StyledIcon, Object.assign({
+const StartIconComponent = props => React.createElement(StyledIcon, Object.assign({
   position: "start"
 }, props));
 StartIconComponent.displayName = 'Button.StartIcon';
@@ -24869,7 +24886,7 @@ const StartIcon = StartIconComponent;
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const EndIconComponent = props => React__default.createElement(StyledIcon, Object.assign({
+const EndIconComponent = props => React.createElement(StyledIcon, Object.assign({
   position: "end"
 }, props));
 EndIconComponent.displayName = 'Button.EndIcon';
@@ -24901,7 +24918,7 @@ const ButtonComponent = reactExports.forwardRef((props, ref) => {
     computedRef = mergeRefs([
     computedProps.ref, ref]);
   }
-  return React__default.createElement(StyledButton$1, Object.assign({}, computedProps, {
+  return React.createElement(StyledButton$1, Object.assign({}, computedProps, {
     ref: computedRef
   }));
 });
@@ -24953,10 +24970,10 @@ const Anchor = reactExports.forwardRef((_ref, ref) => {
     noIconLabel: 'true'
   };
   const iconAriaLabel = useText(Anchor, checkProps, isExternal ? 'externalIconLabel' : 'noIconLabel', '(opens in a new tab)');
-  return React__default.createElement(StyledAnchor, Object.assign({
+  return React.createElement(StyledAnchor, Object.assign({
     ref: ref
   }, anchorProps), children, isExternal &&
-  React__default.createElement(StyledExternalIcon, {
+  React.createElement(StyledExternalIcon, {
     role: "img",
     "aria-label": iconAriaLabel,
     "aria-hidden": undefined
@@ -27001,7 +27018,7 @@ function isIeOrEdge() {
  * @return {Function} the event handler to add to an element
  */
 
-function composeEventHandlers() {
+function composeEventHandlers$2() {
   for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) {
     fns[_key] = arguments[_key];
   }
@@ -27213,7 +27230,7 @@ var Dropzone = /*#__PURE__*/reactExports.forwardRef(function (_ref, ref) {
     };
   }, [open]); // TODO: Figure out why react-styleguidist cannot create docs if we don't return a jsx element
 
-  return /*#__PURE__*/React__default.createElement(reactExports.Fragment, null, children(_objectSpread(_objectSpread({}, props), {}, {
+  return /*#__PURE__*/React.createElement(reactExports.Fragment, null, children(_objectSpread(_objectSpread({}, props), {}, {
     open: open
   })));
 });
@@ -28012,14 +28029,14 @@ function useDropzone() {
           rest = _objectWithoutProperties(_ref2, _excluded3);
 
       return _objectSpread(_objectSpread(_defineProperty({
-        onKeyDown: composeKeyboardHandler(composeEventHandlers(onKeyDown, onKeyDownCb)),
-        onFocus: composeKeyboardHandler(composeEventHandlers(onFocus, onFocusCb)),
-        onBlur: composeKeyboardHandler(composeEventHandlers(onBlur, onBlurCb)),
-        onClick: composeHandler(composeEventHandlers(onClick, onClickCb)),
-        onDragEnter: composeDragHandler(composeEventHandlers(onDragEnter, onDragEnterCb)),
-        onDragOver: composeDragHandler(composeEventHandlers(onDragOver, onDragOverCb)),
-        onDragLeave: composeDragHandler(composeEventHandlers(onDragLeave, onDragLeaveCb)),
-        onDrop: composeDragHandler(composeEventHandlers(onDrop, onDropCb)),
+        onKeyDown: composeKeyboardHandler(composeEventHandlers$2(onKeyDown, onKeyDownCb)),
+        onFocus: composeKeyboardHandler(composeEventHandlers$2(onFocus, onFocusCb)),
+        onBlur: composeKeyboardHandler(composeEventHandlers$2(onBlur, onBlurCb)),
+        onClick: composeHandler(composeEventHandlers$2(onClick, onClickCb)),
+        onDragEnter: composeDragHandler(composeEventHandlers$2(onDragEnter, onDragEnterCb)),
+        onDragOver: composeDragHandler(composeEventHandlers$2(onDragOver, onDragOverCb)),
+        onDragLeave: composeDragHandler(composeEventHandlers$2(onDragLeave, onDragLeaveCb)),
+        onDrop: composeDragHandler(composeEventHandlers$2(onDrop, onDropCb)),
         role: typeof role === "string" && role !== "" ? role : "presentation"
       }, refKey, rootRef), !disabled && !noKeyboard ? {
         tabIndex: 0
@@ -28045,8 +28062,8 @@ function useDropzone() {
         style: {
           display: "none"
         },
-        onChange: composeHandler(composeEventHandlers(onChange, onDropCb)),
-        onClick: composeHandler(composeEventHandlers(onClick, onInputElementClick)),
+        onChange: composeHandler(composeEventHandlers$2(onChange, onDropCb)),
+        onClick: composeHandler(composeEventHandlers$2(onClick, onInputElementClick)),
         tabIndex: -1
       }, refKey, inputRef);
 
@@ -28174,7 +28191,7 @@ const SIZE$2 = ['small', 'medium', 'large'];
 */
 
 const COMPONENT_ID$u = 'loaders.progress';
-const Progress = React__default.forwardRef((_ref, ref) => {
+const Progress = React.forwardRef((_ref, ref) => {
   let {
     value,
     size,
@@ -28186,7 +28203,7 @@ const Progress = React__default.forwardRef((_ref, ref) => {
     'aria-label': label
   }, 'aria-label', 'Progress');
   return (
-    React__default.createElement(StyledProgressBackground, Object.assign({
+    React.createElement(StyledProgressBackground, Object.assign({
       "data-garden-id": COMPONENT_ID$u,
       "data-garden-version": '8.76.2',
       "aria-valuemax": 100,
@@ -28196,7 +28213,7 @@ const Progress = React__default.forwardRef((_ref, ref) => {
       size: size,
       ref: ref,
       "aria-label": ariaLabel
-    }, other), React__default.createElement(StyledProgressIndicator, {
+    }, other), React.createElement(StyledProgressIndicator, {
       value: percentage,
       size: size
     }))
@@ -28487,14 +28504,14 @@ const Tooltip = _ref => {
     }
   }, [controlledIsVisible, content]);
   const popperPlacement = rtl ? getRtlPopperPlacement$1(placement) : getPopperPlacement$1(placement);
-  const singleChild = React__default.Children.only(children);
+  const singleChild = React.Children.only(children);
   const modifiers = {
     preventOverflow: {
       boundariesElement: 'window'
     },
     ...popperModifiers
   };
-  return React__default.createElement(Manager, null, React__default.createElement(Reference, null, _ref2 => {
+  return React.createElement(Manager, null, React.createElement(Reference, null, _ref2 => {
     let {
       ref
     } = _ref2;
@@ -28502,7 +28519,7 @@ const Tooltip = _ref => {
       ...singleChild.props,
       [refKey]: mergeRefs([ref, singleChild.ref ? singleChild.ref : null])
     }));
-  }), React__default.createElement(Popper, {
+  }), React.createElement(Popper, {
     placement: popperPlacement,
     eventsEnabled: controlledIsVisible && eventsEnabled,
     modifiers: modifiers
@@ -28531,22 +28548,22 @@ const Tooltip = _ref => {
       hasArrow,
       placement: currentPlacement,
       size: computedSize,
-      onFocus: composeEventHandlers$1(onFocus, () => {
+      onFocus: composeEventHandlers$3(onFocus, () => {
         openTooltip();
       }),
-      onBlur: composeEventHandlers$1(onBlur, () => {
+      onBlur: composeEventHandlers$3(onBlur, () => {
         closeTooltip(0);
       }),
       'aria-hidden': !controlledIsVisible,
       type,
       ...otherTooltipProps
     };
-    const tooltip = React__default.createElement(StyledTooltipWrapper, {
+    const tooltip = React.createElement(StyledTooltipWrapper, {
       ref: controlledIsVisible ? ref : null,
       style: style,
       zIndex: zIndex,
       "aria-hidden": !controlledIsVisible
-    }, React__default.createElement(StyledTooltip, getTooltipProps(tooltipProps), content));
+    }, React.createElement(StyledTooltip, getTooltipProps(tooltipProps), content));
     if (appendToNode) {
       return reactDomExports.createPortal(tooltip, appendToNode);
     }
@@ -29738,25 +29755,25 @@ const MonthSelector = _ref => {
     });
     return formatter.format(date);
   }, [locale]);
-  return React__default.createElement(StyledHeader$2, {
+  return React.createElement(StyledHeader$2, {
     isCompact: isCompact
-  }, React__default.createElement(StyledHeaderPaddle, {
+  }, React.createElement(StyledHeaderPaddle, {
     isCompact: isCompact,
     onClick: () => {
       dispatch({
         type: 'PREVIEW_PREVIOUS_MONTH'
       });
     }
-  }, React__default.createElement(SvgChevronLeftStroke, null)), React__default.createElement(StyledHeaderLabel, {
+  }, React.createElement(SvgChevronLeftStroke, null)), React.createElement(StyledHeaderLabel, {
     isCompact: isCompact
-  }, headerLabelFormatter(state.previewDate)), React__default.createElement(StyledHeaderPaddle, {
+  }, headerLabelFormatter(state.previewDate)), React.createElement(StyledHeaderPaddle, {
     isCompact: isCompact,
     onClick: () => {
       dispatch({
         type: 'PREVIEW_NEXT_MONTH'
       });
     }
-  }, React__default.createElement(SvgChevronRightStroke, null)));
+  }, React.createElement(SvgChevronRightStroke, null)));
 };
 
 /**
@@ -29799,10 +29816,10 @@ const Calendar = reactExports.forwardRef((_ref, ref) => {
     end: addDays(startDate, 6)
   }).map(date => {
     const formattedDayLabel = dayLabelFormatter(date);
-    return React__default.createElement(StyledCalendarItem, {
+    return React.createElement(StyledCalendarItem, {
       key: `day-label-${formattedDayLabel}`,
       isCompact: isCompact
-    }, React__default.createElement(StyledDayLabel, {
+    }, React.createElement(StyledDayLabel, {
       isCompact: isCompact
     }, formattedDayLabel));
   });
@@ -29821,10 +29838,10 @@ const Calendar = reactExports.forwardRef((_ref, ref) => {
     if (maxValue !== undefined) {
       isDisabled = isDisabled || isAfter(date, maxValue) && !isSameDay(date, maxValue);
     }
-    return React__default.createElement(StyledCalendarItem, {
+    return React.createElement(StyledCalendarItem, {
       key: `day-${itemsIndex}`,
       isCompact: isCompact
-    }, React__default.createElement(StyledDay, {
+    }, React.createElement(StyledDay, {
       isToday: isCurrentDate,
       isPreviousMonth: isPreviousMonth,
       isSelected: isSelected,
@@ -29840,16 +29857,16 @@ const Calendar = reactExports.forwardRef((_ref, ref) => {
       }
     }, formattedDayLabel));
   });
-  return React__default.createElement(StyledDatepicker, {
+  return React.createElement(StyledDatepicker, {
     ref: ref,
     isCompact: isCompact,
     onMouseDown: e => {
       e.preventDefault();
     }
-  }, React__default.createElement(MonthSelector, {
+  }, React.createElement(MonthSelector, {
     locale: locale,
     isCompact: isCompact
-  }), React__default.createElement(StyledCalendar, {
+  }), React.createElement(StyledCalendar, {
     isCompact: isCompact
   }, dayLabels, items));
 });
@@ -34006,45 +34023,45 @@ const Datepicker = reactExports.forwardRef((props, calendarRef) => {
     state,
     dispatch
   }), [state, dispatch]);
-  return React__default.createElement(DatepickerContext.Provider, {
+  return React.createElement(DatepickerContext.Provider, {
     value: contextValue
-  }, React__default.createElement(Manager, null, React__default.createElement(Reference, null, _ref => {
+  }, React.createElement(Manager, null, React.createElement(Reference, null, _ref => {
     let {
       ref
     } = _ref;
-    const childElement = React__default.Children.only(children);
-    return React__default.cloneElement(childElement, {
+    const childElement = React.Children.only(children);
+    return React.cloneElement(childElement, {
       [refKey]: refValue => {
         ref(refValue);
         inputRef.current = refValue;
       },
-      onMouseDown: composeEventHandlers$1(childElement.props.onMouseDown, () => {
+      onMouseDown: composeEventHandlers$3(childElement.props.onMouseDown, () => {
         isInputMouseDownRef.current = true;
       }),
-      onMouseUp: composeEventHandlers$1(childElement.props.onMouseUp, () => {
+      onMouseUp: composeEventHandlers$3(childElement.props.onMouseUp, () => {
         setTimeout(() => {
           isInputMouseDownRef.current = false;
         }, 0);
       }),
-      onClick: composeEventHandlers$1(childElement.props.onClick, () => {
+      onClick: composeEventHandlers$3(childElement.props.onClick, () => {
         if (isInputMouseDownRef.current && !state.isOpen) {
           dispatch({
             type: 'OPEN'
           });
         }
       }),
-      onBlur: composeEventHandlers$1(childElement.props.onBlur, () => {
+      onBlur: composeEventHandlers$3(childElement.props.onBlur, () => {
         dispatch({
           type: 'CLOSE'
         });
       }),
-      onChange: composeEventHandlers$1(childElement.props.onChange, e => {
+      onChange: composeEventHandlers$3(childElement.props.onChange, e => {
         dispatch({
           type: 'MANUALLY_UPDATE_INPUT',
           value: e.target.value
         });
       }),
-      onKeyDown: composeEventHandlers$1(childElement.props.onKeyDown, e => {
+      onKeyDown: composeEventHandlers$3(childElement.props.onKeyDown, e => {
         switch (e.key) {
           case KEYS.ESCAPE:
           case KEYS.ENTER:
@@ -34064,7 +34081,7 @@ const Datepicker = reactExports.forwardRef((props, calendarRef) => {
       autoComplete: 'off',
       value: state.inputValue
     });
-  }), React__default.createElement(Popper, {
+  }), React.createElement(Popper, {
     placement: popperPlacement,
     modifiers: popperModifiers
     ,
@@ -34077,14 +34094,14 @@ const Datepicker = reactExports.forwardRef((props, calendarRef) => {
       placement: currentPlacement
     } = _ref2;
     scheduleUpdateRef.current = scheduleUpdate;
-    return React__default.createElement(StyledMenuWrapper, {
+    return React.createElement(StyledMenuWrapper, {
       ref: ref,
       style: style,
       isHidden: !state.isOpen,
       isAnimated: isAnimated && (state.isOpen || isVisible),
       placement: currentPlacement,
       zIndex: zIndex
-    }, (state.isOpen || isVisible) && React__default.createElement(StyledMenu, menuProps, React__default.createElement(Calendar, {
+    }, (state.isOpen || isVisible) && React.createElement(StyledMenu, menuProps, React.createElement(Calendar, {
       ref: calendarRef,
       isCompact: isCompact,
       value: value,
@@ -34143,7 +34160,7 @@ const StyledAvatar = styled(_ref => {
     children,
     ...props
   } = _ref;
-  return React__default.cloneElement(reactExports.Children.only(children), props);
+  return React.cloneElement(reactExports.Children.only(children), props);
 }).attrs({
   'data-garden-id': COMPONENT_ID$g,
   'data-garden-version': '8.76.2'
@@ -34298,13 +34315,13 @@ var SvgXStroke$1 = function SvgXStroke(props) {
 
 const CloseComponent = reactExports.forwardRef((props, ref) => {
   const ariaLabel = useText(CloseComponent, props, 'aria-label', 'Remove');
-  return React__default.createElement(StyledClose$1, Object.assign({
+  return React.createElement(StyledClose$1, Object.assign({
     ref: ref,
     "aria-label": ariaLabel
   }, props, {
     type: "button",
     tabIndex: -1
-  }), React__default.createElement(SvgXStroke$1, null));
+  }), React.createElement(SvgXStroke$1, null));
 });
 CloseComponent.displayName = 'Tag.Close';
 const Close$1 = CloseComponent;
@@ -34316,7 +34333,7 @@ const Close$1 = CloseComponent;
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const AvatarComponent = props => React__default.createElement(StyledAvatar, props);
+const AvatarComponent = props => React.createElement(StyledAvatar, props);
 AvatarComponent.displayName = 'Tag.Avatar';
 const Avatar = AvatarComponent;
 
@@ -34333,7 +34350,7 @@ const TagComponent = reactExports.forwardRef((_ref, ref) => {
     hue,
     ...otherProps
   } = _ref;
-  return React__default.createElement(StyledTag, Object.assign({
+  return React.createElement(StyledTag, Object.assign({
     ref: ref,
     size: size,
     hue: hue
@@ -34446,7 +34463,7 @@ function useGrid(_ref) {
     defaultColIndex
   } = _ref;
   const doc = environment || document;
-  const prefix = useId(idPrefix);
+  const prefix = useId$1(idPrefix);
   const [uncontrolledRowIndex, setUncontrolledRowIndex] = reactExports.useState(defaultRowIndex !== null && defaultRowIndex !== undefined ? defaultRowIndex : 0);
   const [uncontrolledColIndex, setUncontrolledColIndex] = reactExports.useState(defaultColIndex !== null && defaultColIndex !== undefined ? defaultColIndex : 0);
   const isControlled = controlledRowIndex !== null && controlledColIndex !== null && controlledRowIndex !== undefined && controlledColIndex !== undefined;
@@ -34549,8 +34566,8 @@ function useGrid(_ref) {
       id: getId(prefix, _rowIndex, _colIndex),
       role: role === null ? undefined : role,
       tabIndex: rowIndex === _rowIndex && colIndex === _colIndex ? 0 : -1,
-      onFocus: composeEventHandlers$1(onFocus, handleFocus),
-      onKeyDown: composeEventHandlers$1(onKeyDown, handleKeyDown),
+      onFocus: composeEventHandlers$3(onFocus, handleFocus),
+      onKeyDown: composeEventHandlers$3(onKeyDown, handleKeyDown),
       ...other
     };
   }, [matrix, rowIndex, colIndex, doc, prefix, isControlled, onChange, rtl, wrap]);
@@ -35225,7 +35242,7 @@ const useFocusJail = function (_temp) {
       ...other
     } = _temp2 === void 0 ? {} : _temp2;
     return {
-      onKeyDown: composeEventHandlers$1(onKeyDown, event => {
+      onKeyDown: composeEventHandlers$3(onKeyDown, event => {
         if (event.key !== KEYS.TAB) {
           return;
         }
@@ -35290,7 +35307,7 @@ const useModal = _ref => {
     restoreFocus,
     environment
   } = _ref;
-  const prefix = useId(idPrefix);
+  const prefix = useId$1(idPrefix);
   const titleId = `${prefix}__title`;
   const contentId = `${prefix}__content`;
   const isModalMousedDownRef = reactExports.useRef(false);
@@ -35312,7 +35329,7 @@ const useModal = _ref => {
       isModalMousedDownRef.current = false;
     };
     return {
-      onMouseUp: composeEventHandlers$1(onMouseUp, handleMouseUp),
+      onMouseUp: composeEventHandlers$3(onMouseUp, handleMouseUp),
       'data-garden-container-id': containerId,
       'data-garden-container-version': '1.0.17',
       ...other
@@ -35331,10 +35348,10 @@ const useModal = _ref => {
       'aria-modal': true,
       'aria-labelledby': titleId,
       'aria-describedby': contentId,
-      onMouseDown: composeEventHandlers$1(onMouseDown, () => {
+      onMouseDown: composeEventHandlers$3(onMouseDown, () => {
         isModalMousedDownRef.current = true;
       }),
-      onKeyDown: composeEventHandlers$1(onKeyDown, event => {
+      onKeyDown: composeEventHandlers$3(onKeyDown, event => {
         if (event.key === KEYS.ESCAPE) {
           closeModal(event);
         }
@@ -35368,7 +35385,7 @@ const useModal = _ref => {
       ...other
     } = _ref2;
     return {
-      onClick: composeEventHandlers$1(onClick, event => {
+      onClick: composeEventHandlers$3(onClick, event => {
         closeModal(event);
       }),
       ...other
@@ -35880,12 +35897,12 @@ const Modal = reactExports.forwardRef((_ref, ref) => {
   if (!rootNode) {
     return null;
   }
-  return reactDomExports.createPortal( React__default.createElement(ModalsContext.Provider, {
+  return reactDomExports.createPortal( React.createElement(ModalsContext.Provider, {
     value: value
-  }, React__default.createElement(StyledBackdrop, Object.assign({
+  }, React.createElement(StyledBackdrop, Object.assign({
     isCentered: isCentered,
     isAnimated: isAnimated
-  }, getBackdropProps(backdropProps)), React__default.createElement(StyledModal, Object.assign({
+  }, getBackdropProps(backdropProps)), React.createElement(StyledModal, Object.assign({
     isCentered: isCentered,
     isAnimated: isAnimated,
     isLarge: isLarge
@@ -35920,7 +35937,7 @@ const Body = reactExports.forwardRef((props, ref) => {
   const {
     getContentProps
   } = useModalContext();
-  return React__default.createElement(StyledBody, Object.assign({}, getContentProps(props), {
+  return React.createElement(StyledBody, Object.assign({}, getContentProps(props), {
     ref: ref
   }));
 });
@@ -35967,12 +35984,12 @@ const Close = reactExports.forwardRef((props, ref) => {
     return () => setIsCloseButtonPresent(false);
   });
   const ariaLabel = useText(Close, props, 'aria-label', 'Close modal');
-  return React__default.createElement(StyledClose, Object.assign({}, getCloseProps({
+  return React.createElement(StyledClose, Object.assign({}, getCloseProps({
     ...props,
     'aria-label': ariaLabel
   }), {
     ref: ref
-  }), React__default.createElement(SvgXStroke, null));
+  }), React.createElement(SvgXStroke, null));
 });
 Close.displayName = 'Close';
 
@@ -35983,11 +36000,11 @@ Close.displayName = 'Close';
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Footer = React__default.forwardRef((props, ref) => {
+const Footer = React.forwardRef((props, ref) => {
   const {
     isLarge
   } = useModalContext();
-  return React__default.createElement(StyledFooter, Object.assign({
+  return React.createElement(StyledFooter, Object.assign({
     ref: ref,
     isLarge: isLarge
   }, props));
@@ -36001,7 +36018,7 @@ Footer.displayName = 'Footer';
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const FooterItem = React__default.forwardRef((props, ref) => React__default.createElement(StyledFooterItem, Object.assign({
+const FooterItem = React.forwardRef((props, ref) => React.createElement(StyledFooterItem, Object.assign({
   ref: ref
 }, props)));
 FooterItem.displayName = 'FooterItem';
@@ -36013,7 +36030,7 @@ FooterItem.displayName = 'FooterItem';
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const Header$1 = reactExports.forwardRef((_ref, ref) => {
+const Header$2 = reactExports.forwardRef((_ref, ref) => {
   let {
     children,
     tag,
@@ -36035,18 +36052,18 @@ const Header$1 = reactExports.forwardRef((_ref, ref) => {
       }
     };
   }, [hasHeader, setHasHeader]);
-  return React__default.createElement(StyledHeader$1, Object.assign({}, getTitleProps(other), {
+  return React.createElement(StyledHeader$1, Object.assign({}, getTitleProps(other), {
     as: tag,
     isCloseButtonPresent: isCloseButtonPresent,
     ref: ref
-  }), other.isDanger && React__default.createElement(StyledDangerIcon, null), children);
+  }), other.isDanger && React.createElement(StyledDangerIcon, null), children);
 });
-Header$1.displayName = 'Header';
-Header$1.propTypes = {
+Header$2.displayName = 'Header';
+Header$2.propTypes = {
   isDanger: PropTypes.bool,
   tag: PropTypes.any
 };
-Header$1.defaultProps = {
+Header$2.defaultProps = {
   tag: 'div'
 };
 
@@ -36067,7 +36084,7 @@ function useAccordion(_ref) {
     expandable = true,
     collapsible = true
   } = _ref;
-  const prefix = useId(idPrefix);
+  const prefix = useId$1(idPrefix);
   const TRIGGER_ID = `${prefix}--trigger`;
   const PANEL_ID = `${prefix}--panel`;
   const isControlled = expandedSections !== null && expandedSections !== undefined;
@@ -36125,8 +36142,8 @@ function useAccordion(_ref) {
       'aria-controls': `${PANEL_ID}:${value}`,
       'aria-disabled': disabledState.includes(value) || undefined,
       'aria-expanded': internalExpandedState.includes(value),
-      onClick: composeEventHandlers$1(props.onClick, () => toggle(value)),
-      onKeyDown: composeEventHandlers$1(props.onKeyDown, event => {
+      onClick: composeEventHandlers$3(props.onClick, () => toggle(value)),
+      onKeyDown: composeEventHandlers$3(props.onKeyDown, event => {
         if (event.key === KEYS.SPACE || event.key === KEYS.ENTER) {
           toggle(value);
           event.preventDefault();
@@ -36373,7 +36390,7 @@ StyledRotateIcon.defaultProps = {
 */
 
 const AccordionContext = reactExports.createContext(undefined);
-const useAccordionContext = () => {
+const useAccordionContext$1 = () => {
   const context = reactExports.useContext(AccordionContext);
   if (context === undefined) {
     throw new Error('This component must be rendered within a Accordion component');
@@ -36420,7 +36437,7 @@ const useHeaderContext = () => {
 * found at http://www.apache.org/licenses/LICENSE-2.0.
 */
 
-const SectionComponent = reactExports.forwardRef((props, ref) => React__default.createElement(StyledSection, Object.assign({
+const SectionComponent = reactExports.forwardRef((props, ref) => React.createElement(StyledSection, Object.assign({
   ref: ref
 }, props)));
 SectionComponent.displayName = 'Accordion.Section';
@@ -36474,7 +36491,7 @@ const HeaderComponent = reactExports.forwardRef((props, ref) => {
     getHeaderProps,
     getTriggerProps,
     expandedSections
-  } = useAccordionContext();
+  } = useAccordionContext$1();
   const sectionValue = useSectionContext();
   const [isFocused, setIsFocused] = reactExports.useState(false);
   const [isHovered, setIsHovered] = reactExports.useState(false);
@@ -36501,9 +36518,9 @@ const HeaderComponent = reactExports.forwardRef((props, ref) => {
     isHovered,
     otherTriggerProps
   }), [isHovered, otherTriggerProps]);
-  return React__default.createElement(HeaderContext.Provider, {
+  return React.createElement(HeaderContext.Provider, {
     value: value
-  }, React__default.createElement(StyledHeader, Object.assign({
+  }, React.createElement(StyledHeader, Object.assign({
     isCollapsible: isCollapsible,
     isExpanded: isExpanded,
     isFocused: isFocused
@@ -36511,23 +36528,23 @@ const HeaderComponent = reactExports.forwardRef((props, ref) => {
     ref,
     'aria-level': ariaLevel,
     role: role === undefined || role === null ? role : 'heading',
-    onClick: composeEventHandlers$1(onClick, onTriggerClick),
-    onFocus: composeEventHandlers$1(onFocus, onHeaderFocus),
-    onBlur: composeEventHandlers$1(onBlur, () => setIsFocused(false)),
-    onMouseOver: composeEventHandlers$1(onMouseOver, () => setIsHovered(true)),
-    onMouseOut: composeEventHandlers$1(onMouseOut, () => setIsHovered(false)),
+    onClick: composeEventHandlers$3(onClick, onTriggerClick),
+    onFocus: composeEventHandlers$3(onFocus, onHeaderFocus),
+    onBlur: composeEventHandlers$3(onBlur, () => setIsFocused(false)),
+    onMouseOver: composeEventHandlers$3(onMouseOver, () => setIsHovered(true)),
+    onMouseOut: composeEventHandlers$3(onMouseOut, () => setIsHovered(false)),
     ...other
-  })), children, React__default.createElement(StyledRotateIcon, {
+  })), children, React.createElement(StyledRotateIcon, {
     isCompact: isCompact,
     isHovered: isHovered,
     isRotated: isExpanded,
     isCollapsible: isCollapsible,
-    onMouseOver: composeEventHandlers$1(onMouseOver, () => setIsHovered(true)),
-    onMouseOut: composeEventHandlers$1(onMouseOut, () => setIsHovered(false))
-  }, React__default.createElement(SvgChevronDownStroke, null))));
+    onMouseOver: composeEventHandlers$3(onMouseOver, () => setIsHovered(true)),
+    onMouseOut: composeEventHandlers$3(onMouseOut, () => setIsHovered(false))
+  }, React.createElement(SvgChevronDownStroke, null))));
 });
 HeaderComponent.displayName = 'Accordion.Header';
-const Header = HeaderComponent;
+const Header$1 = HeaderComponent;
 
 /**
 * Copyright Zendesk, Inc.
@@ -36542,13 +36559,13 @@ const LabelComponent = reactExports.forwardRef((props, ref) => {
     isCompact,
     isCollapsible,
     expandedSections
-  } = useAccordionContext();
+  } = useAccordionContext$1();
   const isExpanded = expandedSections.includes(sectionValue);
   const {
     isHovered,
     otherTriggerProps
   } = useHeaderContext();
-  return React__default.createElement(StyledButton, Object.assign({
+  return React.createElement(StyledButton, Object.assign({
     ref: ref,
     isCompact: isCompact,
     isHovered: isHovered,
@@ -36578,10 +36595,10 @@ const PanelComponent = reactExports.forwardRef((_ref, ref) => {
     isCompact,
     expandedSections,
     getPanelProps
-  } = useAccordionContext();
+  } = useAccordionContext$1();
   const sectionValue = useSectionContext();
   const isExpanded = expandedSections.includes(sectionValue);
-  return React__default.createElement(StyledPanel, Object.assign({
+  return React.createElement(StyledPanel, Object.assign({
     inert: isExpanded ? undefined : '',
     isAnimated: isAnimated,
     isBare: isBare,
@@ -36592,7 +36609,7 @@ const PanelComponent = reactExports.forwardRef((_ref, ref) => {
     ref,
     value: sectionValue,
     ...props
-  })), React__default.createElement(StyledInnerPanel, {
+  })), React.createElement(StyledInnerPanel, {
     isAnimated: isAnimated
   }, children));
 });
@@ -36623,7 +36640,7 @@ const AccordionComponent = reactExports.forwardRef((_ref, ref) => {
   const {
     sections,
     sectionChildren
-  } = reactExports.useMemo(() => reactExports.Children.toArray(children).filter(reactExports.isValidElement).map((child, index) => React__default.createElement(SectionContext.Provider, {
+  } = reactExports.useMemo(() => reactExports.Children.toArray(children).filter(reactExports.isValidElement).map((child, index) => React.createElement(SectionContext.Provider, {
     key: index,
     value: index
   }, child)).reduce((acc, child, index) => {
@@ -36658,9 +36675,9 @@ const AccordionComponent = reactExports.forwardRef((_ref, ref) => {
     getTriggerProps,
     expandedSections
   }), [level, isBare, isCompact, isAnimated, isCollapsible, getPanelProps, getHeaderProps, getTriggerProps, expandedSections]);
-  return React__default.createElement(AccordionContext.Provider, {
+  return React.createElement(AccordionContext.Provider, {
     value: accordionContextValue
-  }, React__default.createElement(StyledAccordion, Object.assign({
+  }, React.createElement(StyledAccordion, Object.assign({
     ref: ref
   }, props), sectionChildren));
 });
@@ -36669,11 +36686,11 @@ AccordionComponent.defaultProps = {
   isAnimated: true,
   isCollapsible: true
 };
-const Accordion = AccordionComponent;
-Accordion.Header = Header;
-Accordion.Label = Label;
-Accordion.Panel = Panel;
-Accordion.Section = Section;
+const Accordion$1 = AccordionComponent;
+Accordion$1.Header = Header$1;
+Accordion$1.Label = Label;
+Accordion$1.Panel = Panel;
+Accordion$1.Section = Section;
 
 var _g;
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
@@ -36697,4 +36714,938 @@ var SvgCheckCircleStroke = function SvgCheckCircleStroke(props) {
   }))));
 };
 
-export { addFlashNotification as $, Anchor as A, SvgCreditCardStroke as B, Close$4 as C, DOMPurify as D, getColorV8 as E, Field$1 as F, Header$1 as G, Hint$2 as H, Input as I, SvgCheckCircleStroke as J, useModalContainer as K, Label$3 as L, Message$2 as M, Notification as N, Option as O, Progress as P, Modal as Q, Body as R, Span as S, Title as T, Accordion as U, Paragraph as V, We as W, Footer as X, FooterItem as Y, Button as Z, Close as _, useTranslation as a, Alert as a0, initI18next as a1, loadTranslations as a2, reactDomExports as a3, ThemeProviders as a4, createTheme as a5, FLASH_NOTIFICATIONS_KEY as a6, Textarea as b, Field as c, Label$1 as d, Hint as e, Combobox as f, Message as g, Checkbox as h, OptGroup as i, jsxRuntimeExports as j, FileList as k, File as l, Tooltip as m, mime as n, useDropzone as o, FileUpload as p, Datepicker as q, reactExports as r, styled as s, useGrid as t, useToast as u, focusStyles as v, FauxInput as w, Tag as x, SvgAlertWarningStroke as y, MediaInput as z };
+// packages/react/context/src/create-context.tsx
+function createContextScope(scopeName, createContextScopeDeps = []) {
+  let defaultContexts = [];
+  function createContext3(rootComponentName, defaultContext) {
+    const BaseContext = reactExports.createContext(defaultContext);
+    const index = defaultContexts.length;
+    defaultContexts = [...defaultContexts, defaultContext];
+    const Provider = (props) => {
+      const { scope, children, ...context } = props;
+      const Context = scope?.[scopeName]?.[index] || BaseContext;
+      const value = reactExports.useMemo(() => context, Object.values(context));
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
+    };
+    Provider.displayName = rootComponentName + "Provider";
+    function useContext2(consumerName, scope) {
+      const Context = scope?.[scopeName]?.[index] || BaseContext;
+      const context = reactExports.useContext(Context);
+      if (context) return context;
+      if (defaultContext !== void 0) return defaultContext;
+      throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
+    }
+    return [Provider, useContext2];
+  }
+  const createScope = () => {
+    const scopeContexts = defaultContexts.map((defaultContext) => {
+      return reactExports.createContext(defaultContext);
+    });
+    return function useScope(scope) {
+      const contexts = scope?.[scopeName] || scopeContexts;
+      return reactExports.useMemo(
+        () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
+        [scope, contexts]
+      );
+    };
+  };
+  createScope.scopeName = scopeName;
+  return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
+}
+function composeContextScopes(...scopes) {
+  const baseScope = scopes[0];
+  if (scopes.length === 1) return baseScope;
+  const createScope = () => {
+    const scopeHooks = scopes.map((createScope2) => ({
+      useScope: createScope2(),
+      scopeName: createScope2.scopeName
+    }));
+    return function useComposedScopes(overrideScopes) {
+      const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
+        const scopeProps = useScope(overrideScopes);
+        const currentScope = scopeProps[`__scope${scopeName}`];
+        return { ...nextScopes2, ...currentScope };
+      }, {});
+      return reactExports.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+    };
+  };
+  createScope.scopeName = baseScope.scopeName;
+  return createScope;
+}
+
+// packages/react/compose-refs/src/compose-refs.tsx
+function setRef(ref, value) {
+  if (typeof ref === "function") {
+    return ref(value);
+  } else if (ref !== null && ref !== void 0) {
+    ref.current = value;
+  }
+}
+function composeRefs(...refs) {
+  return (node) => {
+    let hasCleanup = false;
+    const cleanups = refs.map((ref) => {
+      const cleanup = setRef(ref, node);
+      if (!hasCleanup && typeof cleanup == "function") {
+        hasCleanup = true;
+      }
+      return cleanup;
+    });
+    if (hasCleanup) {
+      return () => {
+        for (let i = 0; i < cleanups.length; i++) {
+          const cleanup = cleanups[i];
+          if (typeof cleanup == "function") {
+            cleanup();
+          } else {
+            setRef(refs[i], null);
+          }
+        }
+      };
+    }
+  };
+}
+function useComposedRefs(...refs) {
+  return reactExports.useCallback(composeRefs(...refs), refs);
+}
+
+// src/slot.tsx
+// @__NO_SIDE_EFFECTS__
+function createSlot(ownerName) {
+  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
+  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    const childrenArray = reactExports.Children.toArray(children);
+    const slottable = childrenArray.find(isSlottable);
+    if (slottable) {
+      const newElement = slottable.props.children;
+      const newChildren = childrenArray.map((child) => {
+        if (child === slottable) {
+          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
+          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+        } else {
+          return child;
+        }
+      });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+  });
+  Slot2.displayName = `${ownerName}.Slot`;
+  return Slot2;
+}
+// @__NO_SIDE_EFFECTS__
+function createSlotClone(ownerName) {
+  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+    const { children, ...slotProps } = props;
+    if (reactExports.isValidElement(children)) {
+      const childrenRef = getElementRef$1(children);
+      const props2 = mergeProps(slotProps, children.props);
+      if (children.type !== reactExports.Fragment) {
+        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      }
+      return reactExports.cloneElement(children, props2);
+    }
+    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+  });
+  SlotClone.displayName = `${ownerName}.SlotClone`;
+  return SlotClone;
+}
+var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
+function isSlottable(child) {
+  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
+}
+function mergeProps(slotProps, childProps) {
+  const overrideProps = { ...childProps };
+  for (const propName in childProps) {
+    const slotPropValue = slotProps[propName];
+    const childPropValue = childProps[propName];
+    const isHandler = /^on[A-Z]/.test(propName);
+    if (isHandler) {
+      if (slotPropValue && childPropValue) {
+        overrideProps[propName] = (...args) => {
+          const result = childPropValue(...args);
+          slotPropValue(...args);
+          return result;
+        };
+      } else if (slotPropValue) {
+        overrideProps[propName] = slotPropValue;
+      }
+    } else if (propName === "style") {
+      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
+    } else if (propName === "className") {
+      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
+    }
+  }
+  return { ...slotProps, ...overrideProps };
+}
+function getElementRef$1(element) {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
+}
+
+function createCollection(name) {
+  const PROVIDER_NAME = name + "CollectionProvider";
+  const [createCollectionContext, createCollectionScope] = createContextScope(PROVIDER_NAME);
+  const [CollectionProviderImpl, useCollectionContext] = createCollectionContext(
+    PROVIDER_NAME,
+    { collectionRef: { current: null }, itemMap: /* @__PURE__ */ new Map() }
+  );
+  const CollectionProvider = (props) => {
+    const { scope, children } = props;
+    const ref = React.useRef(null);
+    const itemMap = React.useRef(/* @__PURE__ */ new Map()).current;
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(CollectionProviderImpl, { scope, itemMap, collectionRef: ref, children });
+  };
+  CollectionProvider.displayName = PROVIDER_NAME;
+  const COLLECTION_SLOT_NAME = name + "CollectionSlot";
+  const CollectionSlotImpl = createSlot(COLLECTION_SLOT_NAME);
+  const CollectionSlot = React.forwardRef(
+    (props, forwardedRef) => {
+      const { scope, children } = props;
+      const context = useCollectionContext(COLLECTION_SLOT_NAME, scope);
+      const composedRefs = useComposedRefs(forwardedRef, context.collectionRef);
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(CollectionSlotImpl, { ref: composedRefs, children });
+    }
+  );
+  CollectionSlot.displayName = COLLECTION_SLOT_NAME;
+  const ITEM_SLOT_NAME = name + "CollectionItemSlot";
+  const ITEM_DATA_ATTR = "data-radix-collection-item";
+  const CollectionItemSlotImpl = createSlot(ITEM_SLOT_NAME);
+  const CollectionItemSlot = React.forwardRef(
+    (props, forwardedRef) => {
+      const { scope, children, ...itemData } = props;
+      const ref = React.useRef(null);
+      const composedRefs = useComposedRefs(forwardedRef, ref);
+      const context = useCollectionContext(ITEM_SLOT_NAME, scope);
+      React.useEffect(() => {
+        context.itemMap.set(ref, { ref, ...itemData });
+        return () => void context.itemMap.delete(ref);
+      });
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(CollectionItemSlotImpl, { ...{ [ITEM_DATA_ATTR]: "" }, ref: composedRefs, children });
+    }
+  );
+  CollectionItemSlot.displayName = ITEM_SLOT_NAME;
+  function useCollection(scope) {
+    const context = useCollectionContext(name + "CollectionConsumer", scope);
+    const getItems = React.useCallback(() => {
+      const collectionNode = context.collectionRef.current;
+      if (!collectionNode) return [];
+      const orderedNodes = Array.from(collectionNode.querySelectorAll(`[${ITEM_DATA_ATTR}]`));
+      const items = Array.from(context.itemMap.values());
+      const orderedItems = items.sort(
+        (a, b) => orderedNodes.indexOf(a.ref.current) - orderedNodes.indexOf(b.ref.current)
+      );
+      return orderedItems;
+    }, [context.collectionRef, context.itemMap]);
+    return getItems;
+  }
+  return [
+    { Provider: CollectionProvider, Slot: CollectionSlot, ItemSlot: CollectionItemSlot },
+    useCollection,
+    createCollectionScope
+  ];
+}
+
+// src/primitive.tsx
+function composeEventHandlers$1(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
+  return function handleEvent(event) {
+    originalEventHandler?.(event);
+    if (checkForDefaultPrevented === false || !event.defaultPrevented) {
+      return ourEventHandler?.(event);
+    }
+  };
+}
+
+// packages/react/use-layout-effect/src/use-layout-effect.tsx
+var useLayoutEffect2 = globalThis?.document ? reactExports.useLayoutEffect : () => {
+};
+
+// src/use-controllable-state.tsx
+var useInsertionEffect = React$1[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
+function useControllableState({
+  prop,
+  defaultProp,
+  onChange = () => {
+  },
+  caller
+}) {
+  const [uncontrolledProp, setUncontrolledProp, onChangeRef] = useUncontrolledState({
+    defaultProp,
+    onChange
+  });
+  const isControlled = prop !== void 0;
+  const value = isControlled ? prop : uncontrolledProp;
+  {
+    const isControlledRef = reactExports.useRef(prop !== void 0);
+    reactExports.useEffect(() => {
+      const wasControlled = isControlledRef.current;
+      if (wasControlled !== isControlled) {
+        const from = wasControlled ? "controlled" : "uncontrolled";
+        const to = isControlled ? "controlled" : "uncontrolled";
+        console.warn(
+          `${caller} is changing from ${from} to ${to}. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.`
+        );
+      }
+      isControlledRef.current = isControlled;
+    }, [isControlled, caller]);
+  }
+  const setValue = reactExports.useCallback(
+    (nextValue) => {
+      if (isControlled) {
+        const value2 = isFunction(nextValue) ? nextValue(prop) : nextValue;
+        if (value2 !== prop) {
+          onChangeRef.current?.(value2);
+        }
+      } else {
+        setUncontrolledProp(nextValue);
+      }
+    },
+    [isControlled, prop, setUncontrolledProp, onChangeRef]
+  );
+  return [value, setValue];
+}
+function useUncontrolledState({
+  defaultProp,
+  onChange
+}) {
+  const [value, setValue] = reactExports.useState(defaultProp);
+  const prevValueRef = reactExports.useRef(value);
+  const onChangeRef = reactExports.useRef(onChange);
+  useInsertionEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange]);
+  reactExports.useEffect(() => {
+    if (prevValueRef.current !== value) {
+      onChangeRef.current?.(value);
+      prevValueRef.current = value;
+    }
+  }, [value, prevValueRef]);
+  return [value, setValue, onChangeRef];
+}
+function isFunction(value) {
+  return typeof value === "function";
+}
+
+// src/primitive.tsx
+var NODES = [
+  "a",
+  "button",
+  "div",
+  "form",
+  "h2",
+  "h3",
+  "img",
+  "input",
+  "label",
+  "li",
+  "nav",
+  "ol",
+  "p",
+  "select",
+  "span",
+  "svg",
+  "ul"
+];
+var Primitive = NODES.reduce((primitive, node) => {
+  const Slot = createSlot(`Primitive.${node}`);
+  const Node = reactExports.forwardRef((props, forwardedRef) => {
+    const { asChild, ...primitiveProps } = props;
+    const Comp = asChild ? Slot : node;
+    if (typeof window !== "undefined") {
+      window[Symbol.for("radix-ui")] = true;
+    }
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { ...primitiveProps, ref: forwardedRef });
+  });
+  Node.displayName = `Primitive.${node}`;
+  return { ...primitive, [node]: Node };
+}, {});
+
+// src/primitive.tsx
+function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
+  return function handleEvent(event) {
+    originalEventHandler?.(event);
+    if (checkForDefaultPrevented === false || !event.defaultPrevented) {
+      return ourEventHandler?.(event);
+    }
+  };
+}
+
+function useStateMachine(initialState, machine) {
+  return reactExports.useReducer((state, event) => {
+    const nextState = machine[state][event];
+    return nextState ?? state;
+  }, initialState);
+}
+
+// src/presence.tsx
+var Presence = (props) => {
+  const { present, children } = props;
+  const presence = usePresence(present);
+  const child = typeof children === "function" ? children({ present: presence.isPresent }) : reactExports.Children.only(children);
+  const ref = useComposedRefs(presence.ref, getElementRef(child));
+  const forceMount = typeof children === "function";
+  return forceMount || presence.isPresent ? reactExports.cloneElement(child, { ref }) : null;
+};
+Presence.displayName = "Presence";
+function usePresence(present) {
+  const [node, setNode] = reactExports.useState();
+  const stylesRef = reactExports.useRef(null);
+  const prevPresentRef = reactExports.useRef(present);
+  const prevAnimationNameRef = reactExports.useRef("none");
+  const initialState = present ? "mounted" : "unmounted";
+  const [state, send] = useStateMachine(initialState, {
+    mounted: {
+      UNMOUNT: "unmounted",
+      ANIMATION_OUT: "unmountSuspended"
+    },
+    unmountSuspended: {
+      MOUNT: "mounted",
+      ANIMATION_END: "unmounted"
+    },
+    unmounted: {
+      MOUNT: "mounted"
+    }
+  });
+  reactExports.useEffect(() => {
+    const currentAnimationName = getAnimationName(stylesRef.current);
+    prevAnimationNameRef.current = state === "mounted" ? currentAnimationName : "none";
+  }, [state]);
+  useLayoutEffect2(() => {
+    const styles = stylesRef.current;
+    const wasPresent = prevPresentRef.current;
+    const hasPresentChanged = wasPresent !== present;
+    if (hasPresentChanged) {
+      const prevAnimationName = prevAnimationNameRef.current;
+      const currentAnimationName = getAnimationName(styles);
+      if (present) {
+        send("MOUNT");
+      } else if (currentAnimationName === "none" || styles?.display === "none") {
+        send("UNMOUNT");
+      } else {
+        const isAnimating = prevAnimationName !== currentAnimationName;
+        if (wasPresent && isAnimating) {
+          send("ANIMATION_OUT");
+        } else {
+          send("UNMOUNT");
+        }
+      }
+      prevPresentRef.current = present;
+    }
+  }, [present, send]);
+  useLayoutEffect2(() => {
+    if (node) {
+      let timeoutId;
+      const ownerWindow = node.ownerDocument.defaultView ?? window;
+      const handleAnimationEnd = (event) => {
+        const currentAnimationName = getAnimationName(stylesRef.current);
+        const isCurrentAnimation = currentAnimationName.includes(CSS.escape(event.animationName));
+        if (event.target === node && isCurrentAnimation) {
+          send("ANIMATION_END");
+          if (!prevPresentRef.current) {
+            const currentFillMode = node.style.animationFillMode;
+            node.style.animationFillMode = "forwards";
+            timeoutId = ownerWindow.setTimeout(() => {
+              if (node.style.animationFillMode === "forwards") {
+                node.style.animationFillMode = currentFillMode;
+              }
+            });
+          }
+        }
+      };
+      const handleAnimationStart = (event) => {
+        if (event.target === node) {
+          prevAnimationNameRef.current = getAnimationName(stylesRef.current);
+        }
+      };
+      node.addEventListener("animationstart", handleAnimationStart);
+      node.addEventListener("animationcancel", handleAnimationEnd);
+      node.addEventListener("animationend", handleAnimationEnd);
+      return () => {
+        ownerWindow.clearTimeout(timeoutId);
+        node.removeEventListener("animationstart", handleAnimationStart);
+        node.removeEventListener("animationcancel", handleAnimationEnd);
+        node.removeEventListener("animationend", handleAnimationEnd);
+      };
+    } else {
+      send("ANIMATION_END");
+    }
+  }, [node, send]);
+  return {
+    isPresent: ["mounted", "unmountSuspended"].includes(state),
+    ref: reactExports.useCallback((node2) => {
+      stylesRef.current = node2 ? getComputedStyle(node2) : null;
+      setNode(node2);
+    }, [])
+  };
+}
+function getAnimationName(styles) {
+  return styles?.animationName || "none";
+}
+function getElementRef(element) {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
+}
+
+// packages/react/id/src/id.tsx
+var useReactId = React$1[" useId ".trim().toString()] || (() => void 0);
+var count = 0;
+function useId(deterministicId) {
+  const [id, setId] = reactExports.useState(useReactId());
+  useLayoutEffect2(() => {
+    if (!deterministicId) setId((reactId) => reactId ?? String(count++));
+  }, [deterministicId]);
+  return deterministicId || (id ? `radix-${id}` : "");
+}
+
+var COLLAPSIBLE_NAME = "Collapsible";
+var [createCollapsibleContext, createCollapsibleScope] = createContextScope(COLLAPSIBLE_NAME);
+var [CollapsibleProvider, useCollapsibleContext] = createCollapsibleContext(COLLAPSIBLE_NAME);
+var Collapsible = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const {
+      __scopeCollapsible,
+      open: openProp,
+      defaultOpen,
+      disabled,
+      onOpenChange,
+      ...collapsibleProps
+    } = props;
+    const [open, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen ?? false,
+      onChange: onOpenChange,
+      caller: COLLAPSIBLE_NAME
+    });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      CollapsibleProvider,
+      {
+        scope: __scopeCollapsible,
+        disabled,
+        contentId: useId(),
+        open,
+        onOpenToggle: reactExports.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Primitive.div,
+          {
+            "data-state": getState$1(open),
+            "data-disabled": disabled ? "" : void 0,
+            ...collapsibleProps,
+            ref: forwardedRef
+          }
+        )
+      }
+    );
+  }
+);
+Collapsible.displayName = COLLAPSIBLE_NAME;
+var TRIGGER_NAME$1 = "CollapsibleTrigger";
+var CollapsibleTrigger = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeCollapsible, ...triggerProps } = props;
+    const context = useCollapsibleContext(TRIGGER_NAME$1, __scopeCollapsible);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.button,
+      {
+        type: "button",
+        "aria-controls": context.contentId,
+        "aria-expanded": context.open || false,
+        "data-state": getState$1(context.open),
+        "data-disabled": context.disabled ? "" : void 0,
+        disabled: context.disabled,
+        ...triggerProps,
+        ref: forwardedRef,
+        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
+      }
+    );
+  }
+);
+CollapsibleTrigger.displayName = TRIGGER_NAME$1;
+var CONTENT_NAME$1 = "CollapsibleContent";
+var CollapsibleContent = reactExports.forwardRef(
+  (props, forwardedRef) => {
+    const { forceMount, ...contentProps } = props;
+    const context = useCollapsibleContext(CONTENT_NAME$1, props.__scopeCollapsible);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ jsxRuntimeExports.jsx(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
+  }
+);
+CollapsibleContent.displayName = CONTENT_NAME$1;
+var CollapsibleContentImpl = reactExports.forwardRef((props, forwardedRef) => {
+  const { __scopeCollapsible, present, children, ...contentProps } = props;
+  const context = useCollapsibleContext(CONTENT_NAME$1, __scopeCollapsible);
+  const [isPresent, setIsPresent] = reactExports.useState(present);
+  const ref = reactExports.useRef(null);
+  const composedRefs = useComposedRefs(forwardedRef, ref);
+  const heightRef = reactExports.useRef(0);
+  const height = heightRef.current;
+  const widthRef = reactExports.useRef(0);
+  const width = widthRef.current;
+  const isOpen = context.open || isPresent;
+  const isMountAnimationPreventedRef = reactExports.useRef(isOpen);
+  const originalStylesRef = reactExports.useRef(void 0);
+  reactExports.useEffect(() => {
+    const rAF = requestAnimationFrame(() => isMountAnimationPreventedRef.current = false);
+    return () => cancelAnimationFrame(rAF);
+  }, []);
+  useLayoutEffect2(() => {
+    const node = ref.current;
+    if (node) {
+      originalStylesRef.current = originalStylesRef.current || {
+        transitionDuration: node.style.transitionDuration,
+        animationName: node.style.animationName
+      };
+      node.style.transitionDuration = "0s";
+      node.style.animationName = "none";
+      const rect = node.getBoundingClientRect();
+      heightRef.current = rect.height;
+      widthRef.current = rect.width;
+      if (!isMountAnimationPreventedRef.current) {
+        node.style.transitionDuration = originalStylesRef.current.transitionDuration;
+        node.style.animationName = originalStylesRef.current.animationName;
+      }
+      setIsPresent(present);
+    }
+  }, [context.open, present]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Primitive.div,
+    {
+      "data-state": getState$1(context.open),
+      "data-disabled": context.disabled ? "" : void 0,
+      id: context.contentId,
+      hidden: !isOpen,
+      ...contentProps,
+      ref: composedRefs,
+      style: {
+        [`--radix-collapsible-content-height`]: height ? `${height}px` : void 0,
+        [`--radix-collapsible-content-width`]: width ? `${width}px` : void 0,
+        ...props.style
+      },
+      children: isOpen && children
+    }
+  );
+});
+function getState$1(open) {
+  return open ? "open" : "closed";
+}
+var Root = Collapsible;
+var Trigger = CollapsibleTrigger;
+var Content = CollapsibleContent;
+
+// packages/react/direction/src/direction.tsx
+var DirectionContext = reactExports.createContext(void 0);
+function useDirection(localDir) {
+  const globalDir = reactExports.useContext(DirectionContext);
+  return localDir || globalDir || "ltr";
+}
+
+var ACCORDION_NAME = "Accordion";
+var ACCORDION_KEYS = ["Home", "End", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"];
+var [Collection, useCollection, createCollectionScope] = createCollection(ACCORDION_NAME);
+var [createAccordionContext, createAccordionScope] = createContextScope(ACCORDION_NAME, [
+  createCollectionScope,
+  createCollapsibleScope
+]);
+var useCollapsibleScope = createCollapsibleScope();
+var Accordion = React.forwardRef(
+  (props, forwardedRef) => {
+    const { type, ...accordionProps } = props;
+    const singleProps = accordionProps;
+    const multipleProps = accordionProps;
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.Provider, { scope: props.__scopeAccordion, children: type === "multiple" ? /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImplMultiple, { ...multipleProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImplSingle, { ...singleProps, ref: forwardedRef }) });
+  }
+);
+Accordion.displayName = ACCORDION_NAME;
+var [AccordionValueProvider, useAccordionValueContext] = createAccordionContext(ACCORDION_NAME);
+var [AccordionCollapsibleProvider, useAccordionCollapsibleContext] = createAccordionContext(
+  ACCORDION_NAME,
+  { collapsible: false }
+);
+var AccordionImplSingle = React.forwardRef(
+  (props, forwardedRef) => {
+    const {
+      value: valueProp,
+      defaultValue,
+      onValueChange = () => {
+      },
+      collapsible = false,
+      ...accordionSingleProps
+    } = props;
+    const [value, setValue] = useControllableState({
+      prop: valueProp,
+      defaultProp: defaultValue ?? "",
+      onChange: onValueChange,
+      caller: ACCORDION_NAME
+    });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      AccordionValueProvider,
+      {
+        scope: props.__scopeAccordion,
+        value: React.useMemo(() => value ? [value] : [], [value]),
+        onItemOpen: setValue,
+        onItemClose: React.useCallback(() => collapsible && setValue(""), [collapsible, setValue]),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImpl, { ...accordionSingleProps, ref: forwardedRef }) })
+      }
+    );
+  }
+);
+var AccordionImplMultiple = React.forwardRef((props, forwardedRef) => {
+  const {
+    value: valueProp,
+    defaultValue,
+    onValueChange = () => {
+    },
+    ...accordionMultipleProps
+  } = props;
+  const [value, setValue] = useControllableState({
+    prop: valueProp,
+    defaultProp: defaultValue ?? [],
+    onChange: onValueChange,
+    caller: ACCORDION_NAME
+  });
+  const handleItemOpen = React.useCallback(
+    (itemValue) => setValue((prevValue = []) => [...prevValue, itemValue]),
+    [setValue]
+  );
+  const handleItemClose = React.useCallback(
+    (itemValue) => setValue((prevValue = []) => prevValue.filter((value2) => value2 !== itemValue)),
+    [setValue]
+  );
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    AccordionValueProvider,
+    {
+      scope: props.__scopeAccordion,
+      value,
+      onItemOpen: handleItemOpen,
+      onItemClose: handleItemClose,
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImpl, { ...accordionMultipleProps, ref: forwardedRef }) })
+    }
+  );
+});
+var [AccordionImplProvider, useAccordionContext] = createAccordionContext(ACCORDION_NAME);
+var AccordionImpl = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, disabled, dir, orientation = "vertical", ...accordionProps } = props;
+    const accordionRef = React.useRef(null);
+    const composedRefs = useComposedRefs(accordionRef, forwardedRef);
+    const getItems = useCollection(__scopeAccordion);
+    const direction = useDirection(dir);
+    const isDirectionLTR = direction === "ltr";
+    const handleKeyDown = composeEventHandlers$1(props.onKeyDown, (event) => {
+      if (!ACCORDION_KEYS.includes(event.key)) return;
+      const target = event.target;
+      const triggerCollection = getItems().filter((item) => !item.ref.current?.disabled);
+      const triggerIndex = triggerCollection.findIndex((item) => item.ref.current === target);
+      const triggerCount = triggerCollection.length;
+      if (triggerIndex === -1) return;
+      event.preventDefault();
+      let nextIndex = triggerIndex;
+      const homeIndex = 0;
+      const endIndex = triggerCount - 1;
+      const moveNext = () => {
+        nextIndex = triggerIndex + 1;
+        if (nextIndex > endIndex) {
+          nextIndex = homeIndex;
+        }
+      };
+      const movePrev = () => {
+        nextIndex = triggerIndex - 1;
+        if (nextIndex < homeIndex) {
+          nextIndex = endIndex;
+        }
+      };
+      switch (event.key) {
+        case "Home":
+          nextIndex = homeIndex;
+          break;
+        case "End":
+          nextIndex = endIndex;
+          break;
+        case "ArrowRight":
+          if (orientation === "horizontal") {
+            if (isDirectionLTR) {
+              moveNext();
+            } else {
+              movePrev();
+            }
+          }
+          break;
+        case "ArrowDown":
+          if (orientation === "vertical") {
+            moveNext();
+          }
+          break;
+        case "ArrowLeft":
+          if (orientation === "horizontal") {
+            if (isDirectionLTR) {
+              movePrev();
+            } else {
+              moveNext();
+            }
+          }
+          break;
+        case "ArrowUp":
+          if (orientation === "vertical") {
+            movePrev();
+          }
+          break;
+      }
+      const clampedIndex = nextIndex % triggerCount;
+      triggerCollection[clampedIndex].ref.current?.focus();
+    });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      AccordionImplProvider,
+      {
+        scope: __scopeAccordion,
+        disabled,
+        direction: dir,
+        orientation,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.Slot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Primitive.div,
+          {
+            ...accordionProps,
+            "data-orientation": orientation,
+            ref: composedRefs,
+            onKeyDown: disabled ? void 0 : handleKeyDown
+          }
+        ) })
+      }
+    );
+  }
+);
+var ITEM_NAME = "AccordionItem";
+var [AccordionItemProvider, useAccordionItemContext] = createAccordionContext(ITEM_NAME);
+var AccordionItem = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, value, ...accordionItemProps } = props;
+    const accordionContext = useAccordionContext(ITEM_NAME, __scopeAccordion);
+    const valueContext = useAccordionValueContext(ITEM_NAME, __scopeAccordion);
+    const collapsibleScope = useCollapsibleScope(__scopeAccordion);
+    const triggerId = useId();
+    const open = value && valueContext.value.includes(value) || false;
+    const disabled = accordionContext.disabled || props.disabled;
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      AccordionItemProvider,
+      {
+        scope: __scopeAccordion,
+        open,
+        disabled,
+        triggerId,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Root,
+          {
+            "data-orientation": accordionContext.orientation,
+            "data-state": getState(open),
+            ...collapsibleScope,
+            ...accordionItemProps,
+            ref: forwardedRef,
+            disabled,
+            open,
+            onOpenChange: (open2) => {
+              if (open2) {
+                valueContext.onItemOpen(value);
+              } else {
+                valueContext.onItemClose(value);
+              }
+            }
+          }
+        )
+      }
+    );
+  }
+);
+AccordionItem.displayName = ITEM_NAME;
+var HEADER_NAME = "AccordionHeader";
+var AccordionHeader = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, ...headerProps } = props;
+    const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
+    const itemContext = useAccordionItemContext(HEADER_NAME, __scopeAccordion);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.h3,
+      {
+        "data-orientation": accordionContext.orientation,
+        "data-state": getState(itemContext.open),
+        "data-disabled": itemContext.disabled ? "" : void 0,
+        ...headerProps,
+        ref: forwardedRef
+      }
+    );
+  }
+);
+AccordionHeader.displayName = HEADER_NAME;
+var TRIGGER_NAME = "AccordionTrigger";
+var AccordionTrigger = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, ...triggerProps } = props;
+    const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
+    const itemContext = useAccordionItemContext(TRIGGER_NAME, __scopeAccordion);
+    const collapsibleContext = useAccordionCollapsibleContext(TRIGGER_NAME, __scopeAccordion);
+    const collapsibleScope = useCollapsibleScope(__scopeAccordion);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.ItemSlot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Trigger,
+      {
+        "aria-disabled": itemContext.open && !collapsibleContext.collapsible || void 0,
+        "data-orientation": accordionContext.orientation,
+        id: itemContext.triggerId,
+        ...collapsibleScope,
+        ...triggerProps,
+        ref: forwardedRef
+      }
+    ) });
+  }
+);
+AccordionTrigger.displayName = TRIGGER_NAME;
+var CONTENT_NAME = "AccordionContent";
+var AccordionContent = React.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeAccordion, ...contentProps } = props;
+    const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
+    const itemContext = useAccordionItemContext(CONTENT_NAME, __scopeAccordion);
+    const collapsibleScope = useCollapsibleScope(__scopeAccordion);
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Content,
+      {
+        role: "region",
+        "aria-labelledby": itemContext.triggerId,
+        "data-orientation": accordionContext.orientation,
+        ...collapsibleScope,
+        ...contentProps,
+        ref: forwardedRef,
+        style: {
+          ["--radix-accordion-content-height"]: "var(--radix-collapsible-content-height)",
+          ["--radix-accordion-content-width"]: "var(--radix-collapsible-content-width)",
+          ...props.style
+        }
+      }
+    );
+  }
+);
+AccordionContent.displayName = CONTENT_NAME;
+function getState(open) {
+  return open ? "open" : "closed";
+}
+var Root2 = Accordion;
+var Item = AccordionItem;
+var Header = AccordionHeader;
+var Trigger2 = AccordionTrigger;
+var Content2 = AccordionContent;
+
+export { addFlashNotification as $, Anchor as A, SvgCreditCardStroke as B, Close$4 as C, DOMPurify as D, getColorV8 as E, Field$1 as F, Header$2 as G, Hint$2 as H, Input as I, SvgCheckCircleStroke as J, useModalContainer as K, Label$3 as L, Message$2 as M, Notification as N, Option as O, Progress as P, Modal as Q, Body as R, Span as S, Title as T, Accordion$1 as U, Paragraph as V, We as W, Footer as X, FooterItem as Y, Button as Z, Close as _, useTranslation as a, Alert as a0, initI18next as a1, loadTranslations as a2, reactDomExports as a3, ThemeProviders as a4, createTheme as a5, FLASH_NOTIFICATIONS_KEY as a6, Root2 as a7, Item as a8, Header as a9, Trigger2 as aa, Content2 as ab, Textarea as b, Field as c, Label$1 as d, Hint as e, Combobox as f, Message as g, Checkbox as h, OptGroup as i, jsxRuntimeExports as j, FileList as k, File as l, Tooltip as m, mime as n, useDropzone as o, FileUpload as p, Datepicker as q, reactExports as r, styled as s, useGrid as t, useToast as u, focusStyles as v, FauxInput as w, Tag as x, SvgAlertWarningStroke as y, MediaInput as z };

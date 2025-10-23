@@ -46,13 +46,13 @@ export function initVanillaAccordions() {
 
       header.setAttribute("aria-expanded", "false");
 
-      // Closing animation
-      panel.style.height = panel.scrollHeight + "px";
-      // Force a reflow to ensure the height is applied before changing it
+      // Closing animation - use max-height instead of height
+      panel.style.maxHeight = panel.scrollHeight + "px";
+      // Force a reflow to ensure the max-height is applied before changing it
       panel.offsetHeight;
 
       // Start animation
-      panel.style.height = "0";
+      panel.style.maxHeight = "0";
       item.classList.remove("expanded");
 
       // After animation completes, hide completely
@@ -103,6 +103,7 @@ export function initVanillaAccordions() {
       // Add icon
       const icon = document.createElement("span");
       icon.className = "accordion-icon";
+      icon.style.transition = "transform 0.35s ease-in-out"; // Match SCSS transition
       icon.innerHTML =
         '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
 
@@ -117,6 +118,12 @@ export function initVanillaAccordions() {
       accordionPanel.setAttribute("role", "region");
       accordionPanel.setAttribute("aria-labelledby", accordionHeader.id);
       accordionPanel.style.display = "none";
+      // Add transition for smooth animation - must do this programmatically
+      // because we don't want transitions before JS loads
+      // Using max-height instead of height to avoid compositing warnings
+      accordionPanel.style.transition = "max-height 0.35s ease-in-out";
+      accordionPanel.style.maxHeight = "0";
+      accordionPanel.style.overflow = "hidden";
 
       // Add content to panel if available
       if (articlesList) {
@@ -195,21 +202,21 @@ export function initVanillaAccordions() {
           accordionHeader.setAttribute("aria-expanded", "true");
 
           // Opening animation
-          // First make it visible but with height 0
+          // First make it visible but with max-height 0
           accordionPanel.style.display = "block";
-          accordionPanel.style.height = "0";
+          accordionPanel.style.maxHeight = "0";
 
           // Force a reflow to ensure the display change is applied
           accordionPanel.offsetHeight;
 
-          // Set the target height and start animation
-          accordionPanel.style.height = accordionPanel.scrollHeight + "px";
+          // Set the target max-height and start animation
+          accordionPanel.style.maxHeight = accordionPanel.scrollHeight + "px";
           accordionItem.classList.add("expanded");
 
-          // Clear height after animation is complete to allow for dynamic content
+          // Clear max-height after animation is complete to allow for dynamic content
           setTimeout(() => {
             if (accordionHeader.getAttribute("aria-expanded") === "true") {
-              accordionPanel.style.height = "auto";
+              accordionPanel.style.maxHeight = "none";
             }
           }, 350); // Match this with CSS transition duration
 
@@ -287,7 +294,10 @@ export function initSubTopicAccordions() {
 
       // Add transition for smooth animation - must do this programmatically
       // because we don't want transitions before JS loads
-      panelBody.style.transition = "height 0.35s ease-in-out";
+      // Using max-height instead of height to avoid compositing warnings
+      panelBody.style.transition =
+        "max-height 0.35s ease-in-out, padding-top 0.35s ease-in-out, padding-bottom 0.35s ease-in-out";
+      panelBody.style.overflow = "hidden";
 
       // Add click functionality
       panelHeading.addEventListener("click", () => {
@@ -296,15 +306,23 @@ export function initSubTopicAccordions() {
         if (expanded) {
           // Close accordion
           panelHeading.setAttribute("aria-expanded", "false");
+          panelBody.classList.remove("panel-body-expanded");
 
-          // First set explicit height before animating
-          panelBody.style.height = panelBody.scrollHeight + "px";
+          // Set overflow to hidden for smooth animation
+          panelBody.style.overflow = "hidden";
 
-          // Force reflow to ensure the browser applies the height
-          panelBody.offsetHeight;
+          // Set explicit max-height to current scroll height
+          panelBody.style.maxHeight = panelBody.scrollHeight + "px";
 
-          // Trigger animation to close
-          panelBody.style.height = "0px";
+          // Use requestAnimationFrame to ensure the browser has painted the max-height change
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              // Trigger animation to close - animate both max-height and padding
+              panelBody.style.maxHeight = "0px";
+              panelBody.style.paddingTop = "0px";
+              panelBody.style.paddingBottom = "0px";
+            });
+          });
 
           // After animation completes, hide the panel completely
           setTimeout(() => {
@@ -316,20 +334,32 @@ export function initSubTopicAccordions() {
           // Open accordion
           panelHeading.setAttribute("aria-expanded", "true");
 
-          // Make sure panel is visible but with zero height to start animation
+          // Make sure panel is visible but with zero max-height to start animation
           panelBody.style.display = "block";
-          panelBody.style.height = "0px";
+          panelBody.style.overflow = "hidden";
+          panelBody.style.maxHeight = "0px";
+          panelBody.style.paddingTop = "0px";
+          panelBody.style.paddingBottom = "0px";
 
-          // Force reflow to ensure display change is applied
-          panelBody.offsetHeight;
+          // Use requestAnimationFrame to ensure the browser has painted the initial state
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              // Get the target height with padding
+              const targetHeight = panelBody.scrollHeight;
 
-          // Set target height to trigger animation
-          panelBody.style.height = panelBody.scrollHeight + "px";
+              // Set target max-height and padding to trigger animation
+              panelBody.style.maxHeight = targetHeight + "px";
+              panelBody.style.paddingTop = "1rem";
+              panelBody.style.paddingBottom = "1rem";
+            });
+          });
 
-          // Clear height after animation completes
+          // Clear max-height after animation completes and set overflow to visible
           setTimeout(() => {
             if (panelHeading.getAttribute("aria-expanded") === "true") {
-              panelBody.style.height = "auto";
+              panelBody.style.maxHeight = "none";
+              panelBody.style.overflow = "visible";
+              panelBody.classList.add("panel-body-expanded");
             }
           }, 350);
         }
@@ -355,7 +385,7 @@ export function initSubTopicAccordions() {
       // Ensure panel is properly collapsed initially
       // Keep the existing collapse class which is part of the HTML structure
       panelBody.style.display = "none";
-      panelBody.style.height = "0px";
+      panelBody.style.maxHeight = "0px";
     });
   } catch (error) {
     console.error("Error initializing sub-topic accordions:", error);

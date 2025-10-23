@@ -107,6 +107,7 @@
     "new-request-form": "{{asset 'new-request-form-bundle.js'}}",
     "flash-notifications": "{{asset 'flash-notifications-bundle.js'}}",
     "category-accordions": "{{asset 'category-accordions-bundle.js'}}",
+    "article-accordions": "{{asset 'article-accordions-bundle.js'}}",
     "new-request-form-translations": "{{asset 'new-request-form-translations-bundle.js'}}",
     "shared": "{{asset 'shared-bundle.js'}}",
     "af": "{{asset 'af-bundle.js'}}",
@@ -210,7 +211,12 @@
     renderFlashNotifications(settings, closeLabel);
   </script>
   <script src="{{asset 'statusio.js'}}"></script>
-  <script src="{{asset 'sub-topic-accordions-fix.js'}}"></script>
+  <!-- Replaced with Radix Accordion implementation -->
+  <!-- <script src="{{asset 'sub-topic-accordions-fix.js'}}"></script> -->
+  <script type="module">
+    // Import the new Radix-based article accordions
+    import "article-accordions";
+  </script>
   <script src="{{asset 'tabbed-article.js'}}"></script>
   <script src="{{asset 'article-toc.js'}}"></script>
 

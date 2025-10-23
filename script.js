@@ -36419,9 +36419,9 @@
     mountMobileNavigation();
 
     // Initialize user info from Zendesk helpers if available
-    const userAvatar = document.querySelector('.user-avatar')?.src;
-    const userName = document.querySelector('#user-name')?.textContent;
-    const isSignedIn = document.body.classList.contains('signed-in') || document.querySelector('.user-avatar') !== null || window.HelpCenter?.user?.signed_in;
+    const userAvatar = document.querySelector(".user-avatar")?.src;
+    const userName = document.querySelector("#user-name")?.textContent;
+    const isSignedIn = document.body.classList.contains("signed-in") || document.querySelector(".user-avatar") !== null || window.HelpCenter?.user?.signed_in;
     if (isSignedIn || userAvatar || userName) {
       window.updateUserInfo({
         isSignedIn: !!isSignedIn,
@@ -36440,9 +36440,6 @@
   // Export functions for use in other modules
   window.mountRadixNavigation = mountRadixNavigation;
   window.mountMobileNavigation = mountMobileNavigation;
-  window.toggleMobileNavigation = window.toggleMobileNavigation;
-  window.closeMobileNavigation = window.closeMobileNavigation;
-  window.updateUserInfo = window.updateUserInfo;
 
   // Mobile Navigation Integration Script
   // This script handles the integration between Zendesk's existing mobile menu button
