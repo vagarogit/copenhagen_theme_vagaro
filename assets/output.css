@@ -85,7 +85,6 @@
     --color-ink-darker: #333333;
     --color-footer-gray: #1E1E1E;
     --color-primary: #cc4744;
-    --color-primary-hover: #b43136;
     --color-wave-gray: #f3f3f3;
   }
 }
@@ -757,6 +756,9 @@
   }
   .gap-0\.5 {
     gap: calc(var(--spacing) * 0.5);
+  }
+  .gap-1 {
+    gap: calc(var(--spacing) * 1);
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
