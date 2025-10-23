@@ -1481,7 +1481,7 @@ select:focus {
   top: 50%;
   transform: translateY(-50%);
   position: absolute;
-  left: 15px;
+  left: 25px;
   z-index: 1;
   width: 20px;
   height: 20px;
@@ -6834,6 +6834,438 @@ zd-summary-block {
   color: #D43C2E;
 }
 
+/***** Error Page Styles *****/
+.error-page-section {
+  background-color: $background_color;
+  padding: 2rem 0;
+  min-height: 60vh;
+}
+@media (min-width: 768px) {
+  .error-page-section {
+    padding: 3rem 0;
+  }
+}
+@media (min-width: 1024px) {
+  .error-page-section {
+    padding: 4rem 0;
+  }
+}
+
+.error-page-container {
+  margin: 0 auto;
+  padding: 0 5%;
+  max-width: 1360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+@media (min-width: 1360px) {
+  .error-page-container {
+    padding: 0;
+    width: 90%;
+  }
+}
+@media (min-width: 768px) {
+  .error-page-container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+}
+@media (min-width: 1024px) {
+  .error-page-container {
+    gap: 4rem;
+  }
+}
+
+.error-page-content {
+  flex: 1;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .error-page-content {
+    max-width: 50%;
+  }
+}
+
+.error-page-text {
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .error-page-text {
+    text-align: left;
+  }
+}
+
+.error-page-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #CC4744;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+@media (min-width: 768px) {
+  .error-page-title {
+    font-size: 2.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .error-page-title {
+    font-size: 3rem;
+  }
+}
+
+.error-page-description {
+  font-size: 1.125rem;
+  color: $text_color;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+@media (min-width: 768px) {
+  .error-page-description {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.error-page-links {
+  margin-top: 2rem;
+}
+
+.error-page-link-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .error-page-link-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .error-page-link-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.error-page-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: $background_color;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: $text_color;
+  transition: all 0.2s ease;
+}
+.error-page-link:hover {
+  background-color: darken($background_color, 3%);
+  border-color: #CC4744;
+  color: $text_color;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.error-page-link:focus {
+  outline: 2px solid #CC4744;
+  outline-offset: 2px;
+}
+@media (min-width: 768px) {
+  .error-page-link {
+    padding: 1rem 1.25rem;
+    gap: 1rem;
+  }
+}
+
+.error-page-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: darken($background_color, 3%);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+@media (min-width: 768px) {
+  .error-page-link-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.error-page-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #CC4744;
+}
+@media (min-width: 768px) {
+  .error-page-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.error-page-link-text {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+@media (min-width: 768px) {
+  .error-page-link-text {
+    font-size: 1rem;
+  }
+}
+
+.error-page-actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .error-page-actions {
+    text-align: left;
+  }
+}
+
+.error-page-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  background-color: #CC4744;
+  color: $brand_text_color;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.error-page-button:hover {
+  background-color: darken($brand_color, 20%);
+  color: $brand_text_color;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.error-page-button:focus {
+  outline: 2px solid #CC4744;
+  outline-offset: 2px;
+}
+@media (min-width: 768px) {
+  .error-page-button {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+  }
+}
+
+.error-page-visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .error-page-visual {
+    max-width: 50%;
+  }
+}
+
+.error-page-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+}
+@media (min-width: 768px) {
+  .error-page-illustration {
+    max-width: 500px;
+  }
+}
+
+.error-page-404 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+}
+@media (min-width: 768px) {
+  .error-page-404 {
+    height: 400px;
+  }
+}
+
+.error-page-404-number {
+  font-size: 8rem;
+  font-weight: 900;
+  color: #CC4744;
+  opacity: 0.1;
+  position: relative;
+  z-index: 1;
+}
+@media (min-width: 768px) {
+  .error-page-404-number {
+    font-size: 10rem;
+  }
+}
+@media (min-width: 1024px) {
+  .error-page-404-number {
+    font-size: 12rem;
+  }
+}
+
+.error-page-404-decoration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  border: 3px solid #CC4744;
+  border-radius: 50%;
+  opacity: 0.2;
+}
+.error-page-404-decoration::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  border: 2px solid #CC4744;
+  border-radius: 50%;
+  opacity: 0.3;
+}
+.error-page-404-decoration::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border: 1px solid #CC4744;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+@media (min-width: 768px) {
+  .error-page-404-decoration {
+    width: 250px;
+    height: 250px;
+  }
+  .error-page-404-decoration::before {
+    width: 200px;
+    height: 200px;
+  }
+  .error-page-404-decoration::after {
+    width: 125px;
+    height: 125px;
+  }
+}
+
+.error-page-icon-large {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  background-color: darken($background_color, 3%);
+  border-radius: 50%;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .error-page-icon-large {
+    width: 250px;
+    height: 250px;
+  }
+}
+@media (min-width: 1024px) {
+  .error-page-icon-large {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.error-page-icon-svg {
+  width: 80px;
+  height: 80px;
+  color: #CC4744;
+}
+@media (min-width: 768px) {
+  .error-page-icon-svg {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (min-width: 1024px) {
+  .error-page-icon-svg {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .error-page-container {
+    padding: 0 1rem;
+  }
+  .error-page-title {
+    font-size: 1.75rem;
+  }
+  .error-page-description {
+    font-size: 1rem;
+  }
+  .error-page-link-grid {
+    grid-template-columns: 1fr;
+  }
+  .error-page-404-number {
+    font-size: 6rem;
+  }
+  .error-page-404-decoration {
+    width: 150px;
+    height: 150px;
+  }
+  .error-page-404-decoration::before {
+    width: 120px;
+    height: 120px;
+  }
+  .error-page-404-decoration::after {
+    width: 80px;
+    height: 80px;
+  }
+  .error-page-icon-large {
+    width: 150px;
+    height: 150px;
+  }
+  .error-page-icon-svg {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media (prefers-contrast: high) {
+  .error-page-link {
+    border-width: 2px;
+  }
+  .error-page-button {
+    border: 2px solid #CC4744;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .error-page-link,
+  .error-page-button {
+    transition: none;
+  }
+  .error-page-link:hover,
+  .error-page-button:hover {
+    transform: none;
+  }
+}
 .glide {
   position: relative;
   width: 100%;
