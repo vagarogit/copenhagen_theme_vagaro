@@ -37,7 +37,8 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
     return !!(eB_2Cookie || eU_2Cookie);
   };
 
-  const isLoggedIn = checkForVagaroCookies();
+  // For testing: Set to true to always show user dropdown, or use checkForVagaroCookies() for production
+  const isLoggedIn = true; // Change to: checkForVagaroCookies() for production
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
@@ -352,7 +353,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
 
   return (
     <NavigationMenu.Root
-      className="NavigationMenuRoot"
+      className="NavigationMenuRoot pt-0 md:pt-2"
       value={activeMenu}
       onValueChange={setActiveMenu}
     >
@@ -483,92 +484,76 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
         </NavigationMenu.Item>
 
         {isLoggedIn && (
-          <NavigationMenu.Item>
-            <div className="user-info dropdown" ref={userDropdownRef}>
-              <button
-                className="dropdown-toggle"
-                onClick={toggleUserDropdown}
-                aria-haspopup="true"
-                aria-expanded={userDropdownOpen}
-              >
-                {userAvatar ? (
-                  <img
-                    src={userAvatar}
-                    alt={userName || "User profile"}
-                    className="user-avatar"
+          <NavigationMenu.Item
+            className="user-info dropdown mt-1"
+            ref={userDropdownRef}
+          >
+            <button
+              className="dropdown-toggle NavigationMenuLink"
+              onClick={toggleUserDropdown}
+              aria-haspopup="true"
+              aria-expanded={userDropdownOpen}
+              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+            >
+              {userAvatar ? (
+                <img
+                  src={userAvatar}
+                  alt={userName || "User profile"}
+                  className="user-avatar"
+                  style={{ width: "32px", height: "32px", borderRadius: "50%" }}
+                />
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="h-5 w-5 text-primary"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
                   />
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    className="h-5 w-5 text-primary inline-block"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                )}
-                <span>
-                  {userName && (
-                    <span className="text-primary font-semibold ml-2">
-                      {userName}
-                    </span>
-                  )}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="12"
-                    focusable="false"
-                    viewBox="0 0 12 12"
-                    className="dropdown-chevron-icon ml-1"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"
-                    />
-                  </svg>
-                </span>
-              </button>
-              <div
-                className={classNames("dropdown-menu dropdown-menu-end", {
-                  "d-block": userDropdownOpen,
-                })}
-                role="menu"
-                style={{ display: userDropdownOpen ? "block" : "none" }}
+                </svg>
+              )}
+              {userName && (
+                <span className="text-primary font-semibold">{userName}</span>
+              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                focusable="false"
+                viewBox="0 0 12 12"
+                className="dropdown-chevron-icon"
+                aria-hidden="true"
               >
-                <a
-                  href="/hc/en-us/profile"
-                  role="menuitem"
-                  onClick={() => setUserDropdownOpen(false)}
-                >
-                  My Profile
-                </a>
-                <a
-                  href="/hc/en-us/requests"
-                  role="menuitem"
-                  onClick={() => setUserDropdownOpen(false)}
-                >
-                  My Activities
-                </a>
-
-                <div className="separator" role="separator"></div>
-                <a
-                  href="/hc/en-us/signout?return_to=https%3A%2F%2Fsupport.vagaro.com%2Fhc%2Fen-us"
-                  role="menuitem"
-                  onClick={() => setUserDropdownOpen(false)}
-                >
-                  Sign Out
-                </a>
-              </div>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"
+                />
+              </svg>
+            </button>
+            <div className="dropdown-menu dropdown-menu-end" role="menu">
+              <a
+                href="/hc/en-us/profile"
+                role="menuitem"
+                onClick={() => setUserDropdownOpen(false)}
+              >
+                Profile
+              </a>
+              <a
+                href="/hc/contributions/posts?locale=en-us"
+                role="menuitem"
+                onClick={() => setUserDropdownOpen(false)}
+              >
+                My Activities
+              </a>
             </div>
           </NavigationMenu.Item>
         )}

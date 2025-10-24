@@ -101,7 +101,7 @@
           {{/if}}
           {{#if settings.show_article_comments}}
             {{#if comments}}
-              <a href="#article-comments" class="article-comment-count">
+              <a href="#article-comments" class="article-comment-count flex items-center gap-1">
                 <svg role="img" aria-labelledby="article-comments-title article-comments-desc" xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="article-comment-count-icon">
                   <title id="article-comments-title">{{t 'go_to_comments'}}</title>
                   <desc id="article-comments-desc">{{t 'comments_count' count=article.comment_count}}</desc>
