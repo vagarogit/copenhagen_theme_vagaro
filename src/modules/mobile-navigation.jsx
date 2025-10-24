@@ -407,7 +407,7 @@ const MobileNavigation = ({
             {!isSignedIn && (
               <div className="pt-4 border-t border-gray-200 space-y-3">
                 <a
-                  href="#"
+                  href="https://support.vagaro.com/hc/en-us/signin?return_to=https%3A%2F%2Fsupport.vagaro.com%2Fhc%2Fen-us"
                   className="block w-full text-center py-2 px-4 text-charcoal font-semibold hover:text-gray-900 transition-colors"
                   onClick={onClose}
                 >
