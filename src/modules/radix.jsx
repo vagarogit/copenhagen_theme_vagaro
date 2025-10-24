@@ -20,16 +20,19 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
   // Set to "features" or "business-types" to force that menu open for styling
   const [activeMenu, setActiveMenu] = React.useState(""); // Change this to control which menu is open
 
-  // Check if eB_2 cookie exists - pure JavaScript function
-  const checkForEb2Cookie = () => {
+  // Check if Vagaro login cookies exist (eB_2 for business, eU_2 for user)
+  const checkForVagaroCookies = () => {
     const cookies = document.cookie.split(";");
     const eB_2Cookie = cookies.find((cookie) =>
       cookie.trim().startsWith("eB_2=")
     );
-    return !!eB_2Cookie;
+    const eU_2Cookie = cookies.find((cookie) =>
+      cookie.trim().startsWith("eU_2=")
+    );
+    return !!(eB_2Cookie || eU_2Cookie);
   };
 
-  const isLoggedIn = checkForEb2Cookie();
+  const isLoggedIn = checkForVagaroCookies();
 
   // Responsive logic - hide desktop navigation on mobile
   const [isMobile, setIsMobile] = React.useState(false);
