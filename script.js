@@ -35606,13 +35606,18 @@
   var propTypesExports = propTypes.exports;
 
   const NavigationMenuDemo = ({
-    navigationData = {}
+    navigationData = {},
+    userInfo = {}
   }) => {
     const {
       businessTypes,
       features,
       isLoaded
     } = navigationData;
+    const {
+      userAvatar,
+      userName
+    } = userInfo;
 
     // Utility function to format links - convert relative links to absolute Vagaro URLs
     const formatLink = link => {
@@ -35624,6 +35629,10 @@
     // Set to "features" or "business-types" to force that menu open for styling
     const [activeMenu, setActiveMenu] = reactExports.useState(""); // Change this to control which menu is open
 
+    // State for user dropdown menu
+    const [userDropdownOpen, setUserDropdownOpen] = reactExports.useState(false);
+    const userDropdownRef = reactExports.useRef(null);
+
     // Check if Vagaro login cookies exist (eB_2 for business, eU_2 for user)
     const checkForVagaroCookies = () => {
       const cookies = document.cookie.split(";");
@@ -35632,6 +35641,27 @@
       return !!(eB_2Cookie || eU_2Cookie);
     };
     const isLoggedIn = checkForVagaroCookies();
+
+    // Close dropdown when clicking outside
+    reactExports.useEffect(() => {
+      const handleClickOutside = event => {
+        if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
+          setUserDropdownOpen(false);
+        }
+      };
+      if (userDropdownOpen) {
+        document.addEventListener("mousedown", handleClickOutside);
+      }
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [userDropdownOpen]);
+
+    // Toggle user dropdown
+    const toggleUserDropdown = e => {
+      e.preventDefault();
+      setUserDropdownOpen(!userDropdownOpen);
+    };
 
     // Responsive logic - hide desktop navigation on mobile
     const [isMobile, setIsMobile] = reactExports.useState(false);
@@ -35895,7 +35925,69 @@
       rel: "noopener noreferrer"
     }, /*#__PURE__*/reactExports.createElement("span", {
       className: "text-primary font-semibold"
-    }, isLoggedIn ? "Go to My Business" : "Sign in"))), /*#__PURE__*/reactExports.createElement(Indicator, {
+    }, isLoggedIn ? "Go to My Business" : "Sign in"))), isLoggedIn && /*#__PURE__*/reactExports.createElement(Item, null, /*#__PURE__*/reactExports.createElement("div", {
+      className: "user-info dropdown",
+      ref: userDropdownRef
+    }, /*#__PURE__*/reactExports.createElement("button", {
+      className: "dropdown-toggle",
+      onClick: toggleUserDropdown,
+      "aria-haspopup": "true",
+      "aria-expanded": userDropdownOpen
+    }, userAvatar ? /*#__PURE__*/reactExports.createElement("img", {
+      src: userAvatar,
+      alt: userName || "User profile",
+      className: "user-avatar"
+    }) : /*#__PURE__*/reactExports.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      fill: "none",
+      viewBox: "0 0 24 24",
+      strokeWidth: "2",
+      stroke: "currentColor",
+      className: "h-5 w-5 text-primary inline-block",
+      "aria-hidden": "true"
+    }, /*#__PURE__*/reactExports.createElement("path", {
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+      d: "M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+    })), /*#__PURE__*/reactExports.createElement("span", null, userName && /*#__PURE__*/reactExports.createElement("span", {
+      className: "text-primary font-semibold ml-2"
+    }, userName), /*#__PURE__*/reactExports.createElement("svg", {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: "12",
+      height: "12",
+      focusable: "false",
+      viewBox: "0 0 12 12",
+      className: "dropdown-chevron-icon ml-1",
+      "aria-hidden": "true"
+    }, /*#__PURE__*/reactExports.createElement("path", {
+      fill: "none",
+      stroke: "currentColor",
+      strokeLinecap: "round",
+      d: "M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"
+    })))), /*#__PURE__*/reactExports.createElement("div", {
+      className: classNames("dropdown-menu dropdown-menu-end", {
+        "d-block": userDropdownOpen
+      }),
+      role: "menu",
+      style: {
+        display: userDropdownOpen ? "block" : "none"
+      }
+    }, /*#__PURE__*/reactExports.createElement("a", {
+      href: "/hc/en-us/profile",
+      role: "menuitem",
+      onClick: () => setUserDropdownOpen(false)
+    }, "My Profile"), /*#__PURE__*/reactExports.createElement("a", {
+      href: "/hc/en-us/requests",
+      role: "menuitem",
+      onClick: () => setUserDropdownOpen(false)
+    }, "My Activities"), /*#__PURE__*/reactExports.createElement("div", {
+      className: "separator",
+      role: "separator"
+    }), /*#__PURE__*/reactExports.createElement("a", {
+      href: "/hc/en-us/signout?return_to=https%3A%2F%2Fsupport.vagaro.com%2Fhc%2Fen-us",
+      role: "menuitem",
+      onClick: () => setUserDropdownOpen(false)
+    }, "Sign Out")))), /*#__PURE__*/reactExports.createElement(Indicator, {
       className: "NavigationMenuIndicator"
     }, /*#__PURE__*/reactExports.createElement("div", {
       className: "Arrow"
@@ -35910,6 +36002,11 @@
       businessTypes: propTypesExports.PropTypes.object,
       features: propTypesExports.PropTypes.array,
       isLoaded: propTypesExports.PropTypes.bool
+    }),
+    userInfo: propTypesExports.PropTypes.shape({
+      isSignedIn: propTypesExports.PropTypes.bool,
+      userAvatar: propTypesExports.PropTypes.string,
+      userName: propTypesExports.PropTypes.string
     })
   };
   const BusinessTypeItem = ({
@@ -36415,12 +36512,14 @@
     mountMobileNavigation();
   };
 
-  // Function to update user info for mobile navigation
+  // Function to update user info for both desktop and mobile navigation
   window.updateUserInfo = userInfo => {
     window.mobileNavState.userInfo = {
       ...window.mobileNavState.userInfo,
       ...userInfo
     };
+    // Re-render both desktop and mobile navigation with new user info
+    mountRadixNavigation();
     mountMobileNavigation();
   };
 
@@ -36441,16 +36540,17 @@
     const mountPoint = document.getElementById("radix-navigation-root");
     const fallbackNav = document.getElementById("fallback-navigation");
     if (mountPoint) {
-      // Mount the React component with navigation data
+      // Mount the React component with navigation data and user info
       reactDomExports.render(/*#__PURE__*/reactExports.createElement(NavigationMenuDemo, {
-        navigationData: window.navigationData
+        navigationData: window.navigationData,
+        userInfo: window.mobileNavState.userInfo
       }), mountPoint);
 
       // Hide the fallback navigation
       if (fallbackNav) {
         fallbackNav.style.display = "none";
       }
-      console.log("[Desktop Navigation] Successfully mounted with data:", window.navigationData);
+      console.log("[Desktop Navigation] Successfully mounted with data:", window.navigationData, "and user info:", window.mobileNavState.userInfo);
       return true;
     }
     console.error("[Desktop Navigation] Mount point not found");

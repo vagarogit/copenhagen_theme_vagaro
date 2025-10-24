@@ -5,8 +5,9 @@ import classNames from "classnames";
 
 import { PropTypes } from "prop-types";
 
-const NavigationMenuDemo = ({ navigationData = {} }) => {
+const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
   const { businessTypes, features, isLoaded } = navigationData;
+  const { userAvatar, userName } = userInfo;
 
   // Utility function to format links - convert relative links to absolute Vagaro URLs
   const formatLink = (link) => {
@@ -19,6 +20,10 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
   // For development: manually set which menu item should be open
   // Set to "features" or "business-types" to force that menu open for styling
   const [activeMenu, setActiveMenu] = React.useState(""); // Change this to control which menu is open
+
+  // State for user dropdown menu
+  const [userDropdownOpen, setUserDropdownOpen] = React.useState(false);
+  const userDropdownRef = React.useRef(null);
 
   // Check if Vagaro login cookies exist (eB_2 for business, eU_2 for user)
   const checkForVagaroCookies = () => {
@@ -33,6 +38,32 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
   };
 
   const isLoggedIn = checkForVagaroCookies();
+
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        userDropdownRef.current &&
+        !userDropdownRef.current.contains(event.target)
+      ) {
+        setUserDropdownOpen(false);
+      }
+    };
+
+    if (userDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [userDropdownOpen]);
+
+  // Toggle user dropdown
+  const toggleUserDropdown = (e) => {
+    e.preventDefault();
+    setUserDropdownOpen(!userDropdownOpen);
+  };
 
   // Responsive logic - hide desktop navigation on mobile
   const [isMobile, setIsMobile] = React.useState(false);
@@ -451,6 +482,97 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
           </NavigationMenu.Link>
         </NavigationMenu.Item>
 
+        {isLoggedIn && (
+          <NavigationMenu.Item>
+            <div className="user-info dropdown" ref={userDropdownRef}>
+              <button
+                className="dropdown-toggle"
+                onClick={toggleUserDropdown}
+                aria-haspopup="true"
+                aria-expanded={userDropdownOpen}
+              >
+                {userAvatar ? (
+                  <img
+                    src={userAvatar}
+                    alt={userName || "User profile"}
+                    className="user-avatar"
+                  />
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    className="h-5 w-5 text-primary inline-block"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                )}
+                <span>
+                  {userName && (
+                    <span className="text-primary font-semibold ml-2">
+                      {userName}
+                    </span>
+                  )}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    focusable="false"
+                    viewBox="0 0 12 12"
+                    className="dropdown-chevron-icon ml-1"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div
+                className={classNames("dropdown-menu dropdown-menu-end", {
+                  "d-block": userDropdownOpen,
+                })}
+                role="menu"
+                style={{ display: userDropdownOpen ? "block" : "none" }}
+              >
+                <a
+                  href="/hc/en-us/profile"
+                  role="menuitem"
+                  onClick={() => setUserDropdownOpen(false)}
+                >
+                  My Profile
+                </a>
+                <a
+                  href="/hc/en-us/requests"
+                  role="menuitem"
+                  onClick={() => setUserDropdownOpen(false)}
+                >
+                  My Activities
+                </a>
+
+                <div className="separator" role="separator"></div>
+                <a
+                  href="/hc/en-us/signout?return_to=https%3A%2F%2Fsupport.vagaro.com%2Fhc%2Fen-us"
+                  role="menuitem"
+                  onClick={() => setUserDropdownOpen(false)}
+                >
+                  Sign Out
+                </a>
+              </div>
+            </div>
+          </NavigationMenu.Item>
+        )}
+
         <NavigationMenu.Indicator className="NavigationMenuIndicator">
           <div className="Arrow" />
         </NavigationMenu.Indicator>
@@ -468,6 +590,11 @@ NavigationMenuDemo.propTypes = {
     businessTypes: PropTypes.object,
     features: PropTypes.array,
     isLoaded: PropTypes.bool,
+  }),
+  userInfo: PropTypes.shape({
+    isSignedIn: PropTypes.bool,
+    userAvatar: PropTypes.string,
+    userName: PropTypes.string,
   }),
 };
 

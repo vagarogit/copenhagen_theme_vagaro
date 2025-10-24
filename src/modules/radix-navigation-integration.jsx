@@ -29,12 +29,14 @@ window.updateNavigationData = (data) => {
   mountMobileNavigation();
 };
 
-// Function to update user info for mobile navigation
+// Function to update user info for both desktop and mobile navigation
 window.updateUserInfo = (userInfo) => {
   window.mobileNavState.userInfo = {
     ...window.mobileNavState.userInfo,
     ...userInfo,
   };
+  // Re-render both desktop and mobile navigation with new user info
+  mountRadixNavigation();
   mountMobileNavigation();
 };
 
@@ -56,9 +58,12 @@ export function mountRadixNavigation() {
   const fallbackNav = document.getElementById("fallback-navigation");
 
   if (mountPoint) {
-    // Mount the React component with navigation data
+    // Mount the React component with navigation data and user info
     ReactDOM.render(
-      <NavigationMenuDemo navigationData={window.navigationData} />,
+      <NavigationMenuDemo
+        navigationData={window.navigationData}
+        userInfo={window.mobileNavState.userInfo}
+      />,
       mountPoint
     );
 
@@ -69,7 +74,9 @@ export function mountRadixNavigation() {
 
     console.log(
       "[Desktop Navigation] Successfully mounted with data:",
-      window.navigationData
+      window.navigationData,
+      "and user info:",
+      window.mobileNavState.userInfo
     );
     return true;
   }
