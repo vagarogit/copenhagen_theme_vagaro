@@ -17,6 +17,9 @@ export function initVanillaAccordions() {
       return;
     }
 
+    // Ensure original content stays hidden to prevent FOUC
+    originalSectionTree.style.display = "none";
+
     // Find or create container for accordions
     let accordionContainer = document.getElementById(
       "category-accordions-container"
@@ -248,13 +251,23 @@ export function initVanillaAccordions() {
     // Add wrapper to container
     accordionContainer.appendChild(accordionWrapper);
 
-    // Hide original section tree
+    // Ensure original section tree stays hidden
     originalSectionTree.style.display = "none";
+
+    // Add smooth fade-in animation for accordions
+    accordionWrapper.style.opacity = "0";
+    accordionWrapper.style.transition = "opacity 0.3s ease-in-out";
+
+    // Trigger fade-in after a brief delay to ensure DOM is ready
+    requestAnimationFrame(() => {
+      accordionWrapper.style.opacity = "1";
+    });
   } catch (error) {
     console.error("Error initializing accordions:", error);
     // Show the original section tree in case of error
     const originalSectionTree = document.querySelector(".section-tree");
     if (originalSectionTree) {
+      originalSectionTree.classList.add("fallback-visible");
       originalSectionTree.style.display = "block";
     }
   }

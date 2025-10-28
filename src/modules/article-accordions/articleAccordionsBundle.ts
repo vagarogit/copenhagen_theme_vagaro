@@ -1,10 +1,10 @@
 /**
  * Article Accordions Bundle
- * Entry point for Radix UI accordion implementation
- * Replaces vanilla JS accordion with better accessibility and smoother animations
+ * Entry point for CSS-only accordion implementation
+ * Uses pure CSS accordions for better performance and simpler implementation
  */
 
-// Import and initialize the Radix accordion integration
+// Import and initialize the CSS accordion integration
 import "./integration.jsx";
 
 console.log("[Article Accordions Bundle] Loaded successfully");
