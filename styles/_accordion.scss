@@ -1,0 +1,178 @@
+/* Main accordion container - High specificity to override any conflicting styles */
+.category-content .zd-custom-accordion,
+#main-content .zd-custom-accordion {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block !important; /* Ensure accordion is always visible */
+    opacity: 1 !important; /* Prevent any fade-in delays */
+    visibility: visible !important; /* Ensure visibility */
+  }
+
+/* Critical: Ensure accordion items are immediately visible */
+.zd-custom-accordion__item {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+  
+  
+  /* Hidden checkbox toggle */
+  .zd-custom-accordion__toggle {
+    display: none;
+  }
+  
+  /* Clickable header - BORDER MOVED HERE */
+  .zd-custom-accordion__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    transition: background-color 0.25s ease-in-out;
+    user-select: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  /* Remove border from last item's header */
+  .zd-custom-accordion__item:last-child .zd-custom-accordion__header {
+    border-bottom: none;
+  }
+  
+  /* Only show border on last header if accordion is open */
+  .zd-custom-accordion__item:last-child .zd-custom-accordion__toggle:checked ~ .zd-custom-accordion__header {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .zd-custom-accordion__header:hover {
+    background-color: #e9ecef;
+  }
+  
+  /* Plus/minus icon */
+  .zd-custom-accordion__icon {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .zd-custom-accordion__icon::before,
+  .zd-custom-accordion__icon::after {
+    content: '';
+    position: absolute;
+    background-color: #333;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Horizontal line */
+  .zd-custom-accordion__icon::before {
+    width: 12px;
+    height: 2px;
+    top: 5px;
+    left: 0;
+  }
+  
+  /* Vertical line */
+  .zd-custom-accordion__icon::after {
+    width: 2px;
+    height: 12px;
+    top: 0;
+    left: 5px;
+  }
+  
+  /* Rotate vertical line when open */
+  .zd-custom-accordion__toggle:checked ~ .zd-custom-accordion__header .zd-custom-accordion__icon::after {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+  
+  /* Collapsible content wrapper */
+  .zd-custom-accordion__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Expanded state */
+  .zd-custom-accordion__toggle:checked ~ .zd-custom-accordion__content {
+    max-height: 1000px;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Content body with padding - Remove fade-in to prevent flash */
+  .zd-custom-accordion__body {
+    padding: 16px 20px;
+    background-color: #fff;
+    opacity: 1; /* Always visible to prevent flash */
+    transform: none; /* Remove transform to prevent flash */
+    transition: none; /* Remove transition to prevent flash */
+  }
+  
+  /* Show content body when open - Simplified without fade effects */
+  .zd-custom-accordion__toggle:checked ~ .zd-custom-accordion__content .zd-custom-accordion__body {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* Article list styles within accordion */
+  .zd-custom-accordion__body {
+    .article-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .article-list-item {
+      margin-bottom: 0.5rem;
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      
+      &.article-promoted {
+        font-weight: 600;
+      }
+    }
+    
+    .article-list-link {
+      flex-grow: 1;
+      color: #4b5563;
+      text-decoration: none;
+      
+      &:hover {
+        color: #2563eb;
+      }
+    }
+    
+    .icon-star, .icon-lock {
+      margin-right: 0.5rem;
+    }
+    
+    .see-all-articles {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #2563eb;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    
+    .category-empty {
+      font-style: italic;
+      color: #6b7280;
+      
+      a {
+        color: #2563eb;
+        text-decoration: none;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }

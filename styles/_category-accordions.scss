@@ -1,4 +1,50 @@
-/***** Category Accordions *****/
+/***** Category Accordions - DEPRECATED (Now using pure CSS accordions) *****/
+
+/* These styles are no longer used since we switched to pure CSS accordions */
+/* Keeping for reference in case we need to revert */
+
+/* Prevent FOUC - hide original content until accordions are ready */
+.section-tree {
+  display: none !important;
+  
+  /* Show original content only if accordions fail to load */
+  &.fallback-visible {
+    display: block !important;
+  }
+}
+
+/* Loading state for accordion container */
+#category-accordions-container {
+  min-height: 200px; /* Prevent layout shift */
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  
+  /* Show loading indicator while accordions initialize */
+  &:empty::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+    border-radius: 0.375rem;
+  }
+  
+  /* Hide loading indicator once content is loaded */
+  &:not(:empty)::before {
+    display: none;
+  }
+}
+
+@keyframes loading-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
 
 .section-tree-accordion {
   margin-bottom: 1.5rem;

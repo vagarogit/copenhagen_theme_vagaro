@@ -15,31 +15,9 @@
   }
 }
 
+/* DEPRECATED: section-tree styles - now using pure CSS accordions */
 .section-tree {
-  @include tablet { flex-direction: row; }
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  .section {
-    @include tablet { flex: 0 0 45%; /* Two columns for tablet and desktop. Leaving 5% separation between columns */ }
-    flex: initial;
-    max-width: 100%;
-  }
-
-  &-title {
-    margin-bottom: 0;
-    font-size: 18px;
-    font-weight: $font-weight-semibold;
-
-    a { color: $text_color; }
-  }
-
-  .see-all-articles {
-    display: block;
-    padding: 15px 0;
-  }
+  display: none !important; /* Hide any remaining section-tree elements */
 }
 
 .article-list {
