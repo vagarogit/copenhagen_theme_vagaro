@@ -78,7 +78,7 @@ export default defineConfig([
       "new-request-form": "src/modules/new-request-form/index.tsx",
       "flash-notifications": "src/modules/flash-notifications/index.ts",
       "category-accordions":
-        "src/modules/category-accordions/categoryAccordionsBundle.ts",
+        "src/modules/category-accordions/categoryAccordionsBundle.js",
       "article-accordions":
         "src/modules/article-accordions/articleAccordionsBundle.ts",
     },

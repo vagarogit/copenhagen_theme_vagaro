@@ -2,7 +2,7 @@
 <div class="px-4">
 
 
-  <div class="category-container w-full md:max-w-4xl mx-auto pt-8 flex flex-col gap-4 pb-12">
+  <div class="category-container w-full md:max-w-4xl mx-auto pt-8 md:pt-2 flex flex-col gap-4 pb-12">
 
    <div class="gap-4 hero">
    
@@ -17,19 +17,16 @@
    </div>
     <div class="category-content flex flex-col gap-2 pb-24">
         
-     
         <header class="page-header">
         <h1 class="text-3xl font-bold">{{category.name}}</h1>
         {{#if category.description}}
           <p class="page-header-description">{{category.description}}</p>
         {{/if}}
-
-        
       </header>
         <div class="sub-nav">
           {{breadcrumbs}}
         </div>
-      <div id="main-content max-w-5xl">
+      <div id="main-content max-w-5xl pt-0">
         {{!-- Pure CSS Accordions - No JavaScript Required --}}
         <div class="zd-custom-accordion">
           {{#each sections}}

@@ -40,6 +40,11 @@
     transition: background-color 0.25s ease-in-out;
     user-select: none;
     border-bottom: none;
+    outline: none;
+
+    &:focus {
+      outline: none;
+    }
   }
   
   /* Show border between header and content when accordion is open */
@@ -84,7 +89,7 @@
   /* Content body with padding - Remove fade-in to prevent flash */
   .zd-custom-accordion__body {
     padding: 16px 20px;
-    background-color: #fff;
+    background-color: #f9fafb;
     opacity: 1; /* Always visible to prevent flash */
     transform: none; /* Remove transform to prevent flash */
     transition: none; /* Remove transition to prevent flash */

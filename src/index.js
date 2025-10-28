@@ -15,3 +15,6 @@ import "./modules/radix-navigation-integration.jsx";
 
 // Import Mobile Navigation Integration
 import "./modules/mobile-nav-integration.js";
+
+// Import Category Accordions (loads all articles without JavaScript accordion)
+import "./modules/category-accordions/categoryAccordionsBundle";

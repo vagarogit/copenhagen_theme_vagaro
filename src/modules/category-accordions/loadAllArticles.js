@@ -15,14 +15,17 @@ export function loadAllArticles() {
     const accordionItems = document.querySelectorAll(
       ".zd-custom-accordion__item"
     );
-    
+
     console.log(`Found ${accordionItems.length} accordion items`);
 
     accordionItems.forEach((item) => {
       const body = item.querySelector(".zd-custom-accordion__body");
       const seeAllLink = body?.querySelector(".see-all-articles");
-      
-      console.log("Checking accordion item:", { hasBody: !!body, hasSeeAllLink: !!seeAllLink });
+
+      console.log("Checking accordion item:", {
+        hasBody: !!body,
+        hasSeeAllLink: !!seeAllLink,
+      });
 
       if (!seeAllLink || !body) {
         return;
@@ -64,8 +67,11 @@ export function loadAllArticles() {
             if (currentArticlesList) {
               // Clone all articles from the full list
               const newArticlesList = fullArticlesList.cloneNode(true);
-              const articleCount = newArticlesList.querySelectorAll('.article-list-item').length;
-              console.log(`Replaced article list with ${articleCount} articles`);
+              const articleCount =
+                newArticlesList.querySelectorAll(".article-list-item").length;
+              console.log(
+                `Replaced article list with ${articleCount} articles`
+              );
               currentArticlesList.replaceWith(newArticlesList);
             }
           } else {

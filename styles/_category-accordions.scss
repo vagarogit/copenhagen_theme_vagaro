@@ -309,7 +309,7 @@
 // Radix Accordion Content with smooth animation
 .radix-accordion-content {
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: #f9fafb;
 
   &[data-state="open"] {
     animation: slideDown 350ms cubic-bezier(0.87, 0, 0.13, 1);
@@ -342,7 +342,7 @@
 .section.accordion.sub-topic .panel-body,
 .radix-accordion-content .panel-body {
   padding: 1rem;
-  background-color: #ffffff;
+  background-color: #f9fafb;
 
   /* Fix for content visibility */
   &.panel-body-expanded {
