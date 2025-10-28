@@ -38,7 +38,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
   };
 
   // For testing: Set to true to always show user dropdown, or use checkForVagaroCookies() for production
-  const isLoggedIn = true; // Change to: checkForVagaroCookies() for production
+  const isLoggedIn = checkForVagaroCookies(); // Change to: true for testing
 
   // Close dropdown when clicking outside
   React.useEffect(() => {

@@ -259,8 +259,8 @@ const MobileNavigation = ({
             {isSignedIn && (
               <div className="pb-4 border-b border-gray-200">
                 <div className="space-y-2">
-                  {/* <a
-                    href="/hc/en-us/profiles"
+                  <a
+                    href="/hc/en-us/profile"
                     className="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors"
                     onClick={onClose}
                   >
@@ -280,7 +280,7 @@ const MobileNavigation = ({
                     <span className="text-gray-900 text-lg font-semibold">
                       My Profile
                     </span>
-                  </a> */}
+                  </a>
                   <a
                     href="/hc/en-us/requests"
                     className="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors"
