@@ -5,9 +5,7 @@
   <div class="category-container w-full md:max-w-4xl mx-auto pt-8 flex flex-col gap-4 pb-12">
 
    <div class="gap-4 hero">
-     <div class="sub-nav">
-          {{breadcrumbs}}
-        </div>
+   
       {{!-- Search above category listing --}}
        <div class="search-container w-full md:max-w-2xl mx-auto z-0 md:px-4 sm:px-6 ">
         {{search submit=false instant=settings.instant_search class='search search-full' placeholder='Search support articles...'}}
@@ -17,7 +15,7 @@
         </svg>
       </div>
    </div>
-    <div class="category-content flex flex-col gap-4">
+    <div class="category-content flex flex-col gap-2 pb-24">
         
      
         <header class="page-header">
@@ -25,7 +23,12 @@
         {{#if category.description}}
           <p class="page-header-description">{{category.description}}</p>
         {{/if}}
+
+        
       </header>
+        <div class="sub-nav">
+          {{breadcrumbs}}
+        </div>
       <div id="main-content max-w-5xl">
         {{!-- Pure CSS Accordions - No JavaScript Required --}}
         <div class="zd-custom-accordion">
@@ -34,7 +37,11 @@
               <input type="checkbox" id="zd-accordion-{{@index}}" class="zd-custom-accordion__toggle" />
               <label for="zd-accordion-{{@index}}" class="zd-custom-accordion__header">
                 <span>{{name}}</span>
-                <span class="zd-custom-accordion__icon"></span>
+                <span class="zd-custom-accordion__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
               </label>
               <div class="zd-custom-accordion__content">
                 <div class="zd-custom-accordion__body">

@@ -1,5 +1,4 @@
 import "../styles/index.scss";
-
 import "./navigation";
 import "./dropdowns";
 import "./share";
@@ -10,7 +9,7 @@ import "./responsiveVideos";
 import "./footerlinks";
 import "./navigationlinks";
 import "./auto-login";
-
+import "./redirects";
 // Import Radix Navigation Integration
 import "./modules/radix-navigation-integration.jsx";
 
