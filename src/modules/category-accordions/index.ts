@@ -1,2 +1,5 @@
 // Entry point for category accordions
-export { initVanillaAccordions } from "./vanillaAccordion.js";
+export {
+  initVanillaAccordions,
+  initSubTopicAccordions,
+} from "./vanillaAccordion.js";

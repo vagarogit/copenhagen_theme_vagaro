@@ -15,9 +15,19 @@
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 12px;
+  position: relative; /* Ensure proper stacking */
   
   &:last-child {
     margin-bottom: 0;
+  }
+  
+  /* Ensure accordion items are visible within article body */
+  #main-content &,
+  .article-content &,
+  .article-body & {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 }
   

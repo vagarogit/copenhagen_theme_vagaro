@@ -193,9 +193,16 @@ template {
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 12px;
+  position: relative; /* Ensure proper stacking */
+  /* Ensure accordion items are visible within article body */
 }
 .zd-custom-accordion__item:last-child {
   margin-bottom: 0;
+}
+#main-content .zd-custom-accordion__item, .article-content .zd-custom-accordion__item, .article-body .zd-custom-accordion__item {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Hidden checkbox toggle */
