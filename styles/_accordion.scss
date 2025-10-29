@@ -82,7 +82,8 @@
   
   /* Expanded state */
   .zd-custom-accordion__toggle:checked ~ .zd-custom-accordion__content {
-    max-height: 1000px;
+    max-height: 9999px;
+    overflow: visible;
     transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
@@ -93,6 +94,7 @@
     opacity: 1; /* Always visible to prevent flash */
     transform: none; /* Remove transform to prevent flash */
     transition: none; /* Remove transition to prevent flash */
+    
   }
   
   /* Show content body when open - Simplified without fade effects */

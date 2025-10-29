@@ -1534,13 +1534,6 @@
       }
     }
   }
-  .hover\:bg-\[\#CDCDCD\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: #CDCDCD;
-      }
-    }
-  }
   .hover\:bg-blue-700 {
     &:hover {
       @media (hover: hover) {

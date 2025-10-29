@@ -11,9 +11,18 @@
  */
 export function transformArticleAccordions() {
   try {
-    // Find all sub-topic accordion sections
+    // Check if accordion container already exists - prevent duplicate transformations
+    const existingContainer = document.getElementById("article-css-accordions");
+    if (existingContainer) {
+      console.log(
+        "[CSS Article Accordions] Accordion container already exists, skipping transformation"
+      );
+      return true;
+    }
+
+    // Find all sub-topic accordion sections that haven't been transformed yet
     const subTopicSections = document.querySelectorAll(
-      ".section.accordion.sub-topic"
+      ".section.accordion.sub-topic:not([data-transformed-to-css])"
     );
 
     if (!subTopicSections.length) {
@@ -129,23 +138,6 @@ export function transformArticleAccordions() {
     return false;
   }
 }
-
-/**
- * Initialize article accordions when DOM is ready
- */
-function initializeArticleAccordions() {
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(transformArticleAccordions, 50);
-    });
-  } else {
-    // DOM is already ready
-    setTimeout(transformArticleAccordions, 50);
-  }
-}
-
-// Initialize on load
-initializeArticleAccordions();
 
 // Export for use in other modules
 if (typeof window !== "undefined") {
