@@ -1,392 +1,188 @@
-/***** Category Accordions - DEPRECATED (Now using pure CSS accordions) *****/
+/**
+ * Category Accordions Styles
+ * Styles for vanilla JavaScript accordions on article pages
+ */
 
-/* These styles are no longer used since we switched to pure CSS accordions */
-/* Keeping for reference in case we need to revert */
-
-/* Prevent FOUC - hide original content until accordions are ready */
-.section-tree {
-  display: none !important;
-  
-  /* Show original content only if accordions fail to load */
-  &.fallback-visible {
-    display: block !important;
-  }
-}
-
-/* Loading state for accordion container */
-#category-accordions-container {
-  min-height: 200px; /* Prevent layout shift */
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
-  
-  /* Show loading indicator while accordions initialize */
-  &:empty::before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: loading-shimmer 1.5s infinite;
-    border-radius: 0.375rem;
-  }
-  
-  /* Hide loading indicator once content is loaded */
-  &:not(:empty)::before {
-    display: none;
-  }
-}
-
-@keyframes loading-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.section-tree-accordion {
-  margin-bottom: 1.5rem;
-  
-  .accordion-item {
-    margin-bottom: 0.5rem; // Reduced margin between items
-    border: 1px solid #e5e7eb;
-    border-radius: 0.375rem;
-    overflow: hidden;
-    transition: all 0.3s ease; // Slightly slower transition
-    
-    &:hover {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-    
-    &.expanded {
-      background-color: #f9fafb; // Light gray background for active item
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); // Slightly more pronounced shadow
-      
-      .accordion-icon {
-        transform: rotate(180deg);
-      }
-    }
-  }
-  
-  .accordion-header {
-    padding: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffff;
-    transition: background-color 0.2s ease;
-    
-    &:hover {
-      background-color: #f9fafb;
-      
-      .section-tree-title .accordion-title-text {
-        color: #2563eb; // Blue color on hover for better feedback
-      }
-    }
-    
-    &[aria-expanded="true"] {
-      background-color: #f9fafb;
-      border-bottom: 1px solid #e5e7eb;
-      
-      .section-tree-title .accordion-title-text {
-        color: #2563eb; // Blue color for active accordion
-      }
-      
-      .accordion-icon {
-        color: #2563eb; // Blue icon for active accordion
-      }
-    }
-    
-    .section-tree-title {
-      margin: 0;
-      
-      .accordion-title-text {
-        color: #111827;
-        font-weight: 600;
-        cursor: pointer;
-      }
-    }
-    
-    .accordion-icon {
-      color: #6b7280;
-      transition: transform 0.35s ease-in-out; // Match with panel transition
-    }
-  }
-  
-  .accordion-panel {
-    padding: 0 1rem;
-    overflow: hidden;
-    transition: height 0.35s ease-in-out; // Smooth height transition
-    
-    .article-list {
-      list-style: none;
-      margin: 0;
-      padding: 1rem 0 0 0; // Add padding to the top only
-    }
-    
-    .article-list-item {
-      margin-bottom: 0.5rem;
-      padding: 0.5rem 0;
-      display: flex;
-      align-items: center;
-    }
-    
-    .article-list-link {
-      flex-grow: 1;
-      color: #4b5563;
-      text-decoration: none;
-      
-      &:hover {
-        color: #2563eb;
-      }
-    }
-    
-    .icon-star, .icon-lock {
-      margin-right: 0.5rem;
-    }
-    
-    .see-all-articles {
-      display: inline-block;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem; // Add bottom padding
-      color: #2563eb;
-      text-decoration: none;
-      
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-    
-    .loading-more-articles {
-      display: inline-block;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-      padding: 0.5rem 1rem;
-      color: #6b7280;
-      font-size: 0.875rem;
-      font-style: italic;
-      background-color: #f9fafb;
-      border-radius: 0.375rem;
-      
-      &::after {
-        content: '...';
-        animation: ellipsis 1.5s infinite;
-      }
-    }
-  }
-}
-
-@keyframes ellipsis {
-  0%, 20% {
-    content: '.';
-  }
-  40% {
-    content: '..';
-  }
-  60%, 100% {
-    content: '...';
-  }
-}
-
-/***** Sub-topic Accordions *****/
-
-// Shared styles for both vanilla and Radix implementations
-.section.accordion.sub-topic,
-.radix-accordion-item {
+/* Sub-topic Accordion Container */
+.section.accordion.sub-topic {
   margin-bottom: 1.5rem;
   border: 1px solid #e5e7eb;
-  border-radius: 0.375rem;
+  border-radius: 8px;
   overflow: hidden;
+  background-color: white;
 
   .panel.panel-default {
     overflow: hidden;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
   }
 }
 
-// Radix Accordion Root
-.radix-accordion {
-  margin-bottom: 1.5rem;
-}
-
-// Radix Accordion Item
-.radix-accordion-item {
-  &[data-state="open"] {
-    background-color: #f9fafb;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-
-    .accordion-icon {
-      transform: rotate(180deg);
-      color: #2563eb;
-    }
-
-    .accordion-title-text {
-      color: #2563eb;
-    }
-  }
-}
-
-// Shared accordion header styles
-.panel-heading,
-.accordion-header {
-  padding: 1rem;
-  font-weight: 600;
-  cursor: pointer;
+/* Accordion Header */
+.section.accordion.sub-topic .panel-heading {
+  padding: 18px 24px;
+  min-height: 56px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  transition: background-color 0.2s ease;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #1f2937;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
   border: none;
   width: 100%;
   text-align: left;
+  background-color: white;
+  position: relative;
 
   &:hover {
-    background-color: #f9fafb;
-
-    .title,
-    .accordion-title-text {
-      color: #2563eb;
-    }
+    background-color: #fafafa;
   }
 
-  &[aria-expanded="true"],
-  &[data-state="open"] {
-    background-color: #f9fafb;
+  &[aria-expanded="true"] {
+    background-color: #fafafa;
     border-bottom: 1px solid #e5e7eb;
 
-    .title,
-    .accordion-title-text {
+    .title {
       color: #2563eb;
-    }
-
-    + .panel-body,
-    + .accordion-panel {
-      border-top: none;
     }
 
     .accordion-icon {
-      color: #2563eb;
       transform: rotate(180deg);
+      color: #2563eb;
     }
   }
 
-  .titlepage {
-    margin: 0;
-    flex: 1;
+  /* Focus styles for accessibility */
+  &:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: -2px;
   }
 
-  .title,
-  .section-tree-title {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #111827;
-  }
-
-  .accordion-title-text {
-    color: #111827;
-    font-weight: 600;
-  }
-
-  .accordion-icon {
-    color: #6b7280;
-    transition: transform 0.35s ease-in-out;
-    margin-left: 0.5rem;
+  &:focus:not(:focus-visible) {
+    outline: none;
   }
 }
 
-// Radix specific header wrapper
-.accordion-header-wrapper {
-  background: none;
-  border: none;
-  padding: 0;
+/* Title Container */
+.section.accordion.sub-topic .panel-heading .titlepage {
+  margin: 0;
+  flex: 1;
 }
 
-// Radix Accordion Content with smooth animation
-.radix-accordion-content {
+.section.accordion.sub-topic .panel-heading .title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: #1f2937;
+  transition: color 0.15s ease;
+
+  h3 {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    pointer-events: none; // Prevent link navigation, header handles clicks
+  }
+}
+
+/* Accordion Icon */
+.section.accordion.sub-topic .panel-heading .accordion-icon {
+  color: #6b7280;
+  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1),
+    color 0.15s ease;
+  flex-shrink: 0;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Panel Body */
+.section.accordion.sub-topic .panel-body {
+  padding: 24px;
+  background-color: white;
+  font-size: 15px;
+  color: #4b5563;
   overflow: hidden;
-  background-color: #f9fafb;
 
-  &[data-state="open"] {
-    animation: slideDown 350ms cubic-bezier(0.87, 0, 0.13, 1);
-  }
-
-  &[data-state="closed"] {
-    animation: slideUp 350ms cubic-bezier(0.87, 0, 0.13, 1);
-  }
-}
-
-@keyframes slideDown {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
-}
-
-// Shared panel body styles for both vanilla and Radix
-.section.accordion.sub-topic .panel-body,
-.radix-accordion-content .panel-body {
-  padding: 1rem;
-  background-color: #f9fafb;
-
-  /* Fix for content visibility */
+  /* Expanded state */
   &.panel-body-expanded {
     overflow: visible !important;
     height: auto !important;
     display: block !important;
+    max-height: none !important;
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
   }
 
+  /* Collapsed state */
   &.collapse {
     overflow: hidden;
     padding-top: 0;
     padding-bottom: 0;
+    display: none;
   }
 
   /* Basic content elements */
-  p, .procedure, .itemizedlist, .tip {
+  p,
+  .procedure,
+  .itemizedlist,
+  .tip {
     margin-bottom: 1rem;
-    display: block !important; /* Ensure blocks are visible */
+    display: block !important;
+  }
+
+  /* Paragraphs */
+  p {
+    line-height: 1.6;
   }
 
   /* Ordered lists */
+  ol,
   ol.procedure {
     padding-left: 1.5rem;
-    display: block !important; /* Ensure lists are visible */
+    display: block !important;
     list-style-type: decimal !important;
+    margin-bottom: 1rem;
 
+    li,
     li.step {
       margin-bottom: 0.5rem;
-      display: list-item !important; /* Ensure list items are visible */
+      display: list-item !important;
       padding-left: 0.5rem;
+      line-height: 1.6;
     }
   }
 
   /* Unordered lists */
+  ul,
   ul.itemizedlist {
     padding-left: 1.5rem;
     display: block !important;
     list-style-type: disc !important;
     margin-bottom: 1rem;
 
+    li,
     li.listitem {
       display: list-item !important;
       margin-bottom: 0.5rem;
       padding-left: 0.5rem;
+      line-height: 1.6;
     }
   }
 
@@ -411,6 +207,7 @@
   }
 
   /* Links */
+  a,
   a.link {
     color: #2563eb;
     text-decoration: none;
@@ -421,7 +218,54 @@
   }
 
   /* Bold text */
-  .bold {
+  .bold,
+  strong,
+  b {
     font-weight: 700;
   }
+
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.375rem;
+    margin: 1rem 0;
+  }
+
+  /* Code blocks */
+  code,
+  pre {
+    background-color: #f3f4f6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    font-size: 0.875rem;
+  }
+
+  pre {
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
 }
+
+/* Glossary definitions - hidden */
+.section.accordion.sub-topic .glossary-definitions {
+  display: none !important;
+}
+
+/* Ensure proper spacing between accordions */
+.section.accordion.sub-topic + .section.accordion.sub-topic {
+  margin-top: 0;
+}
+
+/* RTL support */
+[dir="rtl"] .section.accordion.sub-topic .panel-heading {
+  text-align: right;
+
+  .accordion-icon {
+    margin-left: 0;
+    margin-right: 16px;
+  }
+}
+
