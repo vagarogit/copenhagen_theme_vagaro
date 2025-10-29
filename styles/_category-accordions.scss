@@ -115,12 +115,20 @@
 /* Panel Body */
 .section.accordion.sub-topic .panel-body {
   padding: 24px;
-  background-color: white;
+  background-color: #F8F8F8;
   font-size: 15px;
   color: #4b5563;
   overflow: hidden;
 
-  /* Expanded state */
+  /* Collapsed state - must come BEFORE expanded state */
+  &.collapse {
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: none;
+  }
+
+  /* Expanded state - must come AFTER collapsed state to override */
   &.panel-body-expanded {
     overflow: visible !important;
     height: auto !important;
@@ -128,14 +136,6 @@
     max-height: none !important;
     padding-top: 24px !important;
     padding-bottom: 24px !important;
-  }
-
-  /* Collapsed state */
-  &.collapse {
-    overflow: hidden;
-    padding-top: 0;
-    padding-bottom: 0;
-    display: none;
   }
 
   /* Basic content elements */

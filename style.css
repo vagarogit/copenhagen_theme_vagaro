@@ -504,12 +504,12 @@ template {
 /* Panel Body */
 .section.accordion.sub-topic .panel-body {
   padding: 24px;
-  background-color: white;
+  background-color: #F8F8F8;
   font-size: 15px;
   color: #4b5563;
   overflow: hidden;
-  /* Expanded state */
-  /* Collapsed state */
+  /* Collapsed state - must come BEFORE expanded state */
+  /* Expanded state - must come AFTER collapsed state to override */
   /* Basic content elements */
   /* Paragraphs */
   /* Ordered lists */
@@ -521,6 +521,12 @@ template {
   /* Images */
   /* Code blocks */
 }
+.section.accordion.sub-topic .panel-body.collapse {
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: none;
+}
 .section.accordion.sub-topic .panel-body.panel-body-expanded {
   overflow: visible !important;
   height: auto !important;
@@ -528,12 +534,6 @@ template {
   max-height: none !important;
   padding-top: 24px !important;
   padding-bottom: 24px !important;
-}
-.section.accordion.sub-topic .panel-body.collapse {
-  overflow: hidden;
-  padding-top: 0;
-  padding-bottom: 0;
-  display: none;
 }
 .section.accordion.sub-topic .panel-body p,
 .section.accordion.sub-topic .panel-body .procedure,

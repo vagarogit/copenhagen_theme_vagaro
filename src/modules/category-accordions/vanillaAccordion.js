@@ -320,6 +320,7 @@ export function initSubTopicAccordions() {
           // Close accordion
           panelHeading.setAttribute("aria-expanded", "false");
           panelBody.classList.remove("panel-body-expanded");
+          panelBody.classList.add("collapse");
 
           // Set overflow to hidden for smooth animation
           panelBody.style.overflow = "hidden";
@@ -346,6 +347,8 @@ export function initSubTopicAccordions() {
         } else {
           // Open accordion
           panelHeading.setAttribute("aria-expanded", "true");
+          panelBody.classList.remove("collapse");
+          panelBody.classList.add("panel-body-expanded");
 
           // Make sure panel is visible but with zero max-height to start animation
           panelBody.style.display = "block";
