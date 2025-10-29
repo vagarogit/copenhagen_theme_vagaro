@@ -30,12 +30,12 @@
     <h2 class="visibility-hidden">{{ t 'categories' }}</h2>
 
     <section class="categories blocks" id="categories-section">
-      <ul class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full">
+      <ul class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full" id="categories-grid">
         {{#each categories}}
           {{#if ../has_multiple_categories}}
           {{!-- category-item --}}
-            <li class="category-item bg-white rounded-2xl border border-gray-200 duration-300 w-full flex items-center justify-center text-center" data-index="{{@index}}">
-              <a href='{{url}}' class="p-6 flex flex-col gap-4 items-center justify-center mt-4 h-40 ">
+            <li class="category-item bg-white rounded-2xl border border-gray-200 duration-300 w-full hover:bg-gray-100/80 transition-colors" data-index="{{@index}}" {{#compare @index '>=' 8}}style="display: none;"{{/compare}}>
+              <a href='{{url}}' class="p-6 flex flex-col gap-4 items-center justify-center mt-4 h-40 w-full ">
                 {{#is id 115000066034}}<img class="" alt="decorative" src="{{asset 'key.svg'}}" />{{/is}}
                 {{#is id 22542821917083}}<img class="" alt="decorative" src="{{asset 'bag-shopping.svg'}}" />{{/is}}
                 {{#is id 115000065974}}<img class="" alt="decorative" src="{{asset 'credit-card.svg'}}" />{{/is}}
@@ -82,9 +82,9 @@
       {{#if (compare categories.length ">" 8)}}
         <div class="see-more-container flex justify-center mt-8">
           <button class="button see-more-btn bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300 flex items-center gap-2" id="see-more-btn">
-            Show More
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="show-more-icon w-5 h-5 fill-primary hover:fill-[#FFFFFF]"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="show-less-icon w-5 h-5 fill-white hover:fill-primary" style="display: none;"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"/></svg>
+            <span class="see-more-text">Show More</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="show-more-icon w-5 h-5 fill-white"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="show-less-icon w-5 h-5 fill-white" style="display: none;"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"/></svg>
           </button>
         </div>
       {{/if}}
@@ -286,29 +286,56 @@
     </section>  --}}
 </div>
 
+<style>
+  /* Hide category items with index >= 8 on initial load */
+  .category-item[data-index] {
+    display: block;
+  }
+  .category-item[data-index="8"],
+  .category-item[data-index="9"],
+  .category-item[data-index="10"],
+  .category-item[data-index="11"],
+  .category-item[data-index="12"],
+  .category-item[data-index="13"],
+  .category-item[data-index="14"],
+  .category-item[data-index="15"],
+  .category-item[data-index="16"],
+  .category-item[data-index="17"],
+  .category-item[data-index="18"],
+  .category-item[data-index="19"],
+  .category-item[data-index="20"],
+  .category-item[data-index="21"],
+  .category-item[data-index="22"],
+  .category-item[data-index="23"],
+  .category-item[data-index="24"] {
+    display: none !important;
+  }
+</style>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Handle the "Show More" button functionality
     const seeMoreBtn = document.getElementById('see-more-btn');
+    const seeMoreText = document.querySelector('.see-more-text');
     const showMoreIcon = document.querySelector('.show-more-icon');
     const showLessIcon = document.querySelector('.show-less-icon');
     const categoryItems = document.querySelectorAll('.category-item');
     let showAll = false;
 
-    if (seeMoreBtn) {
-      // Initially hide items with index >= 8
-      categoryItems.forEach(function(item) {
-        const index = parseInt(item.getAttribute('data-index'));
-        if (index >= 8) {
-          item.style.display = 'none';
-        }
-      });
+    // Initially hide items with index >= 8 (CSS should handle this, but ensure it's hidden)
+    categoryItems.forEach(function(item) {
+      const index = parseInt(item.getAttribute('data-index'));
+      if (index >= 8) {
+        item.style.setProperty('display', 'none', 'important');
+      }
+    });
 
+    if (seeMoreBtn) {
       seeMoreBtn.addEventListener('click', function() {
         showAll = !showAll;
 
         // Toggle text
-        seeMoreBtn.textContent = showAll ? 'Show Less' : 'Show More';
+        if (seeMoreText) seeMoreText.textContent = showAll ? 'Show Less' : 'Show More';
 
         // Toggle icons
         if (showMoreIcon) showMoreIcon.style.display = showAll ? 'none' : 'inline-block';
@@ -318,7 +345,7 @@
         categoryItems.forEach(function(item) {
           const index = parseInt(item.getAttribute('data-index'));
           if (index >= 8) {
-            item.style.display = showAll ? 'block' : 'none';
+            item.style.setProperty('display', showAll ? 'block' : 'none', 'important');
           }
         });
       });
