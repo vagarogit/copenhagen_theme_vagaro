@@ -3649,26 +3649,116 @@ select:focus {
 .statusio-bar.operational {
   background-color: #D7EBDD;
 }
-.statusio-bar.degraded {
-  background-color: #f39c12;
+.statusio-bar.operational #statusio-message {
+  color: #379B55;
+  font-weight: 400;
 }
-.statusio-bar.partial-outage {
-  background-color: #e67e22;
+.statusio-bar.operational .statusio-icon {
+  background-color: #379B55;
+  position: relative;
 }
-.statusio-bar.major-outage {
-  background-color: #e74c3c;
+.statusio-bar.operational .statusio-icon:before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 4px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+  margin-top: -1px;
+}
+.statusio-bar.minor {
+  background-color: #fce588;
+}
+.statusio-bar.minor #statusio-message {
+  color: #d97706;
+  font-weight: 600;
+}
+.statusio-bar.minor .statusio-icon {
+  background-color: #d97706;
+}
+.statusio-bar.major {
+  background-color: #ef8278;
+}
+.statusio-bar.major #statusio-message {
+  color: #fff;
+  font-weight: 600;
+}
+.statusio-bar.major .statusio-icon {
+  background-color: #991b1b;
+}
+.statusio-bar.critical {
+  background-color: #ef8278;
+}
+.statusio-bar.critical #statusio-message {
+  color: #fff;
+  font-weight: 400;
+}
+.statusio-bar.critical .statusio-icon {
+  background-color: #991b1b;
 }
 .statusio-bar.maintenance {
-  background-color: #3498db;
+  background-color: #6bb3e8;
+}
+.statusio-bar.maintenance #statusio-message {
+  color: #fff;
+  font-weight: 400;
+}
+.statusio-bar.maintenance .statusio-icon {
+  background-color: #1e40af;
 }
 .statusio-bar.loading {
   background-color: #f8f9fa;
 }
 .statusio-bar.loading .statusio-icon {
+  background-color: #6c757d;
   animation: pulse 1.5s ease-in-out infinite;
 }
 .statusio-bar.error {
   background-color: #f8f9fa;
+}
+.statusio-bar.error .statusio-icon {
+  background-color: #6c757d;
+}
+.statusio-bar.degraded {
+  background-color: #fce588;
+}
+.statusio-bar.degraded #statusio-message {
+  color: #d97706;
+  font-weight: 600;
+}
+.statusio-bar.degraded .statusio-icon {
+  background-color: #d97706;
+}
+.statusio-bar.partial-outage {
+  background-color: #ef8278;
+}
+.statusio-bar.partial-outage #statusio-message {
+  color: #fff;
+  font-weight: 600;
+}
+.statusio-bar.partial-outage .statusio-icon {
+  background-color: #991b1b;
+}
+.statusio-bar.major-outage {
+  background-color: #ef8278;
+}
+.statusio-bar.major-outage #statusio-message {
+  color: #fff;
+  font-weight: 600;
+}
+.statusio-bar.major-outage .statusio-icon {
+  background-color: #991b1b;
+}
+.statusio-bar.minor-outage {
+  background-color: #fce588;
+}
+.statusio-bar.minor-outage #statusio-message {
+  color: #d97706;
+  font-weight: 600;
+}
+.statusio-bar.minor-outage .statusio-icon {
+  background-color: #d97706;
 }
 
 @keyframes pulse {
@@ -3686,19 +3776,11 @@ select:focus {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: #379B55;
-  font-weight: 600;
   max-width: 1160px;
   margin: 0 auto;
   padding: 0 5%;
   text-align: left;
   width: 100%;
-}
-.operational .statusio-status {
-  color: #379B55;
-}
-.degraded .statusio-status, .partial-outage .statusio-status, .major-outage .statusio-status, .maintenance .statusio-status {
-  color: #fff;
 }
 
 .statusio-icon {
@@ -3710,23 +3792,6 @@ select:focus {
   border-radius: 50%;
   margin-right: 8px;
   flex-shrink: 0;
-}
-.operational .statusio-icon {
-  background-color: #379B55;
-  position: relative;
-}
-.operational .statusio-icon:before {
-  content: "";
-  display: block;
-  width: 8px;
-  height: 4px;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: rotate(-45deg);
-  margin-top: -1px;
-}
-.degraded .statusio-icon, .partial-outage .statusio-icon, .major-outage .statusio-icon, .maintenance .statusio-icon {
-  background-color: #fff;
 }
 
 #statusio-message {

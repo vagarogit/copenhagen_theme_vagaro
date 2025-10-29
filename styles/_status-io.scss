@@ -31,35 +31,150 @@
   }
 
   &.operational {
-    background-color: #D7EBDD; // Green for operational
+    background-color: #D7EBDD; // Light green for operational
+    
+    #statusio-message {
+      color: #379B55; // Green text
+      font-weight: 400;
+    }
+    
+    .statusio-icon {
+      background-color: #379B55; // Green icon
+      position: relative;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 8px;
+        height: 4px;
+        border-left: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        transform: rotate(-45deg);
+        margin-top: -1px;
+      }
+    }
   }
 
-  &.degraded {
-    background-color: #f39c12; // Orange for degraded performance
+  &.minor {
+    background-color: #fce588; // Light yellow for minor issues
+    
+    #statusio-message {
+      color: #d97706; // Orange text
+      font-weight: 600;
+    }
+    
+    .statusio-icon {
+      background-color: #d97706; // Orange icon
+    }
   }
 
-  &.partial-outage {
-    background-color: #e67e22; // Darker orange for partial outage
+  &.major {
+    background-color: #ef8278; // Light red for major issues
+    
+    #statusio-message {
+      color: #fff; // White text
+      font-weight: 600;
+    }
+    
+    .statusio-icon {
+      background-color: #991b1b; // Dark red icon
+    }
   }
 
-  &.major-outage {
-    background-color: #e74c3c; // Red for major outage
+  &.critical {
+    background-color: #ef8278; // Light red for critical issues
+    
+    #statusio-message {
+      color: #fff; // White text
+      font-weight: 400;
+    }
+    
+    .statusio-icon {
+      background-color: #991b1b; // Dark red icon
+    }
   }
 
   &.maintenance {
-    background-color: #3498db; // Blue for maintenance
+    background-color: #6bb3e8; // Light blue for maintenance
+    
+    #statusio-message {
+      color: #fff; // White text
+      font-weight: 400;
+    }
+    
+    .statusio-icon {
+      background-color: #1e40af; // Dark blue icon
+    }
   }
 
   &.loading {
     background-color: #f8f9fa; // Light gray for loading
 
     .statusio-icon {
+      background-color: #6c757d; // Gray icon
       animation: pulse 1.5s ease-in-out infinite;
     }
   }
 
   &.error {
     background-color: #f8f9fa; // Light gray for error
+    
+    .statusio-icon {
+      background-color: #6c757d; // Gray icon
+    }
+  }
+  
+  // Legacy status classes (keeping for backwards compatibility)
+  &.degraded {
+    background-color: #fce588; // Map to minor
+    
+    #statusio-message {
+      color: #d97706;
+      font-weight: 600;
+    }
+    
+    .statusio-icon {
+      background-color: #d97706;
+    }
+  }
+
+  &.partial-outage {
+    background-color: #ef8278; // Map to major
+    
+    #statusio-message {
+      color: #fff;
+      font-weight: 600;
+    }
+    
+    .statusio-icon {
+      background-color: #991b1b;
+    }
+  }
+
+  &.major-outage {
+    background-color: #ef8278; // Map to major
+    
+    #statusio-message {
+      color: #fff;
+      font-weight: 600;
+    }
+    
+    .statusio-icon {
+      background-color: #991b1b;
+    }
+  }
+
+  &.minor-outage {
+    background-color: #fce588; // Map to minor
+    
+    #statusio-message {
+      color: #d97706;
+      font-weight: 600;
+    }
+    
+    .statusio-icon {
+      background-color: #d97706;
+    }
   }
 }
 
@@ -80,24 +195,11 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  color: #379B55;
-  font-weight: 600;
   max-width: 1160px;
   margin: 0 auto;
   padding: 0 5%;
   text-align: left;
   width: 100%;  // Add width 100% to ensure full container width
-
-  .operational & {
-    color: #379B55;
-  }
-
-  .degraded &,
-  .partial-outage &,
-  .major-outage &,
-  .maintenance & {
-    color: #fff;
-  }
 }
 
 .statusio-icon {
@@ -109,29 +211,6 @@
   border-radius: 50%;
   margin-right: 8px;
   flex-shrink: 0; // Prevent icon from shrinking
-
-  .operational & {
-    background-color: #379B55;
-    position: relative;
-
-    &:before {
-      content: '';
-      display: block;
-      width: 8px;
-      height: 4px;
-      border-left: 2px solid #fff;
-      border-bottom: 2px solid #fff;
-      transform: rotate(-45deg);
-      margin-top: -1px;
-    }
-  }
-
-  .degraded &,
-  .partial-outage &,
-  .major-outage &,
-  .maintenance & {
-    background-color: #fff;
-  }
 }
 
 #statusio-message {

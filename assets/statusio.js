@@ -61,11 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
       isLoading = true;
       statusMessage.textContent = 'Checking system status...';
 
-      // Add loading class for visual feedback
+      // Add loading class for visual feedback (styles handled by CSS)
       statusBar.className = 'statusio-bar w-full z-0 loading';
-      if (statusIcon) {
-        statusIcon.style.backgroundColor = '#6c757d';
-      }
 
       // Set a timeout to show fallback message if loading takes too long
       loadingTimeoutId = setTimeout(() => {
@@ -91,17 +88,12 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('[StatusIO] Error updating status:', error);
       statusMessage.textContent = 'Status information unavailable';
 
-      // Apply error class and styling
+      // Apply error class (styles handled by CSS)
       statusBar.className = 'statusio-bar w-full z-0 error';
       statusBar.setAttribute('role', 'button');
       statusBar.setAttribute('tabindex', '0');
       statusBar.setAttribute('aria-label', 'Click to view Vagaro system status page');
       statusBar.setAttribute('title', 'Click to view Vagaro system status page');
-
-      if (statusIcon) {
-        statusIcon.style.backgroundColor = '#6c757d'; // Gray for unknown
-      }
-      statusBar.style.backgroundColor = '#f8f9fa'; // Light gray background
     };
 
     // Set fallback state when API is consistently unavailable
@@ -110,63 +102,51 @@ document.addEventListener('DOMContentLoaded', function() {
       console.warn('[StatusIO] Using fallback state');
       statusMessage.textContent = 'Visit status page for latest updates';
 
-      // Apply fallback styling (similar to error but different message)
+      // Apply fallback styling (similar to error but different message, styles handled by CSS)
       statusBar.className = 'statusio-bar w-full z-0 error';
       statusBar.setAttribute('role', 'button');
       statusBar.setAttribute('tabindex', '0');
       statusBar.setAttribute('aria-label', 'Click to view Vagaro system status page');
       statusBar.setAttribute('title', 'Click to view Vagaro system status page');
-
-      if (statusIcon) {
-        statusIcon.style.backgroundColor = '#6c757d';
-      }
-      statusBar.style.backgroundColor = '#f8f9fa';
     };
 
     // Apply status styling based on indicator
     const applyStatusStyling = (indicator) => {
-      // Reset status bar classes and apply default styling
-      statusBar.className = 'statusio-bar w-full z-0';
+      console.log('[StatusIO] Applying status styling for indicator:', indicator);
+      
+      // Map status indicator to CSS class
+      let statusClass = 'operational'; // Default to operational
+      
+      switch (indicator) {
+        case 'minor':
+          statusClass = 'minor';
+          console.log('[StatusIO] Setting minor status');
+          break;
+        case 'major':
+          statusClass = 'major';
+          console.log('[StatusIO] Setting major status');
+          break;
+        case 'critical':
+          statusClass = 'critical';
+          console.log('[StatusIO] Setting critical status');
+          break;
+        case 'maintenance':
+          statusClass = 'maintenance';
+          console.log('[StatusIO] Setting maintenance status');
+          break;
+        case 'none':
+        default:
+          statusClass = 'operational';
+          console.log('[StatusIO] Setting operational status');
+          break;
+      }
+      
+      // Apply status class (all styling handled by CSS)
+      statusBar.className = `statusio-bar w-full z-0 ${statusClass}`;
       statusBar.setAttribute('role', 'button');
       statusBar.setAttribute('tabindex', '0');
       statusBar.setAttribute('aria-label', 'Click to view Vagaro system status page');
       statusBar.setAttribute('title', 'Click to view Vagaro system status page');
-
-      // Apply inline styles based on status indicator
-      switch (indicator) {
-        case 'minor':
-          if (statusIcon) {
-            statusIcon.style.backgroundColor = '#f6d644';
-          }
-          statusBar.style.backgroundColor = '#f6d644';
-          break;
-        case 'major':
-          if (statusIcon) {
-            statusIcon.style.backgroundColor = '#d83f34';
-          }
-          statusBar.style.backgroundColor = '#d83f34';
-          break;
-        case 'critical':
-          if (statusIcon) {
-            statusIcon.style.backgroundColor = '#d83f34';
-          }
-          statusBar.style.backgroundColor = '#d83f34';
-          break;
-        case 'maintenance':
-          if (statusIcon) {
-            statusIcon.style.backgroundColor = '#3498db';
-          }
-          statusBar.style.backgroundColor = '#3498db';
-          break;
-        case 'none':
-        default:
-          // Operational status - use default CSS styling
-          if (statusIcon) {
-            statusIcon.style.backgroundColor = '#379B55';
-          }
-          statusBar.style.backgroundColor = '#D7EBDD';
-          break;
-      }
     };
 
     // Fetch status with timeout and retry logic
@@ -242,7 +222,12 @@ document.addEventListener('DOMContentLoaded', function() {
           statusMessage.textContent = data.status.description;
           applyStatusStyling(data.status.indicator);
 
-          console.log('[StatusIO] Status updated successfully:', data.status.description);
+          console.log('[StatusIO] Status updated successfully');
+          console.log('[StatusIO] Current status:', {
+            indicator: data.status.indicator,
+            description: data.status.description,
+            className: statusBar.className
+          });
           return;
 
         } catch (error) {
@@ -326,6 +311,57 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Clean up on page unload
     window.addEventListener('beforeunload', cleanup);
+
+    // ===== TEMPORARY DEV HELPER =====
+    // Call from browser console to test different status states
+    // Examples:
+    //   testStatusIO('minor')
+    //   testStatusIO('major')
+    //   testStatusIO('critical')
+    //   testStatusIO('maintenance')
+    //   testStatusIO('none') or testStatusIO('operational')
+    window.testStatusIO = function(statusType) {
+      const mockStatuses = {
+        'minor': {
+          indicator: 'minor',
+          description: 'Some services experiencing minor issues'
+        },
+        'major': {
+          indicator: 'major',
+          description: 'Major service disruption detected'
+        },
+        'critical': {
+          indicator: 'critical',
+          description: 'Critical systems are down'
+        },
+        'maintenance': {
+          indicator: 'maintenance',
+          description: 'Scheduled maintenance in progress'
+        },
+        'operational': {
+          indicator: 'none',
+          description: 'All systems operational'
+        },
+        'none': {
+          indicator: 'none',
+          description: 'All systems operational'
+        }
+      };
+
+      const status = mockStatuses[statusType.toLowerCase()];
+      if (!status) {
+        console.error('[StatusIO Test] Invalid status type. Use: minor, major, critical, maintenance, operational/none');
+        console.log('[StatusIO Test] Available types:', Object.keys(mockStatuses).join(', '));
+        return;
+      }
+
+      console.log('[StatusIO Test] Setting test status:', statusType);
+      statusMessage.textContent = status.description;
+      applyStatusStyling(status.indicator);
+    };
+
+    console.log('[StatusIO] 🧪 Dev helper available! Use testStatusIO("minor"|"major"|"critical"|"maintenance"|"operational") in console');
+    // ===== END DEV HELPER =====
 
     // Initialize the status checker
     initializeStatusChecker();

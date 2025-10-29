@@ -12,28 +12,36 @@
 export function transformArticleAccordions() {
   try {
     // Find all sub-topic accordion sections
-    const subTopicSections = document.querySelectorAll('.section.accordion.sub-topic');
+    const subTopicSections = document.querySelectorAll(
+      ".section.accordion.sub-topic"
+    );
 
     if (!subTopicSections.length) {
-      console.log('[CSS Article Accordions] No accordion sections found on page');
+      console.log(
+        "[CSS Article Accordions] No accordion sections found on page"
+      );
       return false;
     }
 
-    console.log(`[CSS Article Accordions] Found ${subTopicSections.length} accordion sections to transform`);
+    console.log(
+      `[CSS Article Accordions] Found ${subTopicSections.length} accordion sections to transform`
+    );
 
     // Create container for the new CSS accordions
-    const accordionContainer = document.createElement('div');
-    accordionContainer.className = 'zd-custom-accordion';
-    accordionContainer.id = 'article-css-accordions';
+    const accordionContainer = document.createElement("div");
+    accordionContainer.className = "zd-custom-accordion";
+    accordionContainer.id = "article-css-accordions";
 
     // Process each sub-topic section
     subTopicSections.forEach((section, index) => {
-      const panelHeading = section.querySelector('.panel-heading');
-      const panelBody = section.querySelector('.panel-body');
-      const titleElement = section.querySelector('.title');
+      const panelHeading = section.querySelector(".panel-heading");
+      const panelBody = section.querySelector(".panel-body");
+      const titleElement = section.querySelector(".title");
 
       if (!panelHeading || !panelBody || !titleElement) {
-        console.warn(`[CSS Article Accordions] Section ${index} missing required elements, skipping`);
+        console.warn(
+          `[CSS Article Accordions] Section ${index} missing required elements, skipping`
+        );
         return;
       }
 
@@ -44,28 +52,28 @@ export function transformArticleAccordions() {
       const content = panelBody.innerHTML;
 
       // Create accordion item
-      const accordionItem = document.createElement('div');
-      accordionItem.className = 'zd-custom-accordion__item';
+      const accordionItem = document.createElement("div");
+      accordionItem.className = "zd-custom-accordion__item";
 
       // Create checkbox toggle (hidden)
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
       checkbox.id = `zd-article-accordion-${index}`;
-      checkbox.className = 'zd-custom-accordion__toggle';
+      checkbox.className = "zd-custom-accordion__toggle";
 
       // Create label/header
-      const label = document.createElement('label');
-      label.setAttribute('for', `zd-article-accordion-${index}`);
-      label.className = 'zd-custom-accordion__header';
+      const label = document.createElement("label");
+      label.setAttribute("for", `zd-article-accordion-${index}`);
+      label.className = "zd-custom-accordion__header";
 
       // Add title text
-      const titleSpan = document.createElement('span');
+      const titleSpan = document.createElement("span");
       titleSpan.textContent = title;
       label.appendChild(titleSpan);
 
       // Add chevron icon
-      const iconSpan = document.createElement('span');
-      iconSpan.className = 'zd-custom-accordion__icon';
+      const iconSpan = document.createElement("span");
+      iconSpan.className = "zd-custom-accordion__icon";
       iconSpan.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="6 9 12 15 18 9"></polyline>
@@ -74,12 +82,12 @@ export function transformArticleAccordions() {
       label.appendChild(iconSpan);
 
       // Create content wrapper
-      const contentWrapper = document.createElement('div');
-      contentWrapper.className = 'zd-custom-accordion__content';
+      const contentWrapper = document.createElement("div");
+      contentWrapper.className = "zd-custom-accordion__content";
 
       // Create content body
-      const contentBody = document.createElement('div');
-      contentBody.className = 'zd-custom-accordion__body';
+      const contentBody = document.createElement("div");
+      contentBody.className = "zd-custom-accordion__body";
       contentBody.innerHTML = content;
 
       // Assemble the structure
@@ -92,24 +100,30 @@ export function transformArticleAccordions() {
       accordionContainer.appendChild(accordionItem);
 
       // Hide the original section
-      section.style.display = 'none';
-      section.setAttribute('data-transformed-to-css', 'true');
+      section.style.display = "none";
+      section.setAttribute("data-transformed-to-css", "true");
     });
 
     // Insert the accordion container before the first sub-topic section
     const firstSection = subTopicSections[0];
     firstSection.parentNode.insertBefore(accordionContainer, firstSection);
 
-    console.log(`[CSS Article Accordions] Successfully transformed ${subTopicSections.length} accordion sections`);
+    console.log(
+      `[CSS Article Accordions] Successfully transformed ${subTopicSections.length} accordion sections`
+    );
     return true;
-
   } catch (error) {
-    console.error('[CSS Article Accordions] Error transforming accordions:', error);
+    console.error(
+      "[CSS Article Accordions] Error transforming accordions:",
+      error
+    );
 
     // On error, show the original sections as fallback
-    const subTopicSections = document.querySelectorAll('.section.accordion.sub-topic');
+    const subTopicSections = document.querySelectorAll(
+      ".section.accordion.sub-topic"
+    );
     subTopicSections.forEach((section) => {
-      section.style.display = '';
+      section.style.display = "";
     });
 
     return false;
@@ -120,8 +134,8 @@ export function transformArticleAccordions() {
  * Initialize article accordions when DOM is ready
  */
 function initializeArticleAccordions() {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
       setTimeout(transformArticleAccordions, 50);
     });
   } else {
@@ -134,6 +148,6 @@ function initializeArticleAccordions() {
 initializeArticleAccordions();
 
 // Export for use in other modules
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   window.transformArticleAccordions = transformArticleAccordions;
 }
