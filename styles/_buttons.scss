@@ -136,20 +136,53 @@
   transition: background-color 0.12s ease-in-out, border-color 0.12s ease-in-out, color 0.15s ease-in-out;
   user-select: none;
   white-space: nowrap;
-  background-color: none;
+  background-color: transparent !important;
+  color: $primary-color;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  
+  &:active,
+  &:focus {
+    background-color: transparent !important;
+    color: $primary-color;
+  }
 }
 
 .see-more-container .button svg {
   width: 12px;
   height: 12px;
   display: inline-block;
+  fill: $primary-color;
 }
 
 .see-more-container .button:hover {
-  background-color: black;
+  color: #333333;
+  background-color: transparent;
+  
+  svg {
+    fill: #333333;
+  }
+}
+
+.see-more-container .button.active,
+.see-more-container .button.active:active,
+.see-more-container .button.active:focus {
+  background-color: transparent !important;
+  color: $primary-color;
+  
+  svg {
+    fill: $primary-color;
+  }
+  
+  &:hover {
+    color: #333333;
+    background-color: transparent !important;
+    
+    svg {
+      fill: #333333;
+    }
+  }
 }

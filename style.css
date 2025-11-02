@@ -1018,22 +1018,55 @@ ul {
   transition: background-color 0.12s ease-in-out, border-color 0.12s ease-in-out, color 0.15s ease-in-out;
   user-select: none;
   white-space: nowrap;
-  background-color: none;
+  background-color: transparent !important;
+  color: #CC4744;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
+.see-more-container .button:active, .see-more-container .pagination-next-link:active, .see-more-container .pagination-prev-link:active, .see-more-container .pagination-first-link:active, .see-more-container .pagination-last-link:active, .see-more-container .subscriptions-subscribe button:active, .subscriptions-subscribe .see-more-container button:active, .see-more-container .requests-table-toolbar .organization-subscribe button:active, .requests-table-toolbar .organization-subscribe .see-more-container button:active, .see-more-container .community-follow button:active, .community-follow .see-more-container button:active, .see-more-container .article-subscribe button:active, .article-subscribe .see-more-container button:active, .see-more-container .section-subscribe button:active, .section-subscribe .see-more-container button:active, .see-more-container .split-button button:active, .split-button .see-more-container button:active, .see-more-container .button:focus, .see-more-container .pagination-next-link:focus, .see-more-container .pagination-prev-link:focus, .see-more-container .pagination-first-link:focus, .see-more-container .pagination-last-link:focus, .see-more-container .subscriptions-subscribe button:focus, .subscriptions-subscribe .see-more-container button:focus, .see-more-container .requests-table-toolbar .organization-subscribe button:focus, .requests-table-toolbar .organization-subscribe .see-more-container button:focus, .see-more-container .community-follow button:focus, .community-follow .see-more-container button:focus, .see-more-container .article-subscribe button:focus, .article-subscribe .see-more-container button:focus, .see-more-container .section-subscribe button:focus, .section-subscribe .see-more-container button:focus, .see-more-container .split-button button:focus, .split-button .see-more-container button:focus {
+  background-color: transparent !important;
+  color: #CC4744;
+}
 
 .see-more-container .button svg, .see-more-container .pagination-next-link svg, .see-more-container .pagination-prev-link svg, .see-more-container .pagination-first-link svg, .see-more-container .pagination-last-link svg, .see-more-container .subscriptions-subscribe button svg, .subscriptions-subscribe .see-more-container button svg, .see-more-container .requests-table-toolbar .organization-subscribe button svg, .requests-table-toolbar .organization-subscribe .see-more-container button svg, .see-more-container .community-follow button svg, .community-follow .see-more-container button svg, .see-more-container .article-subscribe button svg, .article-subscribe .see-more-container button svg, .see-more-container .section-subscribe button svg, .section-subscribe .see-more-container button svg, .see-more-container .split-button button svg, .split-button .see-more-container button svg {
   width: 12px;
   height: 12px;
   display: inline-block;
+  fill: #CC4744;
 }
 
 .see-more-container .button:hover, .see-more-container .pagination-next-link:hover, .see-more-container .pagination-prev-link:hover, .see-more-container .pagination-first-link:hover, .see-more-container .pagination-last-link:hover, .see-more-container .subscriptions-subscribe button:hover, .subscriptions-subscribe .see-more-container button:hover, .see-more-container .requests-table-toolbar .organization-subscribe button:hover, .requests-table-toolbar .organization-subscribe .see-more-container button:hover, .see-more-container .community-follow button:hover, .community-follow .see-more-container button:hover, .see-more-container .article-subscribe button:hover, .article-subscribe .see-more-container button:hover, .see-more-container .section-subscribe button:hover, .section-subscribe .see-more-container button:hover, .see-more-container .split-button button:hover, .split-button .see-more-container button:hover {
-  background-color: black;
+  color: #333333;
+  background-color: transparent;
+}
+.see-more-container .button:hover svg, .see-more-container .pagination-next-link:hover svg, .see-more-container .pagination-prev-link:hover svg, .see-more-container .pagination-first-link:hover svg, .see-more-container .pagination-last-link:hover svg, .see-more-container .subscriptions-subscribe button:hover svg, .subscriptions-subscribe .see-more-container button:hover svg, .see-more-container .requests-table-toolbar .organization-subscribe button:hover svg, .requests-table-toolbar .organization-subscribe .see-more-container button:hover svg, .see-more-container .community-follow button:hover svg, .community-follow .see-more-container button:hover svg, .see-more-container .article-subscribe button:hover svg, .article-subscribe .see-more-container button:hover svg, .see-more-container .section-subscribe button:hover svg, .section-subscribe .see-more-container button:hover svg, .see-more-container .split-button button:hover svg, .split-button .see-more-container button:hover svg {
+  fill: #333333;
+}
+
+.see-more-container .button.active, .see-more-container .active.pagination-next-link, .see-more-container .active.pagination-prev-link, .see-more-container .active.pagination-first-link, .see-more-container .active.pagination-last-link, .see-more-container .subscriptions-subscribe button.active, .subscriptions-subscribe .see-more-container button.active, .see-more-container .requests-table-toolbar .organization-subscribe button.active, .requests-table-toolbar .organization-subscribe .see-more-container button.active, .see-more-container .community-follow button.active, .community-follow .see-more-container button.active, .see-more-container .article-subscribe button.active, .article-subscribe .see-more-container button.active, .see-more-container .section-subscribe button.active, .section-subscribe .see-more-container button.active, .see-more-container .split-button button.active, .split-button .see-more-container button.active,
+.see-more-container .button.active:active,
+.see-more-container .button.active:focus {
+  background-color: transparent !important;
+  color: #CC4744;
+}
+.see-more-container .button.active svg, .see-more-container .active.pagination-next-link svg, .see-more-container .active.pagination-prev-link svg, .see-more-container .active.pagination-first-link svg, .see-more-container .active.pagination-last-link svg, .see-more-container .subscriptions-subscribe button.active svg, .subscriptions-subscribe .see-more-container button.active svg, .see-more-container .requests-table-toolbar .organization-subscribe button.active svg, .requests-table-toolbar .organization-subscribe .see-more-container button.active svg, .see-more-container .community-follow button.active svg, .community-follow .see-more-container button.active svg, .see-more-container .article-subscribe button.active svg, .article-subscribe .see-more-container button.active svg, .see-more-container .section-subscribe button.active svg, .section-subscribe .see-more-container button.active svg, .see-more-container .split-button button.active svg, .split-button .see-more-container button.active svg,
+.see-more-container .button.active:active svg,
+.see-more-container .button.active:focus svg {
+  fill: #CC4744;
+}
+.see-more-container .button.active:hover, .see-more-container .active.pagination-next-link:hover, .see-more-container .active.pagination-prev-link:hover, .see-more-container .active.pagination-first-link:hover, .see-more-container .active.pagination-last-link:hover, .see-more-container .subscriptions-subscribe button.active:hover, .subscriptions-subscribe .see-more-container button.active:hover, .see-more-container .requests-table-toolbar .organization-subscribe button.active:hover, .requests-table-toolbar .organization-subscribe .see-more-container button.active:hover, .see-more-container .community-follow button.active:hover, .community-follow .see-more-container button.active:hover, .see-more-container .article-subscribe button.active:hover, .article-subscribe .see-more-container button.active:hover, .see-more-container .section-subscribe button.active:hover, .section-subscribe .see-more-container button.active:hover, .see-more-container .split-button button.active:hover, .split-button .see-more-container button.active:hover,
+.see-more-container .button.active:active:hover,
+.see-more-container .button.active:focus:hover {
+  color: #333333;
+  background-color: transparent !important;
+}
+.see-more-container .button.active:hover svg, .see-more-container .active.pagination-next-link:hover svg, .see-more-container .active.pagination-prev-link:hover svg, .see-more-container .active.pagination-first-link:hover svg, .see-more-container .active.pagination-last-link:hover svg, .see-more-container .subscriptions-subscribe button.active:hover svg, .subscriptions-subscribe .see-more-container button.active:hover svg, .see-more-container .requests-table-toolbar .organization-subscribe button.active:hover svg, .requests-table-toolbar .organization-subscribe .see-more-container button.active:hover svg, .see-more-container .community-follow button.active:hover svg, .community-follow .see-more-container button.active:hover svg, .see-more-container .article-subscribe button.active:hover svg, .article-subscribe .see-more-container button.active:hover svg, .see-more-container .section-subscribe button.active:hover svg, .section-subscribe .see-more-container button.active:hover svg, .see-more-container .split-button button.active:hover svg, .split-button .see-more-container button.active:hover svg,
+.see-more-container .button.active:active:hover svg,
+.see-more-container .button.active:focus:hover svg {
+  fill: #333333;
 }
 
 /***** Split button *****/
