@@ -2851,10 +2851,44 @@ select:focus {
   margin-top: 0.75rem;
   margin-bottom: 0.5rem;
   padding-left: 2rem;
-  list-style-type: lower-alpha;
+  list-style-position: outside;
+}
+.article-body .procedure .step ol.substeps[type=a] {
+  list-style-type: lower-alpha !important;
+}
+.article-body .procedure .step ol.substeps[type=A] {
+  list-style-type: upper-alpha !important;
+}
+.article-body .procedure .step ol.substeps[type="1"] {
+  list-style-type: decimal !important;
 }
 .article-body .procedure .step ol.substeps .step {
   margin-bottom: 0.5rem;
+}
+.article-body ol.substeps {
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  list-style-position: outside;
+}
+.article-body ol.substeps[type=a] {
+  list-style-type: lower-alpha !important;
+}
+.article-body ol.substeps[type=A] {
+  list-style-type: upper-alpha !important;
+}
+.article-body ol.substeps[type="1"] {
+  list-style-type: decimal !important;
+}
+.article-body ol.substeps .step {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+.article-body ol.substeps .step p {
+  margin-bottom: 0.5rem;
+}
+.article-body ol.substeps .step p:last-child {
+  margin-bottom: 0;
 }
 .article-body .itemizedlist {
   margin-bottom: 1rem;
@@ -2887,13 +2921,9 @@ select:focus {
 .article-body .guimenu,
 .article-body .guisubmenu,
 .article-body .guimenuitem {
-  font-weight: 600;
-  color: #374151;
-  background-color: #f3f4f6;
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-  border: 1px solid #d1d5db;
+  font-weight: 900;
+  color: black;
+  border: none;
 }
 .article-body .inlinemediaobject {
   display: inline-block;
