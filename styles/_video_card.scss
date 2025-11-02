@@ -1,7 +1,7 @@
 // Card base mixin with shared styles for all video cards
 @mixin video-card-base {
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -11,8 +11,8 @@
   height: 100%;
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+   transform: translateY(-5px);
+   
   }
 }
 // Image container mixin with specific background colors
@@ -24,6 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 16px;
 }
 
 // Image mixin for all card variations
@@ -87,10 +88,13 @@
 // Text elements container
 .video-card-content {
   padding: 20px;
+  padding-left: 0;
+  padding-right: 0;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   background-color: white;
+  border-radius: 16px;
 }
 
 .video-card-title {
@@ -112,8 +116,8 @@
 
 // Video section container
 .video-section {
-  margin: 50px 0 70px;
-  
+    margin: 50px 0 70px;
+
   .video-section-header {
     display: flex;
     justify-content: space-between;

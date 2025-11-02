@@ -357,6 +357,9 @@
   .my-1 {
     margin-block: calc(var(--spacing) * 1);
   }
+  .my-2 {
+    margin-block: calc(var(--spacing) * 2);
+  }
   .my-8 {
     margin-block: calc(var(--spacing) * 8);
   }
@@ -979,9 +982,6 @@
   .bg-black {
     background-color: var(--color-black);
   }
-  .bg-blue-600 {
-    background-color: var(--color-blue-600);
-  }
   .bg-footer-gray {
     background-color: var(--color-footer-gray);
   }
@@ -1029,9 +1029,6 @@
   }
   .fill-primary {
     fill: var(--color-primary);
-  }
-  .fill-white {
-    fill: var(--color-white);
   }
   .object-contain {
     object-fit: contain;
@@ -1281,9 +1278,6 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
-  .text-black {
-    color: var(--color-black);
-  }
   .text-blue-600 {
     color: var(--color-blue-600);
   }
@@ -1488,13 +1482,6 @@
       }
     }
   }
-  .group-hover\:fill-white {
-    &:is(:where(.group):hover *) {
-      @media (hover: hover) {
-        fill: var(--color-white);
-      }
-    }
-  }
   .group-hover\:text-gray-900 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -1545,13 +1532,6 @@
       }
     }
   }
-  .hover\:bg-blue-700 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-blue-700);
-      }
-    }
-  }
   .hover\:bg-charcoal {
     &:hover {
       @media (hover: hover) {
@@ -1594,27 +1574,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-gray-300);
-      }
-    }
-  }
-  .hover\:bg-primary {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-primary);
-      }
-    }
-  }
-  .hover\:bg-primary-dark {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-primary-dark);
-      }
-    }
-  }
-  .hover\:fill-white {
-    &:hover {
-      @media (hover: hover) {
-        fill: var(--color-white);
       }
     }
   }

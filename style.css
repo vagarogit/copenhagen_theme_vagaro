@@ -6266,7 +6266,6 @@ zd-summary-block {
 
 .video-card {
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -6277,7 +6276,6 @@ zd-summary-block {
 }
 .video-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 .video-card-image-container {
   overflow: hidden;
@@ -6287,6 +6285,7 @@ zd-summary-block {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 16px;
 }
 .video-card-image {
   width: 80%;
@@ -6298,7 +6297,6 @@ zd-summary-block {
 
 .video-card--purple {
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -6309,7 +6307,6 @@ zd-summary-block {
 }
 .video-card--purple:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 .video-card--purple-image-container {
   overflow: hidden;
@@ -6319,6 +6316,7 @@ zd-summary-block {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 16px;
 }
 .video-card--purple-image {
   width: 80%;
@@ -6330,7 +6328,6 @@ zd-summary-block {
 
 .video-card--green {
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -6341,7 +6338,6 @@ zd-summary-block {
 }
 .video-card--green:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 .video-card--green-image-container {
   overflow: hidden;
@@ -6351,6 +6347,7 @@ zd-summary-block {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 16px;
 }
 .video-card--green-image {
   width: 80%;
@@ -6362,7 +6359,6 @@ zd-summary-block {
 
 .video-card--orange {
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -6373,7 +6369,6 @@ zd-summary-block {
 }
 .video-card--orange:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 .video-card--orange-image-container {
   overflow: hidden;
@@ -6383,6 +6378,7 @@ zd-summary-block {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 16px;
 }
 .video-card--orange-image {
   width: 80%;
@@ -6394,10 +6390,13 @@ zd-summary-block {
 
 .video-card-content {
   padding: 20px;
+  padding-left: 0;
+  padding-right: 0;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   background-color: white;
+  border-radius: 16px;
 }
 
 .video-card-title {
