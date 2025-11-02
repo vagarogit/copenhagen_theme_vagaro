@@ -85,6 +85,7 @@
     --color-ink-darker: #333333;
     --color-footer-gray: #1E1E1E;
     --color-primary: #cc4744;
+    --color-primary-dark: #b43136;
     --color-wave-gray: #f3f3f3;
   }
 }
@@ -1280,6 +1281,9 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
+  .text-black {
+    color: var(--color-black);
+  }
   .text-blue-600 {
     color: var(--color-blue-600);
   }
@@ -1583,6 +1587,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-gray-300);
+      }
+    }
+  }
+  .hover\:bg-primary-dark {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-primary-dark);
       }
     }
   }

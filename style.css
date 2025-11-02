@@ -6363,19 +6363,6 @@ zd-summary-block {
   align-items: center;
   margin-bottom: 20px;
 }
-.video-section h2 {
-  margin-bottom: 40px;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #333;
-}
-.video-section .video-section-title {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #333;
-  text-align: left;
-  margin-bottom: 0;
-}
 .video-section .glide__arrow {
   position: static;
   transform: none;
