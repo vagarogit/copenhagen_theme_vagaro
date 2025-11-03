@@ -403,13 +403,17 @@ template {
  * Category Accordions Styles
  * Styles for vanilla JavaScript accordions on article pages
  */
-/* Sub-topic Accordion Container */
+/* Sub-topic Accordion Container - Match zd-custom-accordion styling */
 .section.accordion.sub-topic {
-  margin-bottom: 1.5rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
   overflow: hidden;
   background-color: white;
+  position: relative;
+}
+.section.accordion.sub-topic:last-child {
+  margin-bottom: 0;
 }
 .section.accordion.sub-topic .panel.panel-default {
   overflow: hidden;
@@ -419,46 +423,48 @@ template {
   box-shadow: none;
 }
 
-/* Accordion Header */
+/* Accordion Header - Match zd-custom-accordion__header styling */
 .section.accordion.sub-topic .panel-heading {
-  padding: 18px 24px;
-  min-height: 56px;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.5;
   color: #1f2937;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.25s ease-in-out;
   border: none;
+  border-bottom: none;
   width: 100%;
   text-align: left;
-  background-color: white;
+  background-color: #FFF;
   position: relative;
+  user-select: none;
+  outline: none;
   /* Focus styles for accessibility */
 }
 .section.accordion.sub-topic .panel-heading:hover {
-  background-color: #fafafa;
+  background-color: #e9ecef;
+}
+.section.accordion.sub-topic .panel-heading:focus {
+  outline: none;
 }
 .section.accordion.sub-topic .panel-heading[aria-expanded=true] {
-  background-color: #fafafa;
-  border-bottom: 1px solid #e5e7eb;
+  background-color: #FFF;
+  border-bottom: 1px solid #e0e0e0;
 }
 .section.accordion.sub-topic .panel-heading[aria-expanded=true] .title {
-  color: #2563eb;
+  color: #1f2937;
 }
 .section.accordion.sub-topic .panel-heading[aria-expanded=true] .accordion-icon {
   transform: rotate(180deg);
-  color: #2563eb;
+  color: #6b7280;
 }
-.section.accordion.sub-topic .panel-heading:focus {
+.section.accordion.sub-topic .panel-heading:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: -2px;
-}
-.section.accordion.sub-topic .panel-heading:focus:not(:focus-visible) {
-  outline: none;
 }
 
 /* Title Container */
@@ -486,28 +492,33 @@ template {
   pointer-events: none;
 }
 
-/* Accordion Icon */
+/* Accordion Icon - Match zd-custom-accordion__icon styling */
 .section.accordion.sub-topic .panel-heading .accordion-icon {
-  color: #6b7280;
-  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1), color 0.15s ease;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
-  margin-left: 16px;
+  color: #6b7280;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 16px;
 }
 .section.accordion.sub-topic .panel-heading .accordion-icon svg {
   width: 14px;
   height: 14px;
 }
 
-/* Panel Body */
+/* Panel Body - Match zd-custom-accordion__body styling */
 .section.accordion.sub-topic .panel-body {
-  padding: 24px;
-  background-color: #F8F8F8;
+  padding: 16px 20px;
+  background-color: #f9fafb;
   font-size: 15px;
   color: #4b5563;
   overflow: hidden;
+  opacity: 1;
+  transform: none;
+  transition: none;
   /* Collapsed state - must come BEFORE expanded state */
   /* Expanded state - must come AFTER collapsed state to override */
   /* Basic content elements */
@@ -532,8 +543,11 @@ template {
   height: auto !important;
   display: block !important;
   max-height: none !important;
-  padding-top: 24px !important;
-  padding-bottom: 24px !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 .section.accordion.sub-topic .panel-body p,
 .section.accordion.sub-topic .panel-body .procedure,
@@ -6510,216 +6524,6 @@ zd-summary-block {
   height: 100%;
 }
 
-/**
- * Radix Accordion Styles
- * Using stock Radix UI CSS patterns
- * Adapted for Vagaro design system
- */
-/* Accordion Root Container */
-#radix-article-accordions-root .AccordionRoot {
-  width: 100%;
-  background-color: transparent;
-}
-
-/* Accordion Item */
-#radix-article-accordions-root .AccordionItem {
-  overflow: hidden;
-  margin-bottom: 12px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  background-color: white;
-}
-#radix-article-accordions-root .AccordionItem:last-child {
-  margin-bottom: 0;
-}
-#radix-article-accordions-root .AccordionItem:focus-within {
-  position: relative;
-  z-index: 1;
-  box-shadow: none;
-}
-#radix-article-accordions-root .AccordionItem[data-state=open] {
-  background-color: white;
-}
-
-/* Accordion Header */
-#radix-article-accordions-root .AccordionHeader {
-  display: flex;
-}
-
-/* Accordion Trigger (Button) - Stock Radix approach */
-#radix-article-accordions-root .AccordionTrigger {
-  font-family: inherit;
-  background-color: transparent;
-  padding: 18px 24px;
-  min-height: 56px;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Stock Radix - puts chevron on right */
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #1f2937;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-  border: none;
-  width: 100%;
-  text-align: left;
-}
-#radix-article-accordions-root .AccordionTrigger:hover {
-  background-color: #fafafa;
-}
-#radix-article-accordions-root .AccordionTrigger[data-state=open] > .AccordionChevron {
-  transform: rotate(180deg);
-}
-
-/* Accordion Title */
-#radix-article-accordions-root .AccordionTitle {
-  flex: 1;
-}
-
-/* Accordion Chevron Icon - Stock Radix approach */
-#radix-article-accordions-root .AccordionChevron {
-  color: #6b7280;
-  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
-  flex-shrink: 0;
-  margin-left: 16px;
-}
-#radix-article-accordions-root .AccordionChevron svg {
-  width: 14px;
-  height: 14px;
-}
-
-/* Accordion Content - Stock Radix approach */
-#radix-article-accordions-root .AccordionContent {
-  overflow: hidden;
-  font-size: 15px;
-  color: #4b5563;
-  background-color: white;
-}
-#radix-article-accordions-root .AccordionContent[data-state=open] {
-  animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
-}
-#radix-article-accordions-root .AccordionContent[data-state=closed] {
-  animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
-}
-
-/* Accordion Content Text (Inner wrapper) - Stock Radix approach */
-#radix-article-accordions-root .AccordionContentText {
-  padding: 0 24px 24px 24px;
-  /* Basic content elements */
-  /* Ordered lists */
-  /* Unordered lists */
-  /* Nested content */
-  /* Tips and callouts */
-  /* Links */
-  /* Bold text */
-  /* Images */
-  /* Code blocks */
-}
-#radix-article-accordions-root .AccordionContentText p,
-#radix-article-accordions-root .AccordionContentText .procedure,
-#radix-article-accordions-root .AccordionContentText .itemizedlist,
-#radix-article-accordions-root .AccordionContentText .tip {
-  margin-bottom: 1rem;
-  display: block !important;
-}
-#radix-article-accordions-root .AccordionContentText ol,
-#radix-article-accordions-root .AccordionContentText ol.procedure {
-  padding-left: 1.5rem;
-  display: block !important;
-  list-style-type: decimal !important;
-  margin-bottom: 1rem;
-}
-#radix-article-accordions-root .AccordionContentText ol li,
-#radix-article-accordions-root .AccordionContentText ol li.step,
-#radix-article-accordions-root .AccordionContentText ol.procedure li,
-#radix-article-accordions-root .AccordionContentText ol.procedure li.step {
-  margin-bottom: 0.5rem;
-  display: list-item !important;
-  padding-left: 0.5rem;
-}
-#radix-article-accordions-root .AccordionContentText ul,
-#radix-article-accordions-root .AccordionContentText ul.itemizedlist {
-  padding-left: 1.5rem;
-  display: block !important;
-  list-style-type: disc !important;
-  margin-bottom: 1rem;
-}
-#radix-article-accordions-root .AccordionContentText ul li,
-#radix-article-accordions-root .AccordionContentText ul li.listitem,
-#radix-article-accordions-root .AccordionContentText ul.itemizedlist li,
-#radix-article-accordions-root .AccordionContentText ul.itemizedlist li.listitem {
-  display: list-item !important;
-  margin-bottom: 0.5rem;
-  padding-left: 0.5rem;
-}
-#radix-article-accordions-root .AccordionContentText li > p {
-  margin-bottom: 0.5rem;
-}
-#radix-article-accordions-root .AccordionContentText .tip {
-  background-color: #f3f4f6;
-  padding: 1rem;
-  border-radius: 0.375rem;
-  border-left: 4px solid #3b82f6;
-  margin: 1rem 0;
-}
-#radix-article-accordions-root .AccordionContentText .tip .title {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #1e3a8a;
-}
-#radix-article-accordions-root .AccordionContentText a,
-#radix-article-accordions-root .AccordionContentText a.link {
-  color: #2563eb;
-  text-decoration: none;
-}
-#radix-article-accordions-root .AccordionContentText a:hover,
-#radix-article-accordions-root .AccordionContentText a.link:hover {
-  text-decoration: underline;
-}
-#radix-article-accordions-root .AccordionContentText .bold,
-#radix-article-accordions-root .AccordionContentText strong,
-#radix-article-accordions-root .AccordionContentText b {
-  font-weight: 700;
-}
-#radix-article-accordions-root .AccordionContentText img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.375rem;
-  margin: 1rem 0;
-}
-#radix-article-accordions-root .AccordionContentText code,
-#radix-article-accordions-root .AccordionContentText pre {
-  background-color: #f3f4f6;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  font-family: monospace;
-  font-size: 0.875rem;
-}
-#radix-article-accordions-root .AccordionContentText pre {
-  padding: 1rem;
-  overflow-x: auto;
-  margin: 1rem 0;
-}
-
-/* Animations - Stock Radix approach */
-@keyframes slideDown {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
-}
-@keyframes slideUp {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
-}
 /***** Tip Element Styling Overrides *****/
 .section.accordion.sub-topic .panel-body .tip {
   background-color: #f9fafb;

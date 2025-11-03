@@ -3,13 +3,18 @@
  * Styles for vanilla JavaScript accordions on article pages
  */
 
-/* Sub-topic Accordion Container */
+/* Sub-topic Accordion Container - Match zd-custom-accordion styling */
 .section.accordion.sub-topic {
-  margin-bottom: 1.5rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
+  margin-bottom: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
   overflow: hidden;
   background-color: white;
+  position: relative;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   .panel.panel-default {
     overflow: hidden;
@@ -20,51 +25,53 @@
   }
 }
 
-/* Accordion Header */
+/* Accordion Header - Match zd-custom-accordion__header styling */
 .section.accordion.sub-topic .panel-heading {
-  padding: 18px 24px;
-  min-height: 56px;
+  padding: 16px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.5;
   color: #1f2937;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.25s ease-in-out;
   border: none;
+  border-bottom: none;
   width: 100%;
   text-align: left;
-  background-color: white;
+  background-color: #FFF;
   position: relative;
+  user-select: none;
+  outline: none;
 
   &:hover {
-    background-color: #fafafa;
+    background-color: #e9ecef;
+  }
+
+  &:focus {
+    outline: none;
   }
 
   &[aria-expanded="true"] {
-    background-color: #fafafa;
-    border-bottom: 1px solid #e5e7eb;
+    background-color: #FFF;
+    border-bottom: 1px solid #e0e0e0;
 
     .title {
-      color: #2563eb;
+      color: #1f2937;
     }
 
     .accordion-icon {
       transform: rotate(180deg);
-      color: #2563eb;
+      color: #6b7280;
     }
   }
 
   /* Focus styles for accessibility */
-  &:focus {
+  &:focus-visible {
     outline: 2px solid #2563eb;
     outline-offset: -2px;
-  }
-
-  &:focus:not(:focus-visible) {
-    outline: none;
   }
 }
 
@@ -95,16 +102,17 @@
   }
 }
 
-/* Accordion Icon */
+/* Accordion Icon - Match zd-custom-accordion__icon styling */
 .section.accordion.sub-topic .panel-heading .accordion-icon {
-  color: #6b7280;
-  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1),
-    color 0.15s ease;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
-  margin-left: 16px;
+  color: #6b7280;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 16px;
 
   svg {
     width: 14px;
@@ -112,13 +120,16 @@
   }
 }
 
-/* Panel Body */
+/* Panel Body - Match zd-custom-accordion__body styling */
 .section.accordion.sub-topic .panel-body {
-  padding: 24px;
-  background-color: #F8F8F8;
+  padding: 16px 20px;
+  background-color: #f9fafb;
   font-size: 15px;
   color: #4b5563;
   overflow: hidden;
+  opacity: 1;
+  transform: none;
+  transition: none;
 
   /* Collapsed state - must come BEFORE expanded state */
   &.collapse {
@@ -134,8 +145,11 @@
     height: auto !important;
     display: block !important;
     max-height: none !important;
-    padding-top: 24px !important;
-    padding-bottom: 24px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   /* Basic content elements */

@@ -155,39 +155,22 @@
 
       {{#if settings.show_articles_in_section}}
         <div class="section-articles-container lg:hidden mb-8">
-          <div class="zd-custom-accordion">
-            <div class="zd-custom-accordion__item">
-              <input type="checkbox" id="zd-accordion-mobile-section" class="zd-custom-accordion__toggle" />
-              <label for="zd-accordion-mobile-section" class="zd-custom-accordion__header">
-                <span>Articles in this section</span>
-                <span class="zd-custom-accordion__icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </span>
-              </label>
-              <div class="zd-custom-accordion__content">
-                <div class="zd-custom-accordion__body">
-                  <nav class="section-articles-nav">
-                    <ul class="section-articles-list">
-                      {{#each section.articles}}
-                        <li class="section-article-item">
-                          <a href="{{url}}"
-                             class="section-article-link {{#is id ../article.id}}current-article{{/is}}"
-                             {{#is id ../article.id}}aria-current="page"{{/is}}>
-                               {{title}}
-                          </a>
-                        </li>
-                      {{/each}}
-                    </ul>
-                    {{#if section.more_articles}}
-                      <a href="{{section.url}}" class="section-more-link">{{t 'see_more'}}</a>
-                    {{/if}}
-                  </nav>
-                </div>
-              </div>
-            </div>
-          </div>
+          <nav class="section-articles-nav">
+            <ul class="section-articles-list">
+              {{#each section.articles}}
+                <li class="section-article-item">
+                  <a href="{{url}}"
+                     class="section-article-link {{#is id ../article.id}}current-article{{/is}}"
+                     {{#is id ../article.id}}aria-current="page"{{/is}}>
+                       {{title}}
+                  </a>
+                </li>
+              {{/each}}
+            </ul>
+            {{#if section.more_articles}}
+              <a href="{{section.url}}" class="section-more-link">{{t 'see_more'}}</a>
+            {{/if}}
+          </nav>
         </div>
       {{/if}}
 

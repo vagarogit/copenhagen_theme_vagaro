@@ -216,31 +216,63 @@
     })();
   </script>
   <script src="{{asset 'statusio.js'}}"></script>
-  <!-- Replaced with Radix Accordion implementation -->
+  <!-- Vanilla JavaScript accordion implementation for article body content -->
 
   <script type="module">
-    // Import the new Radix-based article accordions
+    // Import vanilla JavaScript accordion initialization for article body content (.section.accordion.sub-topic)
     (async () => {
       try {
-        await import("article-accordions");
-        console.log("Article accordions module loaded successfully");
-      } catch (error) {
-        console.error("Failed to load article-accordions module:", error);
-        // Fallback: Try to initialize accordions manually if module fails
-        if (typeof window.initArticleAccordions === 'function') {
-          console.log("Attempting fallback initialization...");
-          window.initArticleAccordions();
+        // Check if the import map entry exists and is valid before trying to import
+        const importMapScript = document.querySelector('script[type="importmap"]');
+        if (importMapScript) {
+          try {
+            const importMap = JSON.parse(importMapScript.textContent);
+            const articleAccordionsPath = importMap?.imports?.["article-accordions"];
+            
+            // Check if the path exists and is valid (not null, undefined, empty string, or the string "null")
+            const isValidPath = articleAccordionsPath && 
+                               articleAccordionsPath !== "null" && 
+                               articleAccordionsPath !== "undefined" &&
+                               typeof articleAccordionsPath === "string" &&
+                               articleAccordionsPath.trim() !== "";
+            
+            if (isValidPath) {
+              await import("article-accordions");
+              console.log("Article accordions module loaded successfully");
+            } else {
+              console.warn("Article accordions import map entry not found or invalid:", articleAccordionsPath);
+              // Fallback: Try to initialize accordions manually using the fallback script
+              // The fallback script below will handle initialization
+            }
+          } catch (parseError) {
+            console.warn("Failed to parse import map:", parseError);
+            // Fallback: Try to initialize accordions manually
+            setTimeout(() => {
+              if (typeof window.initArticleAccordions === 'function') {
+                console.log("Attempting fallback initialization...");
+                window.initArticleAccordions();
+              }
+            }, 500);
+          }
         } else {
-          // If the module didn't load at all, try to manually initialize after a delay
-          console.log("Module not available, scheduling manual initialization...");
+          console.warn("Import map not found, skipping article-accordions import");
+          // Fallback: Try to initialize accordions manually
           setTimeout(() => {
             if (typeof window.initArticleAccordions === 'function') {
+              console.log("Attempting fallback initialization...");
               window.initArticleAccordions();
-            } else {
-              console.error("Article accordions initialization function not available");
             }
-          }, 1000);
+          }, 500);
         }
+      } catch (error) {
+        console.warn("Failed to load article-accordions module:", error);
+        // Fallback: Try to initialize accordions manually if module fails
+        setTimeout(() => {
+          if (typeof window.initArticleAccordions === 'function') {
+            console.log("Attempting fallback initialization...");
+            window.initArticleAccordions();
+          }
+        }, 500);
       }
     })();
   </script>
