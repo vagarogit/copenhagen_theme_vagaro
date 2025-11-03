@@ -727,6 +727,44 @@ template {
   margin-bottom: 10px;
 }
 
+.warning {
+  background-color: #fff1bf;
+  border: 1px solid #f9d093;
+  border-radius: 8px;
+  color: #333333;
+  padding: 20px;
+  margin: 8px 0;
+  position: relative;
+  padding-left: 48px;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 20px !important;
+  margin-top: 20px !important;
+  padding-left: 48px !important;
+  padding-right: 48px !important;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+.warning::before {
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffcc00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z'%3E%3C/path%3E%3Cline x1='12' y1='9' x2='12' y2='13'%3E%3C/line%3E%3Cline x1='12' y1='17' x2='12.01' y2='17'%3E%3C/line%3E%3C/svg%3E");
+  color: #333333;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 16px;
+  top: 24px;
+  width: 24px;
+  height: 24px;
+}
+.warning .title {
+  color: #333333;
+  margin-top: 0;
+  margin-bottom: 10px;
+  margin-left: 32px !important;
+}
+
 .alert, .warning, .caution {
   width: 100% !important;
   margin-left: 0 !important;
