@@ -276,55 +276,185 @@
       }
     })();
   </script>
-  <!-- Fallback initialization if module fails to load -->
+  <!-- Fallback initialization if module fails to load - Self-contained implementation -->
   <script>
-    // Ensure accordions work even if ES module fails
+    // Self-contained accordion initialization - works even if ES module fails to load
     (function() {
-      let attempts = 0;
-      const maxAttempts = 5;
+      let hasInitialized = false;
       
-      function tryInitializeAccordions() {
-        attempts++;
-        console.log(`[Accordion Fallback] Attempt ${attempts} to initialize accordions...`);
-        
-        // Check if accordions exist
-        const accordions = document.querySelectorAll('.section.accordion.sub-topic');
-        console.log(`[Accordion Fallback] Found ${accordions.length} accordion(s)`);
-        
-        if (accordions.length > 0) {
-          // Check if they're already initialized (have aria-expanded attribute)
-          const uninitialized = Array.from(accordions).filter(function(acc) {
-            const heading = acc.querySelector('.panel-heading');
-            return heading && !heading.hasAttribute('aria-expanded');
+      function initSubTopicAccordions() {
+        try {
+          // Find all sub-topic accordions
+          const subTopicAccordions = document.querySelectorAll('.section.accordion.sub-topic');
+          
+          if (!subTopicAccordions.length) {
+            return;
+          }
+          
+          let initializedCount = 0;
+          subTopicAccordions.forEach(function(accordion, index) {
+            const panelHeading = accordion.querySelector('.panel-heading');
+            const panelBody = accordion.querySelector('.panel-body');
+            const titleElement = accordion.querySelector('.title');
+            
+            if (!panelHeading || !panelBody || !titleElement) {
+              return;
+            }
+            
+            // Check if already initialized
+            if (accordion.hasAttribute('data-accordion-initialized')) {
+              return;
+            }
+            
+            // Mark as initialized
+            accordion.setAttribute('data-accordion-initialized', 'true');
+            
+            // Extract panel ID
+            const panelId = panelBody.id || 'sub-topic-panel-' + index;
+            panelBody.id = panelId;
+            
+            // Setup ARIA attributes
+            panelHeading.setAttribute('role', 'button');
+            panelHeading.setAttribute('aria-expanded', 'false');
+            panelHeading.setAttribute('aria-controls', panelId);
+            panelHeading.tabIndex = 0;
+            
+            // Add transitions
+            panelBody.style.transition = 'max-height 0.35s ease-in-out, padding-top 0.35s ease-in-out, padding-bottom 0.35s ease-in-out';
+            panelBody.style.overflow = 'hidden';
+            
+            // Add click handler
+            panelHeading.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              
+              const expanded = panelHeading.getAttribute('aria-expanded') === 'true';
+              
+              if (expanded) {
+                // Close
+                panelHeading.setAttribute('aria-expanded', 'false');
+                panelBody.classList.remove('panel-body-expanded');
+                panelBody.classList.add('collapse');
+                panelBody.style.overflow = 'hidden';
+                panelBody.style.maxHeight = panelBody.scrollHeight + 'px';
+                
+                requestAnimationFrame(function() {
+                  requestAnimationFrame(function() {
+                    panelBody.style.maxHeight = '0px';
+                    panelBody.style.paddingTop = '0px';
+                    panelBody.style.paddingBottom = '0px';
+                  });
+                });
+                
+                setTimeout(function() {
+                  if (panelHeading.getAttribute('aria-expanded') === 'false') {
+                    panelBody.style.display = 'none';
+                  }
+                }, 350);
+              } else {
+                // Open
+                panelHeading.setAttribute('aria-expanded', 'true');
+                panelBody.classList.remove('collapse');
+                panelBody.classList.add('panel-body-expanded');
+                
+                panelBody.style.display = 'block';
+                panelBody.style.overflow = 'hidden';
+                panelBody.style.maxHeight = '0px';
+                panelBody.style.paddingTop = '0px';
+                panelBody.style.paddingBottom = '0px';
+                
+                void panelBody.offsetHeight;
+                
+                panelBody.style.maxHeight = '9999px';
+                panelBody.style.paddingTop = '1rem';
+                panelBody.style.paddingBottom = '1rem';
+                
+                void panelBody.offsetHeight;
+                
+                const targetHeight = panelBody.scrollHeight;
+                
+                panelBody.style.maxHeight = '0px';
+                panelBody.style.paddingTop = '0px';
+                panelBody.style.paddingBottom = '0px';
+                
+                requestAnimationFrame(function() {
+                  requestAnimationFrame(function() {
+                    panelBody.style.maxHeight = targetHeight + 'px';
+                    panelBody.style.paddingTop = '1rem';
+                    panelBody.style.paddingBottom = '1rem';
+                  });
+                });
+                
+                setTimeout(function() {
+                  if (panelHeading.getAttribute('aria-expanded') === 'true') {
+                    panelBody.style.maxHeight = 'none';
+                    panelBody.style.overflow = 'visible';
+                    panelBody.classList.add('panel-body-expanded');
+                  }
+                }, 350);
+              }
+            });
+            
+            // Keyboard accessibility
+            panelHeading.addEventListener('keydown', function(event) {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                panelHeading.click();
+              }
+            });
+            
+            // Add icon if not present
+            if (!panelHeading.querySelector('.accordion-icon')) {
+              const icon = document.createElement('span');
+              icon.className = 'accordion-icon';
+              icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+              panelHeading.appendChild(icon);
+            }
+            
+            // Initially collapsed
+            panelBody.style.display = 'none';
+            panelBody.style.maxHeight = '0px';
+            
+            initializedCount++;
           });
           
-          console.log(`[Accordion Fallback] ${uninitialized.length} uninitialized accordion(s)`);
-          
-          if (uninitialized.length > 0) {
-            if (typeof window.initArticleAccordions === 'function') {
-              console.log('[Accordion Fallback] Calling initArticleAccordions...');
-              window.initArticleAccordions();
-            } else {
-              console.warn('[Accordion Fallback] initArticleAccordions function not available yet');
-              // If function not available, try again later
-              if (attempts < maxAttempts) {
-                setTimeout(tryInitializeAccordions, 500);
-              }
-            }
-          } else {
-            console.log('[Accordion Fallback] All accordions already initialized');
+          if (initializedCount > 0) {
+            console.log('[Accordion Fallback] Successfully initialized ' + initializedCount + ' accordion(s)');
           }
-        } else {
-          // No accordions found yet, retry if we haven't exceeded max attempts
-          if (attempts < maxAttempts) {
-            setTimeout(tryInitializeAccordions, 500);
-          } else {
-            console.log('[Accordion Fallback] No accordions found after ' + maxAttempts + ' attempts');
+        } catch (error) {
+          console.error('[Accordion Fallback] Error initializing accordions:', error);
+        }
+      }
+      
+      function tryInitializeAccordions() {
+        // First try to use module function if available
+        if (typeof window.initArticleAccordions === 'function') {
+          console.log('[Accordion Fallback] Using module function');
+          window.initArticleAccordions();
+          hasInitialized = true;
+          return;
+        }
+        
+        // Otherwise, initialize directly
+        if (!hasInitialized) {
+          const accordions = document.querySelectorAll('.section.accordion.sub-topic');
+          
+          if (accordions.length > 0) {
+            const uninitialized = Array.from(accordions).filter(function(acc) {
+              const heading = acc.querySelector('.panel-heading');
+              return heading && !heading.hasAttribute('aria-expanded');
+            });
+            
+            if (uninitialized.length > 0) {
+              console.log('[Accordion Fallback] Initializing ' + uninitialized.length + ' accordion(s) directly');
+              initSubTopicAccordions();
+              hasInitialized = true;
+            }
           }
         }
       }
       
-      // Start trying after DOM is ready
+      // Start initialization
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
           setTimeout(tryInitializeAccordions, 500);
