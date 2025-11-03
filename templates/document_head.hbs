@@ -203,19 +203,109 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <script type="module">
-    import { renderFlashNotifications } from "flash-notifications";
-    // 'settings' and the translated 'close' label are injected via server-side templating.
-    const settings = {{json settings}};
-    const closeLabel = {{json (t 'close')}};
-
-    renderFlashNotifications(settings, closeLabel);
+    (async () => {
+      try {
+        const flashNotificationsModule = await import("flash-notifications");
+        // 'settings' and the translated 'close' label are injected via server-side templating.
+        const settings = {{json settings}};
+        const closeLabel = {{json (t 'close')}};
+        flashNotificationsModule.renderFlashNotifications(settings, closeLabel);
+      } catch (error) {
+        console.warn("Failed to load flash-notifications module:", error);
+      }
+    })();
   </script>
   <script src="{{asset 'statusio.js'}}"></script>
   <!-- Replaced with Radix Accordion implementation -->
 
   <script type="module">
     // Import the new Radix-based article accordions
-    import "article-accordions";
+    (async () => {
+      try {
+        await import("article-accordions");
+        console.log("Article accordions module loaded successfully");
+      } catch (error) {
+        console.error("Failed to load article-accordions module:", error);
+        // Fallback: Try to initialize accordions manually if module fails
+        if (typeof window.initArticleAccordions === 'function') {
+          console.log("Attempting fallback initialization...");
+          window.initArticleAccordions();
+        } else {
+          // If the module didn't load at all, try to manually initialize after a delay
+          console.log("Module not available, scheduling manual initialization...");
+          setTimeout(() => {
+            if (typeof window.initArticleAccordions === 'function') {
+              window.initArticleAccordions();
+            } else {
+              console.error("Article accordions initialization function not available");
+            }
+          }, 1000);
+        }
+      }
+    })();
+  </script>
+  <!-- Fallback initialization if module fails to load -->
+  <script>
+    // Ensure accordions work even if ES module fails
+    (function() {
+      let attempts = 0;
+      const maxAttempts = 5;
+      
+      function tryInitializeAccordions() {
+        attempts++;
+        console.log(`[Accordion Fallback] Attempt ${attempts} to initialize accordions...`);
+        
+        // Check if accordions exist
+        const accordions = document.querySelectorAll('.section.accordion.sub-topic');
+        console.log(`[Accordion Fallback] Found ${accordions.length} accordion(s)`);
+        
+        if (accordions.length > 0) {
+          // Check if they're already initialized (have aria-expanded attribute)
+          const uninitialized = Array.from(accordions).filter(function(acc) {
+            const heading = acc.querySelector('.panel-heading');
+            return heading && !heading.hasAttribute('aria-expanded');
+          });
+          
+          console.log(`[Accordion Fallback] ${uninitialized.length} uninitialized accordion(s)`);
+          
+          if (uninitialized.length > 0) {
+            if (typeof window.initArticleAccordions === 'function') {
+              console.log('[Accordion Fallback] Calling initArticleAccordions...');
+              window.initArticleAccordions();
+            } else {
+              console.warn('[Accordion Fallback] initArticleAccordions function not available yet');
+              // If function not available, try again later
+              if (attempts < maxAttempts) {
+                setTimeout(tryInitializeAccordions, 500);
+              }
+            }
+          } else {
+            console.log('[Accordion Fallback] All accordions already initialized');
+          }
+        } else {
+          // No accordions found yet, retry if we haven't exceeded max attempts
+          if (attempts < maxAttempts) {
+            setTimeout(tryInitializeAccordions, 500);
+          } else {
+            console.log('[Accordion Fallback] No accordions found after ' + maxAttempts + ' attempts');
+          }
+        }
+      }
+      
+      // Start trying after DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(tryInitializeAccordions, 500);
+        });
+      } else {
+        setTimeout(tryInitializeAccordions, 500);
+      }
+      
+      // Also try after window load
+      window.addEventListener('load', function() {
+        setTimeout(tryInitializeAccordions, 1000);
+      });
+    })();
   </script>
   <script src="{{asset 'tabbed-article.js'}}"></script>
   <script src="{{asset 'article-toc.js'}}"></script>

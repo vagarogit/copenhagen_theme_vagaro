@@ -4,37 +4,60 @@
  */
 import { initSubTopicAccordions } from "../category-accordions/vanillaAccordion.js";
 
+// Track if we've already initialized to prevent duplicate calls
+let hasInitialized = false;
+
 /**
  * Initialize vanilla JS accordions for article pages
  */
 function initializeArticleAccordions() {
-  // Wait for DOM to be ready and all scripts loaded
+  console.log("[Article Accordions] Initializing...");
+  
+  // Run initialization
   const runInitialization = () => {
-    setTimeout(() => {
+    // Prevent duplicate initialization
+    if (hasInitialized) {
+      console.log("[Article Accordions] Already initialized, skipping duplicate call");
+      return;
+    }
+    
+    console.log("[Article Accordions] Running initialization...");
+    try {
       initSubTopicAccordions();
-    }, 100);
+      const accordionCount = document.querySelectorAll(".section.accordion.sub-topic").length;
+      console.log(`[Article Accordions] Found ${accordionCount} accordion(s)`);
+      hasInitialized = true;
+    } catch (error) {
+      console.error("[Article Accordions] Error during initialization:", error);
+    }
   };
 
-  // Wait for window load to ensure all scripts have finished
+  // Wait for DOM to be ready and article body to be loaded
   if (document.readyState === "loading") {
-    window.addEventListener("load", () => {
+    document.addEventListener("DOMContentLoaded", () => {
+      // Wait a bit for article body content to be fully rendered
       setTimeout(() => {
         runInitialization();
-      }, 200);
+      }, 300);
     });
   } else if (document.readyState === "interactive") {
     // DOM is ready but resources might still be loading
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        runInitialization();
-      }, 200);
-    });
+    setTimeout(() => {
+      runInitialization();
+    }, 300);
   } else {
     // Already loaded
     setTimeout(() => {
       runInitialization();
-    }, 200);
+    }, 300);
   }
+
+  // Also try after window load to catch any dynamically loaded content
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      runInitialization();
+    }, 500);
+  });
 }
 
 // Initialize on load

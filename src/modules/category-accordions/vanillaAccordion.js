@@ -279,21 +279,43 @@ export function initVanillaAccordions() {
  */
 export function initSubTopicAccordions() {
   try {
+    console.log("[initSubTopicAccordions] Starting initialization...");
     // Find all sub-topic accordions
     const subTopicAccordions = document.querySelectorAll(
       ".section.accordion.sub-topic"
     );
 
+    console.log(`[initSubTopicAccordions] Found ${subTopicAccordions.length} accordion(s)`);
+
     if (!subTopicAccordions.length) {
+      console.log("[initSubTopicAccordions] No accordions found, exiting");
       return;
     }
 
+    let initializedCount = 0;
     subTopicAccordions.forEach((accordion, index) => {
       const panelHeading = accordion.querySelector(".panel-heading");
       const panelBody = accordion.querySelector(".panel-body");
       const titleElement = accordion.querySelector(".title");
 
-      if (!panelHeading || !panelBody || !titleElement) return;
+      if (!panelHeading || !panelBody || !titleElement) {
+        console.warn(`[initSubTopicAccordions] Accordion ${index} missing required elements`, {
+          hasHeading: !!panelHeading,
+          hasBody: !!panelBody,
+          hasTitle: !!titleElement
+        });
+        return;
+      }
+
+      // Check if this accordion has already been initialized
+      // We check for the data attribute to prevent duplicate initialization
+      if (accordion.hasAttribute('data-accordion-initialized')) {
+        console.log(`[initSubTopicAccordions] Accordion ${index} already initialized, skipping`);
+        return;
+      }
+
+      // Mark as initialized BEFORE setting up event listeners to prevent race conditions
+      accordion.setAttribute('data-accordion-initialized', 'true');
 
       // Extract the panel ID from the existing structure or create a new one
       const panelId = panelBody.id || `sub-topic-panel-${index}`;
@@ -313,11 +335,17 @@ export function initSubTopicAccordions() {
       panelBody.style.overflow = "hidden";
 
       // Add click functionality
-      panelHeading.addEventListener("click", () => {
+      panelHeading.addEventListener("click", (e) => {
+        console.log(`[Accordion ${index}] Clicked!`);
+        e.preventDefault();
+        e.stopPropagation();
+        
         const expanded = panelHeading.getAttribute("aria-expanded") === "true";
+        console.log(`[Accordion ${index}] Currently expanded: ${expanded}`);
 
         if (expanded) {
           // Close accordion
+          console.log(`[Accordion ${index}] Closing...`);
           panelHeading.setAttribute("aria-expanded", "false");
           panelBody.classList.remove("panel-body-expanded");
           panelBody.classList.add("collapse");
@@ -346,13 +374,37 @@ export function initSubTopicAccordions() {
           }, 350);
         } else {
           // Open accordion
+          console.log(`[Accordion ${index}] Opening...`);
           panelHeading.setAttribute("aria-expanded", "true");
           panelBody.classList.remove("collapse");
           panelBody.classList.add("panel-body-expanded");
 
-          // Make sure panel is visible but with zero max-height to start animation
+          // Ensure panel is visible (if it was hidden)
           panelBody.style.display = "block";
           panelBody.style.overflow = "hidden";
+          
+          // Start with collapsed state
+          panelBody.style.maxHeight = "0px";
+          panelBody.style.paddingTop = "0px";
+          panelBody.style.paddingBottom = "0px";
+          
+          // Force a reflow
+          void panelBody.offsetHeight;
+
+          // Temporarily expand to measure actual height (using very large max-height)
+          // This allows us to measure without visual flash
+          panelBody.style.maxHeight = "9999px";
+          panelBody.style.paddingTop = "1rem";
+          panelBody.style.paddingBottom = "1rem";
+          
+          // Force another reflow to ensure measurement
+          void panelBody.offsetHeight;
+          
+          // Get the actual height we need to animate to
+          const targetHeight = panelBody.scrollHeight;
+          console.log(`[Accordion ${index}] Target height: ${targetHeight}px`);
+
+          // Immediately reset to collapsed state for animation
           panelBody.style.maxHeight = "0px";
           panelBody.style.paddingTop = "0px";
           panelBody.style.paddingBottom = "0px";
@@ -360,9 +412,6 @@ export function initSubTopicAccordions() {
           // Use requestAnimationFrame to ensure the browser has painted the initial state
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-              // Get the target height with padding
-              const targetHeight = panelBody.scrollHeight;
-
               // Set target max-height and padding to trigger animation
               panelBody.style.maxHeight = targetHeight + "px";
               panelBody.style.paddingTop = "1rem";
@@ -402,8 +451,13 @@ export function initSubTopicAccordions() {
       // Keep the existing collapse class which is part of the HTML structure
       panelBody.style.display = "none";
       panelBody.style.maxHeight = "0px";
+      
+      initializedCount++;
+      console.log(`[initSubTopicAccordions] Initialized accordion ${index + 1}/${subTopicAccordions.length}`);
     });
+    
+    console.log(`[initSubTopicAccordions] Successfully initialized ${initializedCount} accordion(s)`);
   } catch (error) {
-    console.error("Error initializing sub-topic accordions:", error);
+    console.error("[initSubTopicAccordions] Error initializing sub-topic accordions:", error);
   }
 }

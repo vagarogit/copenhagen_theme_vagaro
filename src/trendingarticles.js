@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
   var trendingSkeleton = document.getElementById("trending-articles-skeleton");
   var trendingContent = document.getElementById("trending-articles-content");
 
-  // If no container found, don't proceed
+  // If no container found, don't proceed (this is normal on non-home pages)
   if (!trendingContainer || !trendingSkeleton || !trendingContent) {
-    console.error("Trending articles container elements not found");
+    // Silently return - this is expected on article pages and other non-home pages
     return;
   }
   // Define a timeout to handle API failures gracefully
