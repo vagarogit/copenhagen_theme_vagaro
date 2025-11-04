@@ -67,6 +67,46 @@
       text-align: right;
     }
 
+    // Honor align attribute
+    &[align="center"] {
+      text-align: center;
+      
+      // Center images and mediaobject elements
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .mediaobject,
+      .mediaobject.image-center {
+        display: block;
+        text-align: center;
+        
+        img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+    }
+    
+    &[align="right"] {
+      text-align: right;
+      
+      [dir="rtl"] & {
+        text-align: left;
+      }
+    }
+    
+    &[align="left"] {
+      text-align: left;
+      
+      [dir="rtl"] & {
+        text-align: right;
+      }
+    }
+
     p {
       margin: 0;
     }
@@ -76,11 +116,15 @@
     }
   }
 
-  th, tr:first-child td {
+  // Vertically center first column
+  td:first-child,
+  th:first-child {
+    vertical-align: middle;
+  }
+
+  th {
     background-color: #f0f0f0;
     font-weight: $font-weight-semibold;
-    
-
   }
 
   tr {

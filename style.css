@@ -1239,13 +1239,50 @@ ul {
 [dir=rtl] .article-body table td, [dir=rtl] .article-body table th {
   text-align: right;
 }
+.article-body table td[align=center], .article-body table th[align=center] {
+  text-align: center;
+}
+.article-body table td[align=center] img, .article-body table th[align=center] img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.article-body table td[align=center] .mediaobject,
+.article-body table td[align=center] .mediaobject.image-center, .article-body table th[align=center] .mediaobject,
+.article-body table th[align=center] .mediaobject.image-center {
+  display: block;
+  text-align: center;
+}
+.article-body table td[align=center] .mediaobject img,
+.article-body table td[align=center] .mediaobject.image-center img, .article-body table th[align=center] .mediaobject img,
+.article-body table th[align=center] .mediaobject.image-center img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.article-body table td[align=right], .article-body table th[align=right] {
+  text-align: right;
+}
+[dir=rtl] .article-body table td[align=right], [dir=rtl] .article-body table th[align=right] {
+  text-align: left;
+}
+.article-body table td[align=left], .article-body table th[align=left] {
+  text-align: left;
+}
+[dir=rtl] .article-body table td[align=left], [dir=rtl] .article-body table th[align=left] {
+  text-align: right;
+}
 .article-body table td p, .article-body table th p {
   margin: 0;
 }
 .article-body table td .bold, .article-body table td strong, .article-body table th .bold, .article-body table th strong {
   font-weight: 600;
 }
-.article-body table th, .article-body table tr:first-child td {
+.article-body table td:first-child,
+.article-body table th:first-child {
+  vertical-align: middle;
+}
+.article-body table th {
   background-color: #f0f0f0;
   font-weight: 600;
 }
