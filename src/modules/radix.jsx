@@ -361,9 +361,10 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
         <NavigationMenu.Item>
           <NavigationMenu.Link
             className="NavigationMenuLink"
-            href="https://www.vagaro.com/book-service"
+            href="https://www.vagaro.com/"
             target="_blank"
             rel="noopener noreferrer"
+            id="top-nav-book-a-service"
           >
             <div className="flex items-center gap-2">
               <span className="text-primary font-semibold text-nowrap">
