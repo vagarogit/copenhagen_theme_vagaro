@@ -15,14 +15,46 @@
   return true;
 ">{{t "skip_navigation"}}</a>
 
-<header class="bg-white">
+<div class="relative h-16 max-h-16 min-h-[64px] bg-primary transition delay-150 ease-in-out">
+        <a
+          href="https://www.vagaro.com/pro/pos-hardware"
+          class="mx-auto flex h-full w-full flex-none cursor-pointer flex-row items-center justify-center gap-6 border-none py-4 text-center text-base leading-8 transition-colors sm:border-none xl:border-none"
+          id="paypro-banner"
+          rel="noopener noreferrer"
+          target="_blank"
+          style="background: linear-gradient(90deg, #422929 0%, #CC4744 64.07%, #773838 100%);"
+        >
+          <div class="relative flex items-center">
+            <div class="mx-auto mr-0 flex h-16 items-center justify-start">
+              <img
+                src="https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/X993Y4sUTNC5Rh2x2XMa"
+                alt="PayPro promotional banner"
+                class="block h-full w-auto max-w-none border-0 object-contain"
+                width="128"
+                height="110"
+              />
+            </div>
+            <div class="flex flex-col justify-center gap-1 md:flex-row md:justify-start md:gap-0">
+              <div class="mx-5">
+                <div class="cursor-pointer leading-5 text-white md:inline-block">
+                  <p>Meet PayPro, Your New Front Desk.</p>
+                </div>
+              </div>
+              <div class="mx-auto flex max-w-[110px] items-center justify-center rounded-full bg-charcoal px-3.5 py-[3px] text-xs font-bold text-white hover:bg-charcoal hover:text-white md:ml-0 md:py-1">
+                LEARN MORE
+              </div>
+            </div>
+          </div>
+        </a>
+  </div>
+<header class="bg-white sticky top-0 z-50 shadow-sm">
   <div class="mx-auto">
     <!-- Top row with logo and auth buttons -->
     <div
       class="relative flex h-16 justify-center items-center border-b border-gray-100 mx-auto px-4 border w-full"
     >
       <!-- Logo -->
-      <div class="absolute left-4 lg:left-8 flex shrink-0 items-center">
+      <div class="absolute left-2 md:left-4 lg:left-8 flex shrink-0 items-center">
         {{#link "help_center" class="flex items-center"}}
           <img
             src="{{asset 'logo.svg'}}"
@@ -35,7 +67,7 @@
       <!-- Mobile Sign Up Button (centered) -->
       <a
         href="https://www.vagaro.com/pro/pricing"
-        class="lg:hidden flex items-center justify-center bg-primary hover:bg-charcoal hover:border-solid text-md text-white font-medium py-2 px-4 rounded-full w-[152px] h-[40px]"
+        class="lg:hidden flex items-center justify-center bg-primary hover:bg-charcoal hover:border-solid text-md text-white font-medium py-2 px-8 md:px-4 rounded-full w-auto md:w-[152px] h-[40px]"
       >
         <span class="text-white font-semibold">Sign Up</span>
       </a>
@@ -79,7 +111,7 @@
 
           <a
             href="https://www.vagaro.com/pro/pricing"
-            class="flex items-center justify-center bg-primary hover:bg-charcoal hover:border-solid text-md text-white font-medium py-2 px-4 rounded-full w-[145px] h-[50px]"
+            class="flex items-center justify-center bg-primary hover:bg-charcoal hover:border-solid text-md text-white font-medium py-2 px-4 rounded-full w-auto md:w-[145px] h-[50px]"
           >
             Sign up
           </a>

@@ -7550,6 +7550,7 @@ zd-summary-block {
   max-width: 100%;
   margin: 0 auto;
   z-index: 50;
+  background-color: white;
 }
 
 .NavigationMenuList {
