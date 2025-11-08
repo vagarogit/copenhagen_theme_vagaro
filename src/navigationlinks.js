@@ -145,12 +145,18 @@ class NavigationLinksManager {
 
       const renderColumn = (columnItems) => {
         return columnItems
-          .map(
-            (item) => `
+          .map((item) => {
+            // Determine icon URL with fallback for beauty category
+            let iconUrl = item.iconImage?.url;
+            if (!iconUrl && title === "BEAUTY" && window.beautyIconSvg) {
+              iconUrl = window.beautyIconSvg;
+            }
+
+            return `
             <div class="mega-menu-item flex items-center py-1 hover:bg-gray-50 rounded px-2">
               ${
-                item.iconImage?.url
-                  ? `<img src="${item.iconImage.url}" alt="${item.name}" class="w-6 h-6 mr-3" />`
+                iconUrl
+                  ? `<img src="${iconUrl}" alt="${item.name}" class="w-6 h-6 mr-3" />`
                   : `<div class="w-6 h-6 mr-3"></div>`
               }
               <a href="${
@@ -159,8 +165,8 @@ class NavigationLinksManager {
                 ${item.name}
               </a>
             </div>
-          `
-          )
+          `;
+          })
           .join("");
       };
 

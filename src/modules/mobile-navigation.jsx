@@ -94,7 +94,12 @@ const MobileNavigation = ({
                   key={item.id}
                   href={formatLink(item.link)}
                   title={item.name}
-                  icon={item.iconImage?.url}
+                  icon={
+                    item.iconImage?.url ||
+                    (key === "beauty" && window.beautyIconSvg
+                      ? window.beautyIconSvg
+                      : null)
+                  }
                   onClick={onClose}
                 />
               ))}

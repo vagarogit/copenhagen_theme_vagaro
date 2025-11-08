@@ -141,7 +141,11 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
                   key={item.id}
                   href={formatLink(item.link)}
                   title={item.name}
-                  icon={item.iconImage?.url}
+                  icon={
+                    item.iconImage?.url ||
+                    (window.beautyIconSvg ? window.beautyIconSvg : null)
+                  }
+                  category="beauty"
                 />
               ))}
             </div>
@@ -160,6 +164,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
                   href={formatLink(item.link)}
                   title={item.name}
                   icon={item.iconImage?.url}
+                  category="wellness"
                 />
               ))}
             </div>
@@ -178,6 +183,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
                   href={formatLink(item.link)}
                   title={item.name}
                   icon={item.iconImage?.url}
+                  category="fitness"
                 />
               ))}
             </div>
