@@ -4,6 +4,9 @@ import * as ReactDOM from "react-dom";
 import NavigationMenuDemo from "./radix.jsx";
 import MobileNavigation from "./mobile-navigation.jsx";
 
+// Development mode: Set to true to keep mobile navigation open during development
+const DEV_MODE_MOBILE_NAV_OPEN = false; // Change to true to open mobile nav on load
+
 // Global data store for navigation data
 window.navigationData = {
   businessTypes: null,
@@ -13,7 +16,7 @@ window.navigationData = {
 
 // Global mobile navigation state
 window.mobileNavState = {
-  isOpen: false,
+  isOpen: DEV_MODE_MOBILE_NAV_OPEN,
   userInfo: {
     isSignedIn: false,
     userAvatar: null,
@@ -96,11 +99,14 @@ export function mountMobileNavigation() {
     document.body.appendChild(mobileNavContainer);
   }
 
+  // In dev mode, override isOpen state if flag is set
+  const isOpen = DEV_MODE_MOBILE_NAV_OPEN ? true : window.mobileNavState.isOpen;
+
   // Mount the mobile navigation component
   ReactDOM.render(
     <MobileNavigation
       navigationData={window.navigationData}
-      isOpen={window.mobileNavState.isOpen}
+      isOpen={isOpen}
       onClose={window.closeMobileNavigation}
       userInfo={window.mobileNavState.userInfo}
     />,
@@ -109,7 +115,8 @@ export function mountMobileNavigation() {
 
   console.log(
     "[Mobile Navigation] Successfully mounted with state:",
-    window.mobileNavState
+    window.mobileNavState,
+    DEV_MODE_MOBILE_NAV_OPEN ? "(DEV MODE: forced open)" : ""
   );
   return true;
 }

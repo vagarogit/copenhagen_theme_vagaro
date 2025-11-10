@@ -82,7 +82,7 @@ const MobileNavigation = ({
     };
 
     return (
-      <div className="space-y-4">
+      <div className="space-y-3">
         {Object.entries(categories).map(([key, category]) => (
           <div key={key}>
             <h4 className="text-base font-semibold text-primary uppercase mb-2">
@@ -172,7 +172,7 @@ const MobileNavigation = ({
     });
 
     return (
-      <div className="space-y-4">
+      <div className="space-y-3">
         {Object.entries(categories).map(([categoryTitle, items]) => {
           if (items.length === 0) return null;
 
@@ -215,8 +215,8 @@ const MobileNavigation = ({
       {/* Navigation Drawer */}
       <div className="mobile-nav-drawer absolute right-0 top-0 h-full w-full bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
         {/* Header */}
-        <div className="relative flex items-center justify-center p-4 border-b border-gray-200">
-          <div className="absolute left-4 flex h-16 items-center">
+        <div className="relative flex items-center justify-center py-4 px-1 border-b border-gray-200">
+          <div className="absolute left-0 flex h-16 items-center">
             <a href="/">
               <svg
                 width="80"
@@ -258,8 +258,8 @@ const MobileNavigation = ({
         </div>
 
         {/* Navigation Content */}
-        <div className="flex-1 overflow-y-auto">
-          <nav className="p-4 space-y-6">
+        <div className="flex-1 overflow-y-auto flex flex-col">
+          <nav className="p-4 space-y-6 flex-1">
             {/* User Section (when signed in) */}
             {isSignedIn && (
               <div className="pb-4 border-b border-gray-200">
@@ -313,100 +313,158 @@ const MobileNavigation = ({
             )}
 
             {/* Main Navigation Items */}
-            <div className="space-y-4">
-              {/* Book a Service */}
-              <MobileNavItem
-                href="https://www.vagaro.com"
-                title="Book a Service"
-                onClick={onClose}
-                className="text-lg font-semibold"
-              />
-
+            <div className="space-y-3">
               {/* Business Types */}
-              <button
+              <NavButton
                 onClick={() => openPanel("business-types")}
-                className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors focus:outline-none"
-              >
-                <span>Business Types</span>
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
+                title="Business Types"
+                icon={
+                  <svg
+                    className="w-6 h-6 text-gray-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                }
+                showChevron={true}
+              />
+              <div className="h-[1px] bg-[#cccccc] border-0" />
 
               {/* Features */}
-              <button
+              <NavButton
                 onClick={() => openPanel("features")}
-                className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors focus:outline-none"
-              >
-                <span>Features</span>
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
+                title="Features"
+                icon={
+                  <svg
+                    className="w-6 h-6 text-charcoal"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                }
+                showChevron={true}
+              />
+              <div className="h-[1px] bg-[#cccccc] border-0" />
 
-              {/* Other Navigation Items */}
+              {/* Products */}
               <MobileNavItem
                 href="https://www.vagaro.com/pro/pos-hardware"
                 title="Products"
                 onClick={onClose}
                 className="text-lg font-semibold"
+                icon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' /%3E%3C/svg%3E"
+                showChevron={true}
               />
+              <div className="h-[1px] bg-[#cccccc] border-0" />
 
+              {/* Multi-location */}
               <MobileNavItem
                 href="https://www.vagaro.com/pro/multi-location"
                 title="Multi-location"
                 onClick={onClose}
                 className="text-lg font-semibold"
+                icon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' /%3E%3C/svg%3E"
               />
+              <div className="h-[1px] bg-[#cccccc] border-0" />
 
+              {/* Pricing */}
               <MobileNavItem
                 href="https://www.vagaro.com/pro/pricing"
                 title="Pricing"
                 onClick={onClose}
                 className="text-lg font-semibold"
+                icon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z' /%3E%3C/svg%3E"
               />
+              <div className="h-[1px] bg-[#cccccc] border-0" />
 
+              {/* Contact Sales */}
               <MobileNavItem
                 href="https://www.vagaro.com/pro/contact-sales-team"
                 title="Contact Sales"
                 onClick={onClose}
                 className="text-lg font-semibold"
+                icon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z' /%3E%3C/svg%3E"
               />
+              <div className="h-[1px] bg-[#cccccc] border-0" />
 
+              {/* Contact Support */}
               <MobileNavItem
                 href="https://vagaro.zendesk.com/hc/en-us"
-                title="Support"
+                title="Contact Support"
                 onClick={onClose}
                 className="text-lg font-semibold"
+                icon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z' /%3E%3C/svg%3E"
+                showChevron={true}
               />
+              <div className="h-[1px] bg-[#cccccc] border-0" />
 
+              {/* Resources */}
               <MobileNavItem
                 href="https://www.vagaro.com/pro/resources"
                 title="Resources"
                 onClick={onClose}
                 className="text-lg font-semibold"
+                icon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z' /%3E%3C/svg%3E"
+                showChevron={true}
               />
+              <div className="h-[1px] bg-[#cccccc] border-0" />
+
+              {/* United States */}
+              <div className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 transition-colors">
+                <div className="">
+                  <span>United States</span>
+                </div>
+                {window.usaflagSvg && (
+                  <img
+                    src={window.usaflagSvg}
+                    alt="United States flag"
+                    className="w-6 h-6 flex-shrink-0"
+                    onError={(e) => {
+                      // Fallback if flag image doesn't exist
+                      e.target.style.display = "none";
+                    }}
+                  />
+                )}
+              </div>
             </div>
+            <div className="h-[1px] bg-[#cccccc] border-0" />
+            {/* Book a Service */}
+            <MobileNavItem
+              href="https://www.vagaro.com"
+              title="Book a Service"
+              onClick={onClose}
+              className="text-lg font-semibold"
+              isRedText={true}
+              showExternalIcon={true}
+            />
+            <div className="h-[1px] bg-[#cccccc] border-0" />
+
+            {/* Go to My Business / Sign In */}
+            <MobileNavItem
+              href={
+                isSignedIn
+                  ? "https://us04.vagaro.com/merchants/calendar"
+                  : "https://support.vagaro.com/hc/en-us/signin?return_to=https%3A%2F%2Fsupport.vagaro.com%2Fhc%2Fen-us"
+              }
+              title={isSignedIn ? "Go to My Business" : "Sign in"}
+              onClick={onClose}
+              className="text-lg font-semibold"
+              showExternalIcon={true}
+            />
 
             {/* Auth Buttons (when not signed in) */}
             {!isSignedIn && (
@@ -418,16 +476,20 @@ const MobileNavigation = ({
                 >
                   Log In
                 </a>
-                <a
-                  href="https://www.vagaro.com/pro/pricing"
-                  className="block w-full text-center py-3 px-4 bg-primary hover:bg-charcoal text-white font-semibold rounded-full transition-colors"
-                  onClick={onClose}
-                >
-                  Sign Up
-                </a>
               </div>
             )}
           </nav>
+
+          {/* Start Free Trial Button */}
+          <div className="p-4 border-t border-gray-200">
+            <a
+              href="https://www.vagaro.com/pro/pricing"
+              className="mx-auto my-4 block w-1/2 rounded-full bg-primary px-3 py-4 text-center text-base font-semibold text-white hover:bg-primary/90"
+              onClick={onClose}
+            >
+              Start Free Trial
+            </a>
+          </div>
         </div>
 
         {/* Sliding Panels */}
@@ -530,22 +592,99 @@ MobileNavigation.propTypes = {
   }),
 };
 
+// Chevron Icon Component
+const ChevronIcon = () => (
+  <svg
+    className="h-6 w-6 text-gray-800 flex-shrink-0"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M9 5l7 7-7 7"
+    />
+  </svg>
+);
+
+// Navigation Button Component (for buttons that open panels)
+const NavButton = ({ onClick, title, icon, showChevron = false }) => (
+  <button
+    onClick={onClick}
+    className="flex items-center justify-between w-full p-2 text-left text-lg font-semibold text-gray-900 hover:bg-gray-50 rounded-md transition-colors focus:outline-none"
+  >
+    <div className="flex items-center space-x-3">
+      <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full flex-shrink-0">
+        {icon}
+      </div>
+      <span>{title}</span>
+    </div>
+    {showChevron && <ChevronIcon />}
+  </button>
+);
+
+NavButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.node,
+  showChevron: PropTypes.bool,
+};
+
 // Mobile Navigation Item Component
-const MobileNavItem = ({ href, title, icon, onClick, className = "" }) => (
+const MobileNavItem = ({
+  href,
+  title,
+  icon,
+  onClick,
+  className = "",
+  showChevron = false,
+  showExternalIcon = false,
+  isRedText = false,
+}) => (
   <a
     href={href}
     className={classNames(
-      "flex items-center text-lg space-x-3 p-2 rounded-md hover:bg-gray-50 transition-colors text-gray-900 hover:text-gray-900",
+      "flex items-center justify-between w-full p-2 text-left rounded-md hover:bg-gray-50 transition-colors",
+      isRedText ? "text-primary" : "text-gray-900",
       className
     )}
     onClick={onClick}
+    target={showExternalIcon ? "_blank" : undefined}
+    rel={showExternalIcon ? "noopener noreferrer" : undefined}
   >
-    {icon && (
-      <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full">
-        <img src={icon} alt={title} className="w-6 h-6" />
-      </div>
+    <div className="flex items-center space-x-3">
+      {icon && (
+        <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full flex-shrink-0">
+          <img src={icon} alt={title} className="w-6 h-6" />
+        </div>
+      )}
+      <span
+        className={classNames(
+          "text-lg font-semibold",
+          isRedText && "text-primary"
+        )}
+      >
+        {title}
+      </span>
+    </div>
+    {showChevron && <ChevronIcon />}
+    {showExternalIcon && (
+      <svg
+        className="w-5 h-5 text-charcoal flex-shrink-0"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+        />
+      </svg>
     )}
-    <span className="text-lg font-semibold">{title}</span>
   </a>
 );
 
@@ -555,6 +694,9 @@ MobileNavItem.propTypes = {
   icon: PropTypes.string,
   onClick: PropTypes.func,
   className: PropTypes.string,
+  showChevron: PropTypes.bool,
+  showExternalIcon: PropTypes.bool,
+  isRedText: PropTypes.bool,
 };
 
 export default MobileNavigation;
