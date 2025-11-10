@@ -344,7 +344,7 @@ class FooterLinksManager {
 
     return `
       <div>
-        <h3 class="text-left text-base font-semibold text-white">${title}</h3>
+        <h3 class="text-left text-base font-semibold text-white mb-4 ">${title}</h3>
         <ul role="list" class="space-y-5">
           ${linksHtml}
         </ul>
