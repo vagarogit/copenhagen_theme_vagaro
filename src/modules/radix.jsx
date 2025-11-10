@@ -1,6 +1,7 @@
 /* eslint-disable @shopify/jsx-no-hardcoded-content */
 import * as React from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
+import { ChevronRightIcon } from "@radix-ui/react-icons";
 import classNames from "classnames";
 
 import { PropTypes } from "prop-types";
@@ -131,31 +132,45 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
         <div className="grid grid-cols-3 gap-4 w-full xl:container mx-auto">
           {/* Beauty Column */}
           <div className="">
-            <h3 className="text-lg font-bold text-primary uppercase ">
-              {categories.beauty}
-            </h3>
+            <a
+              href={formatLink("beauty-software")}
+              className="flex items-center justify-start text-lg font-bold text-primary uppercase hover:text-primary/80 transition-colors mb-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>{categories.beauty}</span>
+              <ChevronRightIcon className="w-4 h-4 text-primary ml-2 flex-shrink-0" />
+            </a>
             <div className="h-px bg-gray-400 max-w-[90%]" />
             <div className="grid grid-cols-1 col-span-1 md:grid-cols-2">
-              {businessTypes.beauty?.map((item) => (
-                <BusinessTypeItem
-                  key={item.id}
-                  href={formatLink(item.link)}
-                  title={item.name}
-                  icon={
-                    item.iconImage?.url ||
-                    (window.beautyIconSvg ? window.beautyIconSvg : null)
-                  }
-                  category="beauty"
-                />
-              ))}
+              {businessTypes.beauty
+                ?.filter((item) => item.link !== "beauty-software")
+                .map((item) => (
+                  <BusinessTypeItem
+                    key={item.id}
+                    href={formatLink(item.link)}
+                    title={item.name}
+                    icon={
+                      item.iconImage?.url ||
+                      (window.beautyIconSvg ? window.beautyIconSvg : null)
+                    }
+                    category="beauty"
+                  />
+                ))}
             </div>
           </div>
 
           {/* Wellness Column */}
           <div>
-            <h3 className="text-lg font-bold  text-primary uppercase">
-              {categories.wellness}
-            </h3>
+            <a
+              href={formatLink("spa-software")}
+              className="flex items-center justify-start text-lg font-bold text-primary uppercase hover:text-primary/80 transition-colors mb-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>{categories.wellness}</span>
+              <ChevronRightIcon className="w-4 h-4 text-primary ml-2 flex-shrink-0" />
+            </a>
             <div className="h-px bg-gray-400 max-w-[90%]" />
             <div className=" grid grid-cols-1 col-span-1 md:grid-cols-2">
               {businessTypes.wellness?.map((item) => (
@@ -172,9 +187,15 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
 
           {/* Fitness Column */}
           <div>
-            <h3 className="text-lg font-bold  text-primary uppercase ">
-              {categories.fitness}
-            </h3>
+            <a
+              href={formatLink("fitness-software")}
+              className="flex items-center justify-start text-lg font-bold text-primary uppercase hover:text-primary/80 transition-colors mb-2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>{categories.fitness}</span>
+              <ChevronRightIcon className="w-4 h-4 text-primary ml-2 flex-shrink-0" />
+            </a>
             <div className="h-px bg-gray-400 max-w-[90%]" />
             <div className="grid grid-cols-1 col-span-1 md:grid-cols-2 xl:max-w-7xl mx-auto">
               {businessTypes.fitness?.map((item) => (
@@ -396,7 +417,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
         </NavigationMenu.Item>
         {/* Business Types Menu */}
         <NavigationMenu.Item value="business-types">
-          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-50 text-nowrap">
+          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-hover text-nowrap">
             Business Types
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent">
@@ -406,7 +427,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
 
         {/* Features Menu */}
         <NavigationMenu.Item value="features">
-          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-50">
+          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-hover">
             Features
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent">

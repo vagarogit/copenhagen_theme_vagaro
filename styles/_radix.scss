@@ -66,6 +66,7 @@
   --indigo-12: hsl(226, 62%, 17%);
 
   --gray-50: #f9fafb;
+  --gray-hover: #f4f4f4;
 }
 
 /* reset */
@@ -100,7 +101,8 @@
 	font-weight: 500;
 	line-height: 1;
 	border-radius: 4px;
-	font-size: 16px !important;
+	font-size: 15px !important;
+	font-weight: 600;
 	color: #333333;
 }
 .NavigationMenuTrigger:focus,
@@ -109,7 +111,7 @@
 }
 .NavigationMenuTrigger:hover,
 .NavigationMenuLink:hover {
-	background-color: var(--gray-50);
+	background-color: var(--gray-hover);
 }
 
 .NavigationMenuTrigger {
@@ -122,8 +124,9 @@
 .NavigationMenuLink {
 	display: block;
 	text-decoration: none;
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 1;
+	font-weight: 600;
 }
 
 .NavigationMenuContent {
@@ -174,7 +177,7 @@
 .NavigationMenuViewport {
 	position: relative;
 	transform-origin: top center;
-	margin-top: 10px;
+	margin-top: 0px;
 	width: 100%;
 	background-color: white;
 	border-radius: 6px;
@@ -305,7 +308,7 @@
 
 /* Style the trigger when the menu is open */
 .NavigationMenuTrigger[data-state="open"] {
-	background-color: var(--gray-50);
+	background-color: var(--gray-hover);
 	color: #333333;
 }
 
