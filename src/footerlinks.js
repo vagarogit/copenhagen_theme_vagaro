@@ -93,14 +93,14 @@ class FooterLinksManager {
         {
           id: "mental-health",
           name: "Mental Health",
-          href: "/pro/mental-health-software",
+          href: "https://www.vagaro.com/pro/mental-health-software",
         },
       ],
       businessFeatures: [
         {
           id: "online-booking",
           name: "Online Booking",
-          href: "/pro/online-booking",
+          href: "https://www.vagaro.com/pro/online-booking",
         },
         {
           id: "calendar",
