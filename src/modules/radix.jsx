@@ -368,6 +368,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
                     title={item.name}
                     icon={item.iconImage?.url}
                     className="hover:bg-gray-50"
+                    flagAsNew={item.flagAsNew}
                   />
                 ))}
               </div>
@@ -641,7 +642,10 @@ BusinessTypeItem.propTypes = {
 };
 
 const ListItem = React.forwardRef(
-  ({ className, children, title, icon, href, ...props }, forwardedRef) => {
+  (
+    { className, children, title, icon, href, flagAsNew, ...props },
+    forwardedRef
+  ) => {
     // All navigation links should open in new tab since they're external to Zendesk
     return (
       <li>
@@ -661,7 +665,14 @@ const ListItem = React.forwardRef(
               <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
                 {icon && <img src={icon} alt={title} className="w-5 h-5" />}
               </div>
-              {title}
+              <span className="flex items-center gap-2">
+                {title}
+                {flagAsNew && (
+                  <span className="rounded-full bg-green px-2 py-0.5 text-xs font-semibold text-white">
+                    NEW
+                  </span>
+                )}
+              </span>
             </div>
             <p className="">{children}</p>
           </a>
@@ -678,6 +689,7 @@ ListItem.propTypes = {
   title: PropTypes.string,
   icon: PropTypes.string,
   href: PropTypes.string,
+  flagAsNew: PropTypes.bool,
 };
 
 export default NavigationMenuDemo;

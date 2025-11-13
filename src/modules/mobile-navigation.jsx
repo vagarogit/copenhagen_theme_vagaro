@@ -101,6 +101,7 @@ const MobileNavigation = ({
                       : null)
                   }
                   onClick={onClose}
+                  flagAsNew={item.flagAsNew}
                 />
               ))}
             </div>
@@ -189,6 +190,7 @@ const MobileNavigation = ({
                     title={item.name}
                     icon={item.iconImage?.url}
                     onClick={onClose}
+                    flagAsNew={item.flagAsNew}
                   />
                 ))}
               </div>
@@ -642,6 +644,7 @@ const MobileNavItem = ({
   showChevron = false,
   showExternalIcon = false,
   isRedText = false,
+  flagAsNew = false,
 }) => (
   <a
     href={href}
@@ -660,13 +663,20 @@ const MobileNavItem = ({
           <img src={icon} alt={title} className="w-6 h-6" />
         </div>
       )}
-      <span
-        className={classNames(
-          "text-lg font-semibold",
-          isRedText && "text-primary"
+      <span className="flex items-center gap-2">
+        <span
+          className={classNames(
+            "text-lg font-semibold",
+            isRedText && "text-primary"
+          )}
+        >
+          {title}
+        </span>
+        {flagAsNew && (
+          <span className="rounded-full bg-green px-2 py-0.5 text-xs font-semibold text-white">
+            NEW
+          </span>
         )}
-      >
-        {title}
       </span>
     </div>
     {showChevron && <ChevronIcon />}
@@ -697,6 +707,7 @@ MobileNavItem.propTypes = {
   showChevron: PropTypes.bool,
   showExternalIcon: PropTypes.bool,
   isRedText: PropTypes.bool,
+  flagAsNew: PropTypes.bool,
 };
 
 export default MobileNavigation;

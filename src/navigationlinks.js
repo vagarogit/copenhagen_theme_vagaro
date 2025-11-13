@@ -32,6 +32,7 @@ class NavigationLinksManager {
               name
               link
               showInHomeTabs
+              flagAsNew
               iconImage {
                 id
                 url
@@ -42,6 +43,7 @@ class NavigationLinksManager {
               name
               link
               showInHomeTabs
+              flagAsNew
               iconImage {
                 id
                 url
@@ -52,6 +54,7 @@ class NavigationLinksManager {
               name
               link
               showInHomeTabs
+              flagAsNew
               iconImage {
                 id
                 url
@@ -63,6 +66,7 @@ class NavigationLinksManager {
               description
               link
               showInHomeTabs
+              flagAsNew
               iconImage {
                 id
                 url
