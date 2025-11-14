@@ -1,0 +1,39 @@
+{
+  // Code formatting
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // ESLint configuration
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  // File associations
+  "files.associations": {
+    "*.hbs": "handlebars"
+  },
+
+  // Tailwind CSS configuration
+  "tailwindCSS.experimental.classRegex": [
+    ["classnames\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ],
+
+  // Editor preferences for this project
+  "editor.tabSize": 2,
+  "files.eol": "\n",
+
+  // Exclude patterns for search
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/assets/*-bundle.js": true,
+    "yarn.lock": true,
+    "style.css": true,
+    "script.js": true
+  }
+}

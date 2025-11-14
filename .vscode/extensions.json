@@ -1,0 +1,30 @@
+{
+  "recommendations": [
+    // Handlebars support for .hbs templates
+    "mads-hartmann.handlebars",
+
+    // JavaScript/TypeScript linting and formatting
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+
+    // React development
+    "dsznajder.es7-react-js-snippets",
+
+    // Tailwind CSS support
+    "bradlc.vscode-tailwindcss",
+
+    // PostCSS support
+    "csstools.postcss",
+
+    // Git enhancements
+    "eamodio.gitlens",
+    "vivaxy.vscode-conventional-commits",
+
+    // Productivity
+    "usernamehw.errorlens",
+    "wix.vscode-import-cost",
+    "christian-kohler.path-intellisense",
+    "formulahendry.auto-rename-tag"
+  ],
+  "unwantedRecommendations": []
+}
