@@ -129,19 +129,19 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
 
     return (
       <div className="List bg-white p-8 w-full fullwidth">
-        <div className="grid grid-cols-3 gap-4 w-full xl:container mx-auto">
+        <div className="grid grid-cols-3 gap-4 w-full xl:container mx-auto xl:max-w-7xl">
           {/* Beauty Column */}
           <div className="">
             <a
               href={formatLink("beauty-software")}
-              className="flex items-center justify-start text-lg font-bold text-primary uppercase hover:text-primary/80 transition-colors mb-2"
+              className="flex items-center justify-start text-base font-bold text-primary uppercase hover:text-primary/80 transition-colors mb-2"
               target="_blank"
               rel="noopener noreferrer"
             >
               <span>{categories.beauty}</span>
               <ChevronRightIcon className="w-4 h-4 text-primary ml-2 flex-shrink-0" />
             </a>
-            <div className="h-px bg-gray-400 max-w-[90%]" />
+            <div className="h-px bg-gray-300 max-w-[90%]" />
             <div className="grid grid-cols-1 col-span-1 md:grid-cols-2">
               {businessTypes.beauty
                 ?.filter((item) => item.link !== "beauty-software")
@@ -353,14 +353,14 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
 
     return (
       <div className="List bg-white w-full fullwidth">
-        <div className="grid grid-cols-5 gap-x-5 xl:container mx-auto">
+        <div className="grid grid-cols-5 gap-x-5 xl:container xl:max-w-7xl mx-auto">
           {categoryOrder.map((categoryTitle) => (
             <div key={categoryTitle} className="space-y-1">
-              <h3 className="text-lg font-bold  text-primary uppercase text-nowrap">
+              <h3 className="text-base font-bold  text-primary uppercase text-nowrap">
                 {categoryTitle}
               </h3>
-              <div className="h-px w-[90%] bg-gray-400" />
-              <div className="space-y-1">
+              <div className="h-px w-[85%] bg-gray-300" />
+              <div className="space-y-1 mt-2">
                 {categories[categoryTitle].map((item) => (
                   <ListItem
                     key={item.id}
@@ -623,11 +623,11 @@ const BusinessTypeItem = ({ href, title, icon }) => {
         rel="noopener noreferrer"
       >
         {icon && (
-          <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
+          <div className="w-9 h-9 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
             <img src={icon} alt={title} className="w-5 h-5 " />
           </div>
         )}
-        <span className="text-charcoal font-medium group-hover:text-gray-900 transition-colors text-base">
+        <span className="text-charcoal font-semibold group-hover:text-gray-900 transition-colors text-base">
           {title}
         </span>
       </a>
@@ -652,7 +652,7 @@ const ListItem = React.forwardRef(
         <NavigationMenu.Link asChild>
           <a
             className={classNames(
-              "ListItemLink pr-1 py-2 text-base font-semibold",
+              "ListItemLink pr-1 py-1 text-base font-semibold",
               className
             )}
             href={href}
@@ -661,11 +661,11 @@ const ListItem = React.forwardRef(
             {...props}
             ref={forwardedRef}
           >
-            <div className="ListItemHeading flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
+            <div className="ListItemHeading flex items-center gap-2">
+              <div className="w-9 h-9 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
                 {icon && <img src={icon} alt={title} className="w-5 h-5" />}
               </div>
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2 text-base font-semibold">
                 {title}
                 {flagAsNew && (
                   <span className="rounded-full bg-green px-2 py-0.5 text-xs font-semibold text-white">
