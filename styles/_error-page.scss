@@ -15,18 +15,19 @@
 }
 
 .error-page-container {
-  @include max-width-container;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  
+
+  @include max-width-container;
+
   @include tablet {
     flex-direction: row;
     align-items: flex-start;
     gap: 3rem;
   }
-  
+
   @include desktop {
     gap: 4rem;
   }

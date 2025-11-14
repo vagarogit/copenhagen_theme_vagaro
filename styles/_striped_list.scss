@@ -4,17 +4,17 @@
   padding: 0;
 
   &-item {
-    @include tablet {
-      align-items: center;
-      flex-direction: row;
-    }
-
     align-items: flex-start;
     border-bottom: 1px solid $low-contrast-border-color;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     padding: 20px 0;
+
+    @include tablet {
+      align-items: center;
+      flex-direction: row;
+    }
   }
 
   &-info {
@@ -40,34 +40,35 @@
   }
 
   &-count {
+    color: $secondary-text-color;
+    font-size: $font-size-small;
+    justify-content: flex-start;
+    text-transform: capitalize;
+
     @include tablet {
       display: flex;
       flex: 1;
       justify-content: space-around;
     }
-
-    color: $secondary-text-color;
-    font-size: $font-size-small;
-    justify-content: flex-start;
-    text-transform: capitalize;
   }
   &-count-item {
     &::after {
-      @include tablet { display: none; }
-
       content: "·";
       display: inline-block;
       padding: 0 5px;
+
+      @include tablet { display: none; }
     }
 
     &:last-child::after { display: none; }
   }
 
   &-number {
+    text-align: center;
+
     @include tablet {
       color: $text_color;
       display: block;
     }
-    text-align: center;
   }
 }

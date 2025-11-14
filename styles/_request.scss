@@ -1,15 +1,15 @@
 /***** Request *****/
 .request {
   &-container {
-    @include desktop {
-      align-items: flex-start;
-      flex-direction: row;
-    }
-
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    @include desktop {
+      align-items: flex-start;
+      flex-direction: row;
+    }
 
     .comment-container {
       min-width: 0;
@@ -17,8 +17,9 @@
   }
 
   &-breadcrumbs {
-    @include desktop { margin-bottom: 60px; }
     margin-bottom: 40px;
+
+    @include desktop { margin-bottom: 60px; }
   }
 
   &-main {
@@ -88,17 +89,22 @@
   }
 
   &-title {
+    width: 100%;
+
     @include desktop {
       border-bottom: 1px solid $low-contrast-border-color;
       margin-bottom: 0;
       max-width: 66%; //Same as main container
       padding-bottom: 20px;
     }
-
-    width: 100%;
   }
 
   &-sidebar {
+    border-bottom: 1px solid $low-contrast-border-color;
+    border-top: 1px solid $low-contrast-border-color;
+    flex: 1 0 auto;
+    order: 0; //Bring to top
+
     @include desktop {
       background-color: $primary-shade;
       border: 0;
@@ -108,19 +114,14 @@
       width: 30%; //IE11 fix
     }
 
-    border-bottom: 1px solid $low-contrast-border-color;
-    border-top: 1px solid $low-contrast-border-color;
-    flex: 1 0 auto;
-    order: 0; //Bring to top
-
     h2 {
-      @include desktop {
-        display: none;
-      }
-
       font-size: $font-size-base;
       font-weight: $font-weight-semibold;
       position: relative;
+
+      @include desktop {
+        display: none;
+      }
     }
   }
 

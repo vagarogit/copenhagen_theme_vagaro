@@ -9,9 +9,9 @@
   }
 
   &-inner {
-    @include max-width-container;
     display: flex;
     justify-content: space-between;
+    @include max-width-container;
   }
 
   &-language-selector button {
@@ -32,14 +32,14 @@
 
 /* Country selector styling */
 select {
-  &:focus {
-    outline: none;
-  }
-  
   /* Style the dropdown arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 /* Social media icons hover effects */

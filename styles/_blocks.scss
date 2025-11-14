@@ -2,22 +2,18 @@
 /* Used in Homepage#categories and Community#topics */
 .blocks {
   &-list {
-    @include tablet {
-      margin: 0 -10px;
-    }
-
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     list-style: none;
     padding: 0;
+
+    @include tablet {
+      margin: 0 -10px;
+    }
   }
 
   &-item {
-    @include tablet {
-      margin: 0 10px 20px;
-    }
-
     border: .5px solid $brand_color;
     border-radius: 8px;
     box-sizing: border-box;
@@ -29,6 +25,12 @@
     text-align: center;
     min-height: 150px;
 
+    transition: all 0.2s ease-in-out;
+
+    @include tablet {
+      margin: 0 10px 20px;
+    }
+
     &:hover,
     &:focus,
     &:active {
@@ -36,15 +38,12 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       transform: translateY(-2px);
       transition: all 0.2s ease-in-out;
-     
 
       * {
         color: #000000;
         text-decoration: none;
       }
     }
-
-    transition: all 0.2s ease-in-out;
 
     &-internal {
       background-color: transparent;

@@ -6,12 +6,12 @@
   }
 
   &-content {
+    flex: 1;
+    max-width: 100%;
+
     @include desktop {
       flex: 0 0 80%;
     }
-
-    flex: 1;
-    max-width: 100%;
   }
 }
 

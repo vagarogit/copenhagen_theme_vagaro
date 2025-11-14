@@ -87,9 +87,9 @@
 }
 
 @mixin content-body {
-  @include standalone-link;
-
   display: flow-root;
+
+  @include standalone-link;
 
   img {
     height: auto;

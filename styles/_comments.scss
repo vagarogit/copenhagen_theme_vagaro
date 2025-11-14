@@ -48,10 +48,10 @@
     position: relative;
 
     &.comment-official {
-      @include tablet { padding-top: 20px; }
-
       border: 1px solid $brand_color;
       padding: 40px 20px 20px; // 20 + 20 of official commment badge
+
+      @include tablet { padding-top: 20px; }
     }
   }
 
@@ -111,16 +111,19 @@
   &-container { width: 100%; }
 
   &-form-controls {
+    display: none;
+    margin-top: 10px;
+    text-align: left;
+
     @include tablet {
       [dir="ltr"] & {
         text-align: right;
       }
     }
-    display: none;
-    margin-top: 10px;
-    text-align: left;
 
     input[type="submit"] {
+      margin-top: 15px;
+
       @include desktop {
         margin-left: 15px;
         [dir="rtl"] & {
@@ -128,7 +131,6 @@
           margin-right: 15px;
         }
       }
-      margin-top: 15px;
     }
 
     input[type="checkbox"] {
@@ -148,11 +150,12 @@
   }
 
   &-body {
-    @include text-overflow;
-    @include content-body;
     font-family: $text_font;
     line-height: 1.6;
     overflow-x: auto;
+
+    @include text-overflow;
+    @include content-body;
   }
 
   &-mark-as-solved {

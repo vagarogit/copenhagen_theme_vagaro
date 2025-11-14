@@ -25,14 +25,14 @@
 
   &-item-parent,
   &-item-link {
+    margin: 6px 0;
+    display: inline-block;
+    width: 100%;
+
     @include tablet {
       width: 70%;
       margin: 0;
     }
-
-    margin: 6px 0;
-    display: inline-block;
-    width: 100%;
   }
 
   &-item-link {
@@ -43,16 +43,15 @@
 
   &-item-meta {
     color: $text_color;
+    margin: 15px 0 0 0;
+    float: none;
+
     @include tablet {
       margin: 0;
       float: right;
 
       [dir="rtl"] & { float: left; }
-
     }
-
-    margin: 15px 0 0 0;
-    float: none;
   }
 
   &-item-time,

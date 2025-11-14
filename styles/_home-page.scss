@@ -1,11 +1,11 @@
 /***** Homepage *****/
 
 .section {
+  margin-bottom: 40px;
+
   @include tablet {
     margin-bottom: 30px;
   }
-
-  margin-bottom: 40px;
 }
 
 .home-section h2 {

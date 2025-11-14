@@ -37,8 +37,9 @@
 }
 
 .post-to-community {
-  @include tablet { margin: 0; }
   margin-top: 10px;
+
+  @include tablet { margin: 0; }
 }
 
 /* Community topics grid */
@@ -57,21 +58,22 @@
 /* Community topic page */
 
 .topic-header {
-  @include tablet { padding-bottom: 10px; }
   border-bottom: 1px solid $low-contrast-border-color;
   font-size: $font-size-small;
 
+  @include tablet { padding-bottom: 10px; }
+
   .dropdown {
+    display: block;
+    border-top: 1px solid $low-contrast-border-color;
+    padding: 10px 0;
+
     @include tablet {
       border-top: 0;
       display: inline-block;
       margin-right: 20px;
       padding: 0;
     }
-
-    display: block;
-    border-top: 1px solid $low-contrast-border-color;
-    padding: 10px 0;
   }
 }
 
@@ -82,22 +84,22 @@
 
 /* Topic, post and user follow button */
 .community-follow {
+  margin-bottom: 10px;
+  width: 100%;
+
   @include tablet {
     margin-bottom: 0;
     width: auto;
   }
 
-  margin-bottom: 10px;
-  width: 100%;
-
   button {
     @extend .button;
-    @include tablet { width: auto;}
-
     line-height: 30px;
     padding: 0 10px 0 15px;
     position: relative;
     width: 100%;
+
+    @include tablet { width: auto;}
 
     &:hover { background-color: $brand_color; }
 
@@ -122,10 +124,6 @@
     }
 
     &::after {
-      @include tablet {
-        position: static;
-      }
-
       border-left: 1px solid $button-color;
       content: attr(data-follower-count);
       color: $button-color;
@@ -135,6 +133,10 @@
       padding-left: 10px;
       position: absolute;
       right: 10px;
+
+      @include tablet {
+        position: static;
+      }
 
       [dir="rtl"] & {
         border-left: 0;

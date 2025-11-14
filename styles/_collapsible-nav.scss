@@ -1,25 +1,24 @@
 /* Navigation element that collapses on mobile */
 .collapsible-nav {
-  @include tablet {
-    flex-direction: row;
-  }
-
   flex-direction: column;
   font-size: $font-size-navigation;
   position: relative;
+
+  @include tablet {
+    flex-direction: row;
+  }
 }
 
 .collapsible-nav-border {
+  border-bottom: 1px solid $low-contrast-border-color;
+  border-top: 1px solid $low-contrast-border-color;
+
   @include tablet {
     border-top: 0;
   }
-
-  border-bottom: 1px solid $low-contrast-border-color;
-  border-top: 1px solid $low-contrast-border-color;
 }
 
 .collapsible-nav-toggle {
-  @include tablet { display: none; }
   top: calc(45px / 2);
   transform: translateY(-50%);
   position: absolute;
@@ -30,6 +29,8 @@
   width: 25px;
   height: 25px;
   border-radius: 50%;
+
+  @include tablet { display: none; }
 
   [dir="rtl"] & {
     left: 0;
@@ -59,14 +60,18 @@
 }
 
 .collapsible-nav-list {
+  display: flex;
+  flex-direction: column;
+
   @include tablet {
     flex-direction: row;
   }
 
-  display: flex;
-  flex-direction: column;
-
   li {
+    color: $text_color;
+    line-height: 45px;
+    order: 1; // All elements have the same order
+
     @include tablet {
       line-height: normal;
       margin-right: 30px;
@@ -81,10 +86,6 @@
         padding: 15px 0;
       }
     }
-
-    color: $text_color;
-    line-height: 45px;
-    order: 1; // All elements have the same order
 
     a {
       color: $text_color;
@@ -105,8 +106,9 @@
 
   li:not([aria-selected="true"]),
   li:not(.current) {
-    @include tablet { display: block; }
     display: none;
+
+    @include tablet { display: block; }
   }
 
   li[aria-selected="true"] {
@@ -117,13 +119,13 @@
 
   li[aria-selected="true"],
   li.current {
+    order: 0; //Move to top of menu
+    position: relative;
+
     @include tablet {
       border-bottom: 4px solid $brand_color;
       order: 1;
     }
-
-    order: 0; //Move to top of menu
-    position: relative;
 
     a { color: $text_color; }
   }
