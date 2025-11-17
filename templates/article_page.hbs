@@ -13,7 +13,7 @@
 
   <div class="mx-auto md:px-4 lg:flex lg:gap-10" id="article-container">
 
-    <article id="main-content" class="w-full md: max-w-6xl">
+    <article id="main-content" class="w-full md:max-w-6xl">
       <header class="article-header">
         <h1 title="{{article.title}}" class="text-4xl md:text-5xl font-semibold block py-8">
           {{article.title}}
@@ -56,7 +56,7 @@
 
       <section class="article-info">
         <div class="article-content">
-          <div class="article-body text-base leading-relaxed">{{article.body}}</div>
+          <div class="article-body text-base leading-relaxed [&_ol]:list-decimal [&_ol]:pl-10 [&_ol]:space-y-1 [&_ul]:list-disc [&_ul]:pl-10 [&_ul]:space-y-1 [&_li_img]:block [&_li_img]:-ml-4 [&_li_img]:h-auto [&_li_img]:mt-4 [&_li_img]:mb-4 [&_li_img]:rounded-lg">{{article.body}}</div>
 
           {{#if (compare article.content_tags.length ">" 0)}}
             <section class="content-tags">
