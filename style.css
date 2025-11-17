@@ -7575,10 +7575,6 @@ zd-summary-block {
 }
 
 .NavigationMenuTrigger:focus,
-.NavigationMenuLink:focus {
-  box-shadow: 0 0 0 2px var(--black-a7);
-}
-
 .NavigationMenuTrigger:hover,
 .NavigationMenuLink:hover {
   background-color: var(--gray-hover);

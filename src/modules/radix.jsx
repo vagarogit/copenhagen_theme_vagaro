@@ -652,7 +652,7 @@ const ListItem = React.forwardRef(
         <NavigationMenu.Link asChild>
           <a
             className={classNames(
-              "ListItemLink pr-1 py-1 text-base font-semibold",
+              "ListItemLink pr-1 py-[2px] text-base font-semibold",
               className
             )}
             href={href}
@@ -662,7 +662,7 @@ const ListItem = React.forwardRef(
             ref={forwardedRef}
           >
             <div className="ListItemHeading flex items-center gap-2">
-              <div className="w-9 h-9 flex items-center justify-center bg-gray-100 rounded-full group-hover:bg-gray-50 transition-colors">
+              <div className="w-10 h-10 flex items-center justify-center bg-ink-lightest rounded-full group-hover:bg-gray-50 transition-colors">
                 {icon && <img src={icon} alt={title} className="w-5 h-5" />}
               </div>
               <span className="flex items-center gap-2 text-base font-semibold">

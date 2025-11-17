@@ -82,6 +82,7 @@
     --color-green: #67ae30;
     --color-gray-wave: #ebebeb;
     --color-ink-darker: #333333;
+    --color-ink-lightest: #f8f8f8;
     --color-footer-gray: #1E1E1E;
     --color-primary: #cc4744;
     --color-wave-gray: #f3f3f3;
@@ -1063,6 +1064,9 @@
   .bg-ink-darker {
     background-color: var(--color-ink-darker);
   }
+  .bg-ink-lightest {
+    background-color: var(--color-ink-lightest);
+  }
   .bg-primary {
     background-color: var(--color-primary);
   }
@@ -1170,6 +1174,9 @@
   }
   .py-16 {
     padding-block: calc(var(--spacing) * 16);
+  }
+  .py-\[2px\] {
+    padding-block: 2px;
   }
   .py-\[3px\] {
     padding-block: 3px;
