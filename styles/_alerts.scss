@@ -122,7 +122,7 @@
 
 .tip {
   background-color: rgba(232, 249, 243, 0.3) !important;
-  border: 1px solid rgb(142, 227, 200);
+  border: 1px solid rgb(142, 227, 200) !important;
   border-radius: 8px;
   color: $heading-color;
   padding: 20px;
@@ -140,16 +140,17 @@
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    left: 16px;
+    left: 16px !important;
     top: 26px;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
   
   .title {
     color: $heading-color;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0px !important;
+    margin-left: 32px !important;
   }
 }
 

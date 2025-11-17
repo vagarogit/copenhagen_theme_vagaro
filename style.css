@@ -778,7 +778,7 @@ template {
 
 .tip {
   background-color: rgba(232, 249, 243, 0.3) !important;
-  border: 1px solid rgb(142, 227, 200);
+  border: 1px solid rgb(142, 227, 200) !important;
   border-radius: 8px;
   color: #333333;
   padding: 20px;
@@ -796,15 +796,16 @@ template {
   background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
-  left: 16px;
+  left: 16px !important;
   top: 26px;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 .tip .title {
   color: #333333;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 0px !important;
+  margin-left: 32px !important;
 }
 
 .alert, .warning, .caution {
@@ -6629,7 +6630,7 @@ zd-summary-block {
 }
 .section.accordion.sub-topic .panel-body ol.procedure {
   list-style-type: decimal !important;
-  padding-left: 1.5rem;
+  padding-left: 8px !important;
   margin-bottom: 1rem;
   display: block !important;
 }
