@@ -11,21 +11,15 @@ let hasInitialized = false;
  * Initialize vanilla JS accordions for article pages
  */
 function initializeArticleAccordions() {
-  console.log("[Article Accordions] Initializing...");
-  
   // Run initialization
   const runInitialization = () => {
     // Prevent duplicate initialization
     if (hasInitialized) {
-      console.log("[Article Accordions] Already initialized, skipping duplicate call");
       return;
     }
-    
-    console.log("[Article Accordions] Running initialization...");
+
     try {
       initSubTopicAccordions();
-      const accordionCount = document.querySelectorAll(".section.accordion.sub-topic").length;
-      console.log(`[Article Accordions] Found ${accordionCount} accordion(s)`);
       hasInitialized = true;
     } catch (error) {
       console.error("[Article Accordions] Error during initialization:", error);

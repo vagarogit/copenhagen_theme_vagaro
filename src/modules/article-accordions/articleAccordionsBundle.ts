@@ -6,5 +6,3 @@
 
 // Import and initialize the CSS accordion integration
 import "./integration.jsx";
-
-console.log("[Article Accordions Bundle] Loaded successfully");

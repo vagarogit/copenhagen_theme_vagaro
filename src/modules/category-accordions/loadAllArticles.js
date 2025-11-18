@@ -7,7 +7,7 @@ export function loadAllArticles() {
   try {
     // Only run on category pages
     if (!document.querySelector(".category-container")) {
-      console.log("Not on category page, skipping loadAllArticles");
+      // console.log("Not on category page, skipping loadAllArticles");
       return;
     }
 
@@ -16,16 +16,16 @@ export function loadAllArticles() {
       ".zd-custom-accordion__item"
     );
 
-    console.log(`Found ${accordionItems.length} accordion items`);
+    // console.log(`Found ${accordionItems.length} accordion items`);
 
     accordionItems.forEach((item) => {
       const body = item.querySelector(".zd-custom-accordion__body");
       const seeAllLink = body?.querySelector(".see-all-articles");
 
-      console.log("Checking accordion item:", {
-        hasBody: !!body,
-        hasSeeAllLink: !!seeAllLink,
-      });
+      // console.log("Checking accordion item:", {
+      //   hasBody: !!body,
+      //   hasSeeAllLink: !!seeAllLink,
+      // });
 
       if (!seeAllLink || !body) {
         return;
@@ -48,8 +48,6 @@ export function loadAllArticles() {
       // Replace the "see all" link with loading indicator
       seeAllLink.style.display = "none";
       body.appendChild(loadingIndicator);
-
-      console.log(`Fetching all articles from: ${sectionUrl}`);
 
       // Fetch the full section page
       fetch(sectionUrl)

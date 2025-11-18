@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Trending articles loading");
+  // console.log("Trending articles loading");
 
   // Check if the trending articles container exists
   var trendingContainer = document.getElementById(
@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Use the pre-configured arrow SVG path
         var arrowPath = window.arrowUpRightSvg || "/assets/arrow-up-right.svg";
-        console.log("Using arrow path:", arrowPath);
 
         // Add articles
         for (var i = 0; i < response.length; i++) {

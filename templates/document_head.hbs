@@ -46,18 +46,17 @@
       'wait_for_update': 500
     });
     gtag("set", "ads_data_redaction", true);
+    
+    // Mark that consent defaults are set but not yet updated
+    window.consentModeReady = false;
   </script>
   <!-- noinspection JSUnresolvedLibraryURL -->
   <script
     id="osano-script"
     src="https://cmp.osano.com/js1OYJVqiJ/4387eb79-890e-4da8-a04c-0e13ea701f15/osano.js"
-    defer
-    onload="
-      setTimeout(function() {
-        window.dispatchEvent(new CustomEvent('osano-script-loaded'));
-      }, 2000);
-    "
+    
   ></script>
+ 
 
 
   <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
@@ -83,7 +82,12 @@
   <!-- Load GTM after Osano consent is ready to ensure proper consent mode sequencing -->
   <script>
     (function() {
+      let gtmLoaded = false;
+      
       function loadGTM() {
+        if (gtmLoaded) return;
+        gtmLoaded = true;
+        
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -91,14 +95,76 @@
         })(window,document,'script','dataLayer','GTM-5QW5SZB');
       }
       
-      // Wait for Osano to load and update consent before loading GTM
-      if (window.Osano) {
-        loadGTM();
-      } else {
-        window.addEventListener('osano-script-loaded', function() {
-          loadGTM();
+      function waitForConsentUpdate() {
+        // Check if consent has already been updated
+        if (window.consentModeReady) {
+          // Consent already updated, safe to load GTM
+          setTimeout(loadGTM, 50);
+          return true;
+        }
+        
+        // Check dataLayer for consent update
+        const consentUpdated = window.dataLayer && window.dataLayer.some(function(item) {
+          return item && Array.isArray(item) && item[0] === 'consent' && item[1] === 'update';
         });
+        
+        if (consentUpdated) {
+          window.consentModeReady = true;
+          setTimeout(loadGTM, 50);
+          return true;
+        }
+        
+        // Listen for the custom consent updated event
+        window.addEventListener('osano-consent-updated', function() {
+          window.consentModeReady = true;
+          // Small delay to ensure consent update is fully processed
+          setTimeout(loadGTM, 100);
+        }, { once: true });
+        
+        // Fallback: Check periodically if consent was updated
+        let attempts = 0;
+        const maxAttempts = 50; // 5 seconds max wait
+        const checkInterval = setInterval(function() {
+          attempts++;
+          
+          if (window.consentModeReady) {
+            clearInterval(checkInterval);
+            setTimeout(loadGTM, 50);
+            return;
+          }
+          
+          const hasConsentUpdate = window.dataLayer && window.dataLayer.some(function(item) {
+            return item && Array.isArray(item) && item[0] === 'consent' && item[1] === 'update';
+          });
+          
+          if (hasConsentUpdate) {
+            window.consentModeReady = true;
+            clearInterval(checkInterval);
+            setTimeout(loadGTM, 50);
+          } else if (attempts >= maxAttempts) {
+            // Timeout: update consent with defaults and load GTM
+            clearInterval(checkInterval);
+            if (typeof gtag === 'function') {
+              gtag('consent', 'update', {
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'personalization_storage': 'denied',
+                'functionality_storage': 'granted',
+                'security_storage': 'granted'
+              });
+            }
+            window.consentModeReady = true;
+            setTimeout(loadGTM, 100);
+          }
+        }, 100);
+        
+        return true;
       }
+      
+      // Always wait for consent update before loading GTM
+      waitForConsentUpdate();
     })();
   </script>
   <!-- End Google Tag Manager -->
@@ -240,7 +306,7 @@
             
             if (isValidPath) {
               await import("article-accordions");
-              console.log("Article accordions module loaded successfully");
+              {{!-- console.log("Article accordions module loaded successfully"); --}}
             } else {
               console.warn("Article accordions import map entry not found or invalid:", articleAccordionsPath);
               // Fallback: Try to initialize accordions manually using the fallback script
@@ -251,7 +317,7 @@
             // Fallback: Try to initialize accordions manually
             setTimeout(() => {
               if (typeof window.initArticleAccordions === 'function') {
-                console.log("Attempting fallback initialization...");
+                // console.log("Attempting fallback initialization...");
                 window.initArticleAccordions();
               }
             }, 500);
@@ -261,7 +327,7 @@
           // Fallback: Try to initialize accordions manually
           setTimeout(() => {
             if (typeof window.initArticleAccordions === 'function') {
-              console.log("Attempting fallback initialization...");
+              {{!-- console.log("Attempting fallback initialization..."); --}}
               window.initArticleAccordions();
             }
           }, 500);
@@ -271,7 +337,7 @@
         // Fallback: Try to initialize accordions manually if module fails
         setTimeout(() => {
           if (typeof window.initArticleAccordions === 'function') {
-            console.log("Attempting fallback initialization...");
+            {{!-- console.log("Attempting fallback initialization..."); --}}
             window.initArticleAccordions();
           }
         }, 500);
@@ -421,17 +487,17 @@
           });
           
           if (initializedCount > 0) {
-            console.log('[Accordion Fallback] Successfully initialized ' + initializedCount + ' accordion(s)');
+            // console.log('[Accordion Fallback] Successfully initialized ' + initializedCount + ' accordion(s)');
           }
         } catch (error) {
-          console.error('[Accordion Fallback] Error initializing accordions:', error);
+          // console.error('[Accordion Fallback] Error initializing accordions:', error);
         }
       }
       
       function tryInitializeAccordions() {
         // First try to use module function if available
         if (typeof window.initArticleAccordions === 'function') {
-          console.log('[Accordion Fallback] Using module function');
+          // console.log('[Accordion Fallback] Using module function');
           window.initArticleAccordions();
           hasInitialized = true;
           return;
@@ -448,7 +514,7 @@
             });
             
             if (uninitialized.length > 0) {
-              console.log('[Accordion Fallback] Initializing ' + uninitialized.length + ' accordion(s) directly');
+              // console.log('[Accordion Fallback] Initializing ' + uninitialized.length + ' accordion(s) directly');
               initSubTopicAccordions();
               hasInitialized = true;
             }

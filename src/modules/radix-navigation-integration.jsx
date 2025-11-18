@@ -75,16 +75,16 @@ export function mountRadixNavigation() {
       fallbackNav.style.display = "none";
     }
 
-    console.log(
-      "[Desktop Navigation] Successfully mounted with data:",
-      window.navigationData,
-      "and user info:",
-      window.mobileNavState.userInfo
-    );
+    // console.log(
+    //   "[Desktop Navigation] Successfully mounted with data:",
+    //   window.navigationData,
+    //   "and user info:",
+    //   window.mobileNavState.userInfo
+    // );
     return true;
   }
 
-  console.error("[Desktop Navigation] Mount point not found");
+  // console.error("[Desktop Navigation] Mount point not found");
   return false;
 }
 
@@ -113,11 +113,6 @@ export function mountMobileNavigation() {
     mobileNavContainer
   );
 
-  console.log(
-    "[Mobile Navigation] Successfully mounted with state:",
-    window.mobileNavState,
-    DEV_MODE_MOBILE_NAV_OPEN ? "(DEV MODE: forced open)" : ""
-  );
   return true;
 }
 

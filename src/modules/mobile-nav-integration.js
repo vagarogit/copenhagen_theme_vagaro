@@ -23,8 +23,6 @@
     
     // Listen for Zendesk user state changes
     setupZendeskListeners();
-    
-    console.log('[Mobile Nav Integration] Initialized successfully');
   }
 
   function updateUserInfoFromZendesk() {
@@ -54,12 +52,6 @@
         userName: userName || null,
       });
     }
-
-    console.log('[Mobile Nav Integration] User info updated:', {
-      isSignedIn,
-      userAvatar: !!userAvatar,
-      userName: !!userName
-    });
   }
 
   function setupMobileMenuButton() {

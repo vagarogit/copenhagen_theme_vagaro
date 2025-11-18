@@ -1,10 +1,10 @@
 /* eslint-disable */
 // Debug: Log when script loads
-console.log('[StatusIO] Script loaded, waiting for DOM...');
+// console.log('[StatusIO] Script loaded, waiting for DOM...');
 
 // Wait for DOM to be ready, then check for statusio-bar
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('[StatusIO] DOM loaded, checking for statusio-bar element');
+  // console.log('[StatusIO] DOM loaded, checking for statusio-bar element');
 
   const statusBar = document.getElementById('statusio-bar');
   const statusMessage = document.getElementById('statusio-message');
@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Only run the script if statusio-bar exists on this page
   if (!statusBar || !statusMessage) {
-    console.log('[StatusIO] StatusIO elements not found on this page, skipping initialization');
+    // console.log('[StatusIO] StatusIO elements not found on this page, skipping initialization');
     return;
   }
 
-  console.log('[StatusIO] StatusIO elements found, initializing status checker');
+  // console.log('[StatusIO] StatusIO elements found, initializing status checker');
 
     // Status API endpoint and status page URL
     const statusioApiUrl = 'https://status.vagaro.com/api/v2/status.json';
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set error state
     const setErrorState = (error) => {
       clearLoadingState();
-      console.error('[StatusIO] Error updating status:', error);
+      // console.error('[StatusIO] Error updating status:', error);
       statusMessage.textContent = 'Status information unavailable';
 
       // Apply error class (styles handled by CSS)
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set fallback state when API is consistently unavailable
     const setFallbackState = () => {
       clearLoadingState();
-      console.warn('[StatusIO] Using fallback state');
+      // console.warn('[StatusIO] Using fallback state');
       statusMessage.textContent = 'Visit status page for latest updates';
 
       // Apply fallback styling (similar to error but different message, styles handled by CSS)
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Apply status styling based on indicator
     const applyStatusStyling = (indicator) => {
-      console.log('[StatusIO] Applying status styling for indicator:', indicator);
+      // console.log('[StatusIO] Applying status styling for indicator:', indicator);
       
       // Map status indicator to CSS class
       let statusClass = 'operational'; // Default to operational
@@ -120,24 +120,24 @@ document.addEventListener('DOMContentLoaded', function() {
       switch (indicator) {
         case 'minor':
           statusClass = 'minor';
-          console.log('[StatusIO] Setting minor status');
+          // console.log('[StatusIO] Setting minor status');
           break;
         case 'major':
           statusClass = 'major';
-          console.log('[StatusIO] Setting major status');
+          // console.log('[StatusIO] Setting major status');
           break;
         case 'critical':
           statusClass = 'critical';
-          console.log('[StatusIO] Setting critical status');
+          // console.log('[StatusIO] Setting critical status');
           break;
         case 'maintenance':
           statusClass = 'maintenance';
-          console.log('[StatusIO] Setting maintenance status');
+          // console.log('[StatusIO] Setting maintenance status');
           break;
         case 'none':
         default:
           statusClass = 'operational';
-          console.log('[StatusIO] Setting operational status');
+          // console.log('[StatusIO] Setting operational status');
           break;
       }
       
@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const timeoutId = setTimeout(() => controller.abort(), CONFIG.timeout);
 
       try {
-        console.log(`[StatusIO] Fetching status (attempt ${attempt}/${CONFIG.maxRetries})`);
-        console.log(`[StatusIO] Fetching from URL: ${statusioApiUrl}`);
+          // console.log(`[StatusIO] Fetching status (attempt ${attempt}/${CONFIG.maxRetries})`);
+          // console.log(`[StatusIO] Fetching from URL: ${statusioApiUrl}`);
 
         const response = await fetch(statusioApiUrl, {
           signal: controller.signal,
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
           },
         });
 
-        console.log(`[StatusIO] Response received:`, response.status, response.statusText);
+        // console.log(`[StatusIO] Response received:`, response.status, response.statusText);
 
         clearTimeout(timeoutId);
 
@@ -177,11 +177,11 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`[StatusIO] Response data:`, data);
 
         if (!data || !data.status) {
-          console.error('[StatusIO] Invalid response format:', data);
+          // console.error('[StatusIO] Invalid response format:', data);
           throw new Error('Invalid response format: missing status data');
         }
 
-        console.log(`[StatusIO] Status data:`, data.status);
+        // console.log(`[StatusIO] Status data:`, data.status);
         return data;
 
       } catch (error) {
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const updateStatusIndicator = async () => {
       // Don't start a new update if one is already in progress
       if (isLoading) {
-        console.log('[StatusIO] Update already in progress, skipping');
+        // console.log('[StatusIO] Update already in progress, skipping');
         return;
       }
 
@@ -222,22 +222,17 @@ document.addEventListener('DOMContentLoaded', function() {
           statusMessage.textContent = data.status.description;
           applyStatusStyling(data.status.indicator);
 
-          console.log('[StatusIO] Status updated successfully');
-          console.log('[StatusIO] Current status:', {
-            indicator: data.status.indicator,
-            description: data.status.description,
-            className: statusBar.className
-          });
+          
           return;
 
         } catch (error) {
           retryCount++;
-          console.warn(`[StatusIO] Attempt ${retryCount} failed:`, error.message);
+          // console.warn(`[StatusIO] Attempt ${retryCount} failed:`, error.message);
 
           if (retryCount < CONFIG.maxRetries) {
             // Calculate exponential backoff delay
             const delay = CONFIG.retryDelay * Math.pow(2, retryCount - 1);
-            console.log(`[StatusIO] Retrying in ${delay}ms...`);
+            // console.log(`[StatusIO] Retrying in ${delay}ms...`);
             await sleep(delay);
           } else {
             // All retries exhausted
@@ -251,23 +246,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize status checking
     const initializeStatusChecker = () => {
-      console.log('[StatusIO] Initializing status checker');
-      console.log('[StatusIO] API URL:', statusioApiUrl);
-      console.log('[StatusIO] Current pathname:', window.location.pathname);
+      // console.log('[StatusIO] Initializing status checker');
+      // console.log('[StatusIO] API URL:', statusioApiUrl);
+      // console.log('[StatusIO] Current pathname:', window.location.pathname);
 
       // Run the update immediately
       updateStatusIndicator();
 
       // Set up periodic updates
       updateIntervalId = setInterval(() => {
-        console.log('[StatusIO] Running scheduled update');
+        // console.log('[StatusIO] Running scheduled update');
         updateStatusIndicator();
       }, CONFIG.updateInterval);
     };
 
     // Cleanup function
     const cleanup = () => {
-      console.log('[StatusIO] Cleaning up status checker');
+      // console.log('[StatusIO] Cleaning up status checker');
 
       if (updateIntervalId) {
         clearInterval(updateIntervalId);
@@ -286,17 +281,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle page visibility changes to pause/resume updates
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        console.log('[StatusIO] Page hidden, pausing updates');
+        // console.log('[StatusIO] Page hidden, pausing updates');
         if (updateIntervalId) {
           clearInterval(updateIntervalId);
           updateIntervalId = null;
         }
       } else {
-        console.log('[StatusIO] Page visible, resuming updates');
+        // console.log('[StatusIO] Page visible, resuming updates');
         if (!updateIntervalId) {
           // Resume periodic updates
           updateIntervalId = setInterval(() => {
-            console.log('[StatusIO] Running scheduled update');
+            // console.log('[StatusIO] Running scheduled update');
             updateStatusIndicator();
           }, CONFIG.updateInterval);
 
@@ -350,12 +345,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const status = mockStatuses[statusType.toLowerCase()];
       if (!status) {
-        console.error('[StatusIO Test] Invalid status type. Use: minor, major, critical, maintenance, operational/none');
-        console.log('[StatusIO Test] Available types:', Object.keys(mockStatuses).join(', '));
+        // console.error('[StatusIO Test] Invalid status type. Use: minor, major, critical, maintenance, operational/none');
+        // console.log('[StatusIO Test] Available types:', Object.keys(mockStatuses).join(', '));
         return;
       }
 
-      console.log('[StatusIO Test] Setting test status:', statusType);
+    
       statusMessage.textContent = status.description;
       applyStatusStyling(status.indicator);
     };

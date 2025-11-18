@@ -82,64 +82,33 @@ class NavigationLinksManager {
    * Fetch navigation menu items from Hygraph
    */
   async fetchNavigationMenu() {
-    console.log("[NavigationLinks] Starting to fetch navigation menu...");
-    console.log("[NavigationLinks] Endpoint:", this.endpoint);
-    console.log("[NavigationLinks] Query:", this.getNavigationMenuQuery());
+    const response = await fetch(this.endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.getNavigationMenuQuery()),
+      signal: AbortSignal.timeout(this.options.timeout),
+    });
 
-    try {
-      const response = await fetch(this.endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.getNavigationMenuQuery()),
-        signal: AbortSignal.timeout(this.options.timeout),
-      });
-
-      console.log("[NavigationLinks] Response status:", response.status);
-      console.log("[NavigationLinks] Response ok:", response.ok);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("[NavigationLinks] Received data:", data);
-
-      if (data.errors) {
-        console.error("[NavigationLinks] GraphQL errors:", data.errors);
-        throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
-      }
-
-      console.log(
-        "[NavigationLinks] Navigation menu data:",
-        data.data.navigationMenu
-      );
-      return data.data.navigationMenu;
-    } catch (error) {
-      console.error(
-        "[NavigationLinks] Failed to fetch navigation menu:",
-        error
-      );
-      throw error;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
+
+    if (data.errors) {
+      throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
+    }
+
+    return data.data.navigationMenu;
   }
 
   /**
    * Render business types mega menu (beauty, wellness, fitness)
    */
   renderBusinessTypesMegaMenu(beautyItems, wellnessItems, fitnessItems) {
-    console.log("[NavigationLinks] Rendering business types mega menu");
-    console.log("[NavigationLinks] Beauty items:", beautyItems);
-    console.log("[NavigationLinks] Wellness items:", wellnessItems);
-    console.log("[NavigationLinks] Fitness items:", fitnessItems);
-
     const renderCategory = (items, title) => {
-      console.log(
-        `[NavigationLinks] Rendering category ${title} with ${
-          items?.length || 0
-        } items`
-      );
       if (!items || items.length === 0) return "";
 
       // Split items into two columns
@@ -217,13 +186,6 @@ class NavigationLinksManager {
    * Render features mega menu
    */
   renderFeatureItemsMegaMenu(featureItems) {
-    console.log("[NavigationLinks] Rendering features mega menu");
-    console.log("[NavigationLinks] Feature items:", featureItems);
-    console.log(
-      "[NavigationLinks] Number of features:",
-      featureItems?.length || 0
-    );
-
     if (!featureItems || featureItems.length === 0) return "";
 
     // Group items into categories based on their position
@@ -333,13 +295,6 @@ class NavigationLinksManager {
    * Render features dropdown menu (simple dropdown version)
    */
   renderFeaturesDropdown(featuresItems) {
-    console.log("[NavigationLinks] Rendering features dropdown");
-    console.log("[NavigationLinks] Features items:", featuresItems);
-    console.log(
-      "[NavigationLinks] Number of features:",
-      featuresItems?.length || 0
-    );
-
     if (!featuresItems || featuresItems.length === 0) return "";
 
     const itemsHtml = featuresItems
@@ -385,58 +340,24 @@ class NavigationLinksManager {
    * Update navigation menu in the header
    */
   async updateNavigationMenu() {
-    console.log("[NavigationLinks] Starting updateNavigationMenu...");
     try {
       const navigationMenu = await this.fetchNavigationMenu();
-      console.log("[NavigationLinks] Fetched navigation menu:", navigationMenu);
 
       // Validate navigation menu data
       if (!navigationMenu) {
-        console.error("[NavigationLinks] No navigation menu data received!");
         this.showFallbackContent();
         return;
       }
 
-      // Log what data we actually have
-      console.log("[NavigationLinks] Data structure check:");
-      console.log(
-        "  - beautyItems:",
-        navigationMenu.beautyItems?.length || 0,
-        "items"
-      );
-      console.log(
-        "  - wellnessItems:",
-        navigationMenu.wellnessItems?.length || 0,
-        "items"
-      );
-      console.log(
-        "  - fitnessItems:",
-        navigationMenu.fitnessItems?.length || 0,
-        "items"
-      );
-      console.log(
-        "  - featureItems:",
-        navigationMenu.featureItems?.length || 0,
-        "items"
-      );
-
       // Update Business Types dropdown
       const businessTypesContainer = document.getElementById(
         "business-types-dropdown"
-      );
-      console.log(
-        "[NavigationLinks] Business types container found:",
-        !!businessTypesContainer
       );
       if (businessTypesContainer) {
         const businessTypesHTML = this.renderBusinessTypesMegaMenu(
           navigationMenu.beautyItems || [],
           navigationMenu.wellnessItems || [],
           navigationMenu.fitnessItems || []
-        );
-        console.log(
-          "[NavigationLinks] Business types HTML length:",
-          businessTypesHTML.length
         );
 
         // Clear existing content
@@ -479,17 +400,9 @@ class NavigationLinksManager {
 
       // Update Features dropdown
       const featuresContainer = document.getElementById("features-dropdown");
-      console.log(
-        "[NavigationLinks] Features container found:",
-        !!featuresContainer
-      );
       if (featuresContainer) {
         const featuresHTML = this.renderFeatureItemsMegaMenu(
           navigationMenu.featureItems || []
-        );
-        console.log(
-          "[NavigationLinks] Features HTML length:",
-          featuresHTML.length
         );
 
         // Clear existing content
@@ -524,10 +437,6 @@ class NavigationLinksManager {
       // Send data to Radix Navigation component
       this.updateRadixNavigation(navigationMenu);
     } catch (error) {
-      console.error(
-        "[NavigationLinks] Failed to update navigation menu:",
-        error
-      );
       // Fallback to static content
       this.showFallbackContent();
     }
@@ -537,30 +446,15 @@ class NavigationLinksManager {
    * Update mobile menu with navigation items
    */
   updateMobileMenu(navigationMenu) {
-    console.log("[NavigationLinks] Updating mobile menu");
-    console.log(
-      "[NavigationLinks] Mobile navigation menu data:",
-      navigationMenu
-    );
-
     const mobileMenuContainer = document.getElementById(
       "mobile-navigation-items"
-    );
-    console.log(
-      "[NavigationLinks] Mobile menu container found:",
-      !!mobileMenuContainer
     );
     if (!mobileMenuContainer) return;
 
     const renderMobileItems = (items, title) => {
       if (!items || items.length === 0) {
-        console.log(`[NavigationLinks] No items for ${title}`);
         return "";
       }
-
-      console.log(
-        `[NavigationLinks] Rendering ${items.length} items for ${title}`
-      );
       const itemsHtml = items
         .map(
           (item) => `
@@ -611,13 +505,6 @@ class NavigationLinksManager {
 
       // Insert after Resources link
       resourcesLink.insertAdjacentElement("afterend", dynamicContainer);
-      console.log(
-        "[NavigationLinks] Dynamic mobile menu items inserted successfully"
-      );
-    } else {
-      console.warn(
-        "[NavigationLinks] Could not find Resources link to insert dynamic items after"
-      );
     }
   }
 
@@ -660,7 +547,6 @@ class NavigationLinksManager {
         businessTypesButton.setAttribute("data-state", "open");
 
         isVisible = true;
-        console.log("[NavigationLinks] Business Types mega menu shown");
       }, 50); // Reduced from 100ms for faster response
     };
 
@@ -681,8 +567,6 @@ class NavigationLinksManager {
           megaMenu.style.display = "none";
           isVisible = false;
         }, 150); // Reduced from 200ms for faster response
-
-        console.log("[NavigationLinks] Business Types mega menu hidden");
       }, 100); // Reduced from 300ms for faster response
     };
 
@@ -744,7 +628,6 @@ class NavigationLinksManager {
         featuresButton.setAttribute("data-state", "open");
 
         isVisible = true;
-        console.log("[NavigationLinks] Features mega menu shown");
       }, 50); // Reduced from 100ms for faster response
     };
 
@@ -765,8 +648,6 @@ class NavigationLinksManager {
           megaMenu.style.display = "none";
           isVisible = false;
         }, 150); // Reduced from 200ms for faster response
-
-        console.log("[NavigationLinks] Features mega menu hidden");
       }, 100); // Reduced from 300ms for faster response
     };
 
@@ -870,12 +751,12 @@ class NavigationLinksManager {
       } catch (error) {
         attempts++;
         if (attempts < this.options.retries) {
-          console.log(
-            `Retrying navigation menu fetch (${attempts}/${this.options.retries})...`
-          );
+          // console.log(
+          //   `Retrying navigation menu fetch (${attempts}/${this.options.retries})...`
+          // );
           await new Promise((resolve) => setTimeout(resolve, 1000 * attempts));
         } else {
-          console.error("Failed to load navigation menu after all retries");
+          // console.error("Failed to load navigation menu after all retries");
           this.showFallbackContent();
         }
       }
@@ -971,8 +852,6 @@ class NavigationLinksManager {
    * Update Radix Navigation component with data
    */
   updateRadixNavigation(navigationMenu) {
-    console.log("[NavigationLinks] Updating Radix Navigation with data");
-
     // Format data for Radix component
     const businessTypes = {
       beauty: navigationMenu.beautyItems || [],
@@ -988,12 +867,6 @@ class NavigationLinksManager {
         businessTypes,
         features,
       });
-      console.log("[NavigationLinks] Data sent to Radix Navigation:", {
-        businessTypes,
-        features,
-      });
-    } else {
-      console.warn("[NavigationLinks] Radix Navigation bridge not available");
     }
   }
 
@@ -1001,29 +874,8 @@ class NavigationLinksManager {
    * Debug method to test navigation menu fetching
    */
   async debugFetch() {
-    console.log("[NavigationLinks DEBUG] Testing navigation menu fetch...");
-    try {
-      const menu = await this.fetchNavigationMenu();
-      console.log("[NavigationLinks DEBUG] Successfully fetched menu:", menu);
-
-      if (menu) {
-        console.log("[NavigationLinks DEBUG] Menu structure:");
-        Object.keys(menu).forEach((key) => {
-          const items = menu[key];
-          console.log(
-            `  - ${key}:`,
-            Array.isArray(items) ? `${items.length} items` : "not an array"
-          );
-          if (Array.isArray(items) && items.length > 0) {
-            console.log(`    Sample item:`, items[0]);
-          }
-        });
-      }
-      return menu;
-    } catch (error) {
-      console.error("[NavigationLinks DEBUG] Failed to fetch:", error);
-      throw error;
-    }
+    const menu = await this.fetchNavigationMenu();
+    return menu;
   }
 }
 
@@ -1032,10 +884,6 @@ window.NavigationLinksManager = NavigationLinksManager;
 
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
-  console.log(
-    "[NavigationLinks] DOM Content Loaded - Initializing navigation links..."
-  );
-
   // Replace with your actual Hygraph endpoint
   const HYGRAPH_ENDPOINT =
     "https://us-west-2.cdn.hygraph.com/content/cld3gw4bb0hr001ue9afzcunb/master";
@@ -1060,9 +908,9 @@ document.addEventListener("DOMContentLoaded", function () {
         content.setAttribute("data-state", "open");
       }
       megaMenu.style.display = "block";
-      console.log("[DEBUG] Business Types mega menu forced to show");
+      // console.log("[DEBUG] Business Types mega menu forced to show");
     } else {
-      console.log("[DEBUG] Business Types mega menu not found");
+      // console.log("[DEBUG] Business Types mega menu not found");
     }
   };
 
@@ -1079,9 +927,9 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         megaMenu.style.display = "none";
       }, 200);
-      console.log("[DEBUG] Business Types mega menu hidden");
+      // console.log("[DEBUG] Business Types mega menu hidden");
     } else {
-      console.log("[DEBUG] Business Types mega menu not found");
+      // console.log("[DEBUG] Business Types mega menu not found");
     }
   };
 
@@ -1094,9 +942,9 @@ document.addEventListener("DOMContentLoaded", function () {
         content.setAttribute("data-state", "open");
       }
       megaMenu.style.display = "block";
-      console.log("[DEBUG] Features mega menu forced to show");
+      // console.log("[DEBUG] Features mega menu forced to show");
     } else {
-      console.log("[DEBUG] Features mega menu not found");
+      // console.log("[DEBUG] Features mega menu not found");
     }
   };
 
@@ -1111,25 +959,11 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         megaMenu.style.display = "none";
       }, 200);
-      console.log("[DEBUG] Features mega menu hidden");
+      // console.log("[DEBUG] Features mega menu hidden");
     } else {
-      console.log("[DEBUG] Features mega menu not found");
+      // console.log("[DEBUG] Features mega menu not found");
     }
   };
-
-  console.log(
-    "[NavigationLinks] Navigation manager created, starting initialization..."
-  );
-  console.log(
-    "[NavigationLinks] For debugging, use: window.navigationManager.debugFetch()"
-  );
-  console.log("[NavigationLinks] Debug commands available:");
-  console.log(
-    "  - Business Types: window.showBusinessTypesMenu() / window.hideBusinessTypesMenu()"
-  );
-  console.log(
-    "  - Features: window.showFeaturesMenu() / window.hideFeaturesMenu()"
-  );
 
   // Initialize navigation menu
   navigationManager.init();
