@@ -2851,7 +2851,6 @@ select:focus {
 }
 .article-body p {
   margin-bottom: 1rem;
-  font-size: 1.125rem;
   line-height: 1.5;
 }
 .article-body ul, .article-body ol {
