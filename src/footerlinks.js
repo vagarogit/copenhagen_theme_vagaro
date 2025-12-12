@@ -225,6 +225,7 @@ class FooterLinksManager {
       resources: [
         { id: "status", name: "Status", href: "https://status.vagaro.com/" },
         { id: "support", name: "Support", href: "https://support.vagaro.com/" },
+        { id: "api-documents", name: "API Documents", href: "https://docs.vagaro.com/" },
         { id: "blog", name: "Blog", href: "https://www.vagaro.com/learn" },
         {
           id: "newsroom",

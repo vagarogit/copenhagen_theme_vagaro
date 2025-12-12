@@ -1,195 +1,248 @@
 <div class="w-full px-8 pt-32 md:pt-24 pb-16"
- style="background: linear-gradient(180deg, #121212 0%, rgba(18, 18, 18, 0.28) 184.81%), url(https://res.cloudinary.com/vagaro/image/upload/v1760545962/support/background-footer-optimized-68efcc8fe5e9c_fanivb.webp) lightgray -91.275px -73.808px / 118.815% 118.11% no-repeat;"
+     style="background: linear-gradient(180deg, #121212 0%, rgba(18, 18, 18, 0.28) 184.81%), url(https://res.cloudinary.com/vagaro/image/upload/v1760545962/support/background-footer-optimized-68efcc8fe5e9c_fanivb.webp) lightgray -91.275px -73.808px / 118.815% 118.11% no-repeat;"
 >
- <div class="bg-footer-gray p-0 md:p-16 rounded-2xl w-full">
+  <div class="bg-footer-gray p-0 md:p-16 rounded-2xl w-full">
 
-   <footer class="container mx-auto">
-    <div class="mx-auto pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-4 w-full">
-      
-      <!-- App Download Section -->
-      <div class="mb-16 md:mb-20 flex flex-col items-center justify-center gap-3 lg:flex-row lg:gap-16">
-        <!-- For Businesses -->
-        <div class="flex flex-col items-center bg-ink-darker rounded-2xl px-8 py-4">
-          <h3 class="text-left text-base font-semibold text-white py-4 ">For businesses</h3>
-          <div class="flex gap-6">
-           <div class="div">
-             <a href="https://apps.apple.com/app/apple-store/id346778559?pt=317944&ct=Vagaro-Pro-App-Page&mt=8"
-              target="_blank" id="b2b-apple-store">
-              <img class="h-12 w-auto"
-                src="{{asset 'apple-app-store-badge.svg'}}" alt="Download on the App Store" />
-            </a>
-           </div>
-          <div class="div">
-              <a href="https://play.google.com/store/apps/details?id=com.semaphore.login" target="_blank"
-              id="b2b-google-store">
-              <img class="h-12 w-auto"
-                src="{{asset 'google-play-badge.svg'}}" alt="Get it on Google Play" />
-            </a>
+    <footer class="container mx-auto">
+      <div class="mx-auto pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-4 w-full">
+
+        <!-- App Download Section -->
+        <div class="mb-16 md:mb-20 flex flex-col items-center justify-center gap-3 lg:flex-row lg:gap-16">
+          <!-- For Businesses -->
+          <div class="flex flex-col items-center bg-ink-darker rounded-2xl px-8 py-4">
+            <h3 class="text-left text-base font-semibold text-white py-4 ">For businesses</h3>
+            <div class="flex gap-6">
+              <div class="div">
+                <a href="https://apps.apple.com/app/apple-store/id346778559?pt=317944&ct=Vagaro-Pro-App-Page&mt=8"
+                   target="_blank" id="b2b-apple-store">
+                  <img class="h-12 w-auto"
+                       src="{{asset 'apple-app-store-badge.svg'}}" alt="Download on the App Store" />
+                </a>
+              </div>
+              <div class="div">
+                <a href="https://play.google.com/store/apps/details?id=com.semaphore.login" target="_blank"
+                   id="b2b-google-store">
+                  <img class="h-12 w-auto"
+                       src="{{asset 'google-play-badge.svg'}}" alt="Get it on Google Play" />
+                </a>
+              </div>
+            </div>
           </div>
+
+          <!-- For Customers -->
+          <div class="flex flex-col items-center bg-ink-darker rounded-2xl px-8 py-4">
+            <h3 class="text-left text-base font-semibold text-white py-4">For customers</h3>
+            <div class="flex gap-6">
+              <a href="https://apps.apple.com/us/app/vagaro/id536110000"
+                 target="_blank" id="b2c-apple-store">
+                <img class="h-12 w-auto"
+                     src="{{asset 'apple-app-store-badge.svg'}}" alt="Download on the App Store" />
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=com.vagaro&hl=en_US" target="_blank"
+                 id="b2c-google-store">
+                <img class="h-12 w-auto"
+                     src="{{asset 'google-play-badge.svg'}}" alt="Get it on Google Play" />
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- For Customers -->
-        <div class="flex flex-col items-center bg-ink-darker rounded-2xl px-8 py-4">
-          <h3 class="text-left text-base font-semibold text-white py-4">For customers</h3>
-          <div class="flex gap-6">
-            <a href="https://apps.apple.com/us/app/vagaro/id536110000"
-              target="_blank" id="b2c-apple-store">
-              <img class="h-12 w-auto"
-                src="{{asset 'apple-app-store-badge.svg'}}" alt="Download on the App Store" />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.vagaro&hl=en_US" target="_blank"
-              id="b2c-google-store">
-              <img class="h-12 w-auto"
-                src="{{asset 'google-play-badge.svg'}}" alt="Get it on Google Play" />
-            </a>
+        <!-- Navigation Links Section -->
+        <div class="mb-12">
+          <div id="footer-links-container"
+               class="w-full grid grid-cols-2 md:gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-6 lg:gap-x-12">
+            <!-- Dynamic footer links will be loaded here -->
+            <!-- Fallback static content -->
+            <div>
+              <h3 class="text-left text-base font-semibold text-white/80">Find Businesses</h3>
+              <ul role="list" class="space-y-3">
+                <li><a href="#" class="text-base text-gray-300 hover:text-white">Loading...</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-left text-base font-semibold text-white">Business Software</h3>
+              <ul role="list" class="space-y-3">
+                <li><a href="#" class="text-left text-base font-semibold text-white">Loading...</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-left text-base font-semibold text-white">Business Features</h3>
+              <ul role="list" class="space-y-3">
+                <li><a href="#" class="text-base text-gray-300 hover:text-white">Loading...</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-left text-base font-semibold text-white">Business Products</h3>
+              <ul role="list" class="space-y-3">
+                <li><a href="#" class="text-base text-gray-300 hover:text-white">Loading...</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-left text-base font-semibold text-white">Company</h3>
+              <ul role="list" class="space-y-3">
+                <li><a href="#" class="text-base text-gray-300 hover:text-white">Loading...</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-left text-base font-semibold text-white">Footer</h3>
+              <ul role="list" class="space-y-3">
+                <li><a href="#" class="text-base text-gray-300 hover:text-white text-nowrap">Loading...</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Country Selector and Social Media Section -->
+        <div class=" border-white/80 py-4 border-y">
+          <div class="flex flex-col items-center justify-between gap-6 md:flex-row px-2">
+            <!-- Country Selector -->
+            <div
+              class="inline-flex h-14 w-full min-w-[260px] max-w-[200px] items-center justify-between gap-3 rounded-full bg-ink-darker px-4 text-left text-white outline-none ring-1 ring-white/10 hover:bg-charcoal focus-visible:ring-2 focus-visible:ring-white/40 md:max-w-xs lg:max-w-[220px]">
+              <div class="flex items-center gap-4">
+                <img src="{{asset 'flag-us.svg'}}" alt="United States" class="h-5 w-auto" />
+                <span class="text-white text-base">United States</span>
+              </div>
+              {{!-- <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg> --}}
+            </div>
+
+            <!-- Social Media Icons -->
+            <div class="flex gap-4">
+              <a href="https://www.facebook.com/vagaropro" class="text-white hover:text-gray-300" target="_blank">
+                <span class="sr-only">Facebook</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                        clip-rule="evenodd" />
+                </svg>
+              </a>
+              <a href="https://x.com/Vagaro" class="text-white hover:text-gray-300" target="_blank">
+                <span class="sr-only">X</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/vagaropro/" class="text-white hover:text-gray-300" target="_blank">
+                <span class="sr-only">Instagram</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                        d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                        clip-rule="evenodd" />
+                </svg>
+              </a>
+              <a href="https://www.pinterest.com/VagaroPins/" class="text-white hover:text-gray-300" target="_blank">
+                <span class="sr-only">Pinterest</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.719-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.083.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.162-1.499-.698-2.436-2.888-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.357-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z" />
+                </svg>
+              </a>
+              <a href="https://www.youtube.com/user/VagaroSupport" class="text-white hover:text-gray-300"
+                 target="_blank">
+                <span class="sr-only">YouTube</span>
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill-rule="evenodd"
+                        d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
+                        clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="py-6">
+          <div class="flex flex-col gap-2 text-sm text-white">
+            <div>Contact Sales: <a href="tel:+19257180971" class="underline hover:no-underline">(925) 718-0971 ext.
+              1</a></div>
+            <div>Contact Support: <a href="tel:+19254641932" class="underline hover:no-underline">(925) 464-1932 ext.
+              2</a></div>
+          </div>
+        </div>
+        <!-- Legal Links -->
+        <div class="py-6">
+          <div class="flex flex-wrap justify-start gap-x-6 gap-y-2 text-sm text-white">
+            <a id="nav-footer-privacy-policy" href="https://www.vagaro.com/pro/privacy"
+               class="hover:text-gray-300 underline">Privacy Policy</a>
+            <a id="nav-footer-user-agreement" href="https://www.vagaro.com/pro/user-agreement"
+               class="hover:text-gray-300 underline">User Agreement</a>
+            <a id="nav-footer-participation-agreement"
+               href="https://www.vagaro.com/pro/vagaro-customer-participation-agreement"
+               class="hover:text-gray-300 underline">Participation Agreement</a>
+            <a id="nav-footer-gdpr" href="https://www.vagaro.com/pro/general-data-protection-regulation"
+               class="hover:text-gray-300 underline">GDPR</a>
+            <button
+              onclick="window.Osano?.cm?.showDrawer && window.Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')"
+              class="hover:text-gray-300 underline">Cookie Preferences
+            </button>
+            <button onclick="window.Osano?.cm?.showDoNotSell && window.Osano.cm.showDoNotSell()"
+                    class="hover:text-gray-300 underline">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                   y="0px" viewBox="0 0 30 14" xml:space="preserve" class="mr-1 inline-block h-4 w-4"><style>.st0 {
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                fill: #FFFFFF;
+              }
+
+              .st1 {
+                fill-rule: evenodd;
+                clip-rule: evenodd;
+                fill: #0066FF;
+              }
+
+              .st2 {
+                fill: #FFFFFF;
+              }
+
+              .st3 {
+                fill: #0066FF;
+              }</style>
+                <g><g><g transform="translate(-1275.000000, -200.000000)"><g transform="translate(1275.000000, 200.000000)"><path class="st0" d="M7.4,12.8h6.8l3.1-11.6H7.4C4.2,1.2,1.6,3.8,1.6,7S4.2,12.8,7.4,12.8z"></path></g></g></g>
+                  <g><g transform="translate(-1275.000000, -200.000000)"><g transform="translate(1275.000000, 200.000000)"><path class="st1" d="M22.6,0H7.4c-3.9,0-7,3.1-7,7s3.1,7,7,7h15.2c3.9,0,7-3.1,7-7S26.4,0,22.6,0z M1.6,7c0-3.2,2.6-5.8,5.8-5.8 h9.9l-3.1,11.6H7.4C4.2,12.8,1.6,10.2,1.6,7z"></path><path
+                    class="st2"
+                    d="M24.6,4c0.2,0.2,0.2,0.6,0,0.8l0,0L22.5,7l2.2,2.2c0.2,0.2,0.2,0.6,0,0.8c-0.2,0.2-0.6,0.2-0.8,0 l0,0l-2.2-2.2L19.5,10c-0.2,0.2-0.6,0.2-0.8,0c-0.2-0.2-0.2-0.6,0-0.8l0,0L20.8,7l-2.2-2.2c-0.2-0.2-0.2-0.6,0-0.8 c0.2-0.2,0.6-0.2,0.8,0l0,0l2.2,2.2L23.8,4C24,3.8,24.4,3.8,24.6,4z"></path><path
+                    class="st3"
+                    d="M12.7,4.1c0.2,0.2,0.3,0.6,0.1,0.8l0,0L8.6,9.8C8.5,9.9,8.4,10,8.3,10c-0.2,0.1-0.5,0.1-0.7-0.1l0,0 L5.4,7.7c-0.2-0.2-0.2-0.6,0-0.8c0.2-0.2,0.6-0.2,0.8,0l0,0L8,8.6l3.8-4.5C12,3.9,12.4,3.9,12.7,4.1z"></path></g></g></g></g></svg>
+              Your Privacy Choices
+            </button>
+          </div>
+        </div>
+
+        <!-- Copyright and Compliance -->
+        <div class="pt-2 text-left">
+
+          <div class="space-y-8 md:space-y-2 text-base text-white/60 text-left">
+            <p>&copy; 2025 Vagaro, Inc</p>
+            <p>&copy; 2025 Vagaro Merchant Services is a registered ISO of PNC Bank, N.A., Pittsburgh, PA</p>
+          </div>
+          <div class="flex justify-center gap-16 mt-16 pb-16 md:pb-2">
+            <div class="mt-8 flex items-center justify-center">
+              <div class="px-5 py-3.5">
+                <img alt="PCI DSS Compliance" loading="lazy" width="140" height="57" decoding="async"
+                     src="{{asset 'pci-assets.webp'}}" />
+              </div>
+              <div class="px-5 py-3.5">
+                <img alt="HIPAA Compliant" loading="lazy" width="140" height="57" decoding="async"
+                     src="{{asset 'hippa.webp'}}" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <!-- Navigation Links Section -->
-      <div class="mb-12">
-        <div id="footer-links-container" class="w-full grid grid-cols-2 md:gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-6 lg:gap-x-12">
-          <!-- Dynamic footer links will be loaded here -->
-          <!-- Fallback static content -->
-          <div>
-            <h3 class="text-left text-base font-semibold text-white/80">Find Businesses</h3>
-            <ul role="list" class="space-y-3">
-              <li><a href="#" class="text-base text-gray-300 hover:text-white">Loading...</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-left text-base font-semibold text-white">Business Software</h3>
-            <ul role="list" class="space-y-3">
-              <li><a href="#" class="text-left text-base font-semibold text-white">Loading...</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-left text-base font-semibold text-white">Business Features</h3>
-            <ul role="list" class="space-y-3">
-              <li><a href="#" class="text-base text-gray-300 hover:text-white">Loading...</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-left text-base font-semibold text-white">Business Products</h3>
-            <ul role="list" class="space-y-3">
-              <li><a href="#" class="text-base text-gray-300 hover:text-white">Loading...</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-left text-base font-semibold text-white">Company</h3>
-            <ul role="list" class="space-y-3">
-              <li><a href="#" class="text-base text-gray-300 hover:text-white">Loading...</a></li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-left text-base font-semibold text-white">Resources</h3>
-            <ul role="list" class="space-y-3">
-              <li><a href="#" class="text-base text-gray-300 hover:text-white">Loading...</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Country Selector and Social Media Section -->
-      <div class=" border-white/80 py-4 border-y">
-        <div class="flex flex-col items-center justify-between gap-6 md:flex-row px-2">
-          <!-- Country Selector -->
-          <div class="inline-flex h-14 w-full min-w-[260px] max-w-[200px] items-center justify-between gap-3 rounded-full bg-ink-darker px-4 text-left text-white outline-none ring-1 ring-white/10 hover:bg-charcoal focus-visible:ring-2 focus-visible:ring-white/40 md:max-w-xs lg:max-w-[220px]">
-          <div class="flex items-center gap-4">
-            <img src="{{asset 'flag-us.svg'}}" alt="United States" class="h-5 w-auto" />
-            <span class="text-white text-base">United States</span>
-          </div>
-            {{!-- <svg class="h-4 w-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg> --}}
-          </div>
-
-          <!-- Social Media Icons -->
-          <div class="flex gap-4">
-            <a href="https://www.facebook.com/vagaropro" class="text-white hover:text-gray-300" target="_blank">
-              <span class="sr-only">Facebook</span>
-              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
-              </svg>
-            </a>
-            <a href="https://x.com/Vagaro" class="text-white hover:text-gray-300" target="_blank">
-              <span class="sr-only">X</span>
-              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
-              </svg>
-            </a>
-            <a href="https://www.instagram.com/vagaropro/" class="text-white hover:text-gray-300" target="_blank">
-              <span class="sr-only">Instagram</span>
-              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
-              </svg>
-            </a>
-            <a href="https://www.pinterest.com/VagaroPins/" class="text-white hover:text-gray-300" target="_blank">
-              <span class="sr-only">Pinterest</span>
-              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.719-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.083.347-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.162-1.499-.698-2.436-2.888-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.357-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z" />
-              </svg>
-            </a>
-            <a href="https://www.youtube.com/user/VagaroSupport" class="text-white hover:text-gray-300" target="_blank">
-              <span class="sr-only">YouTube</span>
-              <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill-rule="evenodd" d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z" clip-rule="evenodd" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Contact Information -->
-      <div class="py-6">
-        <div class="flex flex-col gap-2 text-sm text-white">
-          <div>Contact Sales: <a href="tel:+19257180971" class="underline hover:no-underline">(925) 718-0971 ext. 1</a></div>
-          <div>Contact Support: <a href="tel:+19254641932" class="underline hover:no-underline">(925) 464-1932 ext. 2</a></div>
-        </div>
-      </div>
-      <!-- Legal Links -->
-      <div class="py-6">
-        <div class="flex flex-wrap justify-start gap-x-6 gap-y-2 text-sm text-white">
-          <a id="nav-footer-privacy-policy" href="https://www.vagaro.com/pro/privacy" class="hover:text-gray-300 underline">Privacy Policy</a>
-          <a id="nav-footer-user-agreement" href="https://www.vagaro.com/pro/user-agreement" class="hover:text-gray-300 underline">User Agreement</a>
-          <a id="nav-footer-participation-agreement" href="https://www.vagaro.com/pro/vagaro-customer-participation-agreement" class="hover:text-gray-300 underline">Participation Agreement</a>
-          <a id="nav-footer-gdpr" href="https://www.vagaro.com/pro/general-data-protection-regulation" class="hover:text-gray-300 underline">GDPR</a>
-          <button onclick="window.Osano?.cm?.showDrawer && window.Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')" class="hover:text-gray-300 underline">Cookie Preferences</button>
-          <button onclick="window.Osano?.cm?.showDoNotSell && window.Osano.cm.showDoNotSell()" class="hover:text-gray-300 underline">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 30 14" xml:space="preserve" class="mr-1 inline-block h-4 w-4"><style>.st0{fill-rule:evenodd;clip-rule:evenodd;fill:#FFFFFF;}
-                          .st1{fill-rule:evenodd;clip-rule:evenodd;fill:#0066FF;}
-                          .st2{fill:#FFFFFF;}
-                          .st3{fill:#0066FF;}</style><g><g><g transform="translate(-1275.000000, -200.000000)"><g transform="translate(1275.000000, 200.000000)"><path class="st0" d="M7.4,12.8h6.8l3.1-11.6H7.4C4.2,1.2,1.6,3.8,1.6,7S4.2,12.8,7.4,12.8z"></path></g></g></g><g><g transform="translate(-1275.000000, -200.000000)"><g transform="translate(1275.000000, 200.000000)"><path class="st1" d="M22.6,0H7.4c-3.9,0-7,3.1-7,7s3.1,7,7,7h15.2c3.9,0,7-3.1,7-7S26.4,0,22.6,0z M1.6,7c0-3.2,2.6-5.8,5.8-5.8 h9.9l-3.1,11.6H7.4C4.2,12.8,1.6,10.2,1.6,7z"></path><path class="st2" d="M24.6,4c0.2,0.2,0.2,0.6,0,0.8l0,0L22.5,7l2.2,2.2c0.2,0.2,0.2,0.6,0,0.8c-0.2,0.2-0.6,0.2-0.8,0 l0,0l-2.2-2.2L19.5,10c-0.2,0.2-0.6,0.2-0.8,0c-0.2-0.2-0.2-0.6,0-0.8l0,0L20.8,7l-2.2-2.2c-0.2-0.2-0.2-0.6,0-0.8 c0.2-0.2,0.6-0.2,0.8,0l0,0l2.2,2.2L23.8,4C24,3.8,24.4,3.8,24.6,4z"></path><path class="st3" d="M12.7,4.1c0.2,0.2,0.3,0.6,0.1,0.8l0,0L8.6,9.8C8.5,9.9,8.4,10,8.3,10c-0.2,0.1-0.5,0.1-0.7-0.1l0,0 L5.4,7.7c-0.2-0.2-0.2-0.6,0-0.8c0.2-0.2,0.6-0.2,0.8,0l0,0L8,8.6l3.8-4.5C12,3.9,12.4,3.9,12.7,4.1z"></path></g></g></g></g></svg> Your Privacy Choices</button>
-        </div>
-      </div>
-
-      <!-- Copyright and Compliance -->
-      <div class="pt-2 text-left">
-        
-        <div class="space-y-8 md:space-y-2 text-base text-white/60 text-left">
-          <p>&copy; 2025 Vagaro, Inc</p>
-          <p>&copy; 2025 Vagaro Merchant Services is a registered ISO of PNC Bank, N.A., Pittsburgh, PA</p>
-        </div>
-   <div class="flex justify-center gap-16 mt-16 pb-16 md:pb-2">
-  <div class="mt-8 flex items-center justify-center">
-         <div class="px-5 py-3.5">
-           <img alt="PCI DSS Compliance" loading="lazy" width="140" height="57" decoding="async"  src="{{asset 'pci-assets.webp'}}" />
-         </div>
-          <div class="px-5 py-3.5">
-           <img alt="HIPAA Compliant" loading="lazy" width="140" height="57" decoding="async"  src="{{asset 'hippa.webp'}}"/>
-         </div>
-        </div>
-      </div>
+    </footer>
+  </div>
+  <div class="flex flex-col items-center justify-center">
+    <div class="mt-8 text-center">
+      <p class="text-lg font-medium text-white">For every step.</p>
     </div>
-  </footer>
- </div>
-        <div class="flex flex-col items-center justify-center">
-          <div class="mt-8 text-center">
-          <p class="text-lg font-medium text-white">For every step.</p>
-        </div>
-        <div class="div">
-          <svg width="115" height="12" viewBox="0 0 115 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M113.973 0.25C114.387 0.250234 114.723 0.585931 114.723 1C114.723 1.41407 114.387 1.74977 113.973 1.75C110.179 1.75 82.7701 1.8694 55.903 2.16699C42.4694 2.31579 29.1744 2.5085 19.0358 2.75391C17.733 2.78544 16.4822 2.81733 15.2906 2.85059C15.852 2.86502 16.4265 2.8827 17.0133 2.89746C27.1289 3.15185 40.9155 3.45891 54.9205 3.95312C68.9233 4.44726 83.1602 5.12928 94.1764 6.13574C99.6817 6.63871 104.404 7.22396 107.896 7.91211C109.64 8.25569 111.102 8.62962 112.212 9.04102C112.766 9.24674 113.252 9.46899 113.648 9.71289C114.036 9.95192 114.387 10.2429 114.611 10.6064C114.828 10.959 114.719 11.4213 114.367 11.6387C114.014 11.856 113.552 11.7461 113.335 11.3936C113.284 11.3109 113.151 11.1694 112.861 10.9902C112.578 10.8158 112.19 10.6328 111.69 10.4473C110.69 10.0762 109.316 9.72077 107.606 9.38379C104.19 8.71071 99.5287 8.1304 94.0397 7.62891C83.0673 6.62646 68.8653 5.9461 54.8678 5.45215C40.8726 4.95828 27.0965 4.65199 16.9752 4.39746C11.9173 4.27026 7.7673 4.15554 4.96252 4.03711C3.56346 3.97803 2.48438 3.91763 1.79163 3.85254C1.45825 3.82121 1.16776 3.785 0.97229 3.73633C0.920736 3.72349 0.853622 3.7044 0.78479 3.67578C0.743006 3.65838 0.58055 3.59071 0.449829 3.42969C0.371885 3.33366 0.282804 3.17558 0.276978 2.96484C0.271172 2.75217 0.352022 2.58596 0.430298 2.48145C0.559816 2.30853 0.728778 2.23593 0.770142 2.21777C0.976769 2.12718 1.2715 2.07259 1.55042 2.03125C1.85999 1.98539 2.25577 1.94193 2.7262 1.90039C3.66909 1.81713 4.94758 1.7391 6.5094 1.66406C9.63524 1.51389 13.926 1.37769 18.9996 1.25488C29.1483 1.00923 42.4511 0.815809 55.8864 0.666992C82.7575 0.369352 110.172 0.25 113.973 0.25Z" fill="#CC4744"></path></svg>
-        </div>
-        </div>
+    <div class="div">
+      <svg width="115" height="12" viewBox="0 0 115 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M113.973 0.25C114.387 0.250234 114.723 0.585931 114.723 1C114.723 1.41407 114.387 1.74977 113.973 1.75C110.179 1.75 82.7701 1.8694 55.903 2.16699C42.4694 2.31579 29.1744 2.5085 19.0358 2.75391C17.733 2.78544 16.4822 2.81733 15.2906 2.85059C15.852 2.86502 16.4265 2.8827 17.0133 2.89746C27.1289 3.15185 40.9155 3.45891 54.9205 3.95312C68.9233 4.44726 83.1602 5.12928 94.1764 6.13574C99.6817 6.63871 104.404 7.22396 107.896 7.91211C109.64 8.25569 111.102 8.62962 112.212 9.04102C112.766 9.24674 113.252 9.46899 113.648 9.71289C114.036 9.95192 114.387 10.2429 114.611 10.6064C114.828 10.959 114.719 11.4213 114.367 11.6387C114.014 11.856 113.552 11.7461 113.335 11.3936C113.284 11.3109 113.151 11.1694 112.861 10.9902C112.578 10.8158 112.19 10.6328 111.69 10.4473C110.69 10.0762 109.316 9.72077 107.606 9.38379C104.19 8.71071 99.5287 8.1304 94.0397 7.62891C83.0673 6.62646 68.8653 5.9461 54.8678 5.45215C40.8726 4.95828 27.0965 4.65199 16.9752 4.39746C11.9173 4.27026 7.7673 4.15554 4.96252 4.03711C3.56346 3.97803 2.48438 3.91763 1.79163 3.85254C1.45825 3.82121 1.16776 3.785 0.97229 3.73633C0.920736 3.72349 0.853622 3.7044 0.78479 3.67578C0.743006 3.65838 0.58055 3.59071 0.449829 3.42969C0.371885 3.33366 0.282804 3.17558 0.276978 2.96484C0.271172 2.75217 0.352022 2.58596 0.430298 2.48145C0.559816 2.30853 0.728778 2.23593 0.770142 2.21777C0.976769 2.12718 1.2715 2.07259 1.55042 2.03125C1.85999 1.98539 2.25577 1.94193 2.7262 1.90039C3.66909 1.81713 4.94758 1.7391 6.5094 1.66406C9.63524 1.51389 13.926 1.37769 18.9996 1.25488C29.1483 1.00923 42.4511 0.815809 55.8864 0.666992C82.7575 0.369352 110.172 0.25 113.973 0.25Z"
+          fill="#CC4744"></path>
+      </svg>
+    </div>
+  </div>
 </div>
