@@ -1,7 +1,7 @@
 {
   "name": "Copenhagen",
   "author": "Zendesk",
-  "version": "4.0.67",
+  "version": "4.0.68",
   "api_version": 4,
   "default_locale": "en-us",
   "settings": [
@@ -238,7 +238,8 @@
           "identifier": "favicon",
           "type": "file",
           "description": "favicon_description",
-          "label": "favicon_label"
+          "label": "favicon_label",
+          "value": "favicon.png"
         }
       ]
     },

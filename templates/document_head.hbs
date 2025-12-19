@@ -14,7 +14,13 @@
   <meta name="twitter:title" content="{{help_center.name}}" />
   <meta name="twitter:image" content="{{asset 'og-image.webp'}}" />
 
+{{#if settings.favicon}}
+<link rel="shortcut icon" type="image/x-icon" href="{{settings.favicon}}">
+<link rel="icon" type="image/png" href="{{settings.favicon}}">
+{{else}}
 <link rel="shortcut icon" type="image/x-icon" href="https://1a96a36bae7c8550901a-274b8a70320bb26e7a1e0ea7836ee429.ssl.cf2.rackcdn.com/Images/vagaro-fav.png">
+<link rel="icon" type="image/png" href="https://1a96a36bae7c8550901a-274b8a70320bb26e7a1e0ea7836ee429.ssl.cf2.rackcdn.com/Images/vagaro-fav.png">
+{{/if}}
 <link rel="apple-touch-icon" sizes="57x57" href="https://1a96a36bae7c8550901a-274b8a70320bb26e7a1e0ea7836ee429.ssl.cf2.rackcdn.com/Images/vagaro-logo-pro57.png">
 <link rel="apple-touch-icon" sizes="114x114" href="https://1a96a36bae7c8550901a-274b8a70320bb26e7a1e0ea7836ee429.ssl.cf2.rackcdn.com/Images/vagaro-logo-pro114.png">
 <link rel="apple-touch-icon" sizes="72x72" href="https://1a96a36bae7c8550901a-274b8a70320bb26e7a1e0ea7836ee429.ssl.cf2.rackcdn.com/Images/vagaro-logo-pro72.png">
