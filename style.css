@@ -439,7 +439,7 @@ template {
   border-bottom: none;
   width: 100%;
   text-align: left;
-  background-color: #FFF;
+  background-color: #fff;
   position: relative;
   user-select: none;
   outline: none;
@@ -452,7 +452,7 @@ template {
   outline: none;
 }
 .section.accordion.sub-topic .panel-heading[aria-expanded=true] {
-  background-color: #FFF;
+  background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
 }
 .section.accordion.sub-topic .panel-heading[aria-expanded=true] .title {
@@ -513,7 +513,7 @@ template {
 .section.accordion.sub-topic .panel-body {
   padding: 16px 20px;
   background-color: #f9fafb;
-  font-size: 15px;
+  font-size: 16px;
   color: #4b5563;
   overflow: hidden;
   opacity: 1;
