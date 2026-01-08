@@ -1,11 +1,17 @@
 {
   "name": "copenhagen_theme",
-  "version": "4.0.69",
+  "version": "4.0.71",
   "repository": "git@github.com:zendesk/copenhagen_theme.git",
   "scripts": {
     "start": "concurrently -k -r 'rollup -c -w' 'npx @tailwindcss/cli -i ./styles/input.css -o ./assets/output.css --watch' 'wait-on script.js style.css && zcli themes:preview'",
     "build": "NODE_ENV=production rollup -c",
+    "build:release": "yarn version:patch && yarn build",
+    "build:minor": "yarn version:minor && yarn build",
+    "build:major": "yarn version:major && yarn build",
     "prebuild": "rm -f assets/*-bundle.js",
+    "version:patch": "node bin/version-bump.js patch",
+    "version:minor": "node bin/version-bump.js minor",
+    "version:major": "node bin/version-bump.js major",
     "eslint": "eslint src",
     "prepare": "husky install",
     "download-locales": "node ./bin/update-translations",
