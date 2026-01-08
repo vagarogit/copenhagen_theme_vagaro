@@ -17,7 +17,7 @@
   // Remove text underlines from article content
   a {
     text-decoration: none !important;
-    
+
     &:hover,
     &:active,
     &:focus {
@@ -108,9 +108,8 @@
     h3 {
       font-size: 1.25rem;
       font-weight: 600;
-      
+
       color: #1f2937;
-     
     }
 
     h4 {
@@ -127,7 +126,8 @@
       line-height: 1.5;
     }
 
-    ul, ol {
+    ul,
+    ol {
       margin-bottom: 1rem;
     }
 
@@ -139,50 +139,50 @@
     .orderedlist {
       margin-bottom: 1rem;
       padding-left: 0;
-      
+
       ol.orderedlist {
         margin-top: 0.5rem;
         margin-bottom: 1rem;
         padding-left: 1.5rem;
-        
+
         &[type="1"] {
           list-style-type: decimal;
         }
-        
+
         &[type="a"] {
           list-style-type: lower-alpha;
         }
-        
+
         &[type="A"] {
           list-style-type: upper-alpha;
         }
-        
+
         &[type="i"] {
           list-style-type: lower-roman;
         }
-        
+
         &[type="I"] {
           list-style-type: upper-roman;
         }
       }
-      
+
       .listitem {
         margin-bottom: 0.5rem;
         line-height: 1.6;
-        
+
         p {
           margin-bottom: 0.5rem;
-          
+
           &:last-child {
             margin-bottom: 0;
           }
         }
-        
+
         // Nested ordered lists within list items
         .orderedlist {
           margin-top: 0.75rem;
           margin-bottom: 0.5rem;
-          
+
           ol.orderedlist {
             padding-left: 2rem;
           }
@@ -194,67 +194,67 @@
     .procedure {
       margin-bottom: 1rem;
       padding-left: 0;
-      
+
       ol.procedure {
         margin-top: 0.5rem;
         margin-bottom: 1rem;
         padding-left: 1.5rem;
         list-style-type: decimal;
-        
+
         &[type="1"] {
           list-style-type: decimal;
         }
-        
+
         &[type="a"] {
           list-style-type: lower-alpha;
         }
-        
+
         &[type="A"] {
           list-style-type: upper-alpha;
         }
       }
-      
+
       .step {
         margin-bottom: 0.75rem;
         line-height: 1.6;
-        
+
         p {
           margin-bottom: 0.5rem;
-          
+
           &:last-child {
             margin-bottom: 0;
           }
         }
-        
+
         // Nested ordered lists within procedure steps
         .orderedlist {
           margin-top: 0.75rem;
           margin-bottom: 0.5rem;
-          
+
           ol.orderedlist {
             padding-left: 2rem;
           }
         }
-        
+
         // Substeps within procedure steps
         ol.substeps {
           margin-top: 0.75rem;
           margin-bottom: 0.5rem;
           padding-left: 2rem;
           list-style-position: outside;
-          
+
           &[type="a"] {
             list-style-type: lower-alpha !important;
           }
-          
+
           &[type="A"] {
             list-style-type: upper-alpha !important;
           }
-          
+
           &[type="1"] {
             list-style-type: decimal !important;
           }
-          
+
           .step {
             margin-bottom: 0.5rem;
           }
@@ -268,26 +268,26 @@
       margin-bottom: 1rem;
       padding-left: 1.5rem;
       list-style-position: outside;
-      
+
       &[type="a"] {
         list-style-type: lower-alpha !important;
       }
-      
+
       &[type="A"] {
         list-style-type: upper-alpha !important;
       }
-      
+
       &[type="1"] {
         list-style-type: decimal !important;
       }
-      
+
       .step {
         margin-bottom: 0.5rem;
         line-height: 1.6;
-        
+
         p {
           margin-bottom: 0.5rem;
-          
+
           &:last-child {
             margin-bottom: 0;
           }
@@ -299,32 +299,32 @@
     .itemizedlist {
       margin-bottom: 1rem;
       padding-left: 0;
-      
+
       ul.itemizedlist {
         margin-top: 0.5rem;
         margin-bottom: 1rem;
         padding-left: 1.5rem;
-        
+
         &[style*="list-style-type: disc"] {
           list-style-type: disc;
         }
-        
+
         &[style*="list-style-type: circle"] {
           list-style-type: circle;
         }
-        
+
         &[style*="list-style-type: square"] {
           list-style-type: square;
         }
       }
-      
+
       .listitem {
         margin-bottom: 0.5rem;
         line-height: 1.6;
-        
+
         p {
           margin-bottom: 0.5rem;
-          
+
           &:last-child {
             margin-bottom: 0;
           }
@@ -343,13 +343,20 @@
 
     // Inline media object styles
     .inlinemediaobject {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       vertical-align: middle;
-      
+      line-height: 1;
+
       img {
-        max-height: 1.5em;
+        // Override Tailwind [&_li_img] styles that break inline icons
+        display: inline !important;
+        max-height: 1.2em;
         width: auto;
-        margin: 0 0.25rem;
+        margin: 0 0.25rem !important;
+        border-radius: 0 !important;
+        object-fit: contain;
+        vertical-align: middle;
       }
     }
 
@@ -437,7 +444,8 @@
     padding: 30px 0;
     text-align: center;
 
-    &-question { // Explicit values for rendering h2 like a span for accessibility.
+    &-question {
+      // Explicit values for rendering h2 like a span for accessibility.
       font-size: $font-size-base;
       font-weight: normal;
       margin-bottom: 0;
@@ -495,7 +503,6 @@
   th > p:last-child {
     margin-bottom: 0;
   }
-
 }
 
 .sidenav {
@@ -653,7 +660,7 @@
       }
 
       // Limit to 8 items
-      &:nth-child(n+9) {
+      &:nth-child(n + 9) {
         display: none;
       }
     }
@@ -693,11 +700,8 @@
 }
 
 .mediaobject {
-
-
   img {
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
 }
-
