@@ -2853,7 +2853,8 @@ select:focus {
   margin-bottom: 1rem;
   line-height: 1.5;
 }
-.article-body ul, .article-body ol {
+.article-body ul,
+.article-body ol {
   margin-bottom: 1rem;
 }
 .article-body li {
@@ -3015,13 +3016,19 @@ select:focus {
   border: none;
 }
 .article-body .inlinemediaobject {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   vertical-align: middle;
+  line-height: 1;
 }
 .article-body .inlinemediaobject img {
-  max-height: 1.5em;
+  display: inline !important;
+  max-height: 1.2em;
   width: auto;
-  margin: 0 0.25rem;
+  margin: 0 0.25rem !important;
+  border-radius: 0 !important;
+  object-fit: contain;
+  vertical-align: middle;
 }
 .article-body .bold strong,
 .article-body span.bold strong {

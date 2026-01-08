@@ -233,10 +233,10 @@ const MobileNavigation = ({
             </a>
           </div>
           <a
-            href="https://www.vagaro.com/pro/pricing"
+            href="https://www.vagaro.com/signup-1?licence=1"
             className="flex items-center justify-center bg-primary hover:bg-charcoal hover:border-solid text-md text-white font-medium py-2 px-4 rounded-full w-[152px] h-[40px]"
           >
-            <span className="text-white font-semibold">Sign Up</span>
+            <span className="text-white font-semibold">Start Free Trial</span>
           </a>
           <button
             onClick={onClose}
@@ -485,7 +485,7 @@ const MobileNavigation = ({
           {/* Start Free Trial Button */}
           <div className="p-4 border-t border-gray-200">
             <a
-              href="https://www.vagaro.com/pro/pricing"
+              href="https://www.vagaro.com/signup-1?licence=1"
               className="mx-auto my-4 block w-1/2 rounded-full bg-primary px-3 py-4 text-center text-base font-semibold text-white hover:bg-primary/90"
               onClick={onClose}
             >
