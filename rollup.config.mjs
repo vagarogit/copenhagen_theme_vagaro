@@ -81,6 +81,7 @@ export default defineConfig([
         "src/modules/category-accordions/categoryAccordionsBundle.js",
       "article-accordions":
         "src/modules/article-accordions/articleAccordionsBundle.ts",
+      "mobile-cta-banner": "src/modules/mobileCtaBannerIntegration.js",
     },
     output: {
       dir: "assets",

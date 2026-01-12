@@ -1,0 +1,92 @@
+/* Liquid Glass CTA Banner - Inspired by Apple's glass morphism */
+
+.mobile-cta-banner {
+  &__glass-container {
+    position: relative;
+    overflow: hidden;
+
+    /* Glass morphism effect with tinted base */
+    background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.08) 0%,
+      rgba(168, 85, 247, 0.06) 50%,
+      rgba(236, 72, 153, 0.08) 100%
+    );
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+    /* Border with subtle gradient */
+    border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+
+    /* Soft shadows for depth */
+    box-shadow:
+      inset 0 1px 2px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 2px 0 rgba(0, 0, 0, 0.03),
+      0 4px 16px 0 rgba(99, 102, 241, 0.08);
+  }
+
+  /* Specular highlight - top shimmer */
+  &__glass-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.5) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 200% 200%;
+    background-position: 50% 50%;
+    animation: mobile-cta-drift 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Inner refraction layer */
+  &__glass-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Drift animation for the specular highlight */
+@keyframes mobile-cta-drift {
+  0% {
+    background-position: 50% 50%;
+    opacity: 1;
+  }
+  25% {
+    background-position: 60% 40%;
+    opacity: 0.8;
+  }
+  50% {
+    background-position: 40% 60%;
+    opacity: 1;
+  }
+  75% {
+    background-position: 55% 45%;
+    opacity: 0.9;
+  }
+  100% {
+    background-position: 50% 50%;
+    opacity: 1;
+  }
+}

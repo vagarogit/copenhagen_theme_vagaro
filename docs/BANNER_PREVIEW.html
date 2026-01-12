@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile CTA Banner - Liquid Glass Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Liquid Glass CTA Banner - Inspired by Apple's glass morphism */
+    .mobile-cta-banner__glass-container {
+      position: relative;
+      overflow: hidden;
+
+      /* Glass morphism effect with tinted base */
+      background: linear-gradient(135deg,
+          rgba(99, 102, 241, 0.08) 0%,
+          rgba(168, 85, 247, 0.06) 50%,
+          rgba(236, 72, 153, 0.08) 100%);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+      /* Border with subtle gradient */
+      border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+
+      /* Soft shadows for depth */
+      box-shadow:
+        inset 0 1px 2px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -1px 2px 0 rgba(0, 0, 0, 0.03),
+        0 4px 16px 0 rgba(99, 102, 241, 0.08);
+    }
+
+    /* Specular highlight - top shimmer */
+    .mobile-cta-banner__glass-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(180deg,
+          rgba(255, 255, 255, 0.5) 0%,
+          rgba(255, 255, 255, 0.1) 50%,
+          transparent 100%);
+      background-size: 200% 200%;
+      background-position: 50% 50%;
+      animation: mobile-cta-drift 8s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Inner refraction layer */
+    .mobile-cta-banner__glass-container::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.15) 50%,
+          transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .mobile-cta-banner__content {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Drift animation for the specular highlight */
+    @keyframes mobile-cta-drift {
+      0% {
+        background-position: 50% 50%;
+        opacity: 1;
+      }
+
+      25% {
+        background-position: 60% 40%;
+        opacity: 0.8;
+      }
+
+      50% {
+        background-position: 40% 60%;
+        opacity: 1;
+      }
+
+      75% {
+        background-position: 55% 45%;
+        opacity: 0.9;
+      }
+
+      100% {
+        background-position: 50% 50%;
+        opacity: 1;
+      }
+    }
+
+    /* Demo styles */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .hero-section {
+      height: 600px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .content-section {
+      padding: 40px 20px;
+      min-height: 2000px;
+      background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+
+    .bg-primary {
+      background-color: #CC4744;
+    }
+
+    .bg-charcoal {
+      background-color: #333333;
+    }
+
+    .sticky-banner {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      transition: all 0.3s ease-out;
+    }
+
+    .sticky-banner.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .sticky-banner.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hero Section -->
+  <div class="hero-section" data-hero-section>
+    <div class="text-center px-4">
+      <h1 class="text-5xl font-bold mb-4">Scroll Down</h1>
+      <p class="text-xl">Watch the liquid glass banner appear</p>
+    </div>
+  </div>
+
+  <!-- Sticky Banner (appears on scroll) -->
+  <div id="mobile-cta-banner" class="sticky-banner hidden lg:hidden">
+    <div class="mobile-cta-banner__glass-container px-3 pb-2.5 pt-3">
+      <div class="mobile-cta-banner__content flex items-center justify-center">
+        <a href="https://www.vagaro.com/signup-1?licence=1"
+          class="flex items-center justify-center bg-primary hover:bg-charcoal text-white font-semibold py-2 px-8 rounded-full w-auto md:w-[152px] h-[40px] transition-colors text-sm md:text-base">
+          <span>Start Free Trial</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="content-section">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold mb-6">Mobile CTA Banner Preview</h2>
+
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-semibold mb-4">🎨 Liquid Glass Effect Features</h3>
+        <ul class="space-y-2">
+          <li>✨ <strong>Backdrop blur</strong> with 20px blur and 180% saturation</li>
+          <li>🌈 <strong>Gradient background</strong> with purple/pink tints</li>
+          <li>💫 <strong>Animated shimmer</strong> that drifts across the surface</li>
+          <li>✨ <strong>Specular highlights</strong> for realistic glass refraction</li>
+          <li>🎭 <strong>Layered shadows</strong> for depth perception</li>
+          <li>🔮 <strong>Subtle border</strong> with gradient tint</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h3 class="text-xl font-semibold mb-4">📱 Scroll Behavior</h3>
+        <ul class="space-y-2">
+          <li>⬇️ Scroll <strong>down</strong> past the hero → Banner appears</li>
+          <li>⬆️ Scroll <strong>up</strong> → Banner disappears</li>
+          <li>🔝 Scroll to <strong>top</strong> → Banner stays hidden</li>
+          <li>🎯 Only visible on mobile viewports (&lt; 1024px)</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-xl font-semibold mb-4">🎬 Animation Details</h3>
+        <p class="mb-4">The liquid glass effect includes a subtle "drift" animation that makes the specular highlight
+          move across the surface over 8 seconds, creating a living, breathing feel similar to Apple's design language.
+        </p>
+        <p class="text-sm text-gray-600">Keep scrolling to test the banner behavior...</p>
+      </div>
+
+      <!-- Spacer content -->
+      <div class="mt-12 space-y-6">
+        <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg p-6">
+          <h4 class="font-semibold mb-2">Scroll Test Area</h4>
+          <p>Keep scrolling to see the banner in action...</p>
+        </div>
+        <div class="bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg p-6">
+          <h4 class="font-semibold mb-2">More Content</h4>
+          <p>The banner should be visible now as you scroll down.</p>
+        </div>
+        <div class="bg-gradient-to-r from-green-100 to-teal-100 rounded-lg p-6">
+          <h4 class="font-semibold mb-2">Try Scrolling Up</h4>
+          <p>Scroll back up and watch the banner disappear smoothly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple scroll behavior demo
+    const banner = document.getElementById('mobile-cta-banner');
+    const heroSection = document.querySelector('[data-hero-section]');
+    let lastScrollY = window.scrollY;
+    let isScrollingDown = false;
+    let isHeroVisible = true;
+
+    // IntersectionObserver for hero section
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isHeroVisible = entry.isIntersecting;
+        updateBannerVisibility();
+      },
+      { threshold: 0, rootMargin: '0px' }
+    );
+
+    observer.observe(heroSection);
+
+    // Scroll listener
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const delta = currentScrollY - lastScrollY;
+
+      if (currentScrollY < 100) {
+        isScrollingDown = false;
+      } else if (Math.abs(delta) >= 10) {
+        isScrollingDown = delta > 0;
+      }
+
+      lastScrollY = currentScrollY;
+      updateBannerVisibility();
+    }, { passive: true });
+
+    function updateBannerVisibility() {
+      const shouldShow = !isHeroVisible && isScrollingDown;
+
+      if (shouldShow) {
+        banner.classList.remove('hidden');
+        banner.classList.add('visible');
+      } else {
+        banner.classList.remove('visible');
+        banner.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+
+</html>

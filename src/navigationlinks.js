@@ -292,6 +292,103 @@ class NavigationLinksManager {
   }
 
   /**
+   * Render support mega menu (2x2 grid with icons and descriptions)
+   * Matches styling from SupportDropdownMenu.tsx
+   */
+  renderSupportMegaMenu() {
+    const supportItems = [
+      {
+        title: "Call Support",
+        description:
+          "Our dedicated support team is here to help you with any questions or issues you may have.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-6">
+          <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z" clip-rule="evenodd" />
+        </svg>`,
+        link: "https://support.vagaro.com/hc/en-us#contact-support",
+      },
+      {
+        title: "Support Articles",
+        description:
+          "If you're using Vagaro and need assistance, checking out our support article page is highly recommended.",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+        </svg>`,
+        link: "https://support.vagaro.com/hc/en-us",
+      },
+      {
+        title: "Feature Requests",
+        description:
+          "Do you have a feature request that would make your life easier? Let us know!",
+        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+        </svg>`,
+        link: "https://vagaro.uservoice.com",
+      },
+    ];
+
+    const renderSupportItem = (item) => {
+      return `
+        <a href="${item.link}" target="_blank" rel="noopener noreferrer"
+           class="support-menu-item group relative flex items-center gap-6 rounded-lg border border-gray-200 p-3 text-sm hover:bg-gray-50 sm:p-6 transition-colors">
+          <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-100 group-hover:bg-white text-gray-700 group-hover:text-primary transition-colors">
+            ${item.icon}
+          </div>
+          <div>
+            <span class="font-semibold text-gray-900">
+              ${item.title}
+              <span class="absolute inset-0"></span>
+            </span>
+            <p class="mt-1 text-sm text-gray-600">${item.description}</p>
+          </div>
+        </a>
+      `;
+    };
+
+    const renderSystemStatusItem = () => {
+      return `
+        <a href="https://status.vagaro.com/" target="_blank" rel="noopener noreferrer"
+           class="support-menu-item group relative flex items-center gap-6 rounded-lg border border-gray-200 bg-white p-3 text-sm hover:bg-gray-50 sm:p-6 transition-colors">
+          <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-100 group-hover:bg-white transition-colors">
+            <span class="relative flex size-6">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75"></span>
+              <span class="relative inline-flex size-6 rounded-full bg-green-500"></span>
+            </span>
+          </div>
+          <div>
+            <span class="font-semibold text-gray-900">
+              System Status
+              <span class="absolute inset-0"></span>
+            </span>
+            <p class="mt-1 text-sm text-gray-600">All Systems Operational</p>
+          </div>
+        </a>
+      `;
+    };
+
+    // Calculate position of the navigation bar
+    const navBar = document.getElementById("navigation-menu");
+    const navBarRect = navBar?.getBoundingClientRect();
+    const navBarBottom = navBarRect ? navBarRect.bottom + window.scrollY : 64;
+
+    return `
+      <div class="mega-menu-full-width" style="
+        top: ${navBarBottom}px;
+        min-height: 200px;
+      " data-state="closed">
+        <div class="mega-menu-content" data-state="closed">
+          <div class="w-full bg-white">
+            <div class="mx-auto grid max-w-4xl grid-cols-1 gap-2 px-6 py-6 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0 sm:py-10 lg:grid-cols-2 lg:gap-4 lg:px-8 xl:gap-8">
+              ${supportItems.map((item) => renderSupportItem(item)).join("")}
+              ${renderSystemStatusItem()}
+            </div>
+          </div>
+          <div class="mega-menu-arrow"></div>
+        </div>
+      </div>
+    `;
+  }
+
+  /**
    * Render features dropdown menu (simple dropdown version)
    */
   renderFeaturesDropdown(featuresItems) {
@@ -430,6 +527,31 @@ class NavigationLinksManager {
         // Add a placeholder div to the original container to maintain hover behavior
         featuresContainer.innerHTML = `<div id="features-placeholder" style="position: absolute; top: 100%; left: 0; width: 1px; height: 1px;"></div>`;
       }
+
+      // Setup Support dropdown (static content, no CMS data needed)
+      const supportHTML = this.renderSupportMegaMenu();
+
+      // Create the support mega menu and append to body for true full width
+      const supportMegaMenuWrapper = document.createElement("div");
+      supportMegaMenuWrapper.id = "support-mega-menu-wrapper";
+      supportMegaMenuWrapper.innerHTML = supportHTML;
+
+      // Initially hide the menu
+      supportMegaMenuWrapper.style.display = "none";
+
+      // Remove any existing support mega menu
+      const existingSupportMegaMenu = document.getElementById(
+        "support-mega-menu-wrapper"
+      );
+      if (existingSupportMegaMenu) {
+        existingSupportMegaMenu.remove();
+      }
+
+      // Append to body for true full viewport width
+      document.body.appendChild(supportMegaMenuWrapper);
+
+      // Add hover behavior for Support button and mega menu
+      this.setupSupportMegaMenuBehavior();
 
       // Update mobile menu items
       this.updateMobileMenu(navigationMenu);
@@ -669,6 +791,87 @@ class NavigationLinksManager {
       content.setAttribute("data-state", "closed");
     }
     featuresButton.setAttribute("data-state", "closed");
+    isVisible = false;
+  }
+
+  /**
+   * Setup hover behavior for Support mega menu
+   */
+  setupSupportMegaMenuBehavior() {
+    // Find the Support button specifically
+    const supportButton =
+      document.querySelector("button:has(+ #support-dropdown)") ||
+      Array.from(document.querySelectorAll(".dropdown-toggle")).find((btn) =>
+        btn.textContent.trim().includes("Support")
+      );
+    const megaMenu = document.getElementById("support-mega-menu-wrapper");
+
+    if (!supportButton || !megaMenu) return;
+
+    // Add mega-menu-trigger class to button
+    supportButton.classList.add("mega-menu-trigger");
+
+    let showTimeout;
+    let hideTimeout;
+    let isVisible = false;
+
+    const showMegaMenu = () => {
+      clearTimeout(hideTimeout);
+
+      if (isVisible) return; // Already visible, don't re-trigger animation
+
+      showTimeout = setTimeout(() => {
+        // Show the menu first
+        megaMenu.style.display = "block";
+
+        // Use the transition utility for smooth animation
+        this.handleMegaMenuTransition(megaMenu, "from-end");
+
+        // Update button state
+        supportButton.setAttribute("data-state", "open");
+
+        isVisible = true;
+      }, 50);
+    };
+
+    const hideMegaMenu = () => {
+      clearTimeout(showTimeout);
+
+      if (!isVisible) return; // Already hidden, don't re-trigger animation
+
+      hideTimeout = setTimeout(() => {
+        // Use the exit transition utility for smooth animation
+        this.handleMegaMenuExit(megaMenu, "to-end");
+
+        // Update button state
+        supportButton.setAttribute("data-state", "closed");
+
+        // Hide the menu after animation completes
+        setTimeout(() => {
+          megaMenu.style.display = "none";
+          isVisible = false;
+        }, 150);
+      }, 100);
+    };
+
+    // Show on hover over Support button
+    supportButton.addEventListener("mouseenter", showMegaMenu);
+    supportButton.addEventListener("mouseleave", hideMegaMenu);
+
+    // Keep visible when hovering over mega menu
+    megaMenu.addEventListener("mouseenter", () => {
+      clearTimeout(hideTimeout);
+    });
+    megaMenu.addEventListener("mouseleave", hideMegaMenu);
+
+    // Initially hide the mega menu
+    megaMenu.style.display = "none";
+    megaMenu.setAttribute("data-state", "closed");
+    const content = megaMenu.querySelector(".mega-menu-content");
+    if (content) {
+      content.setAttribute("data-state", "closed");
+    }
+    supportButton.setAttribute("data-state", "closed");
     isVisible = false;
   }
 
@@ -962,6 +1165,32 @@ document.addEventListener("DOMContentLoaded", function () {
       // console.log("[DEBUG] Features mega menu hidden");
     } else {
       // console.log("[DEBUG] Features mega menu not found");
+    }
+  };
+
+  window.showSupportMenu = function () {
+    const megaMenu = document.getElementById("support-mega-menu-wrapper");
+    if (megaMenu) {
+      megaMenu.setAttribute("data-state", "open");
+      const content = megaMenu.querySelector(".mega-menu-content");
+      if (content) {
+        content.setAttribute("data-state", "open");
+      }
+      megaMenu.style.display = "block";
+    }
+  };
+
+  window.hideSupportMenu = function () {
+    const megaMenu = document.getElementById("support-mega-menu-wrapper");
+    if (megaMenu) {
+      megaMenu.setAttribute("data-state", "closed");
+      const content = megaMenu.querySelector(".mega-menu-content");
+      if (content) {
+        content.setAttribute("data-state", "closed");
+      }
+      setTimeout(() => {
+        megaMenu.style.display = "none";
+      }, 200);
     }
   };
 

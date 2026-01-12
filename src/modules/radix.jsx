@@ -379,6 +379,221 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
     );
   };
 
+  // Render support content
+  const renderSupport = () => {
+    const supportItems = [
+      {
+        name: "Call Support",
+        description:
+          "Our dedicated support team is here to help you with any questions or issues you may have.",
+        href: "https://support.vagaro.com/hc/en-us#contact-support",
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            className="size-6"
+          >
+            <path
+              fillRule="evenodd"
+              d="M2 3.5A1.5 1.5 0 0 1 3.5 2h1.148a1.5 1.5 0 0 1 1.465 1.175l.716 3.223a1.5 1.5 0 0 1-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 0 0 6.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 0 1 1.767-1.052l3.223.716A1.5 1.5 0 0 1 18 15.352V16.5a1.5 1.5 0 0 1-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 0 1 2.43 8.326 13.019 13.019 0 0 1 2 5V3.5Z"
+              clipRule="evenodd"
+            />
+          </svg>
+        ),
+      },
+      {
+        name: "Support Articles",
+        description:
+          "If you're using Vagaro and need assistance, checking out our support article page is highly recommended.",
+        href: "https://support.vagaro.com/hc/en-us",
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
+            />
+          </svg>
+        ),
+      },
+      {
+        name: "Feature Requests",
+        description:
+          "Do you have a feature request that would make your life easier? Let us know!",
+        href: "https://vagaro.uservoice.com",
+        icon: (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
+            />
+          </svg>
+        ),
+      },
+    ];
+
+    return (
+      <div className="List bg-white w-full fullwidth">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-2 px-6 py-6 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0 sm:py-10 lg:grid-cols-2 lg:gap-4 lg:px-8 xl:gap-8">
+          {supportItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative flex items-center gap-6 rounded-lg border border-gray-200 p-3 text-sm hover:bg-gray-50 sm:p-6 transition-colors"
+            >
+              <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-100 group-hover:bg-white text-gray-700 group-hover:text-primary transition-colors">
+                {item.icon}
+              </div>
+              <div>
+                <span className="font-semibold text-gray-900">
+                  {item.name}
+                  <span className="absolute inset-0" />
+                </span>
+                <p className="mt-1 text-sm text-gray-600">{item.description}</p>
+              </div>
+            </a>
+          ))}
+
+          {/* System Status Item */}
+          <a
+            href="https://status.vagaro.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center gap-6 rounded-lg border border-gray-200 bg-white p-3 text-sm hover:bg-gray-50 sm:p-6 transition-colors"
+          >
+            <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-100 group-hover:bg-white transition-colors">
+              <span className="relative flex size-6">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+                <span className="relative inline-flex size-6 rounded-full bg-green-500" />
+              </span>
+            </div>
+            <div>
+              <span className="font-semibold text-gray-900">
+                System Status
+                <span className="absolute inset-0" />
+              </span>
+              <p className="mt-1 text-sm text-gray-600">
+                All Systems Operational
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    );
+  };
+
+  // Render products/hardware content
+  const renderProducts = () => {
+    const hardwareItems = [
+      {
+        name: "PayPro",
+        link: "terminal",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/psvr1YnATyc5qhFhnA2C",
+      },
+      {
+        name: "PayPro Duo",
+        link: "terminal-dual-screen",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/HmnLuvFRvysMT651PfNA",
+      },
+      {
+        name: "PayPro Mini",
+        link: "tablet",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/EF6KDxjtS0KB25tz56QC",
+      },
+      {
+        name: "Credit Card Reader",
+        link: "credit-card-reader",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/i1Oc6AyARBqCxTLW8O3j",
+      },
+      {
+        name: "Pay Swivel Stand",
+        link: "stand",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/x8n2rFC6RxYCBMoAqRYh",
+      },
+      {
+        name: "QR Scanner",
+        link: "barcode-scanner",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/ZTBXIbbjRLyyWhTF7wrC",
+      },
+      {
+        name: "Vagaro Printer",
+        link: "thermal-receipt-printer",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/TMW9IaXLQj6Uq8WrAir7",
+      },
+      {
+        name: "Cash Drawer",
+        link: "cash-register",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/mYof6RfARfKM5OJBozSE",
+      },
+    ];
+
+    return (
+      <div className="List bg-white w-full fullwidth">
+        <div className="mx-auto w-full max-w-4xl bg-white p-4">
+          <div className="flex items-center justify-between gap-4 px-2">
+            <span className="text-base font-semibold uppercase text-primary">
+              POS Hardware
+            </span>
+            <a
+              className="rounded-lg border border-gray-300 bg-gray-50 px-5 py-2.5 text-base font-normal text-gray-900 hover:bg-primary hover:text-white transition-colors"
+              href="https://www.vagaro.com/pro/pos-hardware"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View All
+            </a>
+          </div>
+          <div className="grid grid-cols-4 gap-4 p-4">
+            {hardwareItems.map((item) => (
+              <a
+                key={item.link}
+                className="flex h-full flex-col items-center justify-center rounded-xl p-4 text-center hover:bg-gray-50 transition-colors"
+                href={`https://www.vagaro.com/pro/pos-hardware/${item.link}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  alt={item.name}
+                  className="h-32 w-full object-contain"
+                  src={item.image}
+                />
+                <span className="text-sm font-semibold text-gray-900 mt-2">
+                  {item.name}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <NavigationMenu.Root
       className="NavigationMenuRoot pt-0 md:pt-2"
@@ -435,15 +650,14 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
             {renderFeatures()}
           </NavigationMenu.Content>
         </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Link
-            className="NavigationMenuLink"
-            href="https://www.vagaro.com/pro/pos-hardware"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        {/* Products Menu */}
+        <NavigationMenu.Item value="products">
+          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-hover">
             Products
-          </NavigationMenu.Link>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content className="NavigationMenuContent">
+            {renderProducts()}
+          </NavigationMenu.Content>
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
@@ -475,15 +689,14 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
             Contact Sales
           </NavigationMenu.Link>
         </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Link
-            className="NavigationMenuLink text-nowrap"
-            href="https://vagaro.zendesk.com/hc/en-us"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        {/* Support Menu */}
+        <NavigationMenu.Item value="support">
+          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-hover">
             Support
-          </NavigationMenu.Link>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content className="NavigationMenuContent">
+            {renderSupport()}
+          </NavigationMenu.Content>
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
