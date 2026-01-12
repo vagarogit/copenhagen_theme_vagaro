@@ -201,6 +201,139 @@ const MobileNavigation = ({
     );
   };
 
+  // Render support section (2x2 grid)
+  const renderSupport = () => {
+    const supportItems = [
+      {
+        name: "Call Support",
+        href: "https://support.vagaro.com/hc/en-us#contact-support",
+      },
+      {
+        name: "Support Articles",
+        href: "https://support.vagaro.com/hc/en-us",
+      },
+      {
+        name: "Feature Requests",
+        href: "https://vagaro.uservoice.com",
+      },
+      {
+        name: "System Status",
+        href: "https://status.vagaro.com/",
+      },
+    ];
+
+    return (
+      <div className="grid grid-cols-2 gap-3 p-2">
+        {supportItems.map((item) => (
+          <a
+            key={item.name}
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center h-40 rounded-lg border border-gray-200 bg-white text-center hover:bg-gray-50 transition-colors"
+            onClick={onClose}
+          >
+            <span className="text-base font-semibold text-gray-900">
+              {item.name}
+            </span>
+          </a>
+        ))}
+      </div>
+    );
+  };
+
+  // Render products section (2-column grid with images)
+  const renderProducts = () => {
+    const hardwareItems = [
+      {
+        name: "PayPro",
+        link: "terminal",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/psvr1YnATyc5qhFhnA2C",
+      },
+      {
+        name: "PayPro Duo",
+        link: "terminal-dual-screen",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/HmnLuvFRvysMT651PfNA",
+      },
+      {
+        name: "PayPro Mini",
+        link: "tablet",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/EF6KDxjtS0KB25tz56QC",
+      },
+      {
+        name: "Credit Card Reader",
+        link: "credit-card-reader",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/i1Oc6AyARBqCxTLW8O3j",
+      },
+      {
+        name: "Pay Swivel Stand",
+        link: "stand",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/x8n2rFC6RxYCBMoAqRYh",
+      },
+      {
+        name: "QR Scanner",
+        link: "barcode-scanner",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/ZTBXIbbjRLyyWhTF7wrC",
+      },
+      {
+        name: "Vagaro Printer",
+        link: "thermal-receipt-printer",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/TMW9IaXLQj6Uq8WrAir7",
+      },
+      {
+        name: "Cash Drawer",
+        link: "cash-register",
+        image:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/mYof6RfARfKM5OJBozSE",
+      },
+    ];
+
+    return (
+      <div className="grid grid-cols-2 gap-3 p-2">
+        {/* View All Card */}
+        <a
+          href="https://www.vagaro.com/pro/pos-hardware"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center h-40 rounded-lg border border-gray-200 bg-white text-center hover:bg-gray-50 transition-colors"
+          onClick={onClose}
+        >
+          <span className="text-base font-semibold text-gray-900">
+            View All
+          </span>
+        </a>
+
+        {/* Hardware Items */}
+        {hardwareItems.map((item) => (
+          <a
+            key={item.link}
+            href={`https://www.vagaro.com/pro/pos-hardware/${item.link}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center justify-center h-40 rounded-lg border border-gray-200 bg-white text-center hover:bg-gray-50 transition-colors p-3"
+            onClick={onClose}
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className="h-20 w-full object-contain mb-2"
+            />
+            <span className="text-sm font-semibold text-gray-900">
+              {item.name}
+            </span>
+          </a>
+        ))}
+      </div>
+    );
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -363,12 +496,24 @@ const MobileNavigation = ({
               <div className="h-[1px] bg-[#cccccc] border-0" />
 
               {/* Products */}
-              <MobileNavItem
-                href="https://www.vagaro.com/pro/pos-hardware"
+              <NavButton
+                onClick={() => openPanel("products")}
                 title="Products"
-                onClick={onClose}
-                className="text-lg font-semibold"
-                icon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' /%3E%3C/svg%3E"
+                icon={
+                  <svg
+                    className="w-6 h-6 text-charcoal"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                }
                 showChevron={true}
               />
               <div className="h-[1px] bg-[#cccccc] border-0" />
@@ -403,13 +548,25 @@ const MobileNavigation = ({
               />
               <div className="h-[1px] bg-[#cccccc] border-0" />
 
-              {/* Contact Support */}
-              <MobileNavItem
-                href="https://vagaro.zendesk.com/hc/en-us"
-                title="Contact Support"
-                onClick={onClose}
-                className="text-lg font-semibold"
-                icon="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='1' d='M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z' /%3E%3C/svg%3E"
+              {/* Support */}
+              <NavButton
+                onClick={() => openPanel("support")}
+                title="Support"
+                icon={
+                  <svg
+                    className="w-6 h-6 text-charcoal"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1}
+                      d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
+                    />
+                  </svg>
+                }
                 showChevron={true}
               />
               <div className="h-[1px] bg-[#cccccc] border-0" />
@@ -572,6 +729,132 @@ const MobileNavigation = ({
             </div>
             {/* Panel Content */}
             <div className="flex-1 overflow-y-auto p-4">{renderFeatures()}</div>
+          </div>
+        </div>
+
+        {/* Support Panel */}
+        <div
+          className={classNames(
+            "absolute inset-0 bg-white transform transition-transform duration-300 ease-in-out",
+            activePanel === "support" ? "translate-x-0" : "translate-x-full"
+          )}
+        >
+          <div className="flex flex-col h-full">
+            {/* Panel Header */}
+            <div className="relative flex items-center justify-center py-4 px-1 border-b border-gray-200">
+              <button
+                onClick={closePanel}
+                className="absolute left-4 flex items-center p-2 text-gray-900 hover:text-gray-600 focus:outline-none"
+                aria-label="Go back"
+              >
+                <svg
+                  className="w-5 h-5 mr-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                <span className="text-base font-medium">Back</span>
+              </button>
+              <a
+                href="https://www.vagaro.com/signup-1?licence=1"
+                className="flex items-center justify-center bg-primary hover:bg-charcoal text-md text-white font-medium py-2 px-4 rounded-full w-[152px] h-[40px]"
+              >
+                <span className="text-white font-semibold">
+                  Start Free Trial
+                </span>
+              </a>
+              <button
+                onClick={onClose}
+                className="absolute right-4 p-2 rounded-md text-primary hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                aria-label="Close navigation"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            {/* Panel Content */}
+            <div className="flex-1 overflow-y-auto p-4">{renderSupport()}</div>
+          </div>
+        </div>
+
+        {/* Products Panel */}
+        <div
+          className={classNames(
+            "absolute inset-0 bg-white transform transition-transform duration-300 ease-in-out",
+            activePanel === "products" ? "translate-x-0" : "translate-x-full"
+          )}
+        >
+          <div className="flex flex-col h-full">
+            {/* Panel Header */}
+            <div className="relative flex items-center justify-center py-4 px-1 border-b border-gray-200">
+              <button
+                onClick={closePanel}
+                className="absolute left-4 flex items-center p-2 text-gray-900 hover:text-gray-600 focus:outline-none"
+                aria-label="Go back"
+              >
+                <svg
+                  className="w-5 h-5 mr-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                <span className="text-base font-medium">Back</span>
+              </button>
+              <a
+                href="https://www.vagaro.com/signup-1?licence=1"
+                className="flex items-center justify-center bg-primary hover:bg-charcoal text-md text-white font-medium py-2 px-4 rounded-full w-[152px] h-[40px]"
+              >
+                <span className="text-white font-semibold">
+                  Start Free Trial
+                </span>
+              </a>
+              <button
+                onClick={onClose}
+                className="absolute right-4 p-2 rounded-md text-primary hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                aria-label="Close navigation"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            {/* Panel Content */}
+            <div className="flex-1 overflow-y-auto p-4">{renderProducts()}</div>
           </div>
         </div>
       </div>
