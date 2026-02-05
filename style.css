@@ -827,7 +827,7 @@ template {
 body {
   background-color: $background_color;
   color: $text_color;
-  font-family: "proxima-nova", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -844,7 +844,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "proxima-nova", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   margin-top: 0;
 }
 
@@ -1313,7 +1313,7 @@ ul {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "proxima-nova", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 .text-large {
