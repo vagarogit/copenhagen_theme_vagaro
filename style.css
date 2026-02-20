@@ -3011,7 +3011,7 @@ select:focus {
 .article-body .guimenu,
 .article-body .guisubmenu,
 .article-body .guimenuitem {
-  font-weight: 900;
+  font-weight: 600;
   color: black;
   border: none;
 }
