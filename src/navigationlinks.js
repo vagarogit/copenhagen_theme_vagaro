@@ -79,6 +79,84 @@ class NavigationLinksManager {
   }
 
   /**
+   * GraphQL query for resources navigation posts (trending + pro updates)
+   */
+  getResourcesNavPostsQuery() {
+    return {
+      query: `
+        query GetResourcesNavPosts {
+          trendingPosts: blogPosts(
+            first: 1
+            where: { category_contains_some: [Beauty], postTypeSelect: Learn }
+            orderBy: date_DESC
+          ) {
+            id
+            title
+            slug
+            publishedAt
+            coverImage {
+              id
+              url
+            }
+          }
+          proPosts: blogPostsConnection(
+            first: 2
+            where: { postTypeSelect: SalesUpdates }
+            orderBy: publishedAt_DESC
+          ) {
+            edges {
+              node {
+                id
+                title
+                slug
+                publishedAt
+                coverImage {
+                  id
+                  url
+                }
+              }
+            }
+          }
+        }
+      `,
+    };
+  }
+
+  /**
+   * Fetch resources navigation posts from Hygraph
+   */
+  async fetchResourcesNavPosts() {
+    try {
+      const response = await fetch(this.endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.getResourcesNavPostsQuery()),
+        signal: AbortSignal.timeout(this.options.timeout),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.errors) {
+        throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
+      }
+
+      return {
+        trendingPosts: data.data.trendingPosts || [],
+        proPosts: (data.data.proPosts?.edges || []).map((edge) => edge.node),
+      };
+    } catch (error) {
+      console.error("[Resources Nav] Failed to fetch posts:", error);
+      return { trendingPosts: [], proPosts: [] };
+    }
+  }
+
+  /**
    * Fetch navigation menu items from Hygraph
    */
   async fetchNavigationMenu() {
@@ -1054,7 +1132,7 @@ class NavigationLinksManager {
   /**
    * Update Radix Navigation component with data
    */
-  updateRadixNavigation(navigationMenu) {
+  async updateRadixNavigation(navigationMenu) {
     // Format data for Radix component
     const businessTypes = {
       beauty: navigationMenu.beautyItems || [],
@@ -1064,11 +1142,16 @@ class NavigationLinksManager {
 
     const features = navigationMenu.featureItems || [];
 
+    // Fetch resources posts in parallel
+    const resourcesPosts = await this.fetchResourcesNavPosts();
+
     // Send data to global bridge
     if (typeof window.updateNavigationData === "function") {
       window.updateNavigationData({
         businessTypes,
         features,
+        trendingPosts: resourcesPosts.trendingPosts,
+        proPosts: resourcesPosts.proPosts,
       });
     }
   }

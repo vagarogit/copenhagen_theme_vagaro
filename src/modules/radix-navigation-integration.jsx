@@ -11,6 +11,8 @@ const DEV_MODE_MOBILE_NAV_OPEN = false; // Change to true to open mobile nav on 
 window.navigationData = {
   businessTypes: null,
   features: null,
+  trendingPosts: [],
+  proPosts: [],
   isLoaded: false,
 };
 

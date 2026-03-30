@@ -7,7 +7,13 @@ import classNames from "classnames";
 import { PropTypes } from "prop-types";
 
 const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
-  const { businessTypes, features, isLoaded } = navigationData;
+  const {
+    businessTypes,
+    features,
+    trendingPosts = [],
+    proPosts = [],
+    isLoaded,
+  } = navigationData;
   const { userAvatar, userName } = userInfo;
 
   // Utility function to format links - convert relative links to absolute Vagaro URLs
@@ -594,6 +600,166 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
     );
   };
 
+  // Render resources content
+  const renderResources = () => {
+    const resourceLinks = [
+      { href: "https://www.vagaro.com/learn", name: "Blog" },
+      {
+        href: "https://mysite.vagaro.com/vagarouniversity",
+        name: "Education",
+      },
+      {
+        href: "https://support.vagaro.com",
+        name: "Support Articles",
+      },
+      { href: "https://www.vagaro.com/studio", name: "Studio" },
+      { href: "https://www.vagaro.com/pro/updates", name: "Pro Updates" },
+      {
+        href: "https://www.vagaro.com/learn/inside-vagaro",
+        name: "Inside Look",
+      },
+    ];
+
+    return (
+      <div className="List bg-white w-full fullwidth">
+        <div className="flex w-full xl:container mx-auto xl:max-w-7xl py-8 px-8">
+          {/* Resources Links Column */}
+          <div className="w-1/5 flex flex-col">
+            <a
+              href="https://www.vagaro.com/pro/resources"
+              className="text-base font-bold uppercase text-primary hover:text-primary/80"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Resources
+            </a>
+            <div className="mt-8 flex flex-col gap-4">
+              {resourceLinks.map((item) => (
+                <a
+                  className="py-2 text-base font-semibold text-charcoal hover:text-primary transition-colors"
+                  href={item.href}
+                  key={item.name}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* What's Trending Column */}
+          <div className="w-2/5 pl-8">
+            <a
+              href="https://www.vagaro.com/learn"
+              className="text-base font-bold uppercase text-primary hover:text-primary/80"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              What&apos;s Trending
+            </a>
+            <div className="mt-6">
+              {trendingPosts.length > 0 ? (
+                trendingPosts.map((post) => (
+                  <article
+                    className="relative isolate flex max-w-sm flex-col gap-y-2"
+                    key={post.id}
+                  >
+                    <div className="relative max-w-lg">
+                      <img
+                        alt={post.title || "Blog post cover image"}
+                        className="aspect-video w-full rounded bg-gray-100 object-cover"
+                        src={post.coverImage?.url || ""}
+                      />
+                    </div>
+                    <div>
+                      <a
+                        className="text-base font-semibold text-charcoal hover:text-primary transition-colors"
+                        href={`https://www.vagaro.com/learn/${post.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {post.title}
+                      </a>
+                      <div className="flex items-center gap-1 mt-2">
+                        <a
+                          className="text-sm text-primary hover:text-primary/80 transition-colors"
+                          href={`https://www.vagaro.com/learn/${post.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Read More
+                        </a>
+                        <ChevronRightIcon className="w-3 h-3 text-primary" />
+                      </div>
+                    </div>
+                  </article>
+                ))
+              ) : (
+                <span className="text-gray-500 text-sm">Loading...</span>
+              )}
+            </div>
+          </div>
+
+          {/* Pro Updates Column */}
+          <div className="w-2/5 pl-8">
+            <a
+              href="https://www.vagaro.com/pro/updates"
+              className="text-base font-bold uppercase text-primary hover:text-primary/80"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pro Updates
+            </a>
+            <div className="mt-6 flex flex-col gap-6">
+              {proPosts.length > 0 ? (
+                proPosts.map((post) => (
+                  <article
+                    className="relative isolate flex gap-x-4 items-start"
+                    key={post.id}
+                  >
+                    <div className="relative flex-shrink-0">
+                      <div className="h-28 w-40 overflow-hidden rounded bg-gray-100">
+                        <img
+                          alt={post.title || "Blog post cover image"}
+                          className="h-full w-full object-cover"
+                          src={post.coverImage?.url || ""}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <a
+                        className="text-base font-semibold text-charcoal hover:text-primary transition-colors"
+                        href={`https://www.vagaro.com/pro/updates/${post.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {post.title}
+                      </a>
+                      <div className="flex items-center gap-1 mt-2">
+                        <a
+                          className="text-sm text-primary hover:text-primary/80 transition-colors"
+                          href={`https://www.vagaro.com/pro/updates/${post.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Read More
+                        </a>
+                        <ChevronRightIcon className="w-3 h-3 text-primary" />
+                      </div>
+                    </div>
+                  </article>
+                ))
+              ) : (
+                <span className="text-gray-500 text-sm">Loading...</span>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <NavigationMenu.Root
       className="NavigationMenuRoot pt-0 md:pt-2"
@@ -653,7 +819,14 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
         {/* Products Menu */}
         <NavigationMenu.Item value="products">
           <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-hover">
-            Products
+            <a
+              href="https://www.vagaro.com/pro/pos-hardware"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {" "}
+              Products
+            </a>
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent">
             {renderProducts()}
@@ -698,15 +871,14 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
             {renderSupport()}
           </NavigationMenu.Content>
         </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Link
-            className="NavigationMenuLink"
-            href="https://www.vagaro.com/pro/resources"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        {/* Resources Menu */}
+        <NavigationMenu.Item value="resources">
+          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-hover">
             Resources
-          </NavigationMenu.Link>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content className="NavigationMenuContent">
+            {renderResources()}
+          </NavigationMenu.Content>
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
@@ -816,6 +988,8 @@ NavigationMenuDemo.propTypes = {
   navigationData: PropTypes.shape({
     businessTypes: PropTypes.object,
     features: PropTypes.array,
+    trendingPosts: PropTypes.array,
+    proPosts: PropTypes.array,
     isLoaded: PropTypes.bool,
   }),
   userInfo: PropTypes.shape({
