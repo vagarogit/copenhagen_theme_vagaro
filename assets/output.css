@@ -2561,6 +2561,11 @@
       border-style: none;
     }
   }
+  .dark\:text-charcoal {
+    @media (prefers-color-scheme: dark) {
+      color: var(--color-charcoal);
+    }
+  }
   .\[\&_li_img\]\:mt-4 {
     & li img {
       margin-top: calc(var(--spacing) * 4);

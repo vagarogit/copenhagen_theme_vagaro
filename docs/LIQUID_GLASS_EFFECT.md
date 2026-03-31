@@ -19,7 +19,7 @@ background: linear-gradient(
 backdrop-filter: blur(20px) saturate(180%);
 ```
 
-**Purpose**: Creates the frosted glass base with color tint
+**Purpose**: Creates the frosted glass base with color tintc
 - Low opacity colors (6-8%) for subtle tinting
 - Backdrop blur creates the frosted effect
 - Saturation boost makes colors behind more vibrant
