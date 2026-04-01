@@ -360,9 +360,11 @@
       }
     }
 
-    .mediaobject,
-    .mediaobject.image-center {
+    .mediaobject {
       display: block;
+    }
+
+    .mediaobject.image-center {
       text-align: center;
 
       img {

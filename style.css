@@ -3030,12 +3030,12 @@ select:focus {
   object-fit: contain;
   vertical-align: middle;
 }
-.article-body .mediaobject,
-.article-body .mediaobject.image-center {
+.article-body .mediaobject {
   display: block;
+}
+.article-body .mediaobject.image-center {
   text-align: center;
 }
-.article-body .mediaobject img,
 .article-body .mediaobject.image-center img {
   display: block;
   margin-left: auto;
