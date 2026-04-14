@@ -1,6 +1,6 @@
 {
   "name": "copenhagen_theme",
-  "version": "4.0.82",
+  "version": "4.0.83",
   "repository": "git@github.com:zendesk/copenhagen_theme.git",
   "scripts": {
     "start": "concurrently -k -r 'rollup -c -w' 'npx @tailwindcss/cli -i ./styles/input.css -o ./assets/output.css --watch' 'wait-on script.js style.css && zcli themes:preview'",
@@ -15,6 +15,7 @@
     "eslint": "eslint src",
     "prepare": "husky install",
     "download-locales": "node ./bin/update-translations",
+    "fetch-nav-data": "node ./bin/fetch-nav-data.js",
     "test": "jest",
     "test-a11y": "node bin/lighthouse/index.js",
     "i18n:extract": "node bin/extract-strings.mjs new-request-form 'src/modules/new-request-form/**/*.{ts,tsx}' src/modules/new-request-form/translations",

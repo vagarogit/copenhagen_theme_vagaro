@@ -531,7 +531,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
         name: "Credit Card Reader",
         link: "credit-card-reader",
         image:
-          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/i1Oc6AyARBqCxTLW8O3j",
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cmnxmndj2gvdh07lmhxffsfgp",
       },
       {
         name: "Pay Swivel Stand",

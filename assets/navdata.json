@@ -1,0 +1,700 @@
+{
+  "fetchedAt": "2026-04-14T18:19:39.963Z",
+  "navigationMenu": {
+    "beautyItems": [
+      {
+        "id": "cmhmg6sf6r7zl09lq4uyc3hxu",
+        "name": "Beauty",
+        "link": "beauty-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cmhmg7bedr8g109lq4n0fsaj7",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cmhmg7bedr8g209lq7714u6fn"
+        }
+      },
+      {
+        "id": "cmfn2e8as0yj007n7tzpkt2hk",
+        "name": "Booth Renter",
+        "link": "booth-renter",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cmgi9who2rqx807mvmmc6lu74",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cmgi9who2rqx907mvl92pqvos"
+        }
+      },
+      {
+        "id": "clezyig6j1dc90bmzml2gjo4d",
+        "name": "Salon",
+        "link": "salon-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clirp76l161x70bn4elvn9miu",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/X28jxRSPTI6HKZW8vtB9"
+        }
+      },
+      {
+        "id": "clezyozfj1que0bmz8u275bva",
+        "name": "Brow & Lash",
+        "link": "brow-lash-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cmhmg37zfpq7h07n1a16gen9s",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cmhmg37zfpq7i07n111641e8r"
+        }
+      },
+      {
+        "id": "clezyk61j1cxp0blm2yabmw43",
+        "name": "Barber",
+        "link": "barber-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cltx6kft1a7r407n62le0l4d6",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/oZYnv6BXTYmFuHkSL9J6"
+        }
+      },
+      {
+        "id": "clezyjldy1c150blm6yhet6b4",
+        "name": "Nail",
+        "link": "nail-salon-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cltx6pr2uaq7407muxilaz342",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/5y0E6YuPSByuRy1mhLGW"
+        }
+      },
+      {
+        "id": "clezyolpn1qpq0bmzqaf5i0jl",
+        "name": "Hair Removal",
+        "link": "hair-removal-studio-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqnjnhorwg0bljb9lmshd5",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/iTHY0lTS8O3DROdqIXNC"
+        }
+      },
+      {
+        "id": "clezyno6t1n1g0blmt41do7q8",
+        "name": "Makeup",
+        "link": "makeup-artist-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqmk0aorkv0bljjje98vft",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/DcZNndDRJaMVsgqsZckQ"
+        }
+      },
+      {
+        "id": "clezyndq71nk40bn1mwwkmrd4",
+        "name": "Tanning",
+        "link": "tanning-salon-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqliaqopvq0bljdir1yna1",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/M2uO8QQ8i7TBZmn0nJHA"
+        }
+      },
+      {
+        "id": "clezyn1c21n240bn1zzhrjyp3",
+        "name": "Tattoo",
+        "link": "tattoo-shop-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cltx6vz99ap8407n6f9jma3or",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/fBoqL1eMTbaw9lba4dVZ"
+        }
+      },
+      {
+        "id": "clnavjhfhz5du0blkcdbtoclu",
+        "name": "Pet Grooming",
+        "link": "pet-grooming-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cltdo5op2s1ye07mwrhhqlkvk",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/6l0k2bLZSiIjm5TxvUvE"
+        }
+      }
+    ],
+    "wellnessItems": [
+      {
+        "id": "clezywqc71xdh0blmpbd79jog",
+        "name": "Spa",
+        "link": "spa-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqp210p0ga0bn5wkvherbu",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/O4n9Y5DRtKkRTLh1XkmM"
+        }
+      },
+      {
+        "id": "cmar1sodbacpp07mxpyzustnw",
+        "name": "Aesthetic Clinic",
+        "link": "aesthetic-clinic-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqu02cow4c0bljj2b3z5wb",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/AtAhRzEPSNeVXm6YABRk"
+        }
+      },
+      {
+        "id": "clezz1mng08v90clpug4rhxx9",
+        "name": "Med Spa",
+        "link": "medical-spa-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqu02cow4c0bljj2b3z5wb",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/AtAhRzEPSNeVXm6YABRk"
+        }
+      },
+      {
+        "id": "clezyxuxg07930clpcnm4hov9",
+        "name": "Massage",
+        "link": "massage-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqpnfbot3k0bljdhmkui92",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/omBsgPtURuiXBemy3dA5"
+        }
+      },
+      {
+        "id": "clezyzbg821js0bn1a988bmb8",
+        "name": "Acupuncture",
+        "link": "acupuncture-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitr3l78pbxb0bn5yd7nvgh0",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/CthLjJFcQ2N1tUiKMZQ7"
+        }
+      },
+      {
+        "id": "clezz0xmz088v0clp6lbesh96",
+        "name": "Chiropractor",
+        "link": "chiropractor-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqsvwgp0m90bmyh9efhdat",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/WqYbZmrBSoCPpLbNnqCB"
+        }
+      },
+      {
+        "id": "clgr5v9qkjq2f0blh9paxgo3o",
+        "name": "Mental Health",
+        "link": "mental-health-software",
+        "showInHomeTabs": true,
+        "flagAsNew": true,
+        "iconImage": {
+          "id": "clitqv4yup0he0bmyl203loej",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/AsY5SrslSaoCyu7mr5qN"
+        }
+      },
+      {
+        "id": "clezz0cka1z9s0an0m0jeewps",
+        "name": "Nutritionist",
+        "link": "nutritionist-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cltx70i2fayvr07muo37zwnbu",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/y0wSZJ9SoiJSPAphXw3w"
+        }
+      },
+      {
+        "id": "clezyyexf07of0clpcys4wr0g",
+        "name": "Coaching",
+        "link": "coaching-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqqdk6p1940bn5363zksn3",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/5k7HbO7VT6CRSK6ExrGf"
+        }
+      },
+      {
+        "id": "clezyzucq1z4y0an0v8ovrwb1",
+        "name": "Physical Therapy",
+        "link": "physical-therapy-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqrh8ep1l10bn5wtcz9dm8",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/E4MFomIVSgGiIWlsYDla"
+        }
+      }
+    ],
+    "fitnessItems": [
+      {
+        "id": "clezz69rp0fdu0clpom739t7v",
+        "name": "All Fitness",
+        "link": "fitness-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqzrt9p2z30bljrgcarvc7",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/ujDhsOaTkuRizlJEMotJ"
+        }
+      },
+      {
+        "id": "clezz2vly26gg0bmz0b8dsqlk",
+        "name": "Yoga",
+        "link": "yoga-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqwk0np14m0blj55w03hzy",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/OA7ao642RZOzkjHdYwUH"
+        }
+      },
+      {
+        "id": "clezz5r0e25on0an0r1imicy1",
+        "name": "Gym",
+        "link": "gym-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqz596p5440bmyvgs7t3js",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/xCxFZ45QhOjFfQr1kR91"
+        }
+      },
+      {
+        "id": "clezz3cli23e80an09myvlarg",
+        "name": "Personal Trainer",
+        "link": "personal-training-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqx4vop6up0bmyci89tdsc",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/oTozP0EZT9mGoBO3CrW0"
+        }
+      },
+      {
+        "id": "cmlu4uxbwok4507n2m8y8pw0n",
+        "name": "Martial Arts",
+        "link": "martial-arts-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": null
+      },
+      {
+        "id": "clezz2c3q22wc0blm3gb1iqyd",
+        "name": "Pilates",
+        "link": "pilates-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqvo35p1t90bmyzooykbwi",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/JBq6cOyYSoupTYv9EoHT"
+        }
+      },
+      {
+        "id": "clezz424u23jx0an0pmfb5taz",
+        "name": "Cross Training",
+        "link": "cross-training-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqxrd2p43n0bmy2yxrf4k5",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/5uQ6G3MdSaCntuShAg7v"
+        }
+      },
+      {
+        "id": "clezz4jrq25ji0blmjv8qwtjt",
+        "name": "Cycling",
+        "link": "cycling-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitqy58pp79z0bmy8evqlk3l",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cabpq3aYTD2d45hQcT2I"
+        }
+      },
+      {
+        "id": "clezz58cz26hv0blm75144yn0",
+        "name": "Dance Studio",
+        "link": "dancing-studio-software",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cltx77rwcb6cv07n6laqsj3t9",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/MjgzHBDaTlG0wdb1mQKz"
+        }
+      }
+    ],
+    "featureItems": [
+      {
+        "id": "clezz8pre2ceq0bmzkc444a7w",
+        "name": "Online Booking",
+        "description": "Send clients to your Vagaro Page to book on any device.",
+        "link": "online-booking",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsjka4pp4o0bn5uuigxq7u",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/8VCjrYmHQ16QXM3oqwZU"
+        }
+      },
+      {
+        "id": "clezzfbh62a3i0an0wv50pnig",
+        "name": "Marketplace",
+        "description": "20+ million customers searching for businesses like yours.",
+        "link": "marketplace",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitso6j5pm9y0bmy34r9r2cs",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/mZfNSt6XS0efxCahoNLg"
+        }
+      },
+      {
+        "id": "clw5aohi3gg3w07ligtmcnf0e",
+        "name": "Vagaro Connect",
+        "description": "A customer messaging platform designed for better connections.",
+        "link": "business-messenger",
+        "showInHomeTabs": true,
+        "flagAsNew": true,
+        "iconImage": {
+          "id": "clw5ci5a9kcyx07li6jq2xz85",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/VfAS9VVFRiq7SRAs87ID"
+        }
+      },
+      {
+        "id": "cltt9vsqrccsk07luovhms3h6",
+        "name": "Vagaro AI",
+        "description": "A transformative tool designed to elevate your client experience.",
+        "link": "business-ai",
+        "showInHomeTabs": true,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "cm2oydea3tz2u06lopssu0jfq",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/y4dSasjCS4y8K8fvcHx2"
+        }
+      },
+      {
+        "id": "clezze0ct29kz0an0qez93669",
+        "name": "Forms",
+        "description": "Create custom quizzes, forms, surveys & waivers.",
+        "link": "forms",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsn4wfply00bmywx9g0ihg",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/sfpxpyjyTo26PsOOx2BW"
+        }
+      },
+      {
+        "id": "clezz7z7i2cbb0bmzwzoowbbq",
+        "name": "Calendar",
+        "description": "A versatile scheduler that always stays up to date.",
+        "link": "calendar",
+        "showInHomeTabs": null,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitsivwhpldm0bmyqubn4zo8",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/WwfJHfW4RKaPlmzEbaYs"
+        }
+      },
+      {
+        "id": "clezzfz9x2cdm0bn1mssuhswo",
+        "name": "Online Store",
+        "description": "Create, manage and market your online store.",
+        "link": "online-store",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsonjupmhs0bmyx4j7wxnm",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/nT6beIIlS7O4inUwqaGH"
+        }
+      },
+      {
+        "id": "cmfrdtex7z4io07lnin5l4gmx",
+        "name": "E-Prescribe",
+        "description": "Manage, track, and send prescriptions seamlessly.",
+        "link": "eprescribe",
+        "showInHomeTabs": true,
+        "flagAsNew": true,
+        "iconImage": {
+          "id": "cmfreztwszr5j07lhshv1fcwu",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cmfreztwszr5k07lhd496nnyw"
+        }
+      },
+      {
+        "id": "clezzjf532dkt0bn1z248sb8n",
+        "name": "Payroll",
+        "description": "Create custom commission tiers & pay employees via direct deposit.",
+        "link": "payroll",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsra51porn0bmydjyixd0f",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/B8xvcjSGRS2xDrVVrSGj"
+        }
+      },
+      {
+        "id": "clezzigdt2cp90blmji71vkv1",
+        "name": "Inventory",
+        "description": "Track products, send purchase orders, and sell online.",
+        "link": "inventory",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsqbefpkjn0bljaadju79e",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/k6n8jIINRsCsjEdA6FiQ"
+        }
+      },
+      {
+        "id": "clezzm2xp2eib0bn1a1kx6yol",
+        "name": "Reports",
+        "description": "Powerful data and graphs at your fingertips.",
+        "link": "reports",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitssvf9pteb0bmytngfnf87",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/WPYDTzoT9iB4i0yO7gAb"
+        }
+      },
+      {
+        "id": "clezzk4642fqf0bmz8ylprx0z",
+        "name": "Rent Collection",
+        "description": "Schedule recurring rent and fees, and deduct commission from rent.",
+        "link": "automatic-rent-fees",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsrrvkpvtp0bn5srrqo6kv",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/bAuLdOJLSlaiZufaMW5x"
+        }
+      },
+      {
+        "id": "cmif509razr2r07lpndl1ru80",
+        "name": "SOAP Notes",
+        "description": "Create detailed SOAP notes to track progress & document treatments.",
+        "link": "soap-notes",
+        "showInHomeTabs": true,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "cmif4zvhfza9x07nattrs13wy",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cmif4zvhfza9y07nan4j391ho"
+        }
+      },
+      {
+        "id": "clezzhiaj2ce50blmo8hq5iyt",
+        "name": "Invoices",
+        "description": "Get paid from anywhere with online invoices.",
+        "link": "invoices",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitspx3upm890bmynfczeunp",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/si141gMNRrqJopgKtwuo"
+        }
+      },
+      {
+        "id": "clezziuc32f1p0bmz21udyifk",
+        "name": "Memberships",
+        "description": "Create recurring memberships with autopay.",
+        "link": "memberships",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsqsofplro0bljejmnqffd",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/PG8iwiTuKcARiAVjsmDQ"
+        }
+      },
+      {
+        "id": "clezzaent2agt0blmgcpen2ny",
+        "name": "Payments",
+        "description": "Accept payments securely from anywhere.",
+        "link": "card-processing",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsutk8pu9s0bmyfr1s61n0",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/QqLpG5xOTBGKUplkBy6D"
+        }
+      },
+      {
+        "id": "cm0ziz8ednpoh07lngx5yvpfe",
+        "name": "PayPro (POS)",
+        "description": "Fully integrated sleek & modern point of sales.",
+        "link": "pos-hardware",
+        "showInHomeTabs": true,
+        "flagAsNew": true,
+        "iconImage": {
+          "id": "clitstg5cpph60bljva07b6bo",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/kHoxFwFURliArX7INVTq"
+        }
+      },
+      {
+        "id": "cllpf8i0l2ozp0bn7vmhokiel",
+        "name": "Vagaro Capital",
+        "description": "Fast & Flexible funding for all businesses.",
+        "link": "vagaro-capital",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitslj6ipgve0blj0t1dzyme",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/IRhNE10UShWrxoqQQAeY"
+        }
+      },
+      {
+        "id": "clezzbsr80hj00clpse2ui4cg",
+        "name": "Buy Now, Pay Later",
+        "description": "Let clients split larger purchases into installments",
+        "link": "pay-later",
+        "showInHomeTabs": null,
+        "flagAsNew": null,
+        "iconImage": {
+          "id": "clitslj6ipgve0blj0t1dzyme",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/IRhNE10UShWrxoqQQAeY"
+        }
+      },
+      {
+        "id": "clezzogzh2epq0blmbby0tqy9",
+        "name": "MySite",
+        "description": "Design a custom booking website for your business.",
+        "link": "booking-website-builder",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsutk8pu9s0bmyfr1s61n0",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/QqLpG5xOTBGKUplkBy6D"
+        }
+      },
+      {
+        "id": "clezzenpj29q80an02gbeok93",
+        "name": "Marketing",
+        "description": "Connect with third-party tools that you're already using.",
+        "link": "marketing",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsno7qppom0bn5el4t14bx",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/e6aFStlUTAysrLIVkIgz"
+        }
+      },
+      {
+        "id": "clezzcl4m0hoy0clph90uj4dh",
+        "name": "Notifications",
+        "description": "Automatically notify your clients with reminders.",
+        "link": "notifications",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsm559pjqp0bmy9rf96lu8",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/Y8U8d1ymTOutg7r62uAk"
+        }
+      },
+      {
+        "id": "clezzdew00hzb0clpu8qfn4r0",
+        "name": "Customer Tracking",
+        "description": "Track customer information and give rewards.",
+        "link": "customer-tracking",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsmpdeppij0bn5o29fk9en",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/omr5SqETTzWuP4CIoDr5"
+        }
+      },
+      {
+        "id": "clezzgtqf2cnc0bn1hzmryxr7",
+        "name": "Live Stream",
+        "description": "Live streaming classes and consultations from anywhere.",
+        "link": "live-stream-classes",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitspfgvpl6k0bmyt0z8gm4f",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/KPcVg6elQUW1swOmA0f5"
+        }
+      },
+      {
+        "id": "cln3fx9atcz6u0blnj8empx9q",
+        "name": "Design Services",
+        "description": "Explore Custom Design Products offered by Vagaro.\n",
+        "link": "design-services",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "cltdo9amts4ik07mwgxb9g0sc",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/0QUTZQz0R8WizKjUaQXn"
+        }
+      },
+      {
+        "id": "clezzla0u2dqm0blmme02e3ty",
+        "name": "Branded App",
+        "description": "Strengthen your brand with your own branded app.",
+        "link": "branded-app",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitssccspqty0bmylwi4itq9",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/M3L2pCDNSmewhKUhD7ef"
+        }
+      },
+      {
+        "id": "clezznrag2gnu0bmz8kn51b1m",
+        "name": "Mobile Apps",
+        "description": "One app for your business and one for your customers.",
+        "link": "vagaro-pro-app",
+        "showInHomeTabs": null,
+        "flagAsNew": false,
+        "iconImage": {
+          "id": "clitsu6l5prp40bmyf7ojvd5j",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/00zmXrZSHGnAdqScgZkw"
+        }
+      }
+    ]
+  },
+  "resourcesNavPosts": {
+    "trendingPosts": [
+      {
+        "id": "cmn6jcv1gkqu607n4pyz40ijo",
+        "title": "How to Finance a Hair Salon: Loans, Grants & Funding Options",
+        "slug": "finance-a-hair-salon",
+        "publishedAt": "2026-03-26T23:23:56.295619+00:00",
+        "coverImage": {
+          "id": "cmn6jf0hokuth07n4ov5r554y",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cmn6jf0hokuti07n4llmupx7c"
+        }
+      }
+    ],
+    "proPosts": [
+      {
+        "id": "cmnqhp8ozhdmp07n5wstua778",
+        "title": "Introducing Smarter, More Powerful SOAP Notes",
+        "slug": "soap-notes",
+        "publishedAt": "2026-04-08T20:29:54.045328+00:00",
+        "coverImage": {
+          "id": "cmnqhtofuhk7807mvszvmeu26",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cmnqhtofuhk7907mvhbfj7t97"
+        }
+      },
+      {
+        "id": "cmnp5z38lgvyu07mykj8xbqfi",
+        "title": "Get Personalized Customer Insights with Custom Fields",
+        "slug": "custom-fields",
+        "publishedAt": "2026-04-08T19:12:26.373769+00:00",
+        "coverImage": {
+          "id": "cmnp5zo53gxdc07k8te98weoy",
+          "url": "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/cmnp5zo53gxdd07k8yqokxj1t"
+        }
+      }
+    ]
+  }
+}

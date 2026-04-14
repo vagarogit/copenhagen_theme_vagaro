@@ -6,8 +6,8 @@
  */
 
 class NavigationLinksManager {
-  constructor(endpoint, options = {}) {
-    this.endpoint = endpoint;
+  constructor(navDataUrl, options = {}) {
+    this.navDataUrl = navDataUrl;
     this.options = {
       timeout: 10000,
       retries: 3,
@@ -17,169 +17,56 @@ class NavigationLinksManager {
     // Global state management for smooth navigation
     this.activeMenu = null;
     this.menuStates = new Map();
+
+    // Cached static navdata.json fetch (navigationMenu + resourcesNavPosts)
+    this._dataPromise = null;
+  }
+
+  _loadData() {
+    if (!this._dataPromise) {
+      this._dataPromise = fetch(this.navDataUrl, {
+        signal: AbortSignal.timeout(this.options.timeout),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .catch((error) => {
+          this._dataPromise = null;
+          throw error;
+        });
+    }
+    return this._dataPromise;
   }
 
   /**
-   * GraphQL query for navigation menu items
-   */
-  getNavigationMenuQuery() {
-    return {
-      query: `
-        query GetNavigationMenu {
-          navigationMenu(where: { id: "clezyiora1akc0an0g68whmx0" }) {
-            beautyItems {
-              id
-              name
-              link
-              showInHomeTabs
-              flagAsNew
-              iconImage {
-                id
-                url
-              }
-            }
-            wellnessItems {
-              id
-              name
-              link
-              showInHomeTabs
-              flagAsNew
-              iconImage {
-                id
-                url
-              }
-            }
-            fitnessItems {
-              id
-              name
-              link
-              showInHomeTabs
-              flagAsNew
-              iconImage {
-                id
-                url
-              }
-            }
-            featureItems {
-              id
-              name
-              description
-              link
-              showInHomeTabs
-              flagAsNew
-              iconImage {
-                id
-                url
-              }
-            }
-          }
-        }
-      `,
-    };
-  }
-
-  /**
-   * GraphQL query for resources navigation posts (trending + pro updates)
-   */
-  getResourcesNavPostsQuery() {
-    return {
-      query: `
-        query GetResourcesNavPosts {
-          trendingPosts: blogPosts(
-            first: 1
-            where: { category_contains_some: [Beauty], postTypeSelect: Learn }
-            orderBy: date_DESC
-          ) {
-            id
-            title
-            slug
-            publishedAt
-            coverImage {
-              id
-              url
-            }
-          }
-          proPosts: blogPostsConnection(
-            first: 2
-            where: { postTypeSelect: SalesUpdates }
-            orderBy: publishedAt_DESC
-          ) {
-            edges {
-              node {
-                id
-                title
-                slug
-                publishedAt
-                coverImage {
-                  id
-                  url
-                }
-              }
-            }
-          }
-        }
-      `,
-    };
-  }
-
-  /**
-   * Fetch resources navigation posts from Hygraph
+   * Read resources navigation posts from the pre-fetched navdata.json
    */
   async fetchResourcesNavPosts() {
     try {
-      const response = await fetch(this.endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.getResourcesNavPostsQuery()),
-        signal: AbortSignal.timeout(this.options.timeout),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      if (data.errors) {
-        throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
-      }
-
+      const data = await this._loadData();
+      const posts = data.resourcesNavPosts || {};
       return {
-        trendingPosts: data.data.trendingPosts || [],
-        proPosts: (data.data.proPosts?.edges || []).map((edge) => edge.node),
+        trendingPosts: posts.trendingPosts || [],
+        proPosts: posts.proPosts || [],
       };
     } catch (error) {
-      console.error("[Resources Nav] Failed to fetch posts:", error);
+      console.error("[Resources Nav] Failed to load posts:", error);
       return { trendingPosts: [], proPosts: [] };
     }
   }
 
   /**
-   * Fetch navigation menu items from Hygraph
+   * Read navigation menu items from the pre-fetched navdata.json
    */
   async fetchNavigationMenu() {
-    const response = await fetch(this.endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(this.getNavigationMenuQuery()),
-      signal: AbortSignal.timeout(this.options.timeout),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    const data = await this._loadData();
+    if (!data.navigationMenu) {
+      throw new Error("navdata.json is missing `navigationMenu`");
     }
-
-    const data = await response.json();
-
-    if (data.errors) {
-      throw new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
-    }
-
-    return data.data.navigationMenu;
+    return data.navigationMenu;
   }
 
   /**
@@ -461,51 +348,6 @@ class NavigationLinksManager {
             </div>
           </div>
           <div class="mega-menu-arrow"></div>
-        </div>
-      </div>
-    `;
-  }
-
-  /**
-   * Render features dropdown menu (simple dropdown version)
-   */
-  renderFeaturesDropdown(featuresItems) {
-    if (!featuresItems || featuresItems.length === 0) return "";
-
-    const itemsHtml = featuresItems
-      .map(
-        (item) => `
-        <li>
-          <a href="${
-            item.link
-          }" class="flex items-start p-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 rounded-md">
-            ${
-              item.iconImage?.url
-                ? `<img src="${item.iconImage.url}" alt="${item.name}" class="w-6 h-6 mr-3 mt-0.5" />`
-                : ""
-            }
-            <div>
-              <div class="font-medium">${item.name}</div>
-              ${
-                item.description
-                  ? `<div class="text-gray-500 text-xs mt-1">${item.description}</div>`
-                  : ""
-              }
-            </div>
-          </a>
-        </li>
-      `
-      )
-      .join("");
-
-    return `
-      <div class="absolute left-0 z-10 mt-2 w-screen transform px-2 sm:px-0">
-        <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-          <div class="relative bg-white px-5 py-6 sm:p-8 max-w-4xl mx-auto">
-            <ul class="space-y-2">
-              ${itemsHtml}
-            </ul>
-          </div>
         </div>
       </div>
     `;
@@ -1170,11 +1012,18 @@ window.NavigationLinksManager = NavigationLinksManager;
 
 // Initialize when DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
-  // Replace with your actual Hygraph endpoint
-  const HYGRAPH_ENDPOINT =
-    "https://us-west-2.cdn.hygraph.com/content/cld3gw4bb0hr001ue9afzcunb/master";
+  // navdata.json is pre-fetched at build time by bin/fetch-nav-data.js and
+  // its asset URL is injected into the DOM by the header template, so the
+  // Hygraph endpoint is never shipped to the client.
+  const navRoot = document.getElementById("radix-navigation-root");
+  const NAV_DATA_URL = navRoot?.dataset.navdataUrl;
 
-  const navigationManager = new NavigationLinksManager(HYGRAPH_ENDPOINT, {
+  if (!NAV_DATA_URL) {
+    console.warn("[Navigation] No data-navdata-url on #radix-navigation-root");
+    return;
+  }
+
+  const navigationManager = new NavigationLinksManager(NAV_DATA_URL, {
     timeout: 8000,
     retries: 2,
   });
