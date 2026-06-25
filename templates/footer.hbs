@@ -249,3 +249,22 @@
     </div>
   </div>
 </div>
+
+{{!-- Vera Chat widget (lean Preact build). Single self-contained file —
+      no async chunk needed. --}}
+<script src="{{asset 'vera-embed.js'}}?v=20260625i"></script>
+<script>
+  if (window.VeraChat) {
+    window.VeraChat.mount({
+      // Dev Vera environment.
+      apiBaseUrl: 'https://dev21connect.bookitall.com/api/v3/vera/chat',
+      hubUrl: 'https://as-convhub-dev-signalr-wus.azurewebsites.net/chatHub',
+
+      // The s_utkn cookie is set on .vagaro.com, so it is readable on the
+      // support.vagaro.com page. The widget reads it from document.cookie and
+      // forwards it as the s_utkn header — no token is hardcoded here. Requires
+      // you to be logged in (s_utkn cookie present) on *.vagaro.com.
+      requireAuthCookie: true
+    });
+  }
+</script>
