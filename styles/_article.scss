@@ -332,6 +332,11 @@
       }
     }
 
+    // Remove itemized list padding when nested inside a responsive table
+    .informaltable.table-responsive ul.itemizedlist {
+      padding-left: 0;
+    }
+
     // GUI element styles for procedures
     .guimenu,
     .guisubmenu,
