@@ -3352,6 +3352,17 @@ select:focus {
   margin-bottom: 1rem;
 }
 
+.original-language-indicator {
+  display: none !important;
+}
+
+/* Optional: make untranslated fallback text look normal */
+.translation-missing {
+  color: inherit !important;
+  font-style: inherit !important;
+  background: transparent !important;
+}
+
 /***** Attachments *****/
 /* Styles attachments inside posts, articles and comments */
 .attachments .attachment-item {
