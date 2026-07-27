@@ -216,16 +216,12 @@ class FooterLinksManager {
           name: "MySite Updates",
           href: "https://www.vagaro.com/pro/mysite-updates",
         },
-        {
-          id: "iconic-25",
-          name: "iconic.25",
-          href: "https://mysite.vagaro.com/iconic25",
-        },
       ],
       resources: [
         { id: "status", name: "Status", href: "https://status.vagaro.com/" },
         { id: "support", name: "Support", href: "https://support.vagaro.com/" },
         { id: "api-documents", name: "API Documents", href: "https://docs.vagaro.com/" },
+        { id: "ambassador", name: "Ambassador", href: "https://www.vagaro.com/pro/ambassador" },
         { id: "blog", name: "Blog", href: "https://www.vagaro.com/learn" },
         {
           id: "newsroom",
