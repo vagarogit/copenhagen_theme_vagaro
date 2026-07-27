@@ -22,7 +22,7 @@
 
 **Version**: 4.0.24
 **Repository**: `git@github.com:zendesk/copenhagen_theme.git` (forked for Vagaro)
-**Node Version**: 18.12.1 (specified in `.nvmrc`)
+**Node Version**: 24.11.0 (specified in `.nvmrc`; dependencies require ≥18.17)
 **Package Manager**: Yarn 1.22.22
 
 ### Key Characteristics
@@ -110,7 +110,7 @@ export function renderNewRequestForm(
 ### Frontend Frameworks
 | Technology | Version | Purpose |
 |-----------|---------|---------|
-| React | 17.0.2 | Component library for UI modules |
+| React | 18.3.1 | Component library for UI modules |
 | TypeScript | 5.1.6 | Type-safe development |
 | Handlebars | - | Template engine (Curlybars variant) |
 | Tailwind CSS | 4.1.3 | Utility-first CSS framework |
@@ -748,30 +748,31 @@ Current bundle sizes are large, impacting initial load time:
 
 ---
 
-### 3. React 18 Upgrade
+### 3. React 18 Upgrade (Completed July 2026)
 
-#### Problem
-- Using React 17.0.2 (released 2020)
-- Missing new features: Concurrent rendering, Suspense improvements, Transitions
-- Future security & compatibility concerns
+#### What was done
+- Upgraded `react`, `react-dom`, and `react-is` from 17.0.2 to 18.3.1
+- Upgraded `@types/react` / `@types/react-dom` to 18.x and updated the yarn
+  `resolutions` pin (`@types/react: ^18.x`)
+- Replaced all `ReactDOM.render` calls with `createRoot` from `react-dom/client`:
+  - `src/modules/new-request-form/renderNewRequestForm.tsx`
+  - `src/modules/flash-notifications/renderFlashNotifications.tsx`
+  - `src/modules/radix-navigation-integration.jsx` — this file re-renders into
+    the same containers on nav data/state updates, so it keeps module-level
+    root instances and reuses `root.render()` instead of re-creating roots
 
-#### Proposed Solutions
-- **Upgrade to React 18.3+**
-  - Update `package.json` dependencies
-  - Replace `ReactDOM.render` with `createRoot` (already done!)
-  - Test all modules for compatibility
+#### Remaining follow-ups
 - **Adopt new React 18 features**:
   - Use `Suspense` for lazy-loaded translations
   - Implement `useTransition` for heavy form operations
   - Utilize `useDeferredValue` for search suggestions
-- **Update testing library**: Upgrade to latest `@testing-library/react`
+- **React 19**: blocked until Zendesk Garden ships stable React 19 support
+  (only the pre-release `@zendeskgarden/react-components@10.0.0-next.*`
+  declares React 19; the stable v9 line caps at React 18). Also requires
+  styled-components v6.
 
-**Priority**: Medium
+**Priority**: Done (follow-ups: Low)
 **Estimated Impact**: Future-proofing, potential performance gains
-**Files to Modify**:
-- `package.json:1` - Dependency versions
-- `src/modules/*/render*.tsx` - Already using createRoot
-- Test files - Update assertions
 
 ---
 

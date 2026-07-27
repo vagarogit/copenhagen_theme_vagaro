@@ -1,8 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
-import * as ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import NavigationMenuDemo from "./radix.jsx";
 import MobileNavigation from "./mobile-navigation.jsx";
+
+// React 18 root instances, reused across re-renders so state/reconciliation
+// persists between calls instead of remounting the tree each time.
+let radixNavRoot = null;
+let radixNavRootContainer = null;
+let mobileNavRoot = null;
+let mobileNavRootContainer = null;
 
 // Development mode: Set to true to keep mobile navigation open during development
 const DEV_MODE_MOBILE_NAV_OPEN = false; // Change to true to open mobile nav on load
@@ -63,13 +70,19 @@ export function mountRadixNavigation() {
   const fallbackNav = document.getElementById("fallback-navigation");
 
   if (mountPoint) {
+    // Create the root once and reuse it for subsequent re-renders so we
+    // don't remount the tree (and lose reconciliation) on every data update.
+    if (!radixNavRoot || radixNavRootContainer !== mountPoint) {
+      radixNavRoot = createRoot(mountPoint);
+      radixNavRootContainer = mountPoint;
+    }
+
     // Mount the React component with navigation data and user info
-    ReactDOM.render(
+    radixNavRoot.render(
       <NavigationMenuDemo
         navigationData={window.navigationData}
         userInfo={window.mobileNavState.userInfo}
-      />,
-      mountPoint
+      />
     );
 
     // Hide the fallback navigation
@@ -104,15 +117,27 @@ export function mountMobileNavigation() {
   // In dev mode, override isOpen state if flag is set
   const isOpen = DEV_MODE_MOBILE_NAV_OPEN ? true : window.mobileNavState.isOpen;
 
+  // Create the root once and reuse it for subsequent re-renders. If the
+  // container was ever removed from the DOM and recreated (not currently
+  // done anywhere in this codebase, but guarded defensively), the stale
+  // root is discarded and a fresh one is created for the new container.
+  if (
+    !mobileNavRoot ||
+    mobileNavRootContainer !== mobileNavContainer ||
+    !mobileNavContainer.isConnected
+  ) {
+    mobileNavRoot = createRoot(mobileNavContainer);
+    mobileNavRootContainer = mobileNavContainer;
+  }
+
   // Mount the mobile navigation component
-  ReactDOM.render(
+  mobileNavRoot.render(
     <MobileNavigation
       navigationData={window.navigationData}
       isOpen={isOpen}
       onClose={window.closeMobileNavigation}
       userInfo={window.mobileNavState.userInfo}
-    />,
-    mobileNavContainer
+    />
   );
 
   return true;

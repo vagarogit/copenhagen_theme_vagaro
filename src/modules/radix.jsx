@@ -253,7 +253,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
         itemName.includes("e-prescribe") ||
         itemName.includes("reports") ||
         itemName.includes("rent collection") ||
-        itemName.includes("vagaro ai") ||
+        itemName.includes("vera ai") ||
         itemName.includes("forms")
       ) {
         categories["RUN YOUR BUSINESS"].push(item);
@@ -297,7 +297,7 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
         "e-prescribe",
         "reports",
         "rent collection",
-        "vagaro ai",
+        "vera ai",
         "forms",
       ],
       "GROW YOUR BUSINESS": [
