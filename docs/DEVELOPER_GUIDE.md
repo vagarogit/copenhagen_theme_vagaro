@@ -1004,6 +1004,42 @@ Current bundle sizes are large, impacting initial load time:
 
 ---
 
+### 11. Remove Zendesk Garden (Future)
+
+#### Problem
+- Garden (`@zendeskgarden/*`, 12 packages) is the sole reason `styled-components`
+  and `react-is` are in the dependency tree, and its stable v9 line caps at
+  React 18 — it is the only hard blocker for a React 19 upgrade
+- Three parallel styling systems: Tailwind 4, styled-components/Garden theming,
+  and plain CSS
+- Usage is fully contained (audited July 2026): 20 files in
+  `src/modules/new-request-form/`, 4 in `src/modules/shared/garden-theme/`,
+  1 in `src/modules/flash-notifications/`. All Vagaro-custom modules (Radix
+  nav, mobile nav, accordions, CTA banner) are already Garden-free on
+  Radix + Tailwind
+
+#### Proposed Solutions
+- **Rewrite the new request form fields on Radix primitives + Tailwind**
+  (~95% of the effort): dropdown, datepicker, multiselect/tagger, CC field,
+  credit card, attachments, answer-bot modal, suggested articles — must
+  preserve accessibility, conditional-field logic, prefill, CSRF submit,
+  and WYSIWYG integration
+- **Rebuild flash notifications** as a small Radix/Tailwind toast (~half day)
+- **Delete `shared/garden-theme` providers** once no consumers remain
+- Then drop `@zendeskgarden/*`, `styled-components`, `react-is` and
+  upgrade to React 19
+- Note: this means fully owning the form module (no more upstream
+  `zendesk/copenhagen_theme` parity — already heavily diverged)
+- Alternative considered: Zendesk Garden v10 (`@zendeskgarden/react-components`)
+  supports React 19 + styled-components v6, but as of July 2026 it is an
+  early pre-release with a single component — re-evaluate when stable
+
+**Priority**: Low (revisit when React 19 becomes a requirement or Garden v10 stabilizes)
+**Estimated Impact**: Unblocks React 19, removes CSS-in-JS runtime, significantly smaller shared bundle, single styling system
+**Estimated Effort**: A few weeks (form field rewrite dominates)
+
+---
+
 ## Implementation Roadmap
 
 ### Phase 1: Foundation (Q1)
