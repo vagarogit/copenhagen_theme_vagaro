@@ -249,3 +249,100 @@
     </div>
   </div>
 </div>
+
+{{!-- Vera chat widget (guest + authenticated). Guest flow activates
+      automatically when the s_utkn cookie is absent. Font Awesome is
+      required by the widget's icons (its demo loads an FA kit). --}}
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+/>
+<script type="module">
+  (async () => {
+    try {
+      // TEMP DEBUG — log every Vera API response body. Filter the console
+      // on "[VeraDebug]". Remove before shipping.
+      const origFetch = window.fetch.bind(window);
+      window.fetch = async (input, init) => {
+        const url = typeof input === "string" ? input : input.url;
+        const res = await origFetch(input, init);
+        if (url.includes("dev21connect.bookitall.com")) {
+          res.clone().json().then(
+            (body) =>
+              console.log("[VeraDebug]", init?.method || "GET", url, res.status, body),
+            () =>
+              console.log("[VeraDebug]", init?.method || "GET", url, res.status, "(non-JSON body)")
+          );
+        }
+        return res;
+      };
+
+      const { renderVeraChat } = await import("vera-chat");
+
+      // Host context for the authenticated flow (see the vera-chat-widget
+      // README "Host context"): the backend no longer returns user/business
+      // data at login — the host maps it via basicDetails. On the help
+      // center the identity source is the signed-in Zendesk user; the
+      // widget requires a non-empty author displayName or message posts
+      // fail (dispatcher 400 surfaced as Connect 500). Guests need none of
+      // this — the widget ignores basicDetails when no s_utkn cookie exists.
+      const zendeskUser = {
+        name: {{json user.name}},
+        // Curlybars doesn't expose user.email in templates; it's only
+        // available at runtime via the HelpCenter JS object.
+        email: window.HelpCenter?.user?.email ?? null,
+        avatarUrl: {{json user.avatar_url}},
+        signedIn: {{json signed_in}},
+      };
+      const [firstName = "Vagaro", ...restOfName] = (zendeskUser.name || "")
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+      const basicDetails = {
+        // Placeholder business block: Zendesk knows nothing about the
+        // visitor's Vagaro business. The backend only validates
+        // author.displayName; these fields pass through — real sourcing
+        // TBD with the Vera team.
+        business: {
+          name: "Vagaro Help Center",
+          countryCode: "US",
+          countryName: "United States of America",
+          stateCode: "CA",
+          stateName: "California",
+          region: "US02",
+        },
+        user: {
+          firstName: firstName || "Vagaro",
+          lastName: restOfName.join(" ") || "Customer",
+          email: zendeskUser.email || "",
+          avatarUrl: zendeskUser.avatarUrl || "",
+          countryCode: "US",
+          countryName: "United States of America",
+          stateCode: "CA",
+          stateName: "California",
+        },
+      };
+
+      renderVeraChat({
+        apiBaseUrl: "https://dev21connect.bookitall.com/api/v3/vera/chat",
+        hubUrl: "https://as-convhub-dev-signalr-wus.azurewebsites.net/chatHub",
+        conversationChannel: "support",
+        basicDetails,
+        loginRedirectUrl:
+          "https://dev21.bookitall.com/login?returnUrl=" +
+          encodeURIComponent(window.location.href),
+        isPanelOpen: true,
+        className: "tw-vera-root",
+        // TEMP DEBUG — parsed objects the widget exposes. Remove with the
+        // fetch interceptor above.
+        onConversationLoaded: (c) =>
+          console.log("[VeraDebug] conversation loaded:", c),
+        onMessageSent: (m) => console.log("[VeraDebug] message sent:", m),
+        onMessageReceived: (m) =>
+          console.log("[VeraDebug] message received:", m),
+      });
+    } catch (error) {
+      console.warn("Failed to load vera-chat module:", error);
+    }
+  })();
+</script>

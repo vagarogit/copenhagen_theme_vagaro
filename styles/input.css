@@ -1,4 +1,13 @@
 @import "tailwindcss";
+@source "../node_modules/vera-chat-widget/dist";
+
+/* Vagaro design-system tokens for vera-chat-widget, vendored verbatim from
+   Vagaro.Vera/src/Assets (the npm package does not ship them). Re-copy when
+   the widget team updates them. Import order matches the widget's demo. */
+@import "./vera/vg-theme.css";
+@import "./vera/vg-typography-token.css";
+@import "./vera/vg-theme-token.css";
+@import "./vera/vera-tailwind-theme.css";
 @theme {
   --color-midnight: #121063;
   --color-tahiti: #3ab7bf;
@@ -57,4 +66,33 @@
   --color-wave-gray-alt: #f8f8f8;
   --color-white: #ffffff;
   --color-white-smoke: #f4f4f4;
+
+  /* vera-chat-widget brand colors (per its README) */
+  --color-vera-purple: #7c3aed;
+  --color-vera-purple-light: #a78bfa;
+  --color-vera-purple-dark: #5b21b6;
+  --color-vera-blue: #3b82f6;
+
+  /* Vagaro design-system token → utility mappings live in the generated
+     styles/vera/vera-tailwind-theme.css (imported above). */
+}
+
+/* Legacy live chat is injected by a GTM tag (container GTM-5QW5SZB, loaded in
+   document_head.hbs) — hide it while Vera chat replaces it. Remove these rules
+   once the GTM tag itself is retired. Selectors cover LiveChat Inc and the
+   classic Zendesk Web Widget. */
+#chat-widget-container,
+#livechat-full,
+iframe#launcher,
+iframe#webWidget {
+  display: none !important;
+}
+
+/* Vera chat mounts into this container (appended to <body> by the vera-chat
+   module). The widget fills its host container, so the host anchors it. */
+#vera-chat-root {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
 }

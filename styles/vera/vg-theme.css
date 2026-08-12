@@ -1,0 +1,51 @@
+:root, html[data-theme="light"] {
+   --box_shadow: 1px 1px 25px 0 rgba(0,0,0,0.16);
+   --topmenu_box_shadow: 0 2px 8px 0 rgba(0,0,0,0.15);
+   --modal_box_shadow: 0,0,0;
+   --bkg_green_default_rgba: 124,197,118;
+   --bkg_yellow_default_rgba: 246,214,69;
+   --bkg_neutral_tiertiary-rgba: 231, 231, 231;
+   --bkg_divider: rgba(0,0,0, 0.10);
+   --bkg_graient_start:rgba(255, 255, 255, 0.60);
+   --color-ai-ai-blue: 65 92 246;
+   --color-ai-ai-purple-500: 159 12 212;
+   --gradient-ai-default: linear-gradient(131deg, rgb(var(--color-ai-ai-blue)) 24.51%, rgb(var(--color-ai-ai-purple-500)) 73.22%);
+   --border-ai-default: rgb(var(--color-ai-ai-blue));
+  
+}
+
+html[data-theme="dark"] {
+   --box_shadow: 1px 1px 25px 0 rgba(109,110,111,0.16);
+   --topmenu_box_shadow: 0 2px 8px 0 rgba(109,110,111,0.16);
+   --modal_box_shadow: 109,110,111;
+   --bkg_green_default_rgba: 88,140,80;
+   --bkg_yellow_default_rgba: 224,195,63;
+   --bkg_neutral_tiertiary-rgba: 51, 51, 51;
+   --bkg_divider: rgba(255,255,255, 0.10);
+   --bkg_graient_start: rgba(30, 31, 33, 0.60);
+   --color-ai-ai-blue: 65 92 246;
+   --color-ai-ai-purple-500: 159 12 212;
+   --gradient-ai-default: linear-gradient(131deg, rgb(var(--color-ai-ai-blue)) 24.51%, rgb(var(--color-ai-ai-purple-500)) 73.22%);
+   --border-ai-default: rgb(var(--color-ai-ai-blue));
+
+}
+
+@media (prefers-color-scheme: dark) {
+   :root {
+       --box_shadow: 1px 1px 25px 0 rgba(109,110,111,0.16);
+       --topmenu_box_shadow: 0 2px 8px 0 rgba(109,110,111,0.16);
+       --modal_box_shadow: 109,110,111;
+       --bkg_green_default_rgba: 88,140,80;
+       --bkg_yellow_default_rgba: 224,195,63;
+       --bkg_neutral_tiertiary-rgba: 51, 51, 51;
+       --bkg_divider: rgba(255,255,255, 0.10);
+       --bkg_graient_start: rgba(30, 31, 33, 0.60);
+      --color-ai-ai-blue: 65 92 246;
+      --color-ai-ai-purple-500: 159 12 212;
+      --gradient-ai-default: linear-gradient(131deg, rgb(var(--color-ai-ai-blue)) 24.51%, rgb(var(--color-ai-ai-purple-500)) 73.22%);
+      --border-ai-default: rgb(var(--color-ai-ai-blue));
+   }
+}
+:root {
+  --bkg-overlay-50: rgba(var(--modal_box_shadow), 0.5);
+}

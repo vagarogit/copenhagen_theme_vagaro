@@ -14,6 +14,26 @@ import { defineConfig } from "rollup";
 
 const fileNames = "[name]-bundle.js";
 const isProduction = process.env.NODE_ENV === "production";
+
+// @vagaro/vagaro-react-toolkit imports react-filerobot-image-editor, which
+// isn't installed (the chat widget never renders the image editor). Stub it
+// so the browser isn't asked to resolve a bare import at runtime.
+const stubFilerobotImageEditor = {
+  name: "stub-filerobot-image-editor",
+  resolveId(source) {
+    return source === "react-filerobot-image-editor"
+      ? "\0stub:react-filerobot-image-editor"
+      : null;
+  },
+  load(id) {
+    if (id === "\0stub:react-filerobot-image-editor") {
+      return `export default function FilerobotImageEditorStub() { return null; }
+export const TOOLS = {};
+export const TABS = {};`;
+    }
+    return null;
+  },
+};
 const TRANSLATION_FILE_REGEX =
   /src\/modules\/(.+?)\/translations\/locales\/.+?\.json$/;
 
@@ -82,6 +102,7 @@ export default defineConfig([
       "article-accordions":
         "src/modules/article-accordions/articleAccordionsBundle.ts",
       "mobile-cta-banner": "src/modules/mobileCtaBannerIntegration.js",
+      "vera-chat": "src/modules/vera-chat/index.tsx",
     },
     output: {
       dir: "assets",
@@ -98,6 +119,17 @@ export default defineConfig([
         // Bundle Garden components to avoid module resolution issues
         // Note: These were previously external but caused module resolution errors
         // when not available via CDN
+
+        // Vera chat's heavy deps (signalr, vagaro toolkit) stay out of the
+        // site-wide shared bundle; they load only with the vera-chat module.
+        if (
+          id.includes("node_modules/vera-chat-widget") ||
+          id.includes("node_modules/@microsoft/signalr") ||
+          id.includes("node_modules/@vagaro/vagaro-react-toolkit") ||
+          id.includes("node_modules/idb")
+        ) {
+          return "vera-vendor";
+        }
 
         if (id.includes("node_modules") || id.includes("src/modules/shared")) {
           return "shared";
@@ -127,6 +159,7 @@ export default defineConfig([
       "@zendeskgarden/svg-icons",
     ],
     plugins: [
+      stubFilerobotImageEditor,
       nodeResolve({
         extensions: [".js", ".jsx", ".ts", ".tsx"],
         preferBuiltins: false,

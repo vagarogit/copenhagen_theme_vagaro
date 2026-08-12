@@ -1,0 +1,349 @@
+:root{
+    --font_family_proximanova: "proxima-nova", sans-serif;
+    
+    /*Font Typography Token*/
+    --font_size_12: 12px;
+    --font_size_14: 14px;
+    --font_size_15: 15px;
+    --font_size_16: 16px;
+    --font_size_18: 18px;
+    --font_size_20: 20px;
+    --font_size_24: 24px;
+    --font_size_26: 26px;
+    --font_size_32: 32px;
+    --font_size_42: 42px;
+    --font_height_16: 16px;
+    --font_height_20: 20px;
+    --font_height_24: 24px;
+    --font_height_28: 28px;
+    --font_height_32: 32px;
+    --font_height_36: 36px;
+    --font_height_40: 40px;
+    --font_weight_regular:400;
+    --font_weight_medium:500;
+    --font_weight_semibold:600;
+    --font_weight_bold:900;
+    --font_align_left:left;
+    --font_align_right:right;
+    --font_align_center:center;
+    --font_underline_none:none;
+    --font_underline:underline;
+    --font_strikethrough:line-through;
+
+    /*Radius Token*/
+    --radius_small:3px;
+    --radius_medium:5px;
+    --radius_large:10px;
+    --radius_full:9999px;
+
+    /*Border Token*/
+    --border-width-none: 0px;
+    --border_width_default: 1px;
+    --border_width_strong: 2px;
+    --border_style_none: none;
+    --border_style_solid: solid;
+    --border_style_dashed: dashed;
+
+    /*Sizing and spacing Token*/
+    --sizing_1: 1px;
+    --sizing_2: 2px;
+    --sizing_4: 4px;
+    --sizing_8: 8px;
+    --sizing_10: 10px;
+    --sizing_12: 12px;
+    --sizing_16: 16px;
+    --sizing_20: 20px;
+    --sizing_24: 24px;
+    --sizing_28: 28px;
+    --sizing_30: 30px;
+    --sizing_32: 32px;
+    --sizing_36: 36px;
+    --sizing_40: 40px;
+    --sizing_44: 44px;
+    --sizing_48: 48px;
+    --sizing_50: 50px;
+    --sizing_56: 56px;
+    --sizing_60: 60px;
+    --sizing_64: 64px;
+    --sizing_72: 72px;
+    --sizing_80: 80px;
+    --sizing_96: 96px;
+    --sizing_120: 120px;
+    --sizing_160: 160px;
+    --sizing_200: 200px;
+    --sizing_240: 240px;
+    --sizing_320: 320px;
+    --sizing_auto: auto;
+    --sizing_none: 0px;
+    --sizing-full:100%;
+    --spacing_0: 0px;
+    --spacing_1: 1px;
+    --spacing_2: 2px;
+    --spacing_4: 4px;
+    --spacing_6: 6px;
+    --spacing_8: 8px;
+    --spacing_10: 10px;
+    --spacing_12: 12px;
+    --spacing_16: 16px;
+    --spacing_20: 20px;
+    --spacing_24: 24px;
+    --spacing_28: 28px;
+    --spacing_32: 32px;
+    --spacing_36: 36px;
+    --spacing_40: 40px;
+    --spacing_48: 48px;
+    --spacing_50: 50px;
+    --spacing_56: 56px;
+    --spacing_64: 64px;
+    --spacing_66: 66px;
+    --spacing_72: 72px;
+    --spacing_80: 80px;
+    --spacing_96: 96px;
+    --spacing_120: 120px;
+    --spacing_160: 160px;
+    --spacing_200: 200px;
+    --spacing_240: 240px;
+    --spacing_320: 320px;
+    --spacing_auto: auto;
+    --spacing_none: 0px;
+    
+    /*Shadow Token*/
+    --shadow_none: none;
+    --shadow_1: 0px 2px 10px 0px rgba(var(--modal_box_shadow), 0.1);
+    --shadow_2: 0px 2px 20px 0px rgba(var(--modal_box_shadow), 0.15);
+    --shadow_3_web: 0px 8px 40px 0px rgba(var(--modal_box_shadow), 0.2);
+    --shadow_3_mobile: 0px -8px 40px 0px rgba(var(--modal_box_shadow), 0.2);
+    --shadow_4_alert: 0px 4px 8px rgba(var(--modal_box_shadow), 0.2);
+
+
+    
+
+    /*Online side token*/
+    --web-display-large-font-family: var(--font_family_proximanova);
+    --web-display-large-font-weight: var(--font_weight_medium);
+    --web-display-large-font-size: var(--font_size_26);
+    --web-display-large-line-height: var(--font_height_32);
+    --web-display-large-letter-spacing: var(--sizing_none);
+    --web-display-medium-default-font-family: var(--font_family_proximanova);
+    --web-display-medium-default-font-weight: var(--font_weight_medium);
+    --web-display-medium-default-font-size: var(--font_size_20);
+    --web-display-medium-default-line-height: var(--font_height_24);
+    --web-display-medium-default-letter-spacing: var(--sizing_none);
+    --web-display-small-font-family: var(--font_family_proximanova);
+    --web-display-small-font-weight: var(--font_weight_medium);
+    --web-display-small-line-height: var(--font_height_24);
+    --web-display-small-font-size: var(--font_size_18);
+    --web-display-small-letter-spacing: var(--sizing_none);
+    --web-subheading-font-family: var(--font_family_proximanova);
+    --web-subheading-font-weight: var(--font_weight_medium);
+    --web-subheading-line-height: var(--font_height_20);
+    --web-subheading-font-size: var(--font_size_15);
+    --web-subheading-letter-spacing: var(--sizing_none);
+    --web-body-font-family: var(--font_family_proximanova);
+    --web-body-font-weight: var(--font_weight_regular);
+    --web-body-line-height: var(--font_height_20);
+    --web-body-font-size: var(--font_size_15);
+    --web-body-letter-spacing: var(--sizing_none);
+    --web-caption-font-family: var(--font_family_proximanova);
+    --web-caption-strong-font-weight: var(--font_weight_medium);
+    --web-caption-font-weight: var(--font_weight_regular);
+    --web-caption-line-height: var(--font_height_16);
+    --web-caption-font-size: var(--font_size_12);
+    --web-caption-letter-spacing: var(--sizing_none);
+    --web-button-font-family: var(--font_family_proximanova);
+    --web-button-font-weight: var(--font_weight_regular);
+    --web-button-line-height: var(--font_height_20);
+    --web-button-font-size: var(--font_size_15);
+    --web-button-letter-spacing: var(--sizing_none);
+    --web-display-medium-strong-font-weight: var(--font_weight_medium);
+    --web-display-medium-default-font-family: var(--font_family_proximanova);
+    --web-display-medium-default-font-weight: var(--font_weight_regular);
+    --web-display-medium-default-font-size: var(--font_size_24);
+    --web-display-medium-default-line-height: var(--font_height_28);
+    --web-display-medium-default-letter-spacing: var(--sizing_none);
+    --mobile-display-large-font-family: var(--global-font-family-proximanova);
+    --mobile-display-large-line-height: var(--font_height_28);
+    --mobile-display-large-font-size: var(--font_size_24);
+    --mobile-display-large-font-weight: var(--font_weight_medium);
+    --mobile-display-medium-default-font-family: var(--global-font-family-proximanova);
+    --mobile-display-medium-default-line-height: var(--font_height_24);
+    --mobile-display-medium-default-font-size: var(--font_size_20);
+    --mobile-display-small-font-family: var(--global-font-family-proximanova);
+    --mobile-display-small-line-height: var(--font_height_24);
+    --mobile-display-small-font-size: var(--font_size_18);
+    --mobile-display-small-font-weight: var(--font_weight_medium);
+    --mobile-subheading-font-family: var(--global-font-family-proximanova);
+    --mobile-subheading-line-height: var(--font_height_20);
+    --mobile-subheading-font-size: var(--font_size_16);
+    --mobile-subheading-font-weight: var(--font_weight_medium);
+    --mobile-subheading-letter-spacing: var(--sizing_none);
+    --mobile-body-font-family: var(--global-font-family-proximanova);
+    --mobile-body-line-height: var(--font_height_20);
+    --mobile-body-font-size: var(--font_size_16);
+    --mobile-body-font-weight:var(--font_weight_regular);
+    --mobile-caption-strong-font-family: var(--global-font-family-proximanova);
+    --mobile-caption-font-family: var(--global-font-family-proximanova);
+    --mobile-caption-line-height: var(--font_height_16);
+    --mobile-caption-font-size: var(--font_size_12);
+    --mobile-caption-strong-font-weight: var(--font_weight_medium);
+    --mobile-caption-font-weight: var(--font_weight_regular);
+    --mobile-caption-letter-spacing: var(--sizing_none);
+    --mobile-button-font-family: var(--global-font-family-proximanova);
+    --mobile-button-line-height: var(--font_height_20);
+    --mobile-button-font-size: var(--font_size_18);
+    --mobile-button-font-weight: var(--font_weight_medium);
+    --mobile-display-medium-strong-font-weight: var(--font_weight_semibold);
+    --mobile-display-medium-default-font-weight: var(--font_weight_medium);
+    --mobile-display-medium-default-letter-spacing: var(--sizing_none);
+    --mobile-display-large-letter-spacing: var(--sizing_none);
+    --mobile-button-letter-spacing:var(--sizing_none);
+
+}
+
+
+
+/*Online Side token list*/
+.vg-display-large{
+    font-family: var(--web-display-large-font-family);
+    font-weight: var(--web-display-large-font-weight);
+    font-size: var(--web-display-large-font-size);
+    line-height: var(--web-display-large-line-height);
+    letter-spacing: var(--web-display-large-letter-spacing);
+}
+.vg-display-medium{
+    font-family: var(--web-display-medium-default-font-family);
+    font-weight: var(--web-display-medium-default-font-weight);
+    font-size: var(--web-display-medium-default-font-size);
+    line-height: var(--web-display-medium-default-line-height);
+    letter-spacing: var(--web-display-medium-default-letter-spacing);
+}
+.vg-display-small{
+    font-family: var(--web-display-small-font-family);
+    font-weight: var(--web-display-small-font-weight);
+    line-height: var(--web-display-small-line-height);
+    font-size: var(--web-display-small-font-size);
+    letter-spacing: var(--web-display-small-letter-spacing);
+}
+.vg-subheading-font{
+    font-family: var(--web-subheading-font-family);
+    font-weight: var(--web-subheading-font-weight);
+    line-height: var(--web-subheading-line-height);
+    font-size: var(--web-subheading-font-size);
+    letter-spacing: var(--web-subheading-letter-spacing);
+}
+.vg-body-font{
+    font-family: var(--web-body-font-family);
+    font-weight: var(--web-body-font-weight);
+    line-height: var(--web-body-line-height);
+    font-size: var(--web-body-font-size);
+    letter-spacing: var(--web-body-letter-spacing);
+}
+.vg-caption-title{
+    font-family: var(--web-caption-font-family);
+    font-weight: var(--web-caption-strong-font-weight);
+    line-height: var(--web-caption-line-height);
+    font-size: var(--web-caption-font-size);
+    letter-spacing: var(--web-caption-letter-spacing);
+}
+.vg-caption-text{
+    font-family: var(--web-caption-font-family);
+    font-weight: var(--web-caption-font-weight);
+    line-height: var(--web-caption-line-height);
+    font-size: var(--web-caption-font-size);
+    letter-spacing: var(--web-caption-letter-spacing);
+}
+.vg-button{
+    font-family: var(--web-button-font-family);
+    font-weight: var(--web-button-font-weight);
+    line-height: var(--web-button-line-height);
+    font-size: var(--web-button-font-size);
+    letter-spacing: var(--web-button-letter-spacing);
+}
+/* .web-section-heading{
+    font-family:var(--web-display-medium-default-font-family) ;
+    font-weight: var(--web-display-medium-strong-font-weight);
+    font-size: var(--web-display-medium-default-font-size);
+    line-height: var(--web-display-medium-default-line-height);
+    letter-spacing: var(--web-display-medium-default-letter-spacing);
+} */
+
+@media(max-width:767px){
+    /*Mobile Side token list*/
+    .vg-display-large{
+        font-family: var(--mobile-display-large-font-family);
+        font-weight: var(--mobile-display-large-font-weight);
+        font-size: var(--mobile-display-large-font-size);
+        line-height: var(--mobile-display-large-line-height);
+        letter-spacing: var(--mobile-display-large-letter-spacing);
+    }
+    .vg-display-medium{
+        font-family: var(--mobile-display-medium-default-font-family);
+        font-weight: var(--mobile-display-medium-default-font-weight);
+        font-size: var(--mobile-display-medium-default-font-size);
+        line-height: var(--mobile-display-medium-default-line-height);
+        letter-spacing: var(--mobile-display-medium-default-letter-spacing);
+    }
+    .vg-display-small{
+        font-family: var(--mobile-display-small-font-family);
+        font-weight: var(--mobile-display-small-font-weight);
+        line-height: var(--mobile-display-small-line-height);
+        font-size: var(--mobile-display-small-font-size);
+        letter-spacing: var(--mobile-display-small-letter-spacing);
+    }
+    .vg-subheading-font{
+        font-family: var(--mobile-subheading-font-family);
+        font-weight: var(--mobile-subheading-font-weight);
+        line-height: var(--mobile-subheading-line-height);
+        font-size: var(--mobile-subheading-font-size);
+        letter-spacing: var(--mobile-subheading-letter-spacing);
+    }
+    .vg-body-font{
+        font-family: var(--mobile-body-font-family);
+        font-weight: var(--mobile-body-font-weight);
+        line-height: var(--mobile-body-line-height);
+        font-size: var(--mobile-body-font-size);
+        letter-spacing: var(--mobile-body-letter-spacing);
+    }
+    .vg-caption-title{
+        font-family: var(--mobile-caption-font-family);
+        font-weight: var(--mobile-caption-strong-font-weight);
+        line-height: var(--mobile-caption-line-height);
+        font-size: var(--mobile-caption-font-size);
+        letter-spacing: var(--mobile-caption-letter-spacing);
+    }
+    .vg-caption-text{
+        font-family: var(--mobile-caption-font-family);
+        font-weight: var(--mobile-caption-font-weight);
+        line-height: var(--mobile-caption-line-height);
+        font-size: var(--mobile-caption-font-size);
+        letter-spacing: var(--mobile-caption-letter-spacing);
+    }
+    .vgb-button{
+        font-family: var(--mobile-button-font-family);
+        font-weight: var(--mobile-button-font-weight);
+        line-height: var(--mobile-button-line-height);
+        font-size: var(--mobile-button-font-size);
+        letter-spacing: var(--mobile-button-letter-spacing);
+    }
+    /* .web-section-heading{
+        font-family:var(--mobile-subheading-font-family) ;
+        font-weight: var(--mobile-display-medium-strong-font-weight);
+        font-size: var(--mobile-subheading-font-size);
+        line-height: var(--mobile-subheading-line-height);
+        letter-spacing: var(--mobile-subheading-letter-spacing);
+    }    */
+}
+
+/* ADA Token CSS Start */
+:root {
+    --global-color-core-ink-darker: #333333;
+    --global-color-core-white: #ffffff;
+    --global-color-core-ink-base: #9a9a9a;
+}
+:root {
+    --color-bkg-neutral-strong: var(--global-color-core-ink-darker);
+    --color-text-neutral-inverse: var(--global-color-core-white);
+    --color-bkg-neutral-default: var(--global-color-core-white);
+    --color-text-neutral-weak: var(--global-color-core-ink-base);
+}
+/* ADA Token CSS Start */
