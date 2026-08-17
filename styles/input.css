@@ -89,13 +89,18 @@
 }
 
 /* Legacy live chat is injected by a GTM tag (container GTM-5QW5SZB, loaded in
-   document_head.hbs) — hide it while Vera chat replaces it. Remove these rules
-   once the GTM tag itself is retired. Selectors cover LiveChat Inc and the
-   classic Zendesk Web Widget. */
-#chat-widget-container,
-#livechat-full,
-iframe#launcher,
-iframe#webWidget {
+   document_head.hbs) — hide it only where Vera actually replaces it. Selectors
+   cover LiveChat Inc and the classic Zendesk Web Widget.
+
+   Scoped to .vera-active, which templates/footer.hbs puts on <html> on exactly
+   the pages Vera mounts on. While Vera is gated to test articles this keeps the
+   existing chat working everywhere else — hiding it unconditionally would leave
+   the rest of the help center with no chat at all. When Vera goes site-wide,
+   drop the .vera-active prefix (and retire these rules with the GTM tag). */
+.vera-active #chat-widget-container,
+.vera-active #livechat-full,
+.vera-active iframe#launcher,
+.vera-active iframe#webWidget {
   display: none !important;
 }
 
