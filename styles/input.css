@@ -1,5 +1,12 @@
 @import "tailwindcss";
-@source "../node_modules/vera-chat-widget/dist";
+/* Scan the compiled sources only. Pointing @source at the directory also feeds
+   Tailwind the .map and .d.ts files sitting next to them, which cost scan time
+   and can surface class names that only exist in source maps. */
+@source "../node_modules/vera-chat-widget/dist/**/*.{js,cjs}";
+/* Toolkit 4.x ships unbundled component source (3.x was a pre-bundled monolith
+   that inlined its own styles), so Tailwind has to scan it for the utility
+   classes used by VgVeraChatBox, VgPopup, VgButton, VgInput and VgAvatar. */
+@source "../node_modules/@vagaro/vagaro-react-toolkit/dist/**/*.js";
 
 /* Vagaro design-system tokens for vera-chat-widget, vendored verbatim from
    Vagaro.Vera/src/Assets (the npm package does not ship them). Re-copy when
@@ -7,6 +14,10 @@
 @import "./vera/vg-theme.css";
 @import "./vera/vg-typography-token.css";
 @import "./vera/vg-theme-token.css";
+/* Must stay imported: this is the @theme block that turns the vg tokens above
+   into Tailwind utilities. Without it 24 of the widget's classes
+   (bg-bkg_neutral_default, text-text_neutral_default, border-border_neutral_*,
+   outline-border_neutral_*, ...) generate no CSS and fail silently. */
 @import "./vera/vera-tailwind-theme.css";
 @theme {
   --color-midnight: #121063;

@@ -266,7 +266,7 @@
       window.fetch = async (input, init) => {
         const url = typeof input === "string" ? input : input.url;
         const res = await origFetch(input, init);
-        if (url.includes("dev21connect.bookitall.com")) {
+        if (url.includes("connect.vagaro.com")) {
           res.clone().json().then(
             (body) =>
               console.log("[VeraDebug]", init?.method || "GET", url, res.status, body),
@@ -324,12 +324,15 @@
       };
 
       renderVeraChat({
-        apiBaseUrl: "https://dev21connect.bookitall.com/api/v3/vera/chat",
-        hubUrl: "https://as-convhub-dev-signalr-wus.azurewebsites.net/chatHub",
+        apiBaseUrl: "https://connect.vagaro.com/api/v3/vera/chat",
+        // Base hub path only — the SignalR client appends "/negotiate" itself,
+        // so including it here would POST to /chatHub/negotiate/negotiate.
+        hubUrl:
+          "https://as-convhub-prod-messagedispatcher-wus.azurewebsites.net/chatHub",
         conversationChannel: "support",
         basicDetails,
         loginRedirectUrl:
-          "https://dev21.bookitall.com/login?returnUrl=" +
+          "https://www.vagaro.com/login?returnUrl=" +
           encodeURIComponent(window.location.href),
         isPanelOpen: true,
         className: "tw-vera-root",
