@@ -22,6 +22,16 @@ const VERA_LAUNCHER_AVATAR =
   "?sp=r&st=2025-12-17T17:25:11Z&se=2031-03-09T01:40:11Z&spr=https" +
   "&sv=2024-11-04&sr=c&sig=2zjrNzCgQrmIz7%2FpKmunoA6SVGJpbYROyrfRllWZknc%3D";
 
+// The widget renders no chrome of its own — no panel background, border or
+// shadow — so the host supplies the drawer. These are the classes the Vera
+// team's reference app uses (support.bookitall.com), minus its top-16 offset:
+// that clears a 64px app header this help center doesn't have, so the drawer
+// runs full height instead. Change inset-y-0 to top-[Npx] bottom-0 to tuck it
+// under the help center header.
+const PANEL_CLASS =
+  "fixed inset-y-0 right-0 z-50 flex w-[400px] max-w-[92vw] flex-col " +
+  "border-l border-gray-200 bg-white shadow-2xl";
+
 function VeraChat({ config }: { config: VeraChatConfig }) {
   const [open, setOpen] = useState(config.isPanelOpen ?? false);
 
@@ -29,12 +39,15 @@ function VeraChat({ config }: { config: VeraChatConfig }) {
     <>
       {/* Keep the widget mounted while closed to avoid re-initialization
           (mirrors the pattern in the vera-chat-widget demo). */}
-      <div className={open ? "" : "hidden"}>
+      <div className={open ? PANEL_CLASS : "hidden"}>
         <VeraChatWidget
           {...config}
           mode="minibar"
           isPanelOpen={open}
           onClose={() => setOpen(false)}
+          className={[config.className, "flex-1 min-h-0 w-full"]
+            .filter(Boolean)
+            .join(" ")}
         />
       </div>
 

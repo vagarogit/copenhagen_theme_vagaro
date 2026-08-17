@@ -280,6 +280,37 @@
       // is suppressed even if Vera itself fails to mount.
       document.documentElement.classList.add("vera-active");
 
+      // The legacy Zendesk messaging widget (snippet.js, injected by the GTM
+      // container) also pops a proactive greeting — "Vagaro AI / Hello 👋
+      // Looking for something? We're here to help!" — which renders in its own
+      // id-less iframe, so the CSS above only catches it by an English title.
+      // Asking the widget to hide itself covers the launcher, the messaging
+      // window and the greeting in one call, independent of Zendesk's markup
+      // and the visitor's locale. snippet.js defines zE as a command queue the
+      // moment it runs, but GTM injects it async, so poll instead of assuming
+      // it's already there.
+      const hideLegacyChat = () => {
+        if (typeof window.zE !== "function") return false;
+        try {
+          // "messenger" is the modern widget; older accounts answer to
+          // "webWidget" instead and throw on the messenger command.
+          window.zE("messenger", "hide");
+        } catch (error) {
+          try {
+            window.zE("webWidget", "hide");
+          } catch (fallbackError) {
+            console.warn("Failed to hide legacy Zendesk chat:", fallbackError);
+          }
+        }
+        return true;
+      };
+      if (!hideLegacyChat()) {
+        const deadline = Date.now() + 30000;
+        const poll = setInterval(() => {
+          if (hideLegacyChat() || Date.now() > deadline) clearInterval(poll);
+        }, 250);
+      }
+
       // TEMP DEBUG — log every Vera API response body. Filter the console
       // on "[VeraDebug]". Remove before shipping.
       const origFetch = window.fetch.bind(window);

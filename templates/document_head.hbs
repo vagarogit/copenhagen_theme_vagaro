@@ -1,6 +1,21 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+  {{!-- The Vagaro design tokens the Vera chat widget consumes
+       (styles/vera/vg-*.css) flip ~156 values under
+       @media (prefers-color-scheme: dark), and vera-chat-widget has no
+       light/dark prop of its own — so a visitor on a dark-mode OS would get a
+       dark chat panel inside a light-only help center. The token files ship an
+       explicit opt-out selector: html[data-theme="light"] has specificity
+       (0,1,1) and outranks the media query's :root (0,1,0) regardless of order,
+       so this pins the light palette at the root. Zendesk renders <html>
+       itself, hence the script rather than an attribute in markup — it runs
+       before first paint, so there's no flash. Nothing else in this theme reads
+       data-theme; flip or remove this if the help center ever gains a real dark
+       mode. styles/vera/vera-force-light.css re-pins the same tokens on
+       #vera-chat-root as a fallback. --}}
+  <script>document.documentElement.setAttribute("data-theme", "light");</script>
+
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="{{help_center.name}}" />
   <meta property="og:type" content="website" />

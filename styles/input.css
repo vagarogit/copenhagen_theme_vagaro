@@ -19,6 +19,9 @@
    (bg-bkg_neutral_default, text-text_neutral_default, border-border_neutral_*,
    outline-border_neutral_*, ...) generate no CSS and fail silently. */
 @import "./vera/vera-tailwind-theme.css";
+/* Must come after the token files: pins the widget to the light palette on a
+   dark-mode OS. See bin/generate-vera-force-light.mjs. */
+@import "./vera/vera-force-light.css";
 @theme {
   --color-midnight: #121063;
   --color-tahiti: #3ab7bf;
@@ -100,15 +103,47 @@
 .vera-active #chat-widget-container,
 .vera-active #livechat-full,
 .vera-active iframe#launcher,
-.vera-active iframe#webWidget {
+.vera-active iframe#webWidget,
+/* The proactive greeting bubble ("Vagaro AI — Hello 👋 Looking for something?")
+   is a third Zendesk messaging iframe with no id, so the rules above miss it.
+   Its title is Zendesk's English string; the locale-proof hide is the
+   zE("messenger", "hide") call in footer.hbs and this only avoids a flash
+   before that runs. Same for the styled-components class hooks — those hashes
+   change whenever Zendesk rebuilds the widget, so don't rely on them. */
+.vera-active iframe[title="Message from company"] {
   display: none !important;
 }
 
 /* Vera chat mounts into this container (appended to <body> by the vera-chat
-   module). The widget fills its host container, so the host anchors it. */
+   module). Both of its children — the drawer and the launcher — are position:
+   fixed and carry their own placement, so this element only needs to exist. */
 #vera-chat-root {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 9999;
+  position: static;
+}
+
+/* Make the widget fill the drawer instead of stopping 52px short of the bottom.
+   In minibar mode vera-chat-widget hard-codes its container to
+   h-[calc(100svh-52px)] (dist/index.js getContainerClasses) — the Vera team's
+   reference app tucks it under a 52px app header. Our drawer is inset-y-0, so
+   that reserved strip becomes dead space below the composer. The widget exposes
+   no height prop: the only class that isn't viewport-derived is behind
+   Entrypoint.Connect, which also flips unrelated Connect-only behavior in three
+   other places, so override the layout here instead.
+
+   .tw-vera-root is the class footer.hbs passes as `className`; the widget puts
+   it on the wrapper *around* the container it heights, so make that wrapper a
+   flex column and let the container grow. Sizing it by flex rather than
+   height: 100% keeps it independent of how the percentage would resolve. Both
+   selectors lead with the #vera-chat-root id, so they outrank the widget's
+   single Tailwind class without !important. */
+#vera-chat-root .tw-vera-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+#vera-chat-root .tw-vera-root > [data-testid="vera-chat-widget"] {
+  flex: 1;
+  min-height: 0;
+  height: auto;
 }
