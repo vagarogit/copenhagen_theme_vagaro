@@ -4,3 +4,5 @@ node_modules/
 .a11yrc.json
 *.DS_Store
 coverage/
+.env
+.npmrc.vagaro-feed
