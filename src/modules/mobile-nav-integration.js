@@ -7,7 +7,11 @@
 
   // Wait for the navigation integration to be available
   function waitForNavigation() {
-    if (window.toggleMobileNavigation && window.updateUserInfo) {
+    if (
+      window.toggleMobileNavigation &&
+      window.updateUserInfo &&
+      window.resolveUserInfo
+    ) {
       initializeMobileNavIntegration();
     } else {
       setTimeout(waitForNavigation, 100);
@@ -26,32 +30,12 @@
   }
 
   function updateUserInfoFromZendesk() {
-    // Get user info from various Zendesk sources
-    const userAvatar = document.querySelector('.user-avatar')?.src || 
-                      document.querySelector('[class*="avatar"]')?.src;
-    
-    const userName = document.querySelector('#user-name')?.textContent?.trim() ||
-                    document.querySelector('[data-user-name]')?.textContent?.trim() ||
-                    document.querySelector('.user-name')?.textContent?.trim();
+    // Shared with the desktop nav so both read the same source of truth
+    // (window.HelpCenter.user) instead of scraping for markup that the
+    // templates never render.
+    if (!window.resolveUserInfo || !window.updateUserInfo) return;
 
-    // Check if user is signed in through multiple methods
-    const isSignedIn = !!(
-      document.body.classList.contains('signed-in') ||
-      document.querySelector('.user-avatar') ||
-      document.querySelector('#user-name') ||
-      window.HelpCenter?.user?.signed_in ||
-      // Check for Zendesk's signed_in variable if available
-      (typeof signed_in !== 'undefined' && signed_in)
-    );
-
-    // Update the mobile navigation with user info
-    if (window.updateUserInfo) {
-      window.updateUserInfo({
-        isSignedIn: isSignedIn,
-        userAvatar: userAvatar || null,
-        userName: userName || null,
-      });
-    }
+    window.updateUserInfo(window.resolveUserInfo());
   }
 
   function setupMobileMenuButton() {

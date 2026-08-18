@@ -70,7 +70,10 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
   // Toggle user dropdown
   const toggleUserDropdown = (e) => {
     e.preventDefault();
-    setUserDropdownOpen(!userDropdownOpen);
+    // Legacy dropdown code listens on document/body; let the click stop here so
+    // it can't close the menu we're opening on the very same click.
+    e.stopPropagation();
+    setUserDropdownOpen((open) => !open);
   };
 
   // Responsive logic - hide desktop navigation on mobile
@@ -899,11 +902,12 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
 
         {isLoggedIn && (
           <NavigationMenu.Item
-            className="user-info dropdown mt-1"
+            className="user-info dropdown"
             ref={userDropdownRef}
           >
             <button
               className="dropdown-toggle NavigationMenuLink"
+              data-react-dropdown=""
               onClick={toggleUserDropdown}
               aria-haspopup="true"
               aria-expanded={userDropdownOpen}
@@ -953,7 +957,14 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
                 />
               </svg>
             </button>
-            <div className="dropdown-menu dropdown-menu-end" role="menu">
+            {/* Display is driven from React state rather than the
+                aria-expanded CSS rule, which any inline style set by other
+                scripts would override. */}
+            <div
+              className="dropdown-menu dropdown-menu-end"
+              role="menu"
+              style={{ display: userDropdownOpen ? "block" : "none" }}
+            >
               <a
                 href="/hc/en-us/profile"
                 role="menuitem"

@@ -37,47 +37,6 @@ function closeNavigation(toggle, menu) {
   toggle.focus();
 }
 
-// Handle dropdown toggles
-function setupDropdowns() {
-  const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
-
-  dropdownToggles.forEach((toggle) => {
-    const menu = toggle.nextElementSibling;
-    if (!menu || !menu.classList.contains("dropdown-menu")) return;
-
-    // Initially hide the dropdown menu
-    menu.style.display = "none";
-
-    toggle.addEventListener("click", (event) => {
-      event.stopPropagation();
-
-      // Toggle visibility
-      if (menu.style.display === "none") {
-        menu.style.display = "block";
-        menu.classList.add("opacity-100", "scale-100");
-        menu.classList.remove("opacity-0", "scale-95");
-      } else {
-        menu.classList.add("opacity-0", "scale-95");
-        menu.classList.remove("opacity-100", "scale-100");
-        setTimeout(() => {
-          menu.style.display = "none";
-        }, 200);
-      }
-    });
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener("click", () => {
-    document.querySelectorAll(".dropdown-menu").forEach((menu) => {
-      menu.classList.add("opacity-0", "scale-95");
-      menu.classList.remove("opacity-100", "scale-100");
-      setTimeout(() => {
-        menu.style.display = "none";
-      }, 200);
-    });
-  });
-}
-
 // Navigation
 window.addEventListener("DOMContentLoaded", () => {
   const menuButton = document.querySelector(".menu-button-mobile");
@@ -108,9 +67,6 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
-  // Setup dropdown menus
-  setupDropdowns();
 
   // Toggles expanded aria to collapsible elements
   const collapsible = document.querySelectorAll(

@@ -143,25 +143,40 @@ export function mountMobileNavigation() {
   return true;
 }
 
+// Read the signed-in user from Zendesk. `window.HelpCenter.user` is the only
+// place the name lives — the templates render an avatar (header.hbs, gated on
+// `signed_in`) but never the name — so DOM lookups only serve as a fallback for
+// the avatar.
+export function resolveUserInfo() {
+  const hcUser = window.HelpCenter?.user;
+  const domAvatar = document.querySelector(".user-avatar");
+
+  const isSignedIn = !!(
+    hcUser?.signed_in ||
+    (hcUser?.role && hcUser.role !== "anonymous") ||
+    document.body.classList.contains("signed-in") ||
+    domAvatar
+  );
+
+  return {
+    isSignedIn,
+    userAvatar: hcUser?.avatar_url || domAvatar?.src || null,
+    userName: hcUser?.name || null,
+  };
+}
+
+window.resolveUserInfo = resolveUserInfo;
+
 // Initialize both components when DOM is ready
 function initializeNavigation() {
   mountRadixNavigation();
   mountMobileNavigation();
 
   // Initialize user info from Zendesk helpers if available
-  const userAvatar = document.querySelector(".user-avatar")?.src;
-  const userName = document.querySelector("#user-name")?.textContent;
-  const isSignedIn =
-    document.body.classList.contains("signed-in") ||
-    document.querySelector(".user-avatar") !== null ||
-    window.HelpCenter?.user?.signed_in;
+  const userInfo = resolveUserInfo();
 
-  if (isSignedIn || userAvatar || userName) {
-    window.updateUserInfo({
-      isSignedIn: !!isSignedIn,
-      userAvatar: userAvatar || null,
-      userName: userName || null,
-    });
+  if (userInfo.isSignedIn || userInfo.userAvatar || userInfo.userName) {
+    window.updateUserInfo(userInfo);
   }
 }
 

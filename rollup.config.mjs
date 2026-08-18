@@ -211,6 +211,15 @@ export default defineConfig([
       ) {
         return;
       }
+      // Cycles inside the prebuilt toolkit dist are parent/child component
+      // pairs resolved at render time, not module evaluation — benign, and not
+      // ours to fix. Cycles in our own src/ still warn.
+      if (
+        warning.code === "CIRCULAR_DEPENDENCY" &&
+        warning.message.includes("node_modules")
+      ) {
+        return;
+      }
       // Use default warning handler for other warnings
       warn(warning);
     },
