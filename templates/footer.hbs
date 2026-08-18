@@ -330,49 +330,16 @@
 
       const { renderVeraChat } = await import("vera-chat");
 
-      // Host context for the authenticated flow (see the vera-chat-widget
-      // README "Host context"): the backend no longer returns user/business
-      // data at login — the host maps it via basicDetails. On the help
-      // center the identity source is the signed-in Zendesk user; the
-      // widget requires a non-empty author displayName or message posts
-      // fail (dispatcher 400 surfaced as Connect 500). Guests need none of
-      // this — the widget ignores basicDetails when no s_utkn cookie exists.
-      const zendeskUser = {
-        name: {{json user.name}},
-        // Curlybars doesn't expose user.email in templates; it's only
-        // available at runtime via the HelpCenter JS object.
-        email: window.HelpCenter?.user?.email ?? null,
-        avatarUrl: {{json user.avatar_url}},
-        signedIn: {{json signed_in}},
-      };
-      const [firstName = "Vagaro", ...restOfName] = (zendeskUser.name || "")
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean);
-      const basicDetails = {
-        // Placeholder business block: Zendesk knows nothing about the
-        // visitor's Vagaro business. The backend only validates
-        // author.displayName; these fields pass through — real sourcing
-        // TBD with the Vera team.
-        business: {
-          name: "Vagaro Help Center",
-          countryCode: "US",
-          countryName: "United States of America",
-          stateCode: "CA",
-          stateName: "California",
-          region: "US02",
-        },
-        user: {
-          firstName: firstName || "",
-          lastName: restOfName.join(" ") || "",
-          email: zendeskUser.email || "",
-          avatarUrl: zendeskUser.avatarUrl || "",
-          countryCode: "US",
-          countryName: "United States of America",
-          stateCode: "CA",
-          stateName: "California",
-        },
-      };
+      // No basicDetails: the login response resolves the authenticated
+      // user's identity server-side from s_utkn, and the widget falls back
+      // to it when the host passes none — the intended path for hosts like
+      // this one that don't know the visitor's Vagaro business. Guests get
+      // their identity from the intake form.
+      // Zendesk sign-in handles the hop to Vagaro login and back; return_to
+      // brings the visitor back to the page they were on. Encoded, so query
+      // strings in the page URL survive the round trip.
+      const currentUrl = encodeURIComponent(window.location.href);
+      const signInUrl = `https://support.vagaro.com/hc/en-us/signin?return_to=${currentUrl}`;
 
       renderVeraChat({
         apiBaseUrl: "https://connect.vagaro.com/api/v3/vera/chat",
@@ -381,10 +348,7 @@
         hubUrl:
           "https://as-convhub-prod-messagedispatcher-wus.azurewebsites.net/chatHub",
         conversationChannel: "support",
-        basicDetails,
-        loginRedirectUrl:
-          "https://www.vagaro.com/login?returnUrl=" +
-          encodeURIComponent(window.location.href),
+        loginRedirectUrl: signInUrl,
         // Start collapsed — the visitor opens Vera from the launcher. The
         // widget stays mounted while closed (see src/modules/vera-chat), so
         // SignalR still connects in the background and history loads on the

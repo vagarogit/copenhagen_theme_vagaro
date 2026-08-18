@@ -9,6 +9,7 @@
  * @param {string} cookieName - The name of the cookie to retrieve
  * @returns {string} The cookie value or empty string if not found
  */
+// eslint-disable-next-line check-file/filename-naming-convention
 function getCookie(cookieName) {
   let name = cookieName + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
