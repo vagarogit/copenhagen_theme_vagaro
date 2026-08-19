@@ -338,8 +338,28 @@
       // Zendesk sign-in handles the hop to Vagaro login and back; return_to
       // brings the visitor back to the page they were on. Encoded, so query
       // strings in the page URL survive the round trip.
-      const currentUrl = encodeURIComponent(window.location.href);
-      const signInUrl = `https://support.vagaro.com/hc/en-us/signin?return_to=${currentUrl}`;
+      //
+      // The round trip is a full page load, so nothing in memory survives it.
+      // To reopen the panel on the way back, the return_to URL carries a
+      // marker param; on load we read it, open the panel, then strip it from
+      // the address bar with replaceState so a later refresh or a shared link
+      // doesn't reopen the chat.
+      const VERA_OPEN_PARAM = "vera_chat";
+
+      const returnUrl = new URL(window.location.href);
+      returnUrl.searchParams.set(VERA_OPEN_PARAM, "open");
+      const signInUrl =
+        "https://support.vagaro.com/hc/en-us/signin?return_to=" +
+        encodeURIComponent(returnUrl.href);
+
+      const landedFromSignIn =
+        new URL(window.location.href).searchParams.get(VERA_OPEN_PARAM) ===
+        "open";
+      if (landedFromSignIn) {
+        const cleanUrl = new URL(window.location.href);
+        cleanUrl.searchParams.delete(VERA_OPEN_PARAM);
+        window.history.replaceState({}, "", cleanUrl.href);
+      }
 
       renderVeraChat({
         apiBaseUrl: "https://connect.vagaro.com/api/v3/vera/chat",
@@ -349,11 +369,12 @@
           "https://as-convhub-prod-signalr-wus.azurewebsites.net/chatHub",
         conversationChannel: "support",
         loginRedirectUrl: signInUrl,
-        // Start collapsed — the visitor opens Vera from the launcher. The
-        // widget stays mounted while closed (see src/modules/vera-chat), so
-        // SignalR still connects in the background and history loads on the
-        // first open.
-        isPanelOpen: false,
+        // Start collapsed — the visitor opens Vera from the launcher — unless
+        // we just came back from sign-in, in which case pick up where the
+        // visitor left off. The widget stays mounted while closed (see
+        // src/modules/vera-chat), so SignalR still connects in the background
+        // and history loads on the first open.
+        isPanelOpen: landedFromSignIn,
         className: "tw-vera-root",
         // TEMP DEBUG — parsed objects the widget exposes. Remove with the
         // fetch interceptor above.
