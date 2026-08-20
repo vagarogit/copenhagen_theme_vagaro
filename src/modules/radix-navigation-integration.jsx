@@ -3,6 +3,7 @@ import * as React from "react";
 import { createRoot } from "react-dom/client";
 import NavigationMenuDemo from "./radix.jsx";
 import MobileNavigation from "./mobile-navigation.jsx";
+import UserMenu from "./user-menu.jsx";
 
 // React 18 root instances, reused across re-renders so state/reconciliation
 // persists between calls instead of remounting the tree each time.
@@ -10,6 +11,8 @@ let radixNavRoot = null;
 let radixNavRootContainer = null;
 let mobileNavRoot = null;
 let mobileNavRootContainer = null;
+let userMenuRoot = null;
+let userMenuRootContainer = null;
 
 // Development mode: Set to true to keep mobile navigation open during development
 const DEV_MODE_MOBILE_NAV_OPEN = false; // Change to true to open mobile nav on load
@@ -50,6 +53,7 @@ window.updateUserInfo = (userInfo) => {
   // Re-render both desktop and mobile navigation with new user info
   mountRadixNavigation();
   mountMobileNavigation();
+  mountUserMenu();
 };
 
 // Function to toggle mobile navigation
@@ -77,12 +81,9 @@ export function mountRadixNavigation() {
       radixNavRootContainer = mountPoint;
     }
 
-    // Mount the React component with navigation data and user info
+    // Mount the React component with navigation data
     radixNavRoot.render(
-      <NavigationMenuDemo
-        navigationData={window.navigationData}
-        userInfo={window.mobileNavState.userInfo}
-      />
+      <NavigationMenuDemo navigationData={window.navigationData} />
     );
 
     // Hide the fallback navigation
@@ -167,10 +168,29 @@ export function resolveUserInfo() {
 
 window.resolveUserInfo = resolveUserInfo;
 
+// Function to mount the signed-in user menu into the header's top row. It
+// lives beside the locale flag instead of inside the nav list so a long
+// display name can't push the nav items off the right edge of the viewport.
+export function mountUserMenu() {
+  const mountPoint = document.getElementById("header-user-menu-root");
+
+  if (!mountPoint) return false;
+
+  if (!userMenuRoot || userMenuRootContainer !== mountPoint) {
+    userMenuRoot = createRoot(mountPoint);
+    userMenuRootContainer = mountPoint;
+  }
+
+  userMenuRoot.render(<UserMenu userInfo={window.mobileNavState.userInfo} />);
+
+  return true;
+}
+
 // Initialize both components when DOM is ready
 function initializeNavigation() {
   mountRadixNavigation();
   mountMobileNavigation();
+  mountUserMenu();
 
   // Initialize user info from Zendesk helpers if available
   const userInfo = resolveUserInfo();
@@ -190,3 +210,4 @@ if (document.readyState === "loading") {
 // Export functions for use in other modules
 window.mountRadixNavigation = mountRadixNavigation;
 window.mountMobileNavigation = mountMobileNavigation;
+window.mountUserMenu = mountUserMenu;

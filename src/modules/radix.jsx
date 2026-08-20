@@ -6,7 +6,7 @@ import classNames from "classnames";
 
 import { PropTypes } from "prop-types";
 
-const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
+const NavigationMenuDemo = ({ navigationData = {} }) => {
   const {
     businessTypes,
     features,
@@ -14,7 +14,6 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
     proPosts = [],
     isLoaded,
   } = navigationData;
-  const { userAvatar, userName } = userInfo;
 
   // Utility function to format links - convert relative links to absolute Vagaro URLs
   const formatLink = (link) => {
@@ -27,10 +26,6 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
   // For development: manually set which menu item should be open
   // Set to "features" or "business-types" to force that menu open for styling
   const [activeMenu, setActiveMenu] = React.useState(""); // Change this to control which menu is open
-
-  // State for user dropdown menu
-  const [userDropdownOpen, setUserDropdownOpen] = React.useState(false);
-  const userDropdownRef = React.useRef(null);
 
   // Check if Vagaro login cookies exist (eB_2 for business, eU_2 for user)
   const checkForVagaroCookies = () => {
@@ -46,35 +41,6 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
 
   // For testing: Set to true to always show user dropdown, or use checkForVagaroCookies() for production
   const isLoggedIn = checkForVagaroCookies(); // Change to: true for testing
-
-  // Close dropdown when clicking outside
-  React.useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        userDropdownRef.current &&
-        !userDropdownRef.current.contains(event.target)
-      ) {
-        setUserDropdownOpen(false);
-      }
-    };
-
-    if (userDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [userDropdownOpen]);
-
-  // Toggle user dropdown
-  const toggleUserDropdown = (e) => {
-    e.preventDefault();
-    // Legacy dropdown code listens on document/body; let the click stop here so
-    // it can't close the menu we're opening on the very same click.
-    e.stopPropagation();
-    setUserDropdownOpen((open) => !open);
-  };
 
   // Responsive logic - hide desktop navigation on mobile
   const [isMobile, setIsMobile] = React.useState(false);
@@ -900,89 +866,6 @@ const NavigationMenuDemo = ({ navigationData = {}, userInfo = {} }) => {
           </NavigationMenu.Link>
         </NavigationMenu.Item>
 
-        {isLoggedIn && (
-          <NavigationMenu.Item
-            className="user-info dropdown"
-            ref={userDropdownRef}
-          >
-            <button
-              className="dropdown-toggle NavigationMenuLink"
-              data-react-dropdown=""
-              onClick={toggleUserDropdown}
-              aria-haspopup="true"
-              aria-expanded={userDropdownOpen}
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-            >
-              {userAvatar ? (
-                <img
-                  src={userAvatar}
-                  alt={userName || "User profile"}
-                  className="user-avatar"
-                  style={{ width: "32px", height: "32px", borderRadius: "50%" }}
-                />
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  className="h-5 w-5 text-primary"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-              )}
-              {userName && (
-                <span className="text-primary font-semibold">{userName}</span>
-              )}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                focusable="false"
-                viewBox="0 0 12 12"
-                className="dropdown-chevron-icon"
-                aria-hidden="true"
-              >
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"
-                />
-              </svg>
-            </button>
-            {/* Display is driven from React state rather than the
-                aria-expanded CSS rule, which any inline style set by other
-                scripts would override. */}
-            <div
-              className="dropdown-menu dropdown-menu-end"
-              role="menu"
-              style={{ display: userDropdownOpen ? "block" : "none" }}
-            >
-              <a
-                href="/hc/en-us/profile"
-                role="menuitem"
-                onClick={() => setUserDropdownOpen(false)}
-              >
-                Profile
-              </a>
-              <a
-                href="/hc/contributions/posts?locale=en-us"
-                role="menuitem"
-                onClick={() => setUserDropdownOpen(false)}
-              >
-                My Activities
-              </a>
-            </div>
-          </NavigationMenu.Item>
-        )}
-
         <NavigationMenu.Indicator className="NavigationMenuIndicator">
           <div className="Arrow" />
         </NavigationMenu.Indicator>
@@ -1002,11 +885,6 @@ NavigationMenuDemo.propTypes = {
     trendingPosts: PropTypes.array,
     proPosts: PropTypes.array,
     isLoaded: PropTypes.bool,
-  }),
-  userInfo: PropTypes.shape({
-    isSignedIn: PropTypes.bool,
-    userAvatar: PropTypes.string,
-    userName: PropTypes.string,
   }),
 };
 

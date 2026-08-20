@@ -7918,6 +7918,70 @@ zd-summary-block {
     opacity: 0;
   }
 }
+/* Signed-in user menu in the header's top row (left of the locale flag).
+   It sits outside .NavigationMenuList so a long display name grows into the
+   header's own whitespace instead of pushing nav items off the viewport. */
+.header-user-menu {
+  max-width: 20rem;
+  min-width: 0;
+}
+.header-user-menu > .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 100%;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: #333333;
+}
+.header-user-menu > .dropdown-toggle:hover, .header-user-menu > .dropdown-toggle:focus {
+  background-color: var(--gray-hover);
+}
+.header-user-menu .user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.header-user-menu .dropdown-chevron-icon {
+  flex-shrink: 0;
+}
+
+/* An unusually long display name truncates instead of widening the header. */
+.header-user-menu__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  max-width: 12rem;
+}
+
+/* The nav row needs ~1187px at full spacing but the desktop layout starts at
+   1024px, so tighten the item spacing across that gap. Tightened, the row
+   measures ~1011px and fits at 1024. */
+@media (max-width: 1239px) {
+  .NavigationMenuTrigger,
+  .NavigationMenuLink {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 14px !important;
+  }
+}
+/* Last-resort guard: if the items still don't fit, scroll the list instead of
+   bleeding past the viewport edge. Safe to scroll here because the dropdown
+   panels live in .ViewportPosition, a sibling of the list, not inside it. */
+.NavigationMenuList {
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.NavigationMenuList::-webkit-scrollbar {
+  display: none;
+}
+
 /* Mobile Navigation Styles */
 .mobile-nav-overlay {
   backdrop-filter: blur(4px);

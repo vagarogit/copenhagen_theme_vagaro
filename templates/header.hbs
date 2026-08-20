@@ -183,6 +183,11 @@
         </button>
 
         <div class="hidden lg:flex items-center space-x-8">
+          <!-- Signed-in user menu (mounted by radix-navigation-integration).
+               Kept here, left of the locale flag, so a long display name
+               can't push the main nav past the edge of the viewport. -->
+          <div id="header-user-menu-root" class="flex items-center"></div>
+
           <div class="flex items-center mr-4">
             <img
               src="https://flagicons.lipis.dev/flags/4x3/us.svg"
