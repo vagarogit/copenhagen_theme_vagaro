@@ -23,14 +23,34 @@ const VERA_LAUNCHER_AVATAR =
   "&sv=2024-11-04&sr=c&sig=2zjrNzCgQrmIz7%2FpKmunoA6SVGJpbYROyrfRllWZknc%3D";
 
 // The widget renders no chrome of its own — no panel background, border or
-// shadow — so the host supplies the drawer. These are the classes the Vera
-// team's reference app uses (support.bookitall.com), minus its top-16 offset:
-// that clears a 64px app header this help center doesn't have, so the drawer
-// runs full height instead. Change inset-y-0 to top-[Npx] bottom-0 to tuck it
-// under the help center header.
+// shadow — so the host supplies the drawer. Based on the classes the Vera
+// team's reference app uses (support.bookitall.com), re-cut for two layouts.
+//
+// Phone (< sm): a floating card inset 3px on every side, rather than the
+// right-hand drawer's max-w-[92vw], which left an 8vw strip of the page
+// showing down the left edge. The top sits flush at --vera-nav-offset (128px,
+// defined in styles/input.css) so the chat opens below the navbar and promo
+// banner instead of over them; the bottom clears the iPhone home indicator
+// via --vera-bottom-offset (also styles/input.css). env() is 0px until a viewport-fit=cover meta opts in —
+// templates/document_head.hbs does — so it stays inert everywhere else.
+//
+// sm and up: the original full-height right-hand drawer, unchanged.
+//
+// Only longhand inset utilities here, no inset-y-0 shorthand: Tailwind emits
+// shorthands before longhands, so a shorthand at the sm: breakpoint would not
+// reliably override the phone rules it is meant to replace.
+//
+// z-40 on phones so the sticky z-50 header — and the mobile nav drawer inside
+// it — stay above the chat even if the header grows (see the promo banners at
+// the top of header.hbs). Back to z-50 at sm and up, where the drawer is
+// full-height by design and is meant to cover the navbar: leaving it at z-40
+// there lets the header paint over the panel's own header and close button.
 const PANEL_CLASS =
-  "fixed inset-y-0 right-0 z-50 flex w-[400px] max-w-[92vw] flex-col " +
-  "border-l border-gray-200 bg-white shadow-2xl";
+  "fixed z-40 sm:z-50 flex flex-col overflow-hidden bg-white shadow-2xl " +
+  "top-[var(--vera-nav-offset)] left-[3px] right-[3px] " +
+  "bottom-[calc(3px+var(--vera-bottom-offset))] rounded-xl " +
+  "sm:top-0 sm:bottom-0 sm:left-auto sm:right-0 sm:w-[400px] " +
+  "sm:rounded-none sm:border-l sm:border-gray-200";
 
 function VeraChat({ config }: { config: VeraChatConfig }) {
   const [open, setOpen] = useState(config.isPanelOpen ?? false);
@@ -61,7 +81,9 @@ function VeraChat({ config }: { config: VeraChatConfig }) {
           // renders empty. Not an issue when isPanelOpen starts true, because
           // the suspense happens during the initial mount instead.
           onClick={() => startTransition(() => setOpen(true))}
-          className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105"
+          // Same home-indicator clearance and the same z-40/sm:z-50 pairing as
+          // the panel, so the launcher never sits above the mobile nav drawer.
+          className="fixed right-5 bottom-[calc(1.25rem+var(--vera-bottom-offset))] z-40 sm:z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105"
         >
           <img
             alt="Vera"

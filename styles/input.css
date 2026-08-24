@@ -159,3 +159,57 @@
   min-height: 0;
   height: auto;
 }
+
+/* Top chrome the Vera panel clears on phones so the chat doesn't open over the
+   nav. 128px = the sticky header in templates/header.hbs (its top row is h-16,
+   64px) plus one promo banner above it (#paypro-banner-variant /
+   #payprogo-banner-variant, also h-16) — the tallest the stack gets, at scroll
+   position 0 with a banner showing. Kept here rather than inline in the module
+   so it sits with the rest of the Vera rules.
+
+   The banners are not sticky and the header is, so once the page scrolls the
+   chrome collapses to 64px and this leaves a 64px strip of page visible above
+   the panel. That's the deliberate trade for never overlapping the nav with a
+   static value; the alternative is measuring
+   header.getBoundingClientRect().bottom on scroll while the panel is open. */
+:root {
+  --vera-nav-offset: 128px;
+
+  /* Bottom chrome the Vera panel clears. In mobile Safari — where this theme
+     runs — the only thing below the panel is the home indicator: 34pt on
+     notched / Dynamic Island iPhones, 0 elsewhere, which is exactly what
+     env(safe-area-inset-bottom) reports (it needs the viewport-fit=cover meta
+     in templates/document_head.hbs to be non-zero). Safari's own toolbar is
+     browser chrome and is already excluded from the fixed viewport, so it
+     needs no offset of its own.
+
+     iOS's full 83pt figure is 49pt of UITabBar plus that 34pt inset, and the
+     49pt only exists inside a native host that draws a tab bar under the web
+     view. If this help center ever ships inside one, change this to
+     calc(49px + env(safe-area-inset-bottom, 0px)); adding it in Safari would
+     just float the panel 49px above the toolbar over a dead strip. */
+  --vera-bottom-offset: env(safe-area-inset-bottom, 0px);
+}
+
+/* Put the composer's padding back on phones. The widget's wrapper is
+   `veraChat-input … pb-2 px-4 max-sm:p-0` (dist/index.js getContainerClasses
+   region, ~line 4063), and Tailwind emits .max-sm\:p-0 after .pb-2/.px-4 at the
+   same specificity, so below 40rem all four sides collapse to 0 and the input
+   sits flush against the panel edge — and against Safari's bottom toolbar.
+   That's correct for the widget's native Mobile entrypoint, which is a bottom
+   sheet flush to the device edge; ours is a floating panel, so restore the
+   padding. Just the padding — the home-indicator inset belongs to the panel's
+   own bottom edge (--vera-bottom-offset, applied in src/modules/vera-chat),
+   which already lifts the whole card clear of it. Adding it here too would
+   inset the composer twice, ~68px up from the viewport bottom on a notched
+   iPhone.
+
+   The package ships no stylesheet (Tailwind classes only, scanned out of dist
+   by the @source above), so this can't be patched upstream without a fork.
+   #vera-chat-root + .veraChat-input outranks the widget's single utility class
+   without !important, same approach as the rules above. */
+@media (width < 40rem) {
+  #vera-chat-root .veraChat-input {
+    padding: 0 0.75rem 0.5rem;
+  }
+}
