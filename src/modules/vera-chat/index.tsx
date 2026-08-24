@@ -59,38 +59,44 @@ function VeraChat({ config }: { config: VeraChatConfig }) {
 
   // Freeze the page behind the panel while it's open.
   //
-  // overflow:hidden on the root rather than the usual position:fixed body
-  // trick: pinning the body would strand the sticky navbar in
-  // templates/header.hbs — with no scroll container left, it stops sticking
-  // and slides away with the document, which is exactly the header the panel
-  // is offset below on phones. Root overflow keeps it in place.
+  // <body> only — NOT documentElement. body's overflow propagates to the
+  // viewport, so the page stops scrolling, while <html> keeps overflow:visible
+  // and stays the scrollport that position:sticky resolves against. Hiding
+  // overflow on the root instead destroys that scrollport, and the sticky
+  // navbar in templates/header.hbs falls back to its *static* position at the
+  // top of the document — so opening the chat mid-page made the mobile nav
+  // vanish. Measured on a repro of the real markup: root+body gives the header
+  // top: -1000px at scrollY 1000, body alone keeps it at 0, and both stop the
+  // page scrolling.
   //
-  // Paired with overscroll-contain on the panel so flicking the message list
-  // past its end doesn't chain into the page or trigger pull-to-refresh.
+  // Paired with overscroll-contain on the message list (styles/input.css) so
+  // flicking past the end of the conversation doesn't chain into the page or
+  // trigger pull-to-refresh.
   useEffect(() => {
     if (!open) return;
 
-    const root = document.documentElement;
     const { body } = document;
     const prev = {
-      rootOverflow: root.style.overflow,
-      bodyOverflow: body.style.overflow,
-      bodyPaddingRight: body.style.paddingRight,
+      overflow: body.style.overflow,
+      paddingRight: body.style.paddingRight,
     };
 
-    // Hiding overflow reclaims the scrollbar's width, which shifts the page
-    // behind the panel on desktop. Pad by exactly what was lost. Always 0 on
-    // phones and on overlay-scrollbar setups.
-    const gutter = window.innerWidth - root.clientWidth;
+    // Locking reclaims the scrollbar's width, which shifts the page behind the
+    // panel. Only worth compensating at sm and up, where the panel is a 400px
+    // side drawer and the page beside it stays in view. On phones the panel
+    // covers everything but a 3px frame, so there is nothing to hold still —
+    // and padding the body there narrows the sticky navbar enough to overflow
+    // it. Same 40rem breakpoint the panel's own layout switches on.
+    const gutter = window.matchMedia("(min-width: 40rem)").matches
+      ? window.innerWidth - document.documentElement.clientWidth
+      : 0;
 
-    root.style.overflow = "hidden";
     body.style.overflow = "hidden";
     if (gutter > 0) body.style.paddingRight = `${gutter}px`;
 
     return () => {
-      root.style.overflow = prev.rootOverflow;
-      body.style.overflow = prev.bodyOverflow;
-      body.style.paddingRight = prev.bodyPaddingRight;
+      body.style.overflow = prev.overflow;
+      body.style.paddingRight = prev.paddingRight;
     };
   }, [open]);
 
