@@ -154,6 +154,66 @@ const stubUnusedToolkitPeers = {
   },
 };
 const stubbedPeers = new Set();
+
+// The toolkit ships dist/tailwind-inject.js: its whole Tailwind utility set as
+// an 85KB string appended to <head> as a plain <style> at import time,
+// deliberately "so they cascade after consumer <link> stylesheets (v3 parity)".
+// Because that <style> is unlayered and every utility in assets/output.css sits
+// in @layer utilities, the toolkit's copy outranks ours unconditionally — an
+// unlayered rule beats a layered one regardless of order or specificity. The
+// toolkit only ships unprefixed utilities, so a base class it happens to share
+// with a template (grid-cols-2, px-2, hidden, gap-6...) sticks at its base
+// value and our md:/lg:/xl: overrides can never win. That pinned the home page
+// category grid and the footer link grid to two columns at every viewport.
+//
+// Wrap the injected sheet in @layer vg-toolkit instead. styles/input.css
+// declares that layer before @import "tailwindcss", so it is the first layer
+// declared and therefore the lowest priority — the theme's own utilities win,
+// while the widget still gets every utility it needs. Keep the two in sync:
+// without the declaration in input.css this layer would be created here, last,
+// and would outrank @layer utilities exactly as the unlayered version did.
+const TOOLKIT_TAILWIND_INJECT = path.join("dist", "tailwind-inject.js");
+const TOOLKIT_TAILWIND_LAYER = "vg-toolkit";
+let layeredToolkitTailwind = false;
+
+const layerToolkitTailwind = {
+  name: "layer-toolkit-tailwind",
+  transform(code, id) {
+    if (!id.includes(TOOLKIT_DIR) || !id.endsWith(TOOLKIT_TAILWIND_INJECT)) {
+      return null;
+    }
+    // Wrap at the injection site rather than rewriting the css literal, so the
+    // 85KB string is left exactly as the toolkit generated it.
+    const marker = "document.createTextNode(css)";
+    if (!code.includes(marker)) {
+      this.warn(
+        `${TOOLKIT_TAILWIND_INJECT} no longer injects via ${marker} — its ` +
+          `utilities are shipping unlayered and will override the theme's`
+      );
+      return null;
+    }
+    layeredToolkitTailwind = true;
+    return {
+      code: code.replace(
+        marker,
+        `document.createTextNode("@layer ${TOOLKIT_TAILWIND_LAYER}{" + css + "}")`
+      ),
+      map: null,
+    };
+  },
+  buildEnd() {
+    // Silence is ambiguous here: the toolkit dropping this file and the plugin
+    // failing to match it both look like "nothing happened" until a utility
+    // silently stops responding to a breakpoint in the browser.
+    if (layeredToolkitTailwind) {
+      console.log(
+        `\nWrapped the toolkit's injected Tailwind sheet in ` +
+          `@layer ${TOOLKIT_TAILWIND_LAYER}.\n`
+      );
+    }
+  },
+};
+
 const TRANSLATION_FILE_REGEX =
   /src\/modules\/(.+?)\/translations\/locales\/.+?\.json$/;
 
@@ -295,6 +355,7 @@ export default defineConfig([
       stubUnusedToolkitPeers,
       // Must precede postcss so skipped stylesheets never reach it.
       dropUnreachableToolkitCss,
+      layerToolkitTailwind,
       // Toolkit 4.x ships its component styles as plain .css next to each
       // component (3.x inlined them via style-inject). Inject them at runtime
       // so the chat box is styled without the theme having to load an extra

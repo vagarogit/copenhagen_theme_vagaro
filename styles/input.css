@@ -1,3 +1,15 @@
+/* Declares the layer the toolkit's runtime-injected Tailwind sheet is wrapped
+   in (see layerToolkitTailwind in rollup.config.mjs). A layer's priority comes
+   from where it is first declared, so naming it here — ahead of the theme,
+   base, components and utilities layers @import "tailwindcss" declares — parks
+   the toolkit's utilities below ours. Nothing is emitted into it from this
+   file; the rule set arrives at runtime from assets/vera-vendor-bundle.js.
+
+   Must stay above the @import: only @charset and @layer statements may precede
+   it. Delete this and the injected sheet becomes the last layer declared,
+   which outranks @layer utilities and re-breaks every base utility the
+   toolkit shares with a template. */
+@layer vg-toolkit;
 @import "tailwindcss";
 /* Scan the compiled sources only. Pointing @source at the directory also feeds
    Tailwind the .map and .d.ts files sitting next to them, which cost scan time
