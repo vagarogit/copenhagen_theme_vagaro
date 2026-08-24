@@ -1,9 +1,10 @@
 {
   "name": "copenhagen_theme",
-  "version": "4.0.99",
+  "version": "4.0.104",
   "repository": "git@github.com:zendesk/copenhagen_theme.git",
   "scripts": {
     "start": "concurrently -k -r 'rollup -c -w' 'npx @tailwindcss/cli -i ./styles/input.css -o ./assets/output.css --watch' 'wait-on script.js style.css && zcli themes:preview'",
+    "start:lan": "concurrently -k -r 'rollup -c -w' 'npx @tailwindcss/cli -i ./styles/input.css -o ./assets/output.css --watch' 'wait-on script.js style.css && ./bin/lan-preview.sh'",
     "build": "NODE_ENV=production rollup -c",
     "build:release": "yarn version:patch && yarn build",
     "build:minor": "yarn version:minor && yarn build",

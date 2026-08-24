@@ -152,12 +152,27 @@
   display: flex;
   flex-direction: column;
   min-height: 0;
+  /* The widget hard-codes w-100 on this wrapper (dist/index.js). In Tailwind
+     v4 that's the spacing scale — 100 * 0.25rem = 400px — not a percentage,
+     so the chat stays 400px wide inside our full-width phone panel and leaves
+     a strip of empty panel down the side. Fill the panel instead; the desktop
+     drawer is 400px anyway, so this changes nothing there. */
+  width: 100%;
 }
 
 #vera-chat-root .tw-vera-root > [data-testid="vera-chat-widget"] {
   flex: 1;
   min-height: 0;
   height: auto;
+}
+
+/* Stop the message list from chaining its scroll into the page. The panel
+   itself carries overscroll-contain, but the panel never scrolls — the real
+   scroller is the widget's message list (h-full overflow-y-auto), so that's
+   where overscroll-behavior has to land to kill rubber-banding and iOS
+   pull-to-refresh when a flick runs past the end of the conversation. */
+#vera-chat-root [data-testid="message-list"] {
+  overscroll-behavior: contain;
 }
 
 /* Top chrome the Vera panel clears on phones so the chat doesn't open over the
@@ -175,20 +190,27 @@
 :root {
   --vera-nav-offset: 128px;
 
-  /* Bottom chrome the Vera panel clears. In mobile Safari — where this theme
-     runs — the only thing below the panel is the home indicator: 34pt on
-     notched / Dynamic Island iPhones, 0 elsewhere, which is exactly what
-     env(safe-area-inset-bottom) reports (it needs the viewport-fit=cover meta
-     in templates/document_head.hbs to be non-zero). Safari's own toolbar is
-     browser chrome and is already excluded from the fixed viewport, so it
-     needs no offset of its own.
+  /* Bottom chrome below the home indicator, for hosts that draw their own.
+     MUST stay a plain length — env() is applied directly at each use site
+     instead. A custom property holding env() is invalid at computed-value
+     time wherever env() doesn't resolve, which takes the whole calc() with it
+     and drops `bottom` to auto, putting the panel *under* the indicator.
 
-     iOS's full 83pt figure is 49pt of UITabBar plus that 34pt inset, and the
-     49pt only exists inside a native host that draws a tab bar under the web
-     view. If this help center ever ships inside one, change this to
-     calc(49px + env(safe-area-inset-bottom, 0px)); adding it in Safari would
-     just float the panel 49px above the toolbar over a dead strip. */
-  --vera-bottom-offset: env(safe-area-inset-bottom, 0px);
+     In mobile Safari the home indicator is the only thing below the panel:
+     34pt on notched / Dynamic Island iPhones, exactly what
+     env(safe-area-inset-bottom) reports once templates/document_head.hbs opts
+     in with viewport-fit=cover. Safari's own toolbar is browser chrome and is
+     already excluded from the fixed viewport, so it needs nothing here — 0 is
+     correct. iOS's 83pt figure is 49pt of UITabBar plus that 34pt inset, and
+     the 49pt exists only inside a native host that draws a tab bar under the
+     web view; if this help center ever ships inside one, set this to 49px. */
+  --vera-bottom-extra: 0px;
+
+  /* How far the composer dims while it's blocked. 0.5 keeps the "Ask Vera
+     anything" placeholder and the send button legible, so it reads as
+     deliberately disabled; much lower and it reads as broken or half-loaded.
+     Drop it toward 0.1 here if you want the state louder. */
+  --vera-composer-disabled-opacity: 0.5;
 }
 
 /* Put the composer's padding back on phones. The widget's wrapper is
@@ -212,4 +234,26 @@
   #vera-chat-root .veraChat-input {
     padding: 0 0.75rem 0.5rem;
   }
+}
+
+/* Make the blocked composer look blocked. The widget disables it more often
+   than a visitor expects — the guest gate holds it until the "Vagaro business
+   owner?" prompt is answered, then again until the name/email intake form
+   arrives over SignalR — but the only signals it gives are
+   contenteditable="false" and a cursor-not-allowed. On a phone there is no
+   cursor, so the input just looks dead. Dim the whole composer (field, send
+   button and all) while Lexical has the editor non-editable, and fade back in
+   the moment it flips to true.
+
+   :has() rather than a class hook because the widget exposes no disabled class
+   on the wrapper — the state lives only on the contenteditable itself. Safari
+   15.4+ / Chrome 105+; where it is unsupported the rule is simply dropped and
+   the composer stays at full opacity, i.e. today's behavior. */
+#vera-chat-root .veraChat-input {
+  transition: opacity 150ms ease;
+}
+
+#vera-chat-root
+  .veraChat-input:has([data-lexical-editor][contenteditable="false"]) {
+  opacity: var(--vera-composer-disabled-opacity, 0.5);
 }

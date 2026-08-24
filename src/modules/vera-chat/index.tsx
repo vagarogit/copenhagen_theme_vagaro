@@ -1,4 +1,4 @@
-import { startTransition, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import type { ComponentProps } from "react";
 import { VeraChatWidget } from "vera-chat-widget";
@@ -31,7 +31,7 @@ const VERA_LAUNCHER_AVATAR =
 // showing down the left edge. The top sits flush at --vera-nav-offset (128px,
 // defined in styles/input.css) so the chat opens below the navbar and promo
 // banner instead of over them; the bottom clears the iPhone home indicator
-// via --vera-bottom-offset (also styles/input.css). env() is 0px until a viewport-fit=cover meta opts in —
+// via env(safe-area-inset-bottom) plus --vera-bottom-extra (input.css). env() is 0px until a viewport-fit=cover meta opts in —
 // templates/document_head.hbs does — so it stays inert everywhere else.
 //
 // sm and up: the original full-height right-hand drawer, unchanged.
@@ -46,14 +46,53 @@ const VERA_LAUNCHER_AVATAR =
 // full-height by design and is meant to cover the navbar: leaving it at z-40
 // there lets the header paint over the panel's own header and close button.
 const PANEL_CLASS =
-  "fixed z-40 sm:z-50 flex flex-col overflow-hidden bg-white shadow-2xl " +
-  "top-[var(--vera-nav-offset)] left-[3px] right-[3px] " +
-  "bottom-[calc(3px+var(--vera-bottom-offset))] rounded-xl " +
+  "fixed z-40 sm:z-50 flex flex-col overflow-hidden overscroll-contain " +
+  "bg-white shadow-2xl " +
+  "top-[var(--vera-nav-offset,128px)] left-[3px] right-[3px] " +
+  "bottom-[calc(3px+var(--vera-bottom-extra,0px)+env(safe-area-inset-bottom,0px))] " +
+  "rounded-xl " +
   "sm:top-0 sm:bottom-0 sm:left-auto sm:right-0 sm:w-[400px] " +
   "sm:rounded-none sm:border-l sm:border-gray-200";
 
 function VeraChat({ config }: { config: VeraChatConfig }) {
   const [open, setOpen] = useState(config.isPanelOpen ?? false);
+
+  // Freeze the page behind the panel while it's open.
+  //
+  // overflow:hidden on the root rather than the usual position:fixed body
+  // trick: pinning the body would strand the sticky navbar in
+  // templates/header.hbs — with no scroll container left, it stops sticking
+  // and slides away with the document, which is exactly the header the panel
+  // is offset below on phones. Root overflow keeps it in place.
+  //
+  // Paired with overscroll-contain on the panel so flicking the message list
+  // past its end doesn't chain into the page or trigger pull-to-refresh.
+  useEffect(() => {
+    if (!open) return;
+
+    const root = document.documentElement;
+    const { body } = document;
+    const prev = {
+      rootOverflow: root.style.overflow,
+      bodyOverflow: body.style.overflow,
+      bodyPaddingRight: body.style.paddingRight,
+    };
+
+    // Hiding overflow reclaims the scrollbar's width, which shifts the page
+    // behind the panel on desktop. Pad by exactly what was lost. Always 0 on
+    // phones and on overlay-scrollbar setups.
+    const gutter = window.innerWidth - root.clientWidth;
+
+    root.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    if (gutter > 0) body.style.paddingRight = `${gutter}px`;
+
+    return () => {
+      root.style.overflow = prev.rootOverflow;
+      body.style.overflow = prev.bodyOverflow;
+      body.style.paddingRight = prev.bodyPaddingRight;
+    };
+  }, [open]);
 
   return (
     <>
@@ -83,7 +122,11 @@ function VeraChat({ config }: { config: VeraChatConfig }) {
           onClick={() => startTransition(() => setOpen(true))}
           // Same home-indicator clearance and the same z-40/sm:z-50 pairing as
           // the panel, so the launcher never sits above the mobile nav drawer.
-          className="fixed right-5 bottom-[calc(1.25rem+var(--vera-bottom-offset))] z-40 sm:z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform hover:scale-105"
+          //
+          // No bg-primary here: the avatar PNG is itself a full circle, and
+          // the theme's primary is the Vagaro red (#cc4744), which showed
+          // through the PNG's transparency as a red ring around the face.
+          className="fixed right-5 bottom-[calc(1.25rem+var(--vera-bottom-extra,0px)+env(safe-area-inset-bottom,0px))] z-40 sm:z-50 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-transparent shadow-lg transition-transform hover:scale-105"
         >
           <img
             alt="Vera"
