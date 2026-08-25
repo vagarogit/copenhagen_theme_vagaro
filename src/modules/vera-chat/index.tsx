@@ -132,7 +132,7 @@ function VeraChat({ config }: { config: VeraChatConfig }) {
           // No bg-primary here: the avatar PNG is itself a full circle, and
           // the theme's primary is the Vagaro red (#cc4744), which showed
           // through the PNG's transparency as a red ring around the face.
-          className="fixed right-5 bottom-[calc(1.25rem+var(--vera-bottom-extra,0px)+env(safe-area-inset-bottom,0px))] z-40 sm:z-50 flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-transparent shadow-lg transition-transform hover:scale-105"
+          className="fixed right-5 bottom-[calc(1.25rem+var(--vera-bottom-extra,0px)+env(safe-area-inset-bottom,0px))] z-40 sm:z-50 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-transparent shadow-lg transition-transform hover:scale-105"
         >
           <img
             alt="Vera"
