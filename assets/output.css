@@ -6273,16 +6273,6 @@
       inset: auto;
     }
   }
-  .sm\:top-0 {
-    @media (width >= 40rem) {
-      top: calc(var(--spacing) * 0);
-    }
-  }
-  .sm\:top-\[var\(--vera-admin-offset\,0px\)\] {
-    @media (width >= 40rem) {
-      top: var(--vera-admin-offset,0px);
-    }
-  }
   .sm\:top-\[var\(--vera-host-chrome-offset\,0px\)\] {
     @media (width >= 40rem) {
       top: var(--vera-host-chrome-offset,0px);

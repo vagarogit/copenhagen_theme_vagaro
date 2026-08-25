@@ -173,7 +173,7 @@ const stubbedPeers = new Set();
 // without the declaration in input.css this layer would be created here, last,
 // and would outrank @layer utilities exactly as the unlayered version did.
 const TOOLKIT_TAILWIND_INJECT = path.join("dist", "tailwind-inject.js");
-const TOOLKIT_TAILWIND_LAYER = "vg-toolkit";
+const TOOLKIT_LAYER = "vg-toolkit";
 let layeredToolkitTailwind = false;
 
 const layerToolkitTailwind = {
@@ -196,7 +196,7 @@ const layerToolkitTailwind = {
     return {
       code: code.replace(
         marker,
-        `document.createTextNode("@layer ${TOOLKIT_TAILWIND_LAYER}{" + css + "}")`
+        `document.createTextNode("@layer ${TOOLKIT_LAYER}{" + css + "}")`
       ),
       map: null,
     };
@@ -208,9 +208,104 @@ const layerToolkitTailwind = {
     if (layeredToolkitTailwind) {
       console.log(
         `\nWrapped the toolkit's injected Tailwind sheet in ` +
-          `@layer ${TOOLKIT_TAILWIND_LAYER}.\n`
+          `@layer ${TOOLKIT_LAYER}.\n`
       );
     }
+    // Same reasoning for the component stylesheets: report what was demoted so
+    // a rule the toolkit newly aims at the theme's class names is visible here
+    // rather than as a mystery in the browser. A missing theme stylesheet
+    // switches the check off entirely, which must never pass unremarked.
+    if (!themeClassNames) {
+      this.warn(
+        `${THEME_STYLESHEET} is missing or empty — toolkit component CSS is ` +
+          `shipping unlayered and can override the theme's utilities`
+      );
+    } else if (demotedToolkitRules.size) {
+      console.log(
+        `Demoted ${demotedToolkitRules.size} toolkit component rule(s) into ` +
+          `@layer ${TOOLKIT_LAYER}: ${[...demotedToolkitRules].join(", ")}\n`
+      );
+    }
+  },
+};
+
+// The toolkit's per-component stylesheets reach the page the same way and carry
+// the same hazard: rollup-plugin-postcss injects each one as a plain <style> at
+// import time, and an unlayered rule outranks every layered one regardless of
+// order or specificity. Nearly everything they ship is namespaced to a
+// component (.vg-input-control, .vg-tk-btn span), so it only ever meets the
+// widget's own markup — but not all of it is. VgTextarea.css carries a bare
+// `.hidden{display:none}`, which beat .lg\:flex in @layer utilities and pinned
+// the header's `hidden lg:flex` desktop block (user menu, locale flag, Start
+// Free Trial) to display:none at every viewport as soon as the chat chunk
+// loaded.
+//
+// So demote those rules and only those: a rule goes into the layer when every
+// class in its selector is one the theme's own stylesheet also styles, which is
+// what makes it able to match markup outside the widget. One extra class of the
+// toolkit's own (.toggle-btn.active) already pins it to the widget's DOM, so it
+// stays put. Wrapping whole stylesheets instead is what the first cut did, and
+// it drops every component rule below @layer utilities — including
+// .vg-tk-btn span, whose font-size then loses to the text-xs the widget puts on
+// the same button.
+//
+// Done as a postcss plugin rather than a custom `inject` function so the layer
+// is baked into the CSS itself — it holds however the stylesheet reaches the
+// page, including if this build ever switches to extracting it. Each rule is
+// wrapped where it sits, so one inside @media stays inside it.
+const THEME_STYLESHEET = "assets/output.css";
+const demotedToolkitRules = new Set();
+
+// Class names the theme's own stylesheet styles. Tailwind escapes anything
+// exotic (.lg\:flex, .w-\[145px\]) and the toolkit's unnamespaced globals are
+// all plain identifiers, so plain names are the only ones that can collide.
+//
+// Read once, at config load: under `yarn start` the tailwind CLI rewrites
+// output.css on its own schedule, and rollup only re-reads this file when the
+// config itself changes. A class name that starts colliding mid-session is
+// therefore picked up on the next restart, not the next rebuild.
+function readThemeClassNames() {
+  try {
+    const css = fs.readFileSync(THEME_STYLESHEET, "utf8");
+    const names = new Set();
+    for (const m of css.matchAll(/\.([A-Za-z_][\w-]*)(?![\w\\-])/g)) {
+      names.add(m[1]);
+    }
+    return names.size ? names : null;
+  } catch {
+    return null;
+  }
+}
+
+const themeClassNames = readThemeClassNames();
+
+const selectorLeaksIntoTheme = (selector) => {
+  const classes = [...selector.matchAll(/\.([A-Za-z_][\w-]*)/g)].map(
+    (m) => m[1]
+  );
+  if (!classes.length || classes.some((name) => name.startsWith("vg-"))) {
+    return false;
+  }
+  return classes.every((name) => themeClassNames.has(name));
+};
+
+const layerToolkitComponentCss = {
+  postcssPlugin: "layer-toolkit-component-css",
+  // OnceExit rather than Once: run after any other plugin has had the file, so
+  // nothing else has to know its rules are about to be nested.
+  OnceExit(root, { AtRule }) {
+    const file = root.source?.input?.file ?? "";
+    if (!file.includes(TOOLKIT_DIR) || !themeClassNames) return;
+    root.walkRules((rule) => {
+      // Already inside a layer (ours, from a rule that shares this parent).
+      if (rule.parent?.type === "atrule" && rule.parent.name === "layer")
+        return;
+      if (!rule.selectors.some(selectorLeaksIntoTheme)) return;
+      const layer = new AtRule({ name: "layer", params: TOOLKIT_LAYER });
+      rule.replaceWith(layer);
+      layer.append(rule);
+      demotedToolkitRules.add(`${path.basename(file)} ${rule.selector}`);
+    });
   },
 };
 
@@ -364,6 +459,7 @@ export default defineConfig([
         include: "**/*.css",
         inject: true,
         minimize: isProduction,
+        plugins: [layerToolkitComponentCss],
       }),
       nodeResolve({
         extensions: [".js", ".jsx", ".ts", ".tsx"],
