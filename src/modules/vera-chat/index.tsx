@@ -45,14 +45,72 @@ const VERA_LAUNCHER_AVATAR =
 // the top of header.hbs). Back to z-50 at sm and up, where the drawer is
 // full-height by design and is meant to cover the navbar: leaving it at z-40
 // there lets the header paint over the panel's own header and close button.
+//
+// The drawer starts at --vera-host-chrome-offset rather than 0 at sm and up,
+// to clear whatever bar Zendesk has pinned above the theme. Two exist, both
+// injected outside the theme and neither reachable on the z axis:
+//
+//   #preview-bar-container  50px, local preview only. Its container is in flow
+//                           but the bar inside it is position:fixed, z-index
+//                           2147483634 — it stays pinned at the top forever.
+//   #navbar-container       49px, signed-in agents/admins (the Guide nav whose
+//                           shadow root holds knowledge-navigation-header).
+//                           position:relative and in flow, so it scrolls away.
+//
+// Those z-indexes are one and thirteen below the 32-bit maximum, so the only
+// value that paints over them is 2147483647 itself. Verified on the live site:
+// a fixed test element at z-index 60 loses the top 49px and only wins at the
+// max. Moving the drawer's top edge down is the one route that isn't a
+// stacking-order stunt.
+//
+// Hence measureHostChrome() below rather than a hardcoded 50px: neither bar
+// exists for signed-out end users, who must get 0 and not a strip of dead
+// space, and the two differ in whether scrolling makes them go away.
+//
+// Phones need none of this — the panel already starts at --vera-nav-offset
+// (128px), well below either bar — so the offset is applied only at sm and up.
 const PANEL_CLASS =
   "fixed z-40 sm:z-50 flex flex-col overflow-hidden overscroll-contain " +
   "bg-white shadow-2xl " +
   "top-[var(--vera-nav-offset,128px)] left-[3px] right-[3px] " +
   "bottom-[calc(3px+var(--vera-bottom-extra,0px)+env(safe-area-inset-bottom,0px))] " +
   "rounded-xl " +
-  "sm:top-0 sm:bottom-0 sm:left-auto sm:right-0 sm:w-[400px] " +
+  "sm:top-[var(--vera-host-chrome-offset,0px)] sm:bottom-0 sm:left-auto sm:right-0 sm:w-[400px] " +
   "sm:rounded-none sm:border-l sm:border-gray-200";
+
+// Selectors for the host chrome described above, outermost element each.
+const HOST_CHROME_SELECTORS = ["#preview-bar-container", "#navbar-container"];
+
+// How far down the viewport the host's own top chrome currently reaches.
+//
+// Returns the lowest bottom edge of anything still on screen, so it is correct
+// whether the bars stack (in preview as an agent, both are present and the
+// lower one wins) or scroll away (an in-flow bar's bottom goes negative and the
+// clamp takes it to 0). Absent chrome contributes nothing, which is what makes
+// this safe to ship: for a signed-out end user every selector misses and the
+// drawer keeps its original top: 0.
+//
+// A bar's own container may be in flow while the bar inside it is fixed —
+// #preview-bar-container is exactly that, and measuring only the container
+// reports 0 as soon as the page scrolls while the bar is still sitting over
+// the panel. So each root is measured together with any fixed descendant.
+function measureHostChrome(): number {
+  let bottom = 0;
+
+  for (const selector of HOST_CHROME_SELECTORS) {
+    const root = document.querySelector(selector);
+    if (!root) continue;
+
+    bottom = Math.max(bottom, root.getBoundingClientRect().bottom);
+
+    for (const el of root.querySelectorAll("*")) {
+      if (getComputedStyle(el).position !== "fixed") continue;
+      bottom = Math.max(bottom, el.getBoundingClientRect().bottom);
+    }
+  }
+
+  return Math.max(0, bottom);
+}
 
 function VeraChat({ config }: { config: VeraChatConfig }) {
   const [open, setOpen] = useState(config.isPanelOpen ?? false);
@@ -81,6 +139,21 @@ function VeraChat({ config }: { config: VeraChatConfig }) {
       paddingRight: body.style.paddingRight,
     };
 
+    // Clear the host's top chrome (see the note above PANEL_CLASS).
+    //
+    // Measured once, on open, rather than tracked on scroll: opening the panel
+    // locks body scroll a few lines down, so the page cannot move underneath it
+    // and this value cannot go stale while the panel is up. Read before the
+    // lock is applied, since the lock reclaims the scrollbar gutter and reflows
+    // the page. A resize or orientation change while the panel is open could
+    // still restyle a bar; that is not worth a listener for chrome only staff
+    // and local preview ever show.
+    const { style: rootStyle } = document.documentElement;
+    rootStyle.setProperty(
+      "--vera-host-chrome-offset",
+      `${measureHostChrome()}px`
+    );
+
     // Locking reclaims the scrollbar's width, which shifts the page behind the
     // panel. Only worth compensating at sm and up, where the panel is a 400px
     // side drawer and the page beside it stays in view. On phones the panel
@@ -97,6 +170,7 @@ function VeraChat({ config }: { config: VeraChatConfig }) {
     return () => {
       body.style.overflow = prev.overflow;
       body.style.paddingRight = prev.paddingRight;
+      rootStyle.removeProperty("--vera-host-chrome-offset");
     };
   }, [open]);
 
