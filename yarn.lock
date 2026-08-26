@@ -14284,10 +14284,10 @@ vary@^1, vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
-vera-chat-widget@0.7.7:
-  version "0.7.7"
-  resolved "https://pkgs.dev.azure.com/Vagaro/_packaging/VagaroVeraCharbot/npm/registry/vera-chat-widget/-/vera-chat-widget-0.7.7.tgz#6728a2c0530b6706198cb23a353c78bae9470821"
-  integrity sha1-ZyiiwFMLZwYZjLI6NTx4uulHCCE=
+vera-chat-widget@0.7.8:
+  version "0.7.8"
+  resolved "https://pkgs.dev.azure.com/Vagaro/_packaging/VagaroVeraCharbot/npm/registry/vera-chat-widget/-/vera-chat-widget-0.7.8.tgz#765f30a20d48e2fd325949a23b5805ef5b78243e"
+  integrity sha1-dl8wog1I4v0yWUmiO1gF71t4JD4=
   dependencies:
     idb "^8.0.3"
 
