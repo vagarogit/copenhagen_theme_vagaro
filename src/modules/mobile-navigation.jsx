@@ -3,6 +3,10 @@ import * as React from "react";
 import classNames from "classnames";
 import { PropTypes } from "prop-types";
 
+// Shared by the top-level Multi-location row and its panel's overview link.
+const MULTI_LOCATION_ICON =
+  "data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 23 18' fill='currentColor' stroke='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.2148 11.25C9.21094 11.25 7.55859 9.63281 7.59375 7.59375C7.59375 5.58984 9.21094 3.9375 11.2148 3.9375C13.2188 3.9375 14.8711 5.58984 14.8711 7.59375C14.8711 9.63281 13.2539 11.25 11.2148 11.25ZM11.2148 5.0625C9.84375 5.0625 8.68359 6.22266 8.68359 7.59375C8.68359 9 9.84375 10.125 11.2148 10.125C12.6211 10.125 13.7461 9 13.7461 7.59375C13.7461 6.22266 12.6211 5.0625 11.2148 5.0625ZM12.9727 12.375C15.75 12.375 18 14.4844 18 17.0859C18 17.6133 17.543 18 16.9805 18H5.48438C4.92188 18 4.5 17.6133 4.5 17.0859C4.5 14.4844 6.71484 12.375 9.49219 12.375H12.9727ZM5.625 16.875H16.8398C16.7344 15.0117 15.0469 13.5 12.9727 13.5H9.45703C7.41797 13.5 5.73047 15.0117 5.625 16.875ZM18 5.625C16.418 5.625 15.1875 4.39453 15.1875 2.8125C15.1875 1.26562 16.418 0 18 0C19.5469 0 20.8125 1.26562 20.8125 2.8125C20.8125 4.39453 19.5469 5.625 18 5.625ZM18 1.125C17.0508 1.125 16.3125 1.89844 16.3125 2.8125C16.3125 3.76172 17.0508 4.5 18 4.5C18.9141 4.5 19.6875 3.76172 19.6875 2.8125C19.6875 1.89844 18.9141 1.125 18 1.125ZM4.5 5.625C2.91797 5.625 1.6875 4.39453 1.6875 2.8125C1.6875 1.26562 2.91797 0 4.5 0C6.04688 0 7.3125 1.26562 7.3125 2.8125C7.3125 4.39453 6.04688 5.625 4.5 5.625ZM4.5 1.125C3.55078 1.125 2.8125 1.89844 2.8125 2.8125C2.8125 3.76172 3.55078 4.5 4.5 4.5C5.41406 4.5 6.1875 3.76172 6.1875 2.8125C6.1875 1.89844 5.41406 1.125 4.5 1.125ZM19.7227 6.75C21.2344 6.75 22.5 8.08594 22.5 9.66797V10.125C22.5 10.4414 22.2188 10.6875 21.9375 10.6875C21.6211 10.6875 21.375 10.4414 21.375 10.125V9.66797C21.375 8.68359 20.6016 7.875 19.7227 7.875H17.4375C17.1914 7.875 16.9805 7.94531 16.7695 8.05078C16.4883 8.19141 16.1367 8.05078 15.9961 7.76953C15.8906 7.48828 15.9961 7.17188 16.2773 7.03125C16.6289 6.85547 17.0156 6.75 17.4375 6.75H19.7227ZM5.69531 8.05078C5.48438 7.94531 5.27344 7.875 5.0625 7.875H2.74219C1.86328 7.875 1.125 8.68359 1.125 9.66797V10.125C1.125 10.4414 0.84375 10.6875 0.5625 10.6875C0.246094 10.6875 0 10.4414 0 10.125V9.66797C0 8.08594 1.23047 6.75 2.74219 6.75H5.0625C5.44922 6.75 5.83594 6.85547 6.1875 7.03125C6.46875 7.17188 6.57422 7.48828 6.46875 7.76953C6.32812 8.05078 5.97656 8.19141 5.69531 8.05078Z'/%3E%3C/svg%3E";
+
 const MobileNavigation = ({
   navigationData = {},
   isOpen,
@@ -106,6 +110,70 @@ const MobileNavigation = ({
               ))}
             </div>
           </div>
+        ))}
+      </div>
+    );
+  };
+
+  // Render multi-location section
+  const renderMultiLocation = () => {
+    // Icons are pulled from the matching Business Types entry so this list
+    // tracks whatever the CMS serves; the hardcoded URL is the fallback for
+    // when navdata hasn't loaded yet.
+    const multiLocationItems = [
+      {
+        name: "Multi-Location Overview",
+        link: "multi-location",
+        icon: MULTI_LOCATION_ICON,
+      },
+      {
+        name: "Salon Multi-Location",
+        link: "multi-location-salon-software",
+        iconFrom: "salon-software",
+        fallbackIcon:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/X28jxRSPTI6HKZW8vtB9",
+      },
+      {
+        name: "Spa Multi-Location",
+        link: "multi-location-spa-software",
+        iconFrom: "spa-software",
+        fallbackIcon:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/O4n9Y5DRtKkRTLh1XkmM",
+      },
+      {
+        name: "Medical Spa Multi-Location",
+        link: "multi-location-medical-spa-software",
+        iconFrom: "medical-spa-software",
+        fallbackIcon:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/AtAhRzEPSNeVXm6YABRk",
+      },
+    ];
+
+    const resolveIcon = (item) => {
+      if (item.icon) return item.icon;
+
+      const match = [
+        businessTypes?.beauty,
+        businessTypes?.wellness,
+        businessTypes?.fitness,
+      ]
+        .filter(Boolean)
+        .flat()
+        .find((entry) => entry.link === item.iconFrom);
+
+      return match?.iconImage?.url || item.fallbackIcon;
+    };
+
+    return (
+      <div className="space-y-1">
+        {multiLocationItems.map((item) => (
+          <MobileNavItem
+            key={item.name}
+            href={formatLink(item.link)}
+            title={item.name}
+            icon={resolveIcon(item)}
+            onClick={onClose}
+          />
         ))}
       </div>
     );
@@ -516,12 +584,18 @@ const MobileNavigation = ({
               <div className="h-[1px] bg-[#cccccc] border-0" />
 
               {/* Multi-location */}
-              <MobileNavItem
-                href="https://www.vagaro.com/pro/multi-location"
+              <NavButton
+                onClick={() => openPanel("multi-location")}
                 title="Multi-location"
-                onClick={onClose}
-                className="text-lg font-semibold"
-                icon="data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 23 18' fill='currentColor' stroke='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.2148 11.25C9.21094 11.25 7.55859 9.63281 7.59375 7.59375C7.59375 5.58984 9.21094 3.9375 11.2148 3.9375C13.2188 3.9375 14.8711 5.58984 14.8711 7.59375C14.8711 9.63281 13.2539 11.25 11.2148 11.25ZM11.2148 5.0625C9.84375 5.0625 8.68359 6.22266 8.68359 7.59375C8.68359 9 9.84375 10.125 11.2148 10.125C12.6211 10.125 13.7461 9 13.7461 7.59375C13.7461 6.22266 12.6211 5.0625 11.2148 5.0625ZM12.9727 12.375C15.75 12.375 18 14.4844 18 17.0859C18 17.6133 17.543 18 16.9805 18H5.48438C4.92188 18 4.5 17.6133 4.5 17.0859C4.5 14.4844 6.71484 12.375 9.49219 12.375H12.9727ZM5.625 16.875H16.8398C16.7344 15.0117 15.0469 13.5 12.9727 13.5H9.45703C7.41797 13.5 5.73047 15.0117 5.625 16.875ZM18 5.625C16.418 5.625 15.1875 4.39453 15.1875 2.8125C15.1875 1.26562 16.418 0 18 0C19.5469 0 20.8125 1.26562 20.8125 2.8125C20.8125 4.39453 19.5469 5.625 18 5.625ZM18 1.125C17.0508 1.125 16.3125 1.89844 16.3125 2.8125C16.3125 3.76172 17.0508 4.5 18 4.5C18.9141 4.5 19.6875 3.76172 19.6875 2.8125C19.6875 1.89844 18.9141 1.125 18 1.125ZM4.5 5.625C2.91797 5.625 1.6875 4.39453 1.6875 2.8125C1.6875 1.26562 2.91797 0 4.5 0C6.04688 0 7.3125 1.26562 7.3125 2.8125C7.3125 4.39453 6.04688 5.625 4.5 5.625ZM4.5 1.125C3.55078 1.125 2.8125 1.89844 2.8125 2.8125C2.8125 3.76172 3.55078 4.5 4.5 4.5C5.41406 4.5 6.1875 3.76172 6.1875 2.8125C6.1875 1.89844 5.41406 1.125 4.5 1.125ZM19.7227 6.75C21.2344 6.75 22.5 8.08594 22.5 9.66797V10.125C22.5 10.4414 22.2188 10.6875 21.9375 10.6875C21.6211 10.6875 21.375 10.4414 21.375 10.125V9.66797C21.375 8.68359 20.6016 7.875 19.7227 7.875H17.4375C17.1914 7.875 16.9805 7.94531 16.7695 8.05078C16.4883 8.19141 16.1367 8.05078 15.9961 7.76953C15.8906 7.48828 15.9961 7.17188 16.2773 7.03125C16.6289 6.85547 17.0156 6.75 17.4375 6.75H19.7227ZM5.69531 8.05078C5.48438 7.94531 5.27344 7.875 5.0625 7.875H2.74219C1.86328 7.875 1.125 8.68359 1.125 9.66797V10.125C1.125 10.4414 0.84375 10.6875 0.5625 10.6875C0.246094 10.6875 0 10.4414 0 10.125V9.66797C0 8.08594 1.23047 6.75 2.74219 6.75H5.0625C5.44922 6.75 5.83594 6.85547 6.1875 7.03125C6.46875 7.17188 6.57422 7.48828 6.46875 7.76953C6.32812 8.05078 5.97656 8.19141 5.69531 8.05078Z'/%3E%3C/svg%3E"
+                icon={
+                  <img
+                    src={MULTI_LOCATION_ICON}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-6 w-6"
+                  />
+                }
+                showChevron={true}
               />
               <div className="h-[1px] bg-[#cccccc] border-0" />
 
@@ -686,6 +760,48 @@ const MobileNavigation = ({
             {/* Panel Content */}
             <div className="flex-1 overflow-y-auto p-4">
               {renderBusinessTypes()}
+            </div>
+          </div>
+        </div>
+
+        {/* Multi-location Panel */}
+        <div
+          className={classNames(
+            "absolute inset-0 bg-white transform transition-transform duration-300 ease-in-out",
+            activePanel === "multi-location"
+              ? "translate-x-0"
+              : "translate-x-full"
+          )}
+        >
+          <div className="flex flex-col h-full">
+            {/* Panel Header */}
+            <div className="relative flex items-center justify-center h-16 border-b border-gray-200 px-4">
+              <h2 className="text-lg font-semibold text-primary leading-none m-0">
+                Multi-location
+              </h2>
+              <button
+                onClick={closePanel}
+                className="absolute right-4 p-2 rounded-md text-primary hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                aria-label="Close panel"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            {/* Panel Content */}
+            <div className="flex-1 overflow-y-auto p-4">
+              {renderMultiLocation()}
             </div>
           </div>
         </div>

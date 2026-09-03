@@ -7622,9 +7622,14 @@ zd-summary-block {
 }
 
 .NavigationMenuContent {
-  position: absolute;
-  top: 0;
-  left: 0;
+  /* Stacked in the viewport's single grid cell rather than absolutely
+     positioned, so the open panel still contributes its height. Radix only
+     publishes --radix-navigation-menu-viewport-height once its ResizeObserver
+     has reported, which never happens before the first open - with absolute
+     content the viewport then computed to 0x0 and the first menu you hovered
+     appeared blank. */
+  grid-area: 1/1;
+  position: relative;
   width: 100%;
   animation-duration: 250ms;
   animation-timing-function: ease;
@@ -7672,6 +7677,7 @@ zd-summary-block {
 
 .NavigationMenuViewport {
   position: relative;
+  display: grid;
   transform-origin: top center;
   margin-top: 0px;
   width: 100%;
@@ -7679,7 +7685,7 @@ zd-summary-block {
   border-radius: 6px;
   overflow: hidden;
   box-shadow: hsla(206, 22%, 7%, 0.35) 0px 10px 38px -10px, hsla(206, 22%, 7%, 0.2) 0px 10px 20px -15px;
-  height: var(--radix-navigation-menu-viewport-height);
+  height: var(--radix-navigation-menu-viewport-height, auto);
   transition: width, height, 300ms ease;
 }
 
@@ -7693,7 +7699,7 @@ zd-summary-block {
 
 @media only screen and (min-width: 600px) {
   .NavigationMenuViewport {
-    width: var(--radix-navigation-menu-viewport-width);
+    width: var(--radix-navigation-menu-viewport-width, 100%);
   }
 }
 .List {

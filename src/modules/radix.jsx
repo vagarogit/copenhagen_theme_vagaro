@@ -569,6 +569,76 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
     );
   };
 
+  // Render multi-location content
+  const renderMultiLocation = () => {
+    // Icons are pulled from the matching Business Types entry so this menu
+    // tracks whatever the CMS serves; the hardcoded URL is the fallback for
+    // when navdata hasn't loaded yet.
+    const multiLocationItems = [
+      {
+        name: "Salon Multi-Location",
+        link: "multi-location-salon-software",
+        iconFrom: "salon-software",
+        fallbackIcon:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/X28jxRSPTI6HKZW8vtB9",
+      },
+      {
+        name: "Med Spa Multi-Location",
+        link: "multi-location-medical-spa-software",
+        iconFrom: "medical-spa-software",
+        fallbackIcon:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/AtAhRzEPSNeVXm6YABRk",
+      },
+      {
+        name: "Spa Multi-Location",
+        link: "multi-location-spa-software",
+        iconFrom: "spa-software",
+        fallbackIcon:
+          "https://us-west-2.graphassets.com/AalLHDRueT6SDLkGLppQVz/O4n9Y5DRtKkRTLh1XkmM",
+      },
+    ];
+
+    const resolveIcon = (iconFrom, fallbackIcon) => {
+      const match = [
+        businessTypes?.beauty,
+        businessTypes?.wellness,
+        businessTypes?.fitness,
+      ]
+        .filter(Boolean)
+        .flat()
+        .find((item) => item.link === iconFrom);
+
+      return match?.iconImage?.url || fallbackIcon;
+    };
+
+    return (
+      <div className="List bg-white w-full fullwidth">
+        <div className="flex w-full flex-col gap-4 px-8 py-8 xl:container mx-auto xl:max-w-7xl">
+          <a
+            href={formatLink("multi-location")}
+            className="flex items-center justify-start gap-2 border-b border-gray-300 pb-4 text-base font-bold uppercase text-primary hover:text-primary/80 transition-colors text-nowrap"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Multi-location overview</span>
+            <ChevronRightIcon className="w-4 h-4 text-primary flex-shrink-0" />
+          </a>
+
+          <div className="grid grid-cols-3 gap-2">
+            {multiLocationItems.map((item) => (
+              <BusinessTypeItem
+                key={item.name}
+                href={formatLink(item.link)}
+                title={item.name}
+                icon={resolveIcon(item.iconFrom, item.fallbackIcon)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Render resources content
   const renderResources = () => {
     const resourceLinks = [
@@ -801,15 +871,14 @@ const NavigationMenuDemo = ({ navigationData = {} }) => {
             {renderProducts()}
           </NavigationMenu.Content>
         </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Link
-            className="NavigationMenuLink text-nowrap"
-            href="https://www.vagaro.com/pro/multi-location"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        {/* Multi-location Menu */}
+        <NavigationMenu.Item value="multi-location">
+          <NavigationMenu.Trigger className="NavigationMenuTrigger hover:bg-gray-hover text-nowrap">
             Multi-location
-          </NavigationMenu.Link>
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content className="NavigationMenuContent">
+            {renderMultiLocation()}
+          </NavigationMenu.Content>
         </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Link
