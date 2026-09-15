@@ -115,7 +115,7 @@
 
     // Tables inside list steps pick up the template's [&_li_img]:-ml-4, which
     // pulls images past the cell padding onto the border. Reset the margins
-    // so images left-align (align="center" cells re-center them above).
+    // and center the image in its cell.
     //
     // max-width: 100% (from content-body) makes an image count as zero width
     // when the table sizes its columns, so on narrow screens the text column
