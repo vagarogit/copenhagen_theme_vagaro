@@ -1219,6 +1219,7 @@ ul {
 /***** Article Body Tables *****/
 .article-body table {
   width: 100%;
+  margin-top: 8px;
   margin-bottom: 1.5rem;
   border-collapse: collapse;
   border: 1px solid #ddd;
@@ -1232,7 +1233,7 @@ ul {
   }
 }
 .article-body table td, .article-body table th {
-  padding: 0.75rem;
+  padding: 0.95rem;
   border: 1px solid #ddd !important;
   text-align: left;
   vertical-align: top;
@@ -1276,6 +1277,23 @@ ul {
 .article-body table td p, .article-body table th p {
   margin: 0;
 }
+.article-body table td .mediaobject img, .article-body table th .mediaobject img {
+  display: block;
+  margin: 0 auto;
+  min-width: 24px;
+  object-fit: contain;
+}
+.article-body table td .mediaobject img[style*=width], .article-body table td .mediaobject img[style*=height], .article-body table th .mediaobject img[style*=width], .article-body table th .mediaobject img[style*=height] {
+  max-width: calc(100vw - 4rem);
+}
+.article-body table td:not([align=center]) .mediaobject img, .article-body table th:not([align=center]) .mediaobject img {
+  max-height: 24px;
+}
+@media (max-width: 768px) {
+  .article-body table td, .article-body table th {
+    padding: 0.5rem;
+  }
+}
 .article-body table td .bold, .article-body table td strong, .article-body table th .bold, .article-body table th strong {
   font-weight: 600;
 }
@@ -1309,7 +1327,7 @@ ul {
 .article-body .informaltable table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0;
+  margin: 4px 0 0;
 }
 
 .table-responsive {
@@ -2947,12 +2965,7 @@ select:focus {
   margin-bottom: 0.5rem;
   padding-left: 2rem;
   list-style-position: outside;
-}
-.article-body .procedure .step ol.substeps[type=a] {
   list-style-type: lower-alpha !important;
-}
-.article-body .procedure .step ol.substeps[type=A] {
-  list-style-type: upper-alpha !important;
 }
 .article-body .procedure .step ol.substeps[type="1"] {
   list-style-type: decimal !important;
@@ -2965,12 +2978,7 @@ select:focus {
   margin-bottom: 1rem;
   padding-left: 1.5rem;
   list-style-position: outside;
-}
-.article-body ol.substeps[type=a] {
   list-style-type: lower-alpha !important;
-}
-.article-body ol.substeps[type=A] {
-  list-style-type: upper-alpha !important;
 }
 .article-body ol.substeps[type="1"] {
   list-style-type: decimal !important;

@@ -46,6 +46,7 @@
 /***** Article Body Tables *****/
 .article-body table {
   width: 100%;
+  margin-top: 8px;
   margin-bottom: 1.5rem;
   border-collapse: collapse;
   border: 1px solid $low-contrast-border-color;
@@ -58,7 +59,7 @@
   }
 
   td, th {
-    padding: 0.75rem;
+    padding: 0.95rem;
     border: 1px solid $low-contrast-border-color !important;
     text-align: left;
     vertical-align: top;
@@ -76,6 +77,7 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+
       }
       
       .mediaobject,
@@ -109,6 +111,39 @@
 
     p {
       margin: 0;
+    }
+
+    // Tables inside list steps pick up the template's [&_li_img]:-ml-4, which
+    // pulls images past the cell padding onto the border. Reset the margins
+    // so images left-align (align="center" cells re-center them above).
+    //
+    // max-width: 100% (from content-body) makes an image count as zero width
+    // when the table sizes its columns, so on narrow screens the text column
+    // squeezes icon columns down to their padding (icons render ~9px wide,
+    // and fixed-height icons distort). Unsized images keep max-width: 100% so
+    // large screenshots still scale to the cell, with a min-width floor.
+    // Author-sized images use a viewport cap instead, which has no percentage,
+    // so the column keeps their width.
+    .mediaobject img {
+      display: block;
+      margin: 0 auto;
+      min-width: 24px;
+      object-fit: contain;
+
+      &[style*="width"],
+      &[style*="height"] {
+        max-width: calc(100vw - 4rem);
+      }
+    }
+
+    // Icon cells: keep icons near text size. Screenshots and photos sit in
+    // align="center" cells and are left uncapped.
+    &:not([align="center"]) .mediaobject img {
+      max-height: 24px;
+    }
+
+    @include mobile {
+      padding: 0.5rem;
     }
 
     .bold, strong {
@@ -159,7 +194,7 @@
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 0;
+    margin: 4px 0 0;
   }
 }
 .table-responsive{

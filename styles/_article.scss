@@ -242,14 +242,9 @@
           margin-bottom: 0.5rem;
           padding-left: 2rem;
           list-style-position: outside;
-
-          &[type="a"] {
-            list-style-type: lower-alpha !important;
-          }
-
-          &[type="A"] {
-            list-style-type: upper-alpha !important;
-          }
+          // Always lowercase letters. Don't split on [type="a"] vs [type="A"]:
+          // HTML matches the type attribute case-insensitively, so both match.
+          list-style-type: lower-alpha !important;
 
           &[type="1"] {
             list-style-type: decimal !important;
@@ -268,14 +263,8 @@
       margin-bottom: 1rem;
       padding-left: 1.5rem;
       list-style-position: outside;
-
-      &[type="a"] {
-        list-style-type: lower-alpha !important;
-      }
-
-      &[type="A"] {
-        list-style-type: upper-alpha !important;
-      }
+      // Always lowercase letters (see note on ol.substeps above).
+      list-style-type: lower-alpha !important;
 
       &[type="1"] {
         list-style-type: decimal !important;
