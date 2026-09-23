@@ -103,6 +103,19 @@
      styles/vera/vera-tailwind-theme.css (imported above). */
 }
 
+/* Strikethrough text, e.g. <span class="strikethrough"> in article HTML. */
+.strikethrough {
+  @apply line-through;
+}
+
+/* Inside article content the rule needs !important: styles/_article.scss sets
+   `.article a { text-decoration: none !important }`, which would otherwise
+   strip the line from <a class="strikethrough">. This selector's specificity
+   (0,2,0) beats that one (0,1,1), so the !important here wins. */
+.article-body .strikethrough {
+  @apply line-through!;
+}
+
 /* Legacy live chat is injected by a GTM tag (container GTM-5QW5SZB, loaded in
    document_head.hbs) — hide it only where Vera actually replaces it. Selectors
    cover LiveChat Inc and the classic Zendesk Web Widget.

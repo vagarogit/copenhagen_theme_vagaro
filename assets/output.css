@@ -373,14 +373,8 @@
   .sticky {
     position: sticky;
   }
-  .-inset-0 {
-    inset: calc(var(--spacing) * -0);
-  }
   .-inset-0\.5 {
     inset: calc(var(--spacing) * -0.5);
-  }
-  .-inset-1 {
-    inset: calc(var(--spacing) * -1);
   }
   .-inset-1\.5 {
     inset: calc(var(--spacing) * -1.5);
@@ -1032,9 +1026,6 @@
   .h-0 {
     height: calc(var(--spacing) * 0);
   }
-  .h-1 {
-    height: calc(var(--spacing) * 1);
-  }
   .h-1\.5 {
     height: calc(var(--spacing) * 1.5);
   }
@@ -1658,10 +1649,6 @@
   }
   .origin-top-right {
     transform-origin: top right;
-  }
-  .-translate-x-1 {
-    --tw-translate-x: calc(var(--spacing) * -1);
-    translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .-translate-x-1\/2 {
     --tw-translate-x: calc(calc(1/2 * 100%) * -1);
@@ -2757,9 +2744,6 @@
   .\[mask-repeat\:no-repeat\] {
     mask-repeat: no-repeat;
   }
-  .mask-repeat {
-    mask-repeat: repeat;
-  }
   .fill-primary {
     fill: var(--color-primary);
   }
@@ -3489,9 +3473,6 @@
   .text-pretty {
     text-wrap: pretty;
   }
-  .text-wrap {
-    text-wrap: wrap;
-  }
   .break-words {
     overflow-wrap: break-word;
   }
@@ -3803,9 +3784,6 @@
   }
   .ring-neutral-200 {
     --tw-ring-color: var(--color-neutral-200);
-  }
-  .ring-white {
-    --tw-ring-color: var(--color-white);
   }
   .ring-white\/10 {
     --tw-ring-color: color-mix(in srgb, #ffffff 10%, transparent);
@@ -8144,6 +8122,12 @@ html[data-theme="dark"] {
     --bkg_component_fb: #1877F2;
     --bkg_component_ios: #000000;
   }
+}
+.strikethrough {
+  text-decoration-line: line-through;
+}
+.article-body .strikethrough {
+  text-decoration-line: line-through !important;
 }
 .vera-active #chat-widget-container, .vera-active #livechat-full, .vera-active iframe#launcher, .vera-active iframe#webWidget, .vera-active iframe[title="Message from company"] {
   display: none !important;
