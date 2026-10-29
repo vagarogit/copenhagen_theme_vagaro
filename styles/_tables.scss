@@ -137,8 +137,8 @@
     }
 
     // Icon cells: keep icons near text size. Screenshots and photos sit in
-    // align="center" cells and are left uncapped.
-    &:not([align="center"]) .mediaobject img {
+    // centered cells (align="center" on the td or its tr) and are left uncapped.
+    &:not([align="center"]):not(tr[align="center"] > *) .mediaobject img {
       max-height: 24px;
     }
 

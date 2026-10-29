@@ -1286,7 +1286,7 @@ ul {
 .article-body table td .mediaobject img[style*=width], .article-body table td .mediaobject img[style*=height], .article-body table th .mediaobject img[style*=width], .article-body table th .mediaobject img[style*=height] {
   max-width: calc(100vw - 4rem);
 }
-.article-body table td:not([align=center]) .mediaobject img, .article-body table th:not([align=center]) .mediaobject img {
+.article-body table td:not([align=center]):not(tr[align=center] > *) .mediaobject img, .article-body table th:not([align=center]):not(tr[align=center] > *) .mediaobject img {
   max-height: 24px;
 }
 @media (max-width: 768px) {

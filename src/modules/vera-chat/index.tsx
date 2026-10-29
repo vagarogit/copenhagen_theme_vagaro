@@ -112,8 +112,40 @@ function measureHostChrome(): number {
   return Math.max(0, bottom);
 }
 
+// Help Center navigation is a full page load, so the panel's open state is
+// lost on every click unless it's carried across. sessionStorage rather than
+// localStorage: it's scoped to the tab, so the chat follows the visitor around
+// the site but a fresh tab or a later visit still starts collapsed. The
+// conversation itself survives on its own — the widget keeps it in cookies.
+// Storage access can throw (Safari private mode, blocked site data), in which
+// case we fall back to the old per-page behavior.
+const OPEN_STATE_KEY = "vera-chat-open";
+
+function readStoredOpen(): boolean {
+  try {
+    return sessionStorage.getItem(OPEN_STATE_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function storeOpen(open: boolean) {
+  try {
+    if (open) sessionStorage.setItem(OPEN_STATE_KEY, "1");
+    else sessionStorage.removeItem(OPEN_STATE_KEY);
+  } catch {
+    // Not persisted; the panel just starts closed on the next page.
+  }
+}
+
 function VeraChat({ config }: { config: VeraChatConfig }) {
-  const [open, setOpen] = useState(config.isPanelOpen ?? false);
+  const [open, setOpen] = useState(
+    () => (config.isPanelOpen ?? false) || readStoredOpen()
+  );
+
+  useEffect(() => {
+    storeOpen(open);
+  }, [open]);
 
   // Freeze the page behind the panel while it's open.
   //

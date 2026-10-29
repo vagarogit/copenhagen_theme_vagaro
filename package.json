@@ -1,6 +1,6 @@
 {
   "name": "copenhagen_theme",
-  "version": "4.0.121",
+  "version": "4.0.122",
   "repository": "git@github.com:zendesk/copenhagen_theme.git",
   "scripts": {
     "start": "concurrently -k -r 'rollup -c -w' 'npx @tailwindcss/cli -i ./styles/input.css -o ./assets/output.css --watch' 'wait-on script.js style.css && zcli themes:preview'",
@@ -102,7 +102,7 @@
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
-    "@zendesk/zcli": "1.0.0-beta.40",
+    "@zendesk/zcli": "^2.2.0",
     "concurrently": "8.0.1",
     "dotenv": "16.0.3",
     "eslint": "8.35.0",
