@@ -147,7 +147,11 @@ function VeraChat({ config }: { config: VeraChatConfig }) {
     storeOpen(open);
   }, [open]);
 
-  // Freeze the page behind the panel while it's open.
+  // Freeze the page behind the panel while it's open — on phones only. There
+  // the panel covers everything but a 3px frame, so a page scrolling unseen
+  // underneath it is just a hazard. At sm and up the panel is a 400px side
+  // drawer with the page still in view beside it, and visitors expect to keep
+  // reading the article while they chat, so the page stays scrollable.
   //
   // <body> only — NOT documentElement. body's overflow propagates to the
   // viewport, so the page stops scrolling, while <html> keeps overflow:visible
@@ -166,42 +170,44 @@ function VeraChat({ config }: { config: VeraChatConfig }) {
     if (!open) return;
 
     const { body } = document;
-    const prev = {
-      overflow: body.style.overflow,
-      paddingRight: body.style.paddingRight,
+    const prevOverflow = body.style.overflow;
+    const { style: rootStyle } = document.documentElement;
+
+    // Same 40rem breakpoint the panel's own layout switches on. Tracked rather
+    // than read once, so resizing across it (or rotating a tablet) while the
+    // panel is open moves between locked and scrollable.
+    const desktop = window.matchMedia("(min-width: 40rem)");
+
+    // Clear the host's top chrome (see the note above PANEL_CLASS). Only used
+    // at sm and up, and there the page now scrolls with the panel open, so the
+    // in-flow #navbar-container can scroll away underneath it — re-measure on
+    // scroll, coalesced to one read per frame.
+    let frame = 0;
+    const updateChromeOffset = () => {
+      frame = 0;
+      rootStyle.setProperty(
+        "--vera-host-chrome-offset",
+        `${measureHostChrome()}px`
+      );
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(updateChromeOffset);
     };
 
-    // Clear the host's top chrome (see the note above PANEL_CLASS).
-    //
-    // Measured once, on open, rather than tracked on scroll: opening the panel
-    // locks body scroll a few lines down, so the page cannot move underneath it
-    // and this value cannot go stale while the panel is up. Read before the
-    // lock is applied, since the lock reclaims the scrollbar gutter and reflows
-    // the page. A resize or orientation change while the panel is open could
-    // still restyle a bar; that is not worth a listener for chrome only staff
-    // and local preview ever show.
-    const { style: rootStyle } = document.documentElement;
-    rootStyle.setProperty(
-      "--vera-host-chrome-offset",
-      `${measureHostChrome()}px`
-    );
+    const apply = () => {
+      body.style.overflow = desktop.matches ? prevOverflow : "hidden";
+      updateChromeOffset();
+    };
 
-    // Locking reclaims the scrollbar's width, which shifts the page behind the
-    // panel. Only worth compensating at sm and up, where the panel is a 400px
-    // side drawer and the page beside it stays in view. On phones the panel
-    // covers everything but a 3px frame, so there is nothing to hold still —
-    // and padding the body there narrows the sticky navbar enough to overflow
-    // it. Same 40rem breakpoint the panel's own layout switches on.
-    const gutter = window.matchMedia("(min-width: 40rem)").matches
-      ? window.innerWidth - document.documentElement.clientWidth
-      : 0;
-
-    body.style.overflow = "hidden";
-    if (gutter > 0) body.style.paddingRight = `${gutter}px`;
+    apply();
+    desktop.addEventListener("change", apply);
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      body.style.overflow = prev.overflow;
-      body.style.paddingRight = prev.paddingRight;
+      desktop.removeEventListener("change", apply);
+      window.removeEventListener("scroll", onScroll);
+      if (frame) cancelAnimationFrame(frame);
+      body.style.overflow = prevOverflow;
       rootStyle.removeProperty("--vera-host-chrome-offset");
     };
   }, [open]);
