@@ -171,8 +171,12 @@
   ol.procedure {
     padding-left: 1.5rem;
     display: block !important;
-    list-style-type: decimal !important;
     margin-bottom: 1rem;
+
+    // Respect the HTML type attribute (a, A, i, I) on lettered/roman lists
+    &:not([type]) {
+      list-style-type: decimal !important;
+    }
 
     li,
     li.step {

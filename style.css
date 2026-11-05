@@ -563,8 +563,11 @@ template {
 .section.accordion.sub-topic .panel-body ol.procedure {
   padding-left: 1.5rem;
   display: block !important;
-  list-style-type: decimal !important;
   margin-bottom: 1rem;
+}
+.section.accordion.sub-topic .panel-body ol:not([type]),
+.section.accordion.sub-topic .panel-body ol.procedure:not([type]) {
+  list-style-type: decimal !important;
 }
 .section.accordion.sub-topic .panel-body ol li,
 .section.accordion.sub-topic .panel-body ol li.step,
